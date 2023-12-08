@@ -11,6 +11,10 @@ website:
   reader-mode: true
   twitter-card: true
   
+  comments:
+    giscus:
+      repo: nacmarino/blog
+  
   title: "Nicholas Marino"
   site-url: "https://nacmarino.netlify.app/"
   description: 'My personal portfolio.'
@@ -45,10 +49,6 @@ format:
 lang: pt
 
 editor: source
-
-comments:
-  giscus:
-    repo: nacmarino/blog
     
 execute:
   freeze: true
