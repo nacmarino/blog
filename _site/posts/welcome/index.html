@@ -67,7 +67,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Nicholas Marino - Welcome To My Blog">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://nacmarino.com/posts/welcome/thumbnail.jpg">
+<meta name="twitter:image" content="https://nacmarino.netlify.app/posts/welcome/thumbnail.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -402,7 +402,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/nacmarino\.netlify\.app\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">
