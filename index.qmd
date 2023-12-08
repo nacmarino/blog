@@ -9,7 +9,6 @@ listing:
   fields: [title, subtitle, date, image, reading-time, categories]
 page-layout: full
 title-block-banner: false
-comments: false
 ---
 
 
