@@ -1,16 +1,14 @@
 ---
-title: "blog"
+title: "Home"
 listing:
   contents: posts
   sort: "date desc"
   type: default
   categories: true
-  sort-ui: false
-  filter-ui: false
+  feed: true
+  fields: [title, subtitle, date, image, reading-time, categories]
 page-layout: full
-title-block-banner: true
+title-block-banner: false
 ---
 
-```{r}
 
-```

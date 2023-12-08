@@ -1,0 +1,21 @@
+---
+title: "Backlog"
+description: |
+  Vou manter um registro de todas as ideias de análises que gostaria de fazer, bem como de ensaios que gostaria de escrever. Não sei se vou conseguir escrever sobre elas, mas acho importante deixar isso registrado em algum lugar para que não perder elas de vista.
+---
+
+# Web Scraping
+- Anúncios do ZapImóveis;  
+- Opiniões dos funcionários do Glassdoor;
+- Colaboradores da empresa no LinkedIn;
+- Perfil do LinkedIn;
+- Postagens do LinkedIn.
+
+# ShinyApp
+- Recomendação de jogos de tabuleiro;
+
+# Análises
+- State of Data 2023;
+
+# Ensaios
+- Review sobre os cursos curtos em Gen AI do DeepLearning.ai;

@@ -1,0 +1,53 @@
+/*-- scss:defaults --*/
+
+// font imports
+
+@import url('https://fonts.googleapis.com/css2?family=Wavefont&display=swap');
+// font-family: 'Wavefont', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap');
+// font-family: 'Sedgwick Ave Display', cursive, $headings-font-family;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+// font-family: 'IBM Plex Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+// font-family: 'Anton', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&display=swap');
+// font-family: 'Exo', sans-serif;
+
+// The right hand margin bar
+$grid-margin-width: 200px !default;
+// The left hand sidebar
+$grid-sidebar-width: 300px !default;
+
+// background
+
+$primary: #FFFFFF !default;
+$footer-bg: #FFFFFF !default;
+$navbar-hl: #FFF122 !default;
+
+// navbar width
+
+.navbar>.container-xxl, .navbar>.container-xl, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container, .navbar>.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-footer {
+  min-height: 1em;
+}
+
+.navbar-title {
+  font-family: 'Anton';
+  color: #000000;
+}
+
+// olhar as opções de scss na documentacao do quarto
+
+$font-family-base: 'IBM Plex Sans', 'Source Sans Pro',  'Lato', 'Merriweather', 'Roboto Regular', 'Cabin Regular' !default;
+$headings-font-family:  'Prata', 'Roboto', 'Playfair Display', 'Montserrat'    !default;
+
+/*-- scss:rules --*/
+
+.navbar li.nav-item a.nav-link span {
+  font-family: 'Exo', sans-serif;
+  color: #000000 !important;
+}

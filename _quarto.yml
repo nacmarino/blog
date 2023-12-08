@@ -1,19 +1,50 @@
 project:
   type: website
+  preview:
+    port: 4200
 
 website:
-  title: "blog"
+  
+  favicon: books.png
+  page-navigation: true
+  back-to-top-navigation: true
+  reader-mode: true
+  twitter-card: true
+  
+  title: "Nicholas Marino"
+  site-url: "https://nacmarino.netlify.app/"
+  description: 'My personal portfolio.'
+  
   navbar:
+    #background: '#BAC0C4'
+    #foreground: '#34375E'
     right:
-      - about.qmd
+      - backlog.qmd
+      - text: 'Autor'
+        menu:
+        - about.qmd
+        - cv.qmd
+    tools:
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        url: https://github.com/nacmarino/blog
+    search: true
+  
+  page-footer:
+    #background: '#BAC0C4'
+    #foreground: '#34375E'
+    center: "Blog created with [Quarto](https://quarto.org/) by Nicholas Marino. License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
+
 format:
   html:
-    theme: cosmo
+    theme: [flatly, stylized_theme.scss]
     css: styles.css
+    footnotes-hover: true
+    smooth-scroll: true
+    toc: true
+
+lang: pt
 
 editor: source
 
+execute:
+  freeze: true
