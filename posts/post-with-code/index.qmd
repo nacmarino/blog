@@ -6,7 +6,7 @@ date: "2023-08-16"
 categories: [news, code, analysis]
 image: "image.jpg"
 description: |
-  Essa √© uma descri√ß√£o de teste em um post.
+  Essa È uma descriÁ„o de teste em um post.
 ---
 
 # Ol√°
