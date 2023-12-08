@@ -1,8 +1,12 @@
+# R stuff
 .Rproj.user
 .Rhistory
 .Rdata
-.httr-oauth
-.DS_Store
+
+# quarto stuff
+/.quarto/
 .quarto
 
-/.quarto/
+# random stuff
+.httr-oauth
+.DS_Store
