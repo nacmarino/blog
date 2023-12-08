@@ -11,13 +11,8 @@ website:
   reader-mode: true
   twitter-card: true
   
-  comments:
-    giscus:
-      repo: nacmarino/blog
-  
   title: "Nicholas Marino"
   site-url: "https://nacmarino.netlify.app/"
-  description: 'My personal portfolio.'
   
   navbar:
     #background: '#BAC0C4'
@@ -41,14 +36,22 @@ website:
 format:
   html:
     theme: [flatly, stylized_theme.scss]
+    citations-hover: true
+    code-link: true
     css: styles.css
     footnotes-hover: true
+    link-external-icon: false
+    link-external-newwindow: true
     smooth-scroll: true
     toc: true
 
 lang: pt
 
 editor: source
-    
+
+comments:
+  giscus:
+    repo: nacmarino/blog
+      
 execute:
   freeze: true
