@@ -5,6 +5,29 @@ freeze: true
 # Enable banner style title blocks
 title-block-banner: true
 
+# Enable CC licence appendix
+license: "CC BY"
+
+# Default for table of contents
+toc: true
+toc-title: Conteúdo
+toc-location: left
+
+# Default knitr options
+execute:
+  echo: true
+  message: true
+  warning: true
+
+# Default author
+author:
+  - name: Nicholas Marino
+    url: nacmarino.netlify.app
+    orcid: 0000-0002-5702-5466
+
+# Default fields for citation
+citation: true
+
 # comments for giscus
 comments:
   giscus:
