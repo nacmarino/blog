@@ -49,9 +49,9 @@ lang: pt
 
 editor: source
 
-comments:
-  giscus:
-    repo: nacmarino/blog
+#comments:
+#  giscus:
+#    repo: nacmarino/blog
       
 execute:
   freeze: true
