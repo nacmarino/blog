@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-title','listing-subtitle','listing-date','listing-image','listing-reading-time','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -156,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categorias</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tudo <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categorias</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Tudo <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -183,33 +183,33 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="news" data-listing-date-sort="1691895600000" data-listing-file-modified-sort="1692210861923" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="machine learning" data-listing-date-sort="1630033200000" data-listing-file-modified-sort="1705109357550" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="52">
 <div class="thumbnail">
-<p><a href="./posts/welcome/index.html"> <p class="card-img-top"><img src="posts\welcome\thumbnail.jpg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="./posts/2021-08-27_niteroi-housing-prices/index.html"> <p class="card-img-top"><img src="posts\2021-08-27_niteroi-housing-prices\index_files\figure-html\anuncios_por_adm-1.png"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
-<a href="./posts/welcome/index.html">
+<a href="./posts/2021-08-27_niteroi-housing-prices/index.html">
 <h3 class="no-anchor listing-title">
-Welcome To My Blog
+Prevendo o preço de apartamentos em Niterói/RJ
 </h3>
 <div class="listing-subtitle">
-
+<p>A previsão de preços de imóveis é uma tarefa muito comum em ciência de dados, existingo até Hello World para esta prática - o Ames Housing, com informações sobre o preço e outros metadados de imóveis na cidade de Ames em Iowa. Neste post, sigo esta idéia e utilizo um conjunto de dados reais sobre os apartamentos disponíveis para a venda no município de Niterói/RJ. Buscarei entender e prever a variação no preço destes imóveis de acordo com as informações contidas nos anúncios com a ajuda de um modelo de Machine Learning.</p>
 </div>
 </a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
-news
+<div class="listing-category" onclick="window.quartoListingCategory('machine learning'); return false;">
+machine learning
 </div>
 </div>
-<a href="./posts/welcome/index.html"> </a>
+<a href="./posts/2021-08-27_niteroi-housing-prices/index.html"> </a>
 </div>
 <div class="metadata">
-<a href="./posts/welcome/index.html">
+<a href="./posts/2021-08-27_niteroi-housing-prices/index.html">
 <div class="listing-date">
-13 de ago. de 2023
+27 de ago. de 2021
 </div>
 <div class="listing-reading-time">
-1 minutos
+52 minutos
 </div>
 </a>
 </div>
@@ -465,8 +465,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="General" data-category-id="DIC_kwDOKH7ZG84Cbmfx" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

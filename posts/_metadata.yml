@@ -10,14 +10,14 @@ license: "CC BY"
 
 # Default for table of contents
 toc: true
-toc-title: Conteúdo
+toc-title: Conteudo
 toc-location: left
 
 # Default knitr options
 execute:
   echo: true
   message: true
-  warning: true
+  warning: false
 
 # Default author
 author:

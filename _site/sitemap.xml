@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nacmarino.com/backlog.html</loc>
-    <lastmod>2023-08-31T13:56:09.288Z</lastmod>
+    <loc>https://nacmarino.netlify.app/posts/welcome/index.html</loc>
+    <lastmod>2024-01-12T14:33:10.899Z</lastmod>
   </url>
   <url>
-    <loc>https://nacmarino.com/index.html</loc>
-    <lastmod>2023-12-08T18:56:13.283Z</lastmod>
+    <loc>https://nacmarino.netlify.app/cv.html</loc>
+    <lastmod>2024-01-12T14:35:57.899Z</lastmod>
   </url>
   <url>
-    <loc>https://nacmarino.com/about.html</loc>
-    <lastmod>2023-08-28T20:26:40.797Z</lastmod>
+    <loc>https://nacmarino.netlify.app/about.html</loc>
+    <lastmod>2024-01-12T14:35:51.005Z</lastmod>
   </url>
   <url>
-    <loc>https://nacmarino.com/cv.html</loc>
-    <lastmod>2023-08-28T20:21:41.046Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nacmarino.com/posts/post-with-code/index.html</loc>
-    <lastmod>2023-12-08T18:56:45.567Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nacmarino.com/posts/welcome/index.html</loc>
-    <lastmod>2023-08-31T00:03:21.332Z</lastmod>
+    <loc>https://nacmarino.netlify.app/backlog.html</loc>
+    <lastmod>2024-01-12T14:36:04.690Z</lastmod>
   </url>
   <url>
     <loc>https://nacmarino.netlify.app/index.html</loc>
-    <lastmod>2023-12-08T20:11:16.065Z</lastmod>
+    <lastmod>2024-01-14T00:17:54.805Z</lastmod>
   </url>
   <url>
-    <loc>https://nacmarino.netlify.app/posts/post-with-code/index.html</loc>
-    <lastmod>2023-12-08T19:49:41.092Z</lastmod>
-  </url>
-  <url>
-    <loc>https://nacmarino.netlify.app/posts/welcome/index.html</loc>
-    <lastmod>2023-12-08T20:03:55.563Z</lastmod>
+    <loc>https://nacmarino.netlify.app/posts/2021-08-27_niteroi-housing-prices/index.html</loc>
+    <lastmod>2024-01-14T00:19:49.573Z</lastmod>
   </url>
 </urlset>

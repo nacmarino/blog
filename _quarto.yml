@@ -4,7 +4,6 @@ project:
     port: 4200
 
 website:
-  
   favicon: books.png
   page-navigation: true
   back-to-top-navigation: true
@@ -38,6 +37,8 @@ format:
     theme: [flatly, stylized_theme.scss]
     citations-hover: true
     code-link: true
+    code-fold: true
+    code-summary: "Codigo"
     css: styles.css
     footnotes-hover: true
     link-external-icon: false
