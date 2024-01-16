@@ -46,6 +46,6 @@
     "href": "posts/2021-08-27_niteroi-housing-prices/index.html#footnotes",
     "title": "Prevendo o preço de apartamentos em Niterói/RJ",
     "section": "Notas de rodapé",
-    "text": "Notas de rodapé\n\nhttps://pt.wikipedia.org/wiki/Niter%C3%B3i↩︎\nShapefile obtido a partir de https://geo.niteroi.rj.gov.br/civitasgeoportal/↩︎\nNão mostro aqui mas, de fato, a relação entre muitas delas não é linear.↩︎\nDei uma lida no texto de descrição dos anúncios e parece que todos os casos que narrei aqui são erros de imputação de informação mesmo. Assim, acredito que esta solução não seja um problema.↩︎\nSe você for uma pessoa curiosa, eu acabei imputando um NA a 583 linhas da base↩︎\nNão existe uma função no fastshap para criar essa figura, então tentei emular uma figura similar que existente dentro do pacote shap.↩︎"
+    "text": "Notas de rodapé\n\n\nhttps://pt.wikipedia.org/wiki/Niter%C3%B3i↩︎\nShapefile obtido a partir de https://geo.niteroi.rj.gov.br/civitasgeoportal/↩︎\nNão mostro aqui mas, de fato, a relação entre muitas delas não é linear.↩︎\nDei uma lida no texto de descrição dos anúncios e parece que todos os casos que narrei aqui são erros de imputação de informação mesmo. Assim, acredito que esta solução não seja um problema.↩︎\nSe você for uma pessoa curiosa, eu acabei imputando um NA a 583 linhas da base↩︎\nNão existe uma função no fastshap para criar essa figura, então tentei emular uma figura similar que existente dentro do pacote shap.↩︎"
   }
 ]
