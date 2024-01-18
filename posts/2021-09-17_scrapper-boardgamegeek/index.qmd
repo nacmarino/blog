@@ -5,6 +5,8 @@ subtitle: |
 date: 09-17-2021
 date-modified: 01-17-2024
 bibliography: bibliografia.bib
+categories:
+  - web scrapping
 execute:
   warning: false
   fig-align: center

@@ -6,8 +6,7 @@ date: 10-08-2021
 date-modified: 01-18-2024
 bibliography: bibliografia.bib
 categories:
-  - tidytuesday
-  - meta-análise
+  - analise
 execute:
   warning: false
   fig-align: center
@@ -42,6 +41,7 @@ theme_update(
 
 A Fórmula 1 é um dos esportes de velocidade mais famosos do mundo, com provas ocorrendo desde o início da década de 50 até os dias de hoje. Com um histórico tanto grande desses, com provas tão intrincadas, tantas montadoras, pilotos e acontecimentos, é de se imaginar também que uma enorme quantidade de dados tenham sido gerados em cada prova. Seguindo esta ideia, existe um [site](^http://ergast.com/mrd/) que hospeda este registro histórico, e que foi o tema de um [_#TidyTuesday_](^https://github.com/rfordatascience/tidytuesday) recentemente. Achei os dados disponíveis bastante interessantes e, como (toda) pessoa interessada em dados, logo comecei a pensar sobre os tipos de perguntas que poderiam ser respondidos olhando para eles. Mas antes de seguir essa estória, vamos baixar os dados do repositório oficial do _TidyTuesday_ (ou usá-los localmente se você já o tiver baixado).
 
+
 ```{r carrega_dados}
 #| code-fold: false
 # carregando os pacotes necessários
@@ -65,7 +65,6 @@ library(tidytuesdayR) # ler os arquivos do tidytuesday
 # carregando a copia local dos dados
 ## extraindo os paths das copias locais
 paths_copias_locais <- dir_ls(path = 'data/')
-# paths_copias_locais <- dir_ls(path = '_posts/2021-09-06-f1-tempos-de-prova/data/')
 
 ## criando vetor de nomes dos arquivos
 nomes_arquivos <- paths_copias_locais %>% 
@@ -151,10 +150,10 @@ tempos_de_prova %>%
   ) %>% 
   # criando a figura do historico de tempos de prova
   ggplot(mapping = aes(x = data, y = media)) +
-  geom_line(alpha = 0.3, size = 0.7) +
+  geom_line(alpha = 0.3, linewidth = 0.7) +
   geom_point(mapping = aes(fill = decada), 
              shape = 21, size = 1.5, alpha = 0.3, color = 'black', show.legend = FALSE) +
-  geom_smooth(se = FALSE, color = 'firebrick3', method = 'loess') +
+  geom_smooth(formula = y ~ x, se = FALSE, color = 'firebrick3', method = 'loess') +
   scale_x_date(breaks = seq.Date(from = as.Date('1950-01-01'), to = as.Date('2021-12-01'), by = '5 years'),
                labels = seq(from = 1950, to = 2020, by = 5)) +
   scale_fill_viridis_d() +
@@ -178,7 +177,9 @@ A segunda coisa que me ocorreu seria o caso onde houvesse uma mudança sistemát
 ## mapeando a velocidade maxima por prova
 velocidades_por_prova <- resultados %>%
   # parseando a velocidade para numerico
-  mutate(fastestLapSpeed = parse_number(fastestLapSpeed)) %>% 
+  mutate(fastestLapSpeed = parse_number(fastestLapSpeed, na = '\\N')) %>% 
+  # dropando NA na variavel alvo
+  drop_na(fastestLapSpeed) %>% 
   # extraindo a velocidade maxima por prova
   group_by(raceId) %>% 
   filter(fastestLapSpeed == max(fastestLapSpeed, na.rm = TRUE)) %>% 
@@ -222,7 +223,7 @@ fig1 <- features_por_prova %>%
   geom_line(alpha = 0.3, size = 0.7) +
   geom_point(mapping = aes(fill = as.character(decada)), 
              shape = 21, size = 1.5, alpha = 0.3, color = 'black', show.legend = FALSE) +
-  geom_smooth(se = FALSE, color = 'firebrick3', method = 'loess') +
+  geom_smooth(formula = y ~ x, se = FALSE, color = 'firebrick3', method = 'loess') +
   scale_x_date(breaks = seq.Date(from = as.Date('2004-01-01'), to = as.Date('2021-01-01'), by = '4 years'),
                labels = seq(from = 2004, to = 2020, by = 4)) +
   scale_fill_viridis_d() +
@@ -239,7 +240,7 @@ fig2 <- features_por_prova %>%
   geom_line(alpha = 0.3, size = 0.7) +
   geom_point(mapping = aes(fill = as.character(decada)), 
              shape = 21, size = 1.5, alpha = 0.3, color = 'black', show.legend = FALSE) +
-  geom_smooth(se = FALSE, color = 'firebrick3', method = 'loess') +
+  geom_smooth(formula = y ~ x, se = FALSE, color = 'firebrick3', method = 'loess') +
   scale_x_date(breaks = seq.Date(from = as.Date('1950-01-01'), to = as.Date('2021-12-01'), by = '10 years'),
                labels = seq(from = 1950, to = 2020, by = 10)) +
   scale_fill_viridis_d() +
@@ -402,7 +403,7 @@ df_regs %>%
   ggplot(mapping = aes(x = year, y = media, color = circuit, group = grupo_recorrencia)) +
   facet_wrap(~ circuit, scales = 'free') +
   geom_point(color = 'black', fill = 'grey70', shape = 21) +
-  geom_smooth(color = 'black', linetype = 1, method = 'lm', se = TRUE) +
+  geom_smooth(formula = y ~ x, color = 'black', linetype = 1, method = 'lm', se = TRUE) +
   labs(
     title = 'Regressões aplicadas à cada período dentro de cada circuito',
     x     = 'Ano',
@@ -681,3 +682,7 @@ Dúvidas, sugestões ou críticas, é só me procurar pelos canais disponíveis!
 - Outra possibilidade seria o de prever a quantidade de acidentes entre provas ou temporadas, não a probabilidade deles ocorrerem;  
 - A base também traz informações da ocorrência de algum tipo de defeito (mecânico, elétrico,...) no carro associado à cada piloto em cada prova. Uma possibilidade então seria prever a probabilidade de ocorrência de cada um destes defeito a partir das informações disponíveis;  
 - Finalmente, fiquei pensando em tentar gerar algum tipo de modelo para tentar prever se um piloto vai concluir ou não uma prova. Existem dados disponíveis na base para isso, também é só organizar.  
+
+```{r}
+sessionInfo()
+```

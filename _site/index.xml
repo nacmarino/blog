@@ -10,7 +10,32 @@
 <atom:link href="https://nacmarino.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Fri, 17 Sep 2021 03:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 08 Oct 2021 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Entendendo os Padrões de Duração das Provas da Fórmula 1</title>
+  <dc:creator>Nicholas Marino</dc:creator>
+  <link>https://nacmarino.netlify.app/posts/2021-10-18_formula-1/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="motivação" class="level1">
+<h1>Motivação</h1>
+<p>A Fórmula 1 é um dos esportes de velocidade mais famosos do mundo, com provas ocorrendo desde o início da década de 50 até os dias de hoje. Com um histórico tanto grande desses, com provas tão intrincadas, tantas montadoras, pilotos e acontecimentos, é de se imaginar também que uma enorme quantidade de dados tenham sido gerados em cada prova. Seguindo esta ideia, existe um <a href="%5Ehttp://ergast.com/mrd/">site</a> que hospeda este registro histórico, e que foi o tema de um <a href="%5Ehttps://github.com/rfordatascience/tidytuesday"><em>#TidyTuesday</em></a> recentemente. Achei os dados disponíveis bastante interessantes e, como (toda) pessoa interessada em dados, logo comecei a pensar sobre os tipos de perguntas que poderiam ser respondidos olhando para eles. Mas antes de seguir essa estória, vamos baixar os dados do repositório oficial do <em>TidyTuesday</em> (ou usá-los localmente se você já o tiver baixado).</p>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Nicholas Marino</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Nicholas Marino</span> <span class="hidden" data-render-id="quarto-int-navbar:Backlog">Backlog</span> <span class="hidden" data-render-id="quarto-int-navbar:/backlog.html">/backlog.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Autor">Autor</span> <span class="hidden" data-render-id="quarto-int-navbar:Sobre">Sobre</span> <span class="hidden" data-render-id="quarto-int-navbar:/about.html">/about.html</span> <span class="hidden" data-render-id="quarto-int-navbar:CV">CV</span> <span class="hidden" data-render-id="quarto-int-navbar:/cv.html">/cv.html</span> <span class="hidden" data-render-id="quarto-navbar-tools:https://github.com/nacmarino/blog">https://github.com/nacmarino/blog</span> <span class="hidden" data-render-id="footer-center">Blog created with <a href="https://quarto.org/">Quarto</a> by Nicholas Marino. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</span></p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">Nicholas Marino - Entendendo os Padrões de Duração das Provas da Fórmula 1</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Nicholas Marino - Entendendo os Padrões de Duração das Provas da Fórmula 1</span> <span class="hidden" data-render-id="quarto-ogcardtitle">Nicholas Marino - Entendendo os Padrões de Duração das Provas da Fórmula 1</span> <span class="hidden" data-render-id="quarto-metasitename">Nicholas Marino</span> <span class="hidden" data-render-id="quarto-twittercarddesc">A Fórmula 1 é um dos esportes de velocidade mais famosos do mundo, com provas ocorrendo desde o início da década de 50 até os dias de hoje. Muita coisa mudou nestes 70 anos, especialmente os carros: cada vez mais bonitos, mais seguros e mais rápidos. Mas será que isso também se traduziu em provas cada vez mais curtas também? Neste post eu examino de que forma a duração das provas da Fórmula 1 têm evoluído ao longo das temporadas.</span> <span class="hidden" data-render-id="quarto-ogcardddesc">A Fórmula 1 é um dos esportes de velocidade mais famosos do mundo, com provas ocorrendo desde o início da década de 50 até os dias de hoje. Muita coisa mudou nestes 70 anos, especialmente os carros: cada vez mais bonitos, mais seguros e mais rápidos. Mas será que isso também se traduziu em provas cada vez mais curtas também? Neste post eu examino de que forma a duração das provas da Fórmula 1 têm evoluído ao longo das temporadas.</span></p>
+</div>
+</section>
+
+ ]]></description>
+  <category>analise</category>
+  <guid>https://nacmarino.netlify.app/posts/2021-10-18_formula-1/index.html</guid>
+  <pubDate>Fri, 08 Oct 2021 03:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Raspando a página do ranking do BoardGameGeek</title>
   <dc:creator>Nicholas Marino</dc:creator>
@@ -1240,7 +1265,7 @@ loaded via a namespace (and not attached):
 [13] jsonlite_1.8.7    rvest_1.0.3       fansi_1.0.4       scales_1.2.1     
 [17] tweenr_2.0.2      cli_3.6.1         rlang_1.1.1       polyclip_1.10-6  
 [21] munsell_0.5.0     withr_2.5.0       yaml_2.3.7        tools_4.3.1      
-[25] tzdb_0.4.0        colorspace_2.1-0  curl_5.0.2        vctrs_0.6.3      
+[25] tzdb_0.4.0        colorspace_2.1-0  curl_5.2.0        vctrs_0.6.3      
 [29] R6_2.5.1          png_0.1-8         lifecycle_1.0.3   snakecase_0.11.1 
 [33] htmlwidgets_1.6.2 MASS_7.3-60       janitor_2.2.0     pkgconfig_2.0.3  
 [37] pillar_1.9.0      gtable_0.3.3      Rcpp_1.0.11       glue_1.6.2       
@@ -1275,6 +1300,7 @@ Lente, Caio. 2018. <span>«O Fluxo do Web Scraping»</span>. <em>Blog da Curso-R
 Marino, Nicholas. 2021. <span>“Raspando a página do ranking do
 BoardGameGeek.”</span> September 17, 2021. <a href="https://nacmarino.netlify.app//posts/2021-09-17_scrapper-boardgamegeek">https://nacmarino.netlify.app//posts/2021-09-17_scrapper-boardgamegeek</a>.
 </div></div></section></div> ]]></description>
+  <category>web scrapping</category>
   <guid>https://nacmarino.netlify.app/posts/2021-09-17_scrapper-boardgamegeek/index.html</guid>
   <pubDate>Fri, 17 Sep 2021 03:00:00 GMT</pubDate>
 </item>
