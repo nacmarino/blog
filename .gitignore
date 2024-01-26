@@ -10,3 +10,6 @@
 # random stuff
 .httr-oauth
 .DS_Store
+
+# data, data, data
+**/**/data/*
