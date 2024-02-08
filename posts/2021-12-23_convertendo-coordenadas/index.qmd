@@ -1,0 +1,89 @@
+---
+title: "Convertendo coordenadas através da calculadora geográfica do INPE"
+subtitle: |
+  Nesse post eu mostro a solução que propus para resolver um problema: converter coordenadas de uma projeção e datum qualquer para SIRGAS2000. Como não encontrei um bom suporte para a conversão no R, tive que recorrer à calculadora geográfica do INPE, criando uma automação para interagir com ela e realizar esta tarefa.
+date: 12-23-2021
+date-modified: 02-09-2024
+preview: "images/cartografia.jpeg"
+categories:
+  - web scraping
+  - selenium
+  - python
+execute:
+  warning: false
+  fig-align: center
+jupyter: 
+  kernelspec: 
+    name: "cond-env-blog_post_env-py"
+    language: "python"
+    display_name: "blog_post_env"
+---
+
+```{r setup}
+#| code-fold: false
+#| echo: false
+#| fig-dpi: 200
+#| include: false
+#| results: 'hide'
+# loading the renv file associated with this blog post
+renv::use(lockfile = 'renv.lock')
+```
+
+# Motivação
+
+Há algumas semanas uma das pessoas com quem trabalho trouxe a necessidade de fazer uma conversão de coordenadas, a fim de que pudéssemos seguir com algumas análises que estávamos fazendo. Essa tarefa parecia ser coisa simples, pois deveríamos apenas passar as coordenadas da projeção^[É a forma pela qual a superfície de uma esfera é achatada em um plano de forma a criar um mapa, envolvendo uma série de transformações para que a latitude e longitude de cada ponto seja equivalente entre os dois.] de grau-minuto-segundo no datum^[É o sistema de referência utilizado para medir precisamente as distâncias no planeta ou qualquer outra entidade planetária.] SAD69 para a projeção de grau decimal no datum SIRGAS2000. Eu sabia que existia uma forma de fazer essas conversões a partir dos metadados disponíveis em um arquivo _shapefile_, tanto através do pacote `sf` no R quanto na _lib_ `geopandas` no Python. Assim, não havia com o que se preocupar...certo?
+
+De uma forma surpreendente, não consegui encontrar um jeito confiável de fazer a conversão das coordenadas nem no R e nem no Python. A primeira tentativa que fiz foi no R, e acabei esbarrando com a falta de suporte ao datum SIRGAS2000: apesar do código EPSG^[Este é um código numérico único para representar cada combinação de datum, sistemas de referência espacial, ellipsoides, transformações de coordenadas e unidades de medida.] para o SIRGAS2000 existir, as funções do `sf` não parecem ter suporte para ela - falhando na conversão logo de cara. Com isso, fiz minha segunda tentativa usando o Python, mas fiquei meio desconfiado do output: na maior parte dos casos, parecia que o `geopandas` fazia a mudança de projeção e datum do arquivo _shapefile_ sem que, no entanto, os valores das coordenadas em si fossem alteradas. Assim, acabamos esbarrando nesse bloqueio para avançar.
+
+Como não eram muitos pontos que deveriam ter as coordenadas convertidas - mais ou menos uns 50 -, surgiu a ideia de usar uma aplicação como QGIS para realizar as conversões. Apesar da ideia ser boa para o momento, ela traria muitos problemas no curto ou médio prazo: (1) precisávamos colocar as informações de latitude e longitude dentro de um `dataframe` geográfico (_i.e._, um `geodataframe` ou um `sf`) e setar o seu datum e projeção, (2) a partir daí precisaríamos salvar o arquivo para o disco para abrir no QGIS, (3) onde precisaríamos executar manualmente muitos passos para converter as coordenadas e exportar um novo _shapefile_ que, (4) finalmente, poderíamos abrir no R/Python para usar. Além disso, em algum momento receberíamos mais um _batch_ de dados, e precisaríamos repetir o procedimento todo de novo. Logo, resolvemos usar essa solução para sair do lugar naquele momento, mas precisávamos de outra estratégia para tornar essa etapa do _pipeline_ de dados mais robusta e reprodutível.
+
+Uma solução que propus para isso foi o uso da [calculadora geográfica do INPE](http://www.dpi.inpe.br/calcula/). Eu já havia usado ela para desenvolver um trabalho que no passado, e sabia que ali teríamos um resultado bastante confiável. Naquela época, eu havia feito a conversão das coordenadas toda de forma manual^[Isso foi há uns 5 anos atrás.], mas achava que seria tranquilo usar as técnicas de _web scrapping_ que aprendi para automar o processo. No fim das contas, não foi! Todavia, acredito que o exercício foi útil para usar o `Selenium` para interagir com uma página dinâmica. Nesse contexto, acabei criando essa automação usando o Python, mas reproduzi os mesmos passos com o R e, neste post, aproveito o `reticulate` para contar sobre a solução usando tanto o Python quanto o R.
+
+# Entendendo o problema
+
+A calculadora geográfica do INPE está disponível através de uma página web, neste [link](http://www.dpi.inpe.br/calcula/). A página tem uma estrutura bastante simples e intuitiva, através da qual podemos fornecer os inputs para três tarefas principais: (1) converter coordenadas (o _box_ de cima), (2) calcular a distância entre dois pontos (o _box_ do meio) e (3) calcular o meridiano central a partir de uma coordenada (o _box_ de baixo). Nosso foco neste post será o _box_ de cima.
+
+A animação abaixo ilustra de que forma funciona a conversão de coordenadas através da página. A sequência de etapas é a seguinte:  
+
+1. O usuário seleciona a projeção de entrada das coordenadas através de um _dropdown_ (_e.g._, grau-minuto-segundo, grau decimal, UTM,...);  
+2. O usuário então entra os valores de longitude e latitude nos dois boxes abaixo. Dependendo da projeção de entrada, o usuário ainda pode ser requisitado à definir se as coordenadas são à oeste ou leste do globo e se está no hemisfério sul ou norte (estas duas últimas opções são definidas, também, através de um _dropdown_);  
+3. O usuário então seleciona o datum de entrada através de um _dropdown_ (e.g., SAD69, SIRGAS2000, WGS84,...)
+4. Quando o usuário clicar em 'Avançar', um novo _box_ vai aparecer à direita. Esse _box_ servirá para especificarmos as características desejadas para a projeção e datum do output;  
+5. Uma vez que o usuário selecione a projeção e o datum de saída, e clique em 'Avançar', uma novo _box_ surgirá à direita - agora, com os resultados da conversão. 
+
+![](images/navegacao.gif)
+
+Beleza. Como já podemos reparar, parece haver algum tipo de dinamismo na página: conforme vamos preenchendo o formulário e clicando nas coisas, novas opções e _boxes_ vão surgindo. Para ficar mais claro o que está acontecendo, vamos olhar o que acontece com o código HTML da página conforme vamos interagindo com ela. Para isso, vamos conferir a animação abaixo, que demonstra o que acontece depois da primeira vez que clicamos no avançar (_i.e._, etapa 4 na lista anterior). Como podemos ver, o formulário do primeiro _box_ é uma requisição do tipo POST, que poderíamos passar normalmente usando o R ou o Python. Todavia, uma vez que enviamos o formulário preenchido para o site, vemos que o conteúdo do _box_ seguinte é gerado de forma dinâmica - esse é o momento em que àquela tag `frameset` brilha, e o conteúdo em seu interior é populado. Analisando esse conteúdo, podemos ver que ele abre a possibilidade de fazermos uma nova requisição do tipo POST, desta vez para enviar os dados associados ao passo 5 da lista acima. Ou seja, parece que dois POSTs são necessários para obter o resultado, e que eles vão aparecendo na página de forma dinâmica.
+
+![](images/interatividade_1.gif)
+
+Vamos à última etapa do que rola por baixo dos panos no código HTML, olhando a próxima animação abaixo. Novamente, a tag `frameset` brilha uma vez que o formulário do segundo _box_ é enviado, e a seleção é toda recolhida; se a expandirmos de novo, podemos ver que o seu conteúdo mudou um bocado e, agora, temos acesso à tabela com os dados das coordenadas já convertidas. De uma forma ou de outra, parece que esta tabela também é gerada de forma dinâmica a partir das informações passadas nos formulários anteriores. Além disso, não sei se você notou, mas existe uma chamada para um `javascript` em diversas partes do código. Isso acende a luz amarela.
+
+![](images/interatividade_2.gif)
+
+Tendo em vista o funcionamento da página, resolvi tentar primeiro o `R` para fazer as requisições POST e converter as coordenadas. Fui no `httr` e não tive sucesso: nada do que tentei me permitia obter o conteúdo para que eu fizesse o segundo POST. Daí então resolvi tentar o `rvest` e a possibilidade de usar uma sessão para poder passar os dois POSTs. Aqui eu já tive um pouquinho mais de sucesso, mas sem conseguir chegar onde queria: obtive o resultado do primeiro POST e fazer o segundo, mas o resultado foi uma página em branco. Depois ~~dessa frustração~~desse aprendizado, resolvi tentar a _lib_ _requests_ do Python, mas também não tive muito sucesso. Assim, busquei alguma informação na internet sobre como lidar com `iframes` e requisições POST associados à páginas com conteúdo dinâmico gerado em `javascript` e `PHP`. Entretanto, tudo o que encontrei foram recomendações para usar o `Selenium` para a tarefa. Como eu já estava cansado de buscar uma solução mais simples, resolvi então dar o braço a torcer e partir para o `Selenium.` 
+
+# Interagindo com a calculadora geográfica
+
+Eu já havia usado o `Selenium` no Python no passado, e tinha sido bem simples: foi só baixar o driver para o navegador, criar a instância dele e pronto, a navegação e automação estão na mão. No R, entretanto, a coisa é muito mais complexa: a instalação do `RSelenium` não segue os padrões convencionais dos pacotes do R, existe a necessidade de definir algumas coisas através do terminal e, além disso, existe muito pouco material para resolução de problemas sobre o esse pacote online. Eu até cheguei à superar as duas primeiras complexidades, mas esbarrei na última algumas vezes ao longo das minhas tentativas de criar a automação. Por conta disso, resolvi começar o desenvolvimento da solução através do Python, de forma que assim que eu chegasse ao resultado que precisava, traduziria o código para o R.
+
+Com isto em mente, a primeira coisa que precisamos fazer é importar o pacote `reticulate` e apontar o _path_ onde está o arquivo binário do Python na minha máquina.
+
+```{r carrega_reticulate}
+library(reticulate)
+use_python(python = Sys.which('python'))
+
+```
+
+O segundo passo é carregar as _libs_ e funções que vamos precisar - tanto o próprio `Selenium` quanto àquelas que nos ajudarão a plotar algumas imagens do avanço da automação.
+
+```{python carrega_python_libs}
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
+from matplotlib.pyplot import imshow
+from PIL import Image
+import numpy as np
+```
+
+Começamos a automação _per se_ definindo a forma como vamos executar o `Selenium`. Neste post eu defini que o utilizaremos no modo `headless` a fim de que o navegador não seja aberto durante a execução do código. Se você definir esse argumento como `False`, então verá a execução toda através do navegador em tempo real.

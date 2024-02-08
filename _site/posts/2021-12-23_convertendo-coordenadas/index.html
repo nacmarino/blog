@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Nicholas Marino">
+<title>Nicholas Marino - Convertendo coordenadas através da calculadora geográfica do INPE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../books.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Nicholas Marino - Convertendo coordenadas através da calculadora geográfica do INPE">
+<meta name="twitter:description" content="Nesse post eu mostro a solução que propus para resolver um problema: converter coordenadas de uma projeção e datum qualquer para SIRGAS2000. Como não encontrei um bom suporte para a conversão no R, tive que recorrer à calculadora geográfica do INPE, criando uma automação para interagir com ela e realizar esta tarefa.">
+<meta name="twitter:image" content="https://nacmarino.netlify.app/posts/2021-12-23_convertendo-coordenadas/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Nicholas Marino</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../backlog.html" rel="" target="">
+ <span class="menu-text">Backlog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-autor" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Autor</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-autor">
+<li>
+    <a class="dropdown-item" href="../../about.html" rel="" target="">
+ <span class="dropdown-text">Sobre</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../cv.html" rel="" target="">
+ <span class="dropdown-text">CV</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<div class="quarto-navbar-tools">
+    <a href="https://github.com/nacmarino/blog" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Convertendo coordenadas através da calculadora geográfica do INPE</h1>
+            <p class="subtitle lead"></p>
+<p>Nesse post eu mostro a solução que propus para resolver um problema: converter coordenadas de uma projeção e datum qualquer para SIRGAS2000. Como não encontrei um bom suporte para a conversão no R, tive que recorrer à calculadora geográfica do INPE, criando uma automação para interagir com ela e realizar esta tarefa.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">web scraping</div>
+                <div class="quarto-category">selenium</div>
+                <div class="quarto-category">python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="nacmarino.netlify.app">Nicholas Marino</a> <a href="https://orcid.org/0000-0002-5702-5466" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Data de Publicação</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">23 de dezembro de 2021</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Conteudo</h2>
+   
+  <ul>
+<li><a href="#motiva%C3%A7%C3%A3o" id="toc-motivação" class="nav-link active" data-scroll-target="#motiva%C3%A7%C3%A3o">Motivação</a></li>
+  <li><a href="#entendendo-o-problema" id="toc-entendendo-o-problema" class="nav-link" data-scroll-target="#entendendo-o-problema">Entendendo o problema</a></li>
+  <li><a href="#interagindo-com-a-calculadora-geogr%C3%A1fica" id="toc-interagindo-com-a-calculadora-geográfica" class="nav-link" data-scroll-target="#interagindo-com-a-calculadora-geogr%C3%A1fica">Interagindo com a calculadora geográfica</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="motivação" class="level1"><h1>Motivação</h1>
+<p>Há algumas semanas uma das pessoas com quem trabalho trouxe a necessidade de fazer uma conversão de coordenadas, a fim de que pudéssemos seguir com algumas análises que estávamos fazendo. Essa tarefa parecia ser coisa simples, pois deveríamos apenas passar as coordenadas da projeção<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> de grau-minuto-segundo no datum<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> SAD69 para a projeção de grau decimal no datum SIRGAS2000. Eu sabia que existia uma forma de fazer essas conversões a partir dos metadados disponíveis em um arquivo <em>shapefile</em>, tanto através do pacote <code>sf</code> no R quanto na <em>lib</em> <code>geopandas</code> no Python. Assim, não havia com o que se preocupar…certo?</p>
+<p>De uma forma surpreendente, não consegui encontrar um jeito confiável de fazer a conversão das coordenadas nem no R e nem no Python. A primeira tentativa que fiz foi no R, e acabei esbarrando com a falta de suporte ao datum SIRGAS2000: apesar do código EPSG<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> para o SIRGAS2000 existir, as funções do <code>sf</code> não parecem ter suporte para ela - falhando na conversão logo de cara. Com isso, fiz minha segunda tentativa usando o Python, mas fiquei meio desconfiado do output: na maior parte dos casos, parecia que o <code>geopandas</code> fazia a mudança de projeção e datum do arquivo <em>shapefile</em> sem que, no entanto, os valores das coordenadas em si fossem alteradas. Assim, acabamos esbarrando nesse bloqueio para avançar.</p>
+<p>Como não eram muitos pontos que deveriam ter as coordenadas convertidas - mais ou menos uns 50 -, surgiu a ideia de usar uma aplicação como QGIS para realizar as conversões. Apesar da ideia ser boa para o momento, ela traria muitos problemas no curto ou médio prazo: (1) precisávamos colocar as informações de latitude e longitude dentro de um <code>dataframe</code> geográfico (<em>i.e.</em>, um <code>geodataframe</code> ou um <code>sf</code>) e setar o seu datum e projeção, (2) a partir daí precisaríamos salvar o arquivo para o disco para abrir no QGIS, (3) onde precisaríamos executar manualmente muitos passos para converter as coordenadas e exportar um novo <em>shapefile</em> que, (4) finalmente, poderíamos abrir no R/Python para usar. Além disso, em algum momento receberíamos mais um <em>batch</em> de dados, e precisaríamos repetir o procedimento todo de novo. Logo, resolvemos usar essa solução para sair do lugar naquele momento, mas precisávamos de outra estratégia para tornar essa etapa do <em>pipeline</em> de dados mais robusta e reprodutível.</p>
+<p>Uma solução que propus para isso foi o uso da <a href="http://www.dpi.inpe.br/calcula/">calculadora geográfica do INPE</a>. Eu já havia usado ela para desenvolver um trabalho que no passado, e sabia que ali teríamos um resultado bastante confiável. Naquela época, eu havia feito a conversão das coordenadas toda de forma manual<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, mas achava que seria tranquilo usar as técnicas de <em>web scrapping</em> que aprendi para automar o processo. No fim das contas, não foi! Todavia, acredito que o exercício foi útil para usar o <code>Selenium</code> para interagir com uma página dinâmica. Nesse contexto, acabei criando essa automação usando o Python, mas reproduzi os mesmos passos com o R e, neste post, aproveito o <code>reticulate</code> para contar sobre a solução usando tanto o Python quanto o R.</p>
+</section><section id="entendendo-o-problema" class="level1"><h1>Entendendo o problema</h1>
+<p>A calculadora geográfica do INPE está disponível através de uma página web, neste <a href="http://www.dpi.inpe.br/calcula/">link</a>. A página tem uma estrutura bastante simples e intuitiva, através da qual podemos fornecer os inputs para três tarefas principais: (1) converter coordenadas (o <em>box</em> de cima), (2) calcular a distância entre dois pontos (o <em>box</em> do meio) e (3) calcular o meridiano central a partir de uma coordenada (o <em>box</em> de baixo). Nosso foco neste post será o <em>box</em> de cima.</p>
+<p>A animação abaixo ilustra de que forma funciona a conversão de coordenadas através da página. A sequência de etapas é a seguinte:</p>
+<ol type="1">
+<li>O usuário seleciona a projeção de entrada das coordenadas através de um <em>dropdown</em> (<em>e.g.</em>, grau-minuto-segundo, grau decimal, UTM,…);<br>
+</li>
+<li>O usuário então entra os valores de longitude e latitude nos dois boxes abaixo. Dependendo da projeção de entrada, o usuário ainda pode ser requisitado à definir se as coordenadas são à oeste ou leste do globo e se está no hemisfério sul ou norte (estas duas últimas opções são definidas, também, através de um <em>dropdown</em>);<br>
+</li>
+<li>O usuário então seleciona o datum de entrada através de um <em>dropdown</em> (e.g., SAD69, SIRGAS2000, WGS84,…)</li>
+<li>Quando o usuário clicar em ‘Avançar’, um novo <em>box</em> vai aparecer à direita. Esse <em>box</em> servirá para especificarmos as características desejadas para a projeção e datum do output;<br>
+</li>
+<li>Uma vez que o usuário selecione a projeção e o datum de saída, e clique em ‘Avançar’, uma novo <em>box</em> surgirá à direita - agora, com os resultados da conversão.</li>
+</ol>
+<p><img src="images/navegacao.gif" class="img-fluid"></p>
+<p>Beleza. Como já podemos reparar, parece haver algum tipo de dinamismo na página: conforme vamos preenchendo o formulário e clicando nas coisas, novas opções e <em>boxes</em> vão surgindo. Para ficar mais claro o que está acontecendo, vamos olhar o que acontece com o código HTML da página conforme vamos interagindo com ela. Para isso, vamos conferir a animação abaixo, que demonstra o que acontece depois da primeira vez que clicamos no avançar (<em>i.e.</em>, etapa 4 na lista anterior). Como podemos ver, o formulário do primeiro <em>box</em> é uma requisição do tipo POST, que poderíamos passar normalmente usando o R ou o Python. Todavia, uma vez que enviamos o formulário preenchido para o site, vemos que o conteúdo do <em>box</em> seguinte é gerado de forma dinâmica - esse é o momento em que àquela tag <code>frameset</code> brilha, e o conteúdo em seu interior é populado. Analisando esse conteúdo, podemos ver que ele abre a possibilidade de fazermos uma nova requisição do tipo POST, desta vez para enviar os dados associados ao passo 5 da lista acima. Ou seja, parece que dois POSTs são necessários para obter o resultado, e que eles vão aparecendo na página de forma dinâmica.</p>
+<p><img src="images/interatividade_1.gif" class="img-fluid"></p>
+<p>Vamos à última etapa do que rola por baixo dos panos no código HTML, olhando a próxima animação abaixo. Novamente, a tag <code>frameset</code> brilha uma vez que o formulário do segundo <em>box</em> é enviado, e a seleção é toda recolhida; se a expandirmos de novo, podemos ver que o seu conteúdo mudou um bocado e, agora, temos acesso à tabela com os dados das coordenadas já convertidas. De uma forma ou de outra, parece que esta tabela também é gerada de forma dinâmica a partir das informações passadas nos formulários anteriores. Além disso, não sei se você notou, mas existe uma chamada para um <code>javascript</code> em diversas partes do código. Isso acende a luz amarela.</p>
+<p><img src="images/interatividade_2.gif" class="img-fluid"></p>
+<p>Tendo em vista o funcionamento da página, resolvi tentar primeiro o <code>R</code> para fazer as requisições POST e converter as coordenadas. Fui no <code>httr</code> e não tive sucesso: nada do que tentei me permitia obter o conteúdo para que eu fizesse o segundo POST. Daí então resolvi tentar o <code>rvest</code> e a possibilidade de usar uma sessão para poder passar os dois POSTs. Aqui eu já tive um pouquinho mais de sucesso, mas sem conseguir chegar onde queria: obtive o resultado do primeiro POST e fazer o segundo, mas o resultado foi uma página em branco. Depois <del>dessa frustração</del>desse aprendizado, resolvi tentar a <em>lib</em> <em>requests</em> do Python, mas também não tive muito sucesso. Assim, busquei alguma informação na internet sobre como lidar com <code>iframes</code> e requisições POST associados à páginas com conteúdo dinâmico gerado em <code>javascript</code> e <code>PHP</code>. Entretanto, tudo o que encontrei foram recomendações para usar o <code>Selenium</code> para a tarefa. Como eu já estava cansado de buscar uma solução mais simples, resolvi então dar o braço a torcer e partir para o <code>Selenium.</code></p>
+</section><section id="interagindo-com-a-calculadora-geográfica" class="level1"><h1>Interagindo com a calculadora geográfica</h1>
+<p>Eu já havia usado o <code>Selenium</code> no Python no passado, e tinha sido bem simples: foi só baixar o driver para o navegador, criar a instância dele e pronto, a navegação e automação estão na mão. No R, entretanto, a coisa é muito mais complexa: a instalação do <code>RSelenium</code> não segue os padrões convencionais dos pacotes do R, existe a necessidade de definir algumas coisas através do terminal e, além disso, existe muito pouco material para resolução de problemas sobre o esse pacote online. Eu até cheguei à superar as duas primeiras complexidades, mas esbarrei na última algumas vezes ao longo das minhas tentativas de criar a automação. Por conta disso, resolvi começar o desenvolvimento da solução através do Python, de forma que assim que eu chegasse ao resultado que precisava, traduziria o código para o R.</p>
+<p>Com isto em mente, a primeira coisa que precisamos fazer é importar o pacote <code>reticulate</code> e apontar o <em>path</em> onde está o arquivo binário do Python na minha máquina.</p>
+
+
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas de rodapé</h2>
+<ol>
+<li id="fn1"><p>É a forma pela qual a superfície de uma esfera é achatada em um plano de forma a criar um mapa, envolvendo uma série de transformações para que a latitude e longitude de cada ponto seja equivalente entre os dois.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>É o sistema de referência utilizado para medir precisamente as distâncias no planeta ou qualquer outra entidade planetária.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Este é um código numérico único para representar cada combinação de datum, sistemas de referência espacial, ellipsoides, transformações de coordenadas e unidades de medida.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Isso foi há uns 5 anos atrás.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2021,
+  author = {Marino, Nicholas},
+  title = {Convertendo coordenadas através da calculadora geográfica do
+    INPE},
+  date = {2021-12-23},
+  url = {https://nacmarino.netlify.app//posts/2021-12-23_convertendo-coordenadas},
+  langid = {pt}
+}
+</code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Por favor, cite este trabalho como:</div><div id="ref-marino2021" class="csl-entry quarto-appendix-citeas" role="listitem">
+Marino, Nicholas. 2021. <span>“Convertendo coordenadas através da
+calculadora geográfica do INPE.”</span> December 23, 2021. <a href="https://nacmarino.netlify.app//posts/2021-12-23_convertendo-coordenadas">https://nacmarino.netlify.app//posts/2021-12-23_convertendo-coordenadas</a>.
+</div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/nacmarino\.netlify\.app\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script><script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Blog created with <a href="https://quarto.org/">Quarto</a> by Nicholas Marino. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
