@@ -4,7 +4,7 @@ subtitle: |
   Nesse post eu mostro a solução que propus para resolver um problema: converter coordenadas de uma projeção e datum qualquer para SIRGAS2000. Como não encontrei um bom suporte para a conversão no R, tive que recorrer à calculadora geográfica do INPE, criando uma automação para interagir com ela e realizar esta tarefa.
 date: 12-23-2021
 date-modified: 02-09-2024
-preview: "images/cartografia.jpeg"
+preview: images/cartografia.jpeg
 categories:
   - web scraping
   - selenium
@@ -12,11 +12,6 @@ categories:
 execute:
   warning: false
   fig-align: center
-jupyter: 
-  kernelspec: 
-    name: "cond-env-blog_post_env-py"
-    language: "python"
-    display_name: "blog_post_env"
 ---
 
 ```{r setup}
@@ -70,14 +65,31 @@ Eu já havia usado o `Selenium` no Python no passado, e tinha sido bem simples: 
 Com isto em mente, a primeira coisa que precisamos fazer é importar o pacote `reticulate` e apontar o _path_ onde está o arquivo binário do Python na minha máquina.
 
 ```{r carrega_reticulate}
+#| code-fold: false
+#| results: 'hide'
+# carregando o reticulate para interagir com o Python
 library(reticulate)
-use_python(python = Sys.which('python'))
 
+# criando um ambiente do conda para esse post, caso ele nao exista
+if(!condaenv_exists(envname = 'blog_post_env')) {
+  # criando o ambiente do conda que sera usado nessa sessao
+  conda_create(envname = 'blog_post_env', python_version = '3.11')
+  
+  # lendo os pacotes e versoes que precisam ser instaladas no ambiente a partir do requirements.txt
+  requirements <- read.delim(file = 'requirements.txt', header = FALSE)$V1
+  
+  # importando as libs para este post
+  conda_install(envname = 'blog_post_env', packages = requirements, pip = TRUE)
+}
+
+# apontando para o ambiente desse post
+use_condaenv(condaenv = 'blog_post_env')
 ```
 
 O segundo passo é carregar as _libs_ e funções que vamos precisar - tanto o próprio `Selenium` quanto àquelas que nos ajudarão a plotar algumas imagens do avanço da automação.
 
 ```{python carrega_python_libs}
+#| code-fold: false
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
@@ -86,4 +98,171 @@ from PIL import Image
 import numpy as np
 ```
 
-Começamos a automação _per se_ definindo a forma como vamos executar o `Selenium`. Neste post eu defini que o utilizaremos no modo `headless` a fim de que o navegador não seja aberto durante a execução do código. Se você definir esse argumento como `False`, então verá a execução toda através do navegador em tempo real.
+Começamos a automação _per se_ definindo a forma como vamos executar o `Selenium`. Neste post eu defini que o utilizaremos no modo `headless` a fim de que o navegador não seja aberto durante a execução do código. Se você não definir esse argumento, então verá a execução toda através do navegador em tempo real.
+
+```{python opcoes_selenium}
+# setando as opcoes para rodar headless
+options = webdriver.ChromeOptions()
+options.add_argument("--headless=new")
+```
+
+::: {.callout-note}
+Na época que escrevi esse post, você precisava baixar o *driver* para fazer o processo de interação abaixo. No entanto, parece que esse passos não é mais necessário. Deixei o texto abaixo apenas por consistência, mas alterei o funcionamento da função que cria o *driver* abaixo.
+:::
+
+Todas as operações que faremos com o `Selenium` farão uso de uma instância do Chrome. Para tal, você precisa baixar um executável do Chromedriver que seja compatível com o seu navegador Google Chrome (_i.e._, geralmente àquela com a mesma versão do seu navegador) e colocá-lo em algum diretório. Uma vez que você tenha feito isso, basta especificar o _path_ até o executável, e passar a instância com as opções de execução do _driver_ que definimos anteriormente para a função `webdriver.Chrome`. O código abaixo faz isso e, então, imprime uma mensagem para avisar se conseguimos inicializar a sessão do webdriver ou não.
+
+```{python abre_webdriver}
+# abrindo o driver do Chrome
+driver = webdriver.Chrome(options = options)
+  
+# printando o status do driver
+try:
+  if driver.session_id:
+    print('Inicialização do driver feita com sucesso!')
+except:
+  print('Inicialização do driver falhou!')
+```
+
+Uma vez que tenhamos a nossa instância do webdriver, podemos usá-la para navegar até a página que queremos. Para isso, basta usarmos o método `.get`, e passar a `url` da calculadora geográfica do INPE. Uma vez que a página começa a ser carregada, aproveito para passar o método `implicitly_wait` de forma a dizer para o webdriver esperar alguns segundos entre as chamadas de todas as funções do webdriver - isso é útil para evitar de ficarmos enviando ações para o navegador sem que os objetos que queiramos interagir tenham sido carregados. Finalmente, aproveito para tirar um _screenshot_ da tela do webdriver, só para ver se estamos no caminho certo.
+
+```{python abre_pagina}
+# entrando no site da calculadora geografica do INPE
+driver.get(url = 'http://www.dpi.inpe.br/calcula/')
+# aguardando o site carregar
+driver.implicitly_wait(10)
+# salvando imagem da pagina
+scr = driver.save_screenshot(filename='images/screenshot_1.png')
+# abrindo imagem da pagina
+imshow(np.asarray(Image.open('images/screenshot_1.png', 'r')))
+```
+
+Tudo parece certo! A próxima coisa que precisaremos fazer é preencher o formulário do primeiro _box_. Para isso, vamos imitar o nosso comportamento através do `Selenium`, fazendo com que:
+
++ A automação 'olhe' o primeiro _box_, `contents`;  
++ Precisaremos então usar a função `Select` para interagir com o menu _dropdown_ que recebe as informações da projeção de entrada. Essa função recebe como argumento o ID do elemento que contém o menu _dropdown_ - este, por sua vez, pode ser encontrado através de um _xpath_ específico (descrito no pedaço de código abaixo);  
++ Uma vez que tenhamos criado uma instância desse seletor, podemos então passar para ele o método `select_by_value`, especificando a _string_ que representa a projeção dos dados de entrada - essa _string_ pode ser encontrada dentro do código HTML da página. Eu optei por usar um `select_by_value` aqui, mas também seria possível usar um `select_by_visible_text` e passar o texto conforme está escrito no menu _dropdown_ - só não fiz isso por uma questão de escolha mesmo;  
++ Na sequência, buscamos o elemento que contém a caixinha de texto do input da longitude, e enviamos o seu valor;  
++ Repetimos o processo acima, mas agora focando no valor da latitude de entrada;  
++ O passo seguinte é então selecionar o datum de entrada da coordenada. Para isso, precisamos criar novamente uma instância do `Select` e passar o ID do elemento que contém este menu _dropdown_;  
++ Uma vez que também tenhamos essa instância, basta passar para o método `select_by_value` o valor que representa o datum de entrada (novamente, este valor pode ser encontrado dentro do código HTML da página, e usar o `select_by_visible_text` seria uma opção viável);  
++ Finalmente, buscamos o elemento que contém o botão `Avançar` e clicamos nele.  
+
+```{python primeiro_formulario}
+# passando para o primeiro frame para preencher 
+driver.switch_to.frame(frame_reference = 'contents')
+# selecionando a projecao de entrada
+seletor_projecao_entrada = Select(driver.find_element(by = 'xpath', value='//body//div//center//table//tbody//tr[3]//select'))
+seletor_projecao_entrada.select_by_value(value = 'latlong_gd')
+## imputando o valor da longitude
+input_X = driver.find_element(by = 'xpath', value='//body//div//center//table//tbody//tr[5]//td//input')
+input_X.send_keys('-43.1034')
+## imputando o valor da latitude
+input_Y = driver.find_element(by = 'xpath', value='//body//div//center//table//tbody//tr[7]//td//input')
+input_Y.send_keys('-22.8822')
+# selecionando o datum de entrada
+seletor_datum_entrada = Select(driver.find_element(by = 'xpath', value='//body//div//center//table//tbody//tr[9]//select'))
+seletor_datum_entrada.select_by_value(value = '1')
+## clicando no avancar
+driver.find_element(by = 'xpath', value='//body//div//center//table//tbody//tr[10]//td').click()
+# salvando imagem da pagina
+scr = driver.save_screenshot(filename='images/screenshot_2.png')
+# abrindo imagem da pagina
+imshow(np.asarray(Image.open('images/screenshot_2.png', 'r')))
+```
+
+Podemos ver que a automação funcionou até aqui! Como resposta aos inputs anteriores, precisamos agora é especificar as informações para os dados de saída da conversão. Para isso, continuaremos reproduzindo o nosso comportamento:
+
++ Primeiro, é preciso 'sair' do primeiro _box_ e passar para o segundo _box_: usaremos o método `switch_to.parent_frame` para o primeiro e o método `switch_to.frame` para o segundo. No caso do segundo _box_, é importante resaltar que precisamos passar como argumento o ID do elemento que contém o segundo _box_. Neste caso, este elemento pode ser selecionar através do nome deste box: `mainp`;  
++ Uma vez que tenhamos entrado no segundo _box_, podemos então selecionar a projeção de saída. Fazemos isso da mesma forma que definimos a projeção de entrada: criando uma instância de um `Select`, passando o ID do elemento que contém o menu _dropdown_ e, então, definindo o valor desejado;  
++ Definimos o datum de saída da mesma forma que fizemos com a projeção de saída e todos os outros menus _dropdown_ até agora;  
++ Após selecionar a projeção e o datum de saída, buscamos o botão `Avançar` deste _box_ e clicamos nele.
+
+```{python segundo_formulario}
+# passando para o segundo frame
+driver.switch_to.parent_frame()
+driver.switch_to.frame(frame_reference = driver.find_element(by = 'name', value = 'mainp'))
+
+# selecionando a projecao de saida
+seletor_projecao_saida = Select(driver.find_element(by = 'xpath', value='//html//body//table//tbody//tr[2]//select'))
+seletor_projecao_saida.select_by_value(value = 'latlong')
+# selecionando o datum de saida
+seletor_datum_entrada = Select(driver.find_element(by = 'xpath', value='//html//body//table//tbody//tr[4]//td//select'))
+seletor_datum_entrada.select_by_value(value = '5')
+## clicando no avancar
+driver.find_element(by = 'xpath', value='//html//body//table//tbody//tr[5]//td').click()
+# salvando imagem da pagina
+scr = driver.save_screenshot(filename='images/screenshot_3.png')
+# abrindo imagem da pagina
+imshow(np.asarray(Image.open('images/screenshot_3.png', 'r')))
+```
+
+Pronto! Chegamos onde precisávamos: o último _box_ com a tabelinha contendo as informações das coordenadas já convertidas. Nosso foco a seguir será conseguir pegar o código HTML que contém essa tabela e guardar essa informação em um objeto. A partir daí, vamos passar esse objeto do Python para o R, a fim de fazer com que o _parsear_ fique mais fácil de ser feito. Mas, antes, vamos por partes:
+
++ Novamente, precisamos sair do segundo _box_ e passar para o _box_ seguinte - este último chamado de `canvas`;  
++ Uma vez que tenhamos entrado neste box, vamos pegar o _xpath_ do elemento que contém toda a informação da tabela;  
++ Por fim, vamos então extrair o primeiro elemento desse objeto que contém a tabela, e pegar o seu código HTML.  
+
+```{python ultimo_frame}
+# passando para o ultimo frame
+driver.switch_to.parent_frame()
+driver.switch_to.frame(frame_reference = driver.find_element(by = 'name', value = 'canvas'))
+# pegando a tabela
+tabela = driver.find_elements(by = 'xpath', value='/html/body')
+# pegando o HTML da tabela
+html_da_tabela = tabela[0].get_attribute('innerHTML')
+# salvando imagem da pagina
+scr = driver.save_screenshot(filename='images/screenshot_4.png')
+# matando o driver
+driver.quit()
+# abrindo imagem da pagina
+imshow(np.asarray(Image.open('images/screenshot_4.png', 'r')))
+```
+
+Agora que temos o código HTML da tabela, fica fácil _parsear_ os resultados da conversão. Vamos pegar o código HTML que está dentro do objeto do Python, ler ele como um html no R, e transformá-lo em um `dataframe` através da função `html_table` do pacote `rvest`. Depois que isto está feito, basta apenas fazer mais uma arrumação dos dados e a tarefa está concluída!
+
+```{r parser_tabela}
+# carregando pacotes
+library(dplyr) # para manipulacao de dados
+library(tidyr) # para manipular dados tambem
+library(purrr) # para manipular listas
+library(rvest) # para ajudar a parsear o HTML
+
+# pegando o HTML do ultimo frame a partir do python
+output <- py$html_da_tabela |>
+  # lendo o html dele
+  read_html() |>
+  # parseando a tabela
+  html_table() |>
+  # tirando a tabela de dentro da lista
+  pluck(1) |>
+  # eliminando o que é lixo
+  filter(!X1 %in% c('Resultado', 'Resultado da conversao:', '--'), X2 != '--') |>
+  # passando a tabela para o formato largo
+  pivot_wider(names_from = X1, values_from = X2) |>
+  # tratando o nome das colunas
+  janitor::clean_names()
+# printando a tabela
+rmarkdown::paged_table(x = output)
+```
+
+Coordenadas convertidas e direto dentro do código! 
+
+# Conclusões
+
+Neste post eu tentei mostrar uma solução que propus para resolver um problema pontual: converter um conjunto de coordenadas para o datum SIRGAS2000 de forma reprodutível, uma vez que não encontrei muito suporte para isso no R, e a conversão através do Python me pareceu meio estranha. A implementação da solução é baseada na automação da operação de conversão de coordenadas através do site da calculadora geográfica do INPE, usando o `Selenium`. Assim, toda a conversão ocorre através de um navegador e múltiplas requisições para um servidor, e não através do processamento na sua máquina _per se_. Isto quer dizer que esta solução não é muito escalável se tivermos que converter um grande número de coordenadas, e deve ser usada com moderação.
+
+O desenvolvimento dessa solução veio muito no sentido de automar uma etapa de um _pipeline_ de dados, que não usa um volume tão grande de observações assim. Além disso, essa solução também nasceu da necessidade de resolver uma questão onde não encontramos uma alternativa mais simples e pré-existente. Com isso, essa solução está OK para endereçar problemas que envolvam aqueles mesmos tipos de contextos, mas está longe de ser o melhor caminho caso eles sejam diferentes. Um exemplo disto seria caso a conversão de datum fosse entre SAD69 e WGS84, onde as funções do pacote `sf` do R parecem funcionar bem - além de ser uma alternativa muito mais simples do que a que mostro aqui! E, por sinal, acho que no fim do dia é isso que realmente importa: resolver o problema de forma rápida, simples, objetiva e reprodutível.
+
+Dúvidas, sugestões ou críticas? É só me procurar que a gente conversa!
+
+# Possíveis extensões
+
+Eu usei um misto de R e Python para fins de demonstração neste post. Todavia, você pode encontrar essa automação escrita toda em R neste link [aqui](https://github.com/nacmarino/blog/blob/main/posts/2021-12-23_convertendo-coordenadas/scripts/01_scrapper_r.R), e toda em Python neste outro [aqui](https://github.com/nacmarino/blog/blob/main/posts/2021-12-23_convertendo-coordenadas/scripts/02_scrapper_python.py). Uma coisa que seria interessante fazer também é criar uma classe no Python, que pudesse ser usada de forma mais reprodutível para fazer essa conversão. Eu nunca havia chegado a construir uma, e acabei tentando fazer isso [aqui](https://github.com/nacmarino/blog/blob/main/posts/2021-12-23_convertendo-coordenadas/scripts/03_CalculadoraINPE.py) pela primeira vez. A ideia é que ela fosse útil para converter não só como mostrei aqui, mas também outras que eu julguei serem comuns em aplicações do nosso dia a dia (e.g., UTM para grau decimal). Eu não cheguei a testar essa classe de forma exaustiva, então sugiro cuidado ao usar ela. De forma similar, sei que ela está longe de estar bem escrita - e estou muito aberto à sugestões de como melhorá-la e oportunidades de aprender mais!
+
+Finalmente, uma outra extensão que vejo seria de pegar o código PHP que faz a conversão das coordenadas e portá-lo para R e Python. Esse código está disponível para download no próprio site da calculadora geográfica do INPE, e seria uma alternativa muito viável para escalar essa conversão.
+
+```{r}
+conda_remove(envname = 'blog_post_env')
+```
+
