@@ -6,7 +6,9 @@ date: 10-08-2021
 date-modified: 01-18-2024
 bibliography: bibliografia.bib
 categories:
+  - estatistica
   - analise
+  - r
 execute:
   warning: false
   fig-align: center
