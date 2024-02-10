@@ -14,5 +14,6 @@
 # data, data, data
 **/**/data/*
 **/**/fonts/*
+**/**/temp/*
 **/**/gwent_decks/*
 **/**/gwent_listas/*
