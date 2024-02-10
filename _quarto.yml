@@ -17,13 +17,11 @@ website:
     #background: '#BAC0C4'
     #foreground: '#34375E'
     right:
-      #- backlog.qmd
-      #- text: 'Autor'
-      #  menu:
-      #  - about.qmd
-      #  - cv.qmd
-      - about.qmd
-      - cv.qmd
+      - backlog.qmd
+      - text: 'Autor'
+        menu:
+        - about.qmd
+        - cv.qmd
     tools:
       - icon: github
         url: https://github.com/nacmarino/blog
