@@ -6,6 +6,8 @@ date: 11-30-2021
 date-modified: 01-31-2024
 categories:
   - web scraping
+  - r
+  - boardgames
 execute:
   warning: false
   fig-align: center
