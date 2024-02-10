@@ -5,6 +5,8 @@ subtitle: |
 date: 08-27-2021
 categories:
   - machine learning
+  - analise
+  - r
 image: "niteroi.jpeg"
 bibliography: bibliografia.bib
 execute:
@@ -879,7 +881,3 @@ Sucesso, não? Se quiser ver que apartamentos são esses dos anúncios, basta ju
 - Eu foquei em anúncios de apartamento aqui, mas nada impede de expandir esta solução para qualquer outro tipo de imóvel neste ou em outro município - basta raspar os dados do site;  
 - Enquanto expandir o escopo da solução é uma possibilidade, o contrário também se faz válido (especialmente pela enorme quantidade de anúncios para alguns bairros em específico). A vantagem de se ter modelos específicos para cada bairro está no potencial de chegarmos a um modelo mais preciso para àquela realidade específica;  
 - É possível utilizar estes mesmos dados para tentar endereçar outros tipos de problema. Poderíamos utilizar, por exemplo, os dados da descrição do apartamento para tentar prever em que bairro ele fica. Acho essa possibilidade bem interessante, e de repente acabarei abordando ela de alguma forma no futuro.
-
-```{r}
-sessionInfo()
-```
