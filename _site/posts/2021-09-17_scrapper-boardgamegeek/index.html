@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Nicholas Marino">
-
 <title>Nicholas Marino - Raspando a página do ranking do BoardGameGeek</title>
 <style>
 code{white-space: pre-wrap;}
@@ -76,7 +73,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -93,8 +89,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -113,10 +108,7 @@ div.csl-indent {
     "search-submit-button-title": "Enviar",
     "search-label": "Procurar"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-
-
+}</script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Nicholas Marino - Raspando a página do ranking do BoardGameGeek">
 <meta name="twitter:description" content="Neste post eu faço a raspagem da tabela do ranking dos jogos de tabuleiro do BoardGameGeek. Essa tarefa foi necessária para que eu conseguisse interagir da melhor forma possível com a API XML que o site oferece.">
@@ -125,13 +117,10 @@ div.csl-indent {
 <meta name="twitter:image-width" content="1344">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Nicholas Marino</span>
@@ -143,7 +132,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../backlog.html" rel="" target="">
  <span class="menu-text">Backlog</span></a>
   </li>  
@@ -151,8 +140,8 @@ div.csl-indent {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-autor" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Autor</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-autor">    
-        <li>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-autor">
+<li>
     <a class="dropdown-item" href="../../about.html" rel="" target="">
  <span class="dropdown-text">Sobre</span></a>
   </li>  
@@ -161,9 +150,9 @@ div.csl-indent {
  <span class="dropdown-text">CV</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-            <div class="quarto-navbar-tools">
+<div class="quarto-navbar-tools">
     <a href="https://github.com/nacmarino/blog" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
   <div class="quarto-reader-toggle-btn">
@@ -173,16 +162,13 @@ div.csl-indent {
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Raspando a página do ranking do BoardGameGeek</h1>
-            <p class="subtitle lead"></p><p>Neste post eu faço a raspagem da tabela do ranking dos jogos de tabuleiro do BoardGameGeek. Essa tarefa foi necessária para que eu conseguisse interagir da melhor forma possível com a API XML que o site oferece.</p><p></p>
+            <p class="subtitle lead"></p>
+<p>Neste post eu faço a raspagem da tabela do ranking dos jogos de tabuleiro do BoardGameGeek. Essa tarefa foi necessária para que eu conseguisse interagir da melhor forma possível com a API XML que o site oferece.</p>
                                 <div class="quarto-categories">
-                <div class="quarto-category">web scrapping</div>
+                <div class="quarto-category">web scraping</div>
               </div>
                   </div>
   </div>
@@ -216,173 +202,131 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Conteudo</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Conteudo</h2>
    
   <ul>
-  <li><a href="#motivação" id="toc-motivação" class="nav-link active" data-scroll-target="#motivação">Motivação</a></li>
+<li><a href="#motiva%C3%A7%C3%A3o" id="toc-motivação" class="nav-link active" data-scroll-target="#motiva%C3%A7%C3%A3o">Motivação</a></li>
   <li><a href="#identificar" id="toc-identificar" class="nav-link" data-scroll-target="#identificar">Identificar</a></li>
   <li><a href="#navegar" id="toc-navegar" class="nav-link" data-scroll-target="#navegar">Navegar</a></li>
   <li><a href="#replicar" id="toc-replicar" class="nav-link" data-scroll-target="#replicar">Replicar</a></li>
   <li><a href="#parsear" id="toc-parsear" class="nav-link" data-scroll-target="#parsear">Parsear</a></li>
   <li><a href="#validar" id="toc-validar" class="nav-link" data-scroll-target="#validar">Validar</a></li>
   <li><a href="#iterar" id="toc-iterar" class="nav-link" data-scroll-target="#iterar">Iterar</a></li>
-  <li><a href="#faxinar-não-incluído-mas-importante" id="toc-faxinar-não-incluído-mas-importante" class="nav-link" data-scroll-target="#faxinar-não-incluído-mas-importante">Faxinar (não incluído, mas importante)</a></li>
-  <li><a href="#conclusões" id="toc-conclusões" class="nav-link" data-scroll-target="#conclusões">Conclusões</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+  <li><a href="#faxinar-n%C3%A3o-inclu%C3%ADdo-mas-importante" id="toc-faxinar-não-incluído-mas-importante" class="nav-link" data-scroll-target="#faxinar-n%C3%A3o-inclu%C3%ADdo-mas-importante">Faxinar (não incluído, mas importante)</a></li>
+  <li><a href="#conclus%C3%B5es" id="toc-conclusões" class="nav-link" data-scroll-target="#conclus%C3%B5es">Conclusões</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
-
-
-
-
-<section id="motivação" class="level1">
-<h1>Motivação</h1>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><section id="motivação" class="level1"><h1>Motivação</h1>
 <p>Sempre joguei os jogos de tabuleiro mais tradicionais, como Banco Imobiliário, Scotland Yard e War. Esses são jogos muito populares, apesar de cada partida ser muito repetitiva e eles demandarem uma quantidade razoável de jogadores para que tenham graça - e, no meio de uma pandemia, se já acabava sendo chato jogar um deles, a coisa passou a ser impossível. Mas será que não existem alternativas (mais divertidas, inclusive) para continuar com a distração num momento tão difícil como esse? Como eu bem descobri, a resposta estava nos próprios jogos de tabuleiro - mais precisamente, na reinvenção que eles sofreram nas últimas décadas.</p>
 <p>Existem inúmeros jogos de tabuleiro disponíveis atualmente e um número crescente de pessoas que os curtem. Dada esta diversidade de novos títulos, inúmeros portais têm focado em criar e manter essa cultura, trazendo reportagens, fóruns, <em>marketplaces</em>, <em>reviews</em>, rankings e fichas técnicas de cada um deles. Dois exemplos destes sites são o <a href="https://boardgamegeek.com/">BoardGameGeek</a> e a <a href="https://www.ludopedia.com.br/">Ludopedia</a>: ambos possuem praticamente o mesmo conteúdo, mas o primeiro é um portal americano e o segundo é brasileiro. Outro ponto interessante é que o consumo de informações desses portais não precisa ocorrer pelo <em>browser</em>, uma vez que ambos fornecem uma API. A Ludopedia oferece uma API REST bastante intuitiva<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, enquanto o BoardGameGeek usa uma API XML que eu acabei achando meio complicada de usar. Mas o que isto tudo tem haver com dados?</p>
 <p>Bom, logo que descobri esse <em>hobby</em>, acabei ficando muito perdido sobre quais são os títulos mais legais para se jogar. São tantas as possibilidades e informações disponíveis sobre cada jogo, que eu me peguei navegando entre inúmeras páginas naqueles portais para tentar encontrar aquilo que eu estava buscando. Assim, acabei tendo a ideia de compilar essas informações e colocar tudo dentro de uma linguagem de programação, a fim de deixar a análise de dados me ajudar a encontrar os jogos que mais combinavam com aquilo que eu estava buscando. Para isso, tive a ideia de pegar as informações dos jogos do BoardGameGeek (BGG daqui em diante) através de sua API, tabular tudo o que estava buscando e partir para o abraço. Mas nada é tão simples quanto parece.</p>
 <p>A parede que encontrei é bem chatinha: o <em>request</em> da API XML do BoardGameGeek funciona muito melhor quando usamos o código numérico de identificação do jogo. Quando passamos o nome do jogo para o <em>request</em>, ele precisa estar grafado igual à como está na base do BGG, caso contrário ele pode falhar em trazer o que você está buscando ou trazer todos os títulos que tenham um <em>match</em> parcial com aquele que você buscou (daí para a frente é só caos). Outra ressalva aqui é que essa API não oferece nenhum tipo de método através do qual podemos pegar um de-para dos IDs numéricos para os nomes dos jogos, e o código numérico deles também não é sequencial. Logo, não dá para fazer uma busca gulosa e <em>loopar</em> os IDs de 1 até <em>n</em>. A solução mais simples para o problema é montar a nossa própria base de-para, catando o nome dos títulos e o seu ID numérico de algum lugar do site do BGG - e esse lugar é a página que contém o ranking dos jogos de tabuleiro no site.</p>
 <p>Neste <em>post</em> eu vou mostrar como raspar a página do ranking do BGG, usando como base o fluxo do Web Scrapping que a galera da Curso-R criou (<span class="citation" data-cites="Lente2018">Lente (<a href="#ref-Lente2018" role="doc-biblioref">2018</a>)</span>), e muito bem ilustrada na figura abaixo.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> <span class="st">'images/web_scrapping_cycle_curso_r.png'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+<details><summary>Código</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">'images/web_scrapping_cycle_curso_r.png'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/web_scrapping_cycle_curso_r.png" class="img-fluid figure-img" width="874"></p>
-<figcaption class="figure-caption">Fluxo do Web Scrapping de acordo com o Lente (2018). Figura copiada de https://blog.curso-r.com/posts/2018-02-18-fluxo-scraping/.</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/web_scrapping_cycle_curso_r.png" class="img-fluid figure-img" width="874"></p>
+<figcaption class="figure-caption">Fluxo do Web Scrapping de acordo com o Lente (2018). Figura copiada de https://blog.curso-r.com/posts/2018-02-18-fluxo-scraping/.</figcaption></figure>
 </div>
 </div>
 </div>
-</section>
-<section id="identificar" class="level1 page-columns page-full">
-<h1>Identificar</h1>
+</section><section id="identificar" class="level1 page-columns page-full"><h1>Identificar</h1>
 <p>A primeira coisa a se fazer é entender como funciona a página que queremos raspar e o seu fluxo de paginação - isto é, como fazer para navegar de uma página para a outra. No nosso caso, navegamos até a página inicial do ranking do BGG através do link <code>https://boardgamegeek.com/browse/boardgame</code>; isso deve nos levar à uma página similar à da figura abaixo.</p>
 <div class="cell page-columns page-full">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> <span class="st">'images/identificar_1.jpg'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-body-outset">
+<details><summary>Código</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">'images/identificar_1.jpg'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-body-outset">
 <p><img src="images/identificar_1.jpg" class="img-fluid"></p>
 </div>
 </div>
 <p>Podemos ver que a página que contém o Top 100 dos jogos de tabuleiro apresenta as informações do ranking dentro de uma tabela: cada jogo no ranking ocupa uma linha da tabela, e cada coluna abriga uma informação distinta sobre o título que ocupa àquela posição (<em>i.e.</em>, ranking, título, uma pequena descrição, quantidade de votos, notas,…). Além disso, podemos ver que o ranking é composto por dezenas de páginas, e podemos navegar através delas pela paginação acima ou abaixo da tabela.</p>
 <div class="cell page-columns page-full">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> <span class="st">'images/identificar_2.jpg'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-body-outset">
+<details><summary>Código</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">'images/identificar_2.jpg'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-body-outset">
 <p><img src="images/identificar_2.jpg" class="img-fluid"></p>
 </div>
 </div>
 <p>Ao passarmos para a segunda página, podemos ver que agora temos acesso às informações do Top 101 ao 200 dos jogos de tabuleiro. Assim, dá para entender que cada página deve conter uma tabelinha com 100 linhas, uma para cada título ocupando cada uma das posições. Outro ponto importante é que quando mudamos para a segunda página do ranking, houve a adição do sufixo <code>page/2</code> à <em>url</em>. Se brincarmos um pouquinho com essa <em>url</em> podemos ver que é possível navegar entre as páginas simplesmente mudando o número ao final da url: <code>https://boardgamegeek.com/browse/boardgame/page/1</code>, <code>https://boardgamegeek.com/browse/boardgame/page/2</code>, <code>https://boardgamegeek.com/browse/boardgame/page/3</code> e assim por diante. Ou seja, para raspar as páginas do ranking basta usarmos a <em>url</em> base (<code>https://boardgamegeek.com/browse/boardgame/page/</code>) e variar apenas a numeração ali no fim.</p>
-</section>
-<section id="navegar" class="level1 page-columns page-full">
-<h1>Navegar</h1>
+</section><section id="navegar" class="level1 page-columns page-full"><h1>Navegar</h1>
 <p>Uma vez que entendemos de que forma funcionam as páginas que queremos raspar, precisamos agora é entender de onde vem o dado que queremos extrair através do código da página. De forma bem geral, podemos usar as ferramentas do desenvolvedor do nosso navegar e ir até a aba de <em>Network</em> para ver se a página está fazendo alguma chamada à uma API para carregar o seu conteúdo - se esse for o caso, podemos aprender a usar a API e usar ela para obter os dados que buscamos. Caso não haja uma API por trás da informação que estamos buscando, podemos ir direto na aba <em>Elements</em> e olhar o código HTML para entender como o que estamos buscando está estruturado.</p>
 <p>No nosso caso, não consegui achar uma API alimentando os dados da tabela que queremos raspar - aparentemente, todo o dado é carregando junto do HTML da página. Assim, olhando o código HTML da página, dá para ver que a tabela que buscamos está dentro de uma tag <em>table</em>. Portanto, se conseguirmos pegar o HTML da página, teremos acesso aos dados que estamos buscando.</p>
 <div class="cell page-columns page-full">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> <span class="st">'images/navegar_1.jpg'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-body-outset">
+<details><summary>Código</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">'images/navegar_1.jpg'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-body-outset">
 <p><img src="images/navegar_1.jpg" class="img-fluid"></p>
 </div>
 </div>
-</section>
-<section id="replicar" class="level1">
-<h1>Replicar</h1>
+</section><section id="replicar" class="level1"><h1>Replicar</h1>
 <p>Como sabemos a <em>url</em> base e como navegar entre as páginas, a ideia será tentar pegar uma das páginas e ver se temos sucesso na tarefa. Vamos então para o R. Primeiro vou carregar alguns pacotes para nos ajudar a fazer o web scrapping, manipular os dados e algumas coisas mais. Vou então criar um objeto que vai receber a <em>url</em> base do ranking do BGG e mais um objeto com a numeração da página do ranking que vamos tentar pegar na primeira tentativa.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># core</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr) <span class="co"># web scrapping</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2) <span class="co"># parsear</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs) <span class="co"># mexer com paths</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce) <span class="co"># extendendo o ggplot2</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">## para raspar o site</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">'https://boardgamegeek.com/browse/boardgame/page/'</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># definindo qual pagina vamos raspar</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>pagina_alvo <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Código</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># core</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span> <span class="co"># web scrapping</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://xml2.r-lib.org/">xml2</a></span><span class="op">)</span> <span class="co"># parsear</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span> <span class="co"># mexer com paths</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span> <span class="co"># extendendo o ggplot2</span></span>
+<span></span>
+<span><span class="co">## para raspar o site</span></span>
+<span><span class="va">base_url</span> <span class="op">&lt;-</span> <span class="st">'https://boardgamegeek.com/browse/boardgame/page/'</span></span>
+<span></span>
+<span><span class="co"># definindo qual pagina vamos raspar</span></span>
+<span><span class="va">pagina_alvo</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Com estes pacotes e objetos definindos, vou utilizar então a função <code>GET</code> do pacote <code>httr</code> para fazer o <em>request</em> da página. Vou passar o endereço da página para a função e, também, escrever o resultado do <em>request</em> para o disco passando uma outra função (<code>write_disk</code>) para o <code>GET</code>. O benefício disso são pelo menos dois: (1) podemos manter uma memória exata do que foi raspado naquele dia e (2) usar o dado raspado <em>offline</em>, sem a necessidade de ter que ficar bombardeando o site o tempo todo de <em>resquests</em>.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## criando pasta temporaria caso ela nao exista</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>temp_folder <span class="ot">&lt;-</span> <span class="st">'temp'</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir_exists</span>(<span class="at">path =</span> temp_folder)) {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  fs<span class="sc">::</span><span class="fu">dir_create</span>(<span class="at">path =</span> temp_folder)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## passando o get e salvando o arquivo html</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="at">url =</span> <span class="fu">str_glue</span>(base_url, pagina_alvo), </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">write_disk</span>(<span class="at">path =</span> <span class="fu">str_glue</span>(<span class="st">'{temp_folder}/page_{pagina_alvo}.html'</span>),</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Código</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## criando pasta temporaria caso ela nao exista</span></span>
+<span><span class="va">temp_folder</span> <span class="op">&lt;-</span> <span class="st">'temp'</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html">dir_exists</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">temp_folder</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">temp_folder</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## passando o get e salvando o arquivo html</span></span>
+<span><span class="va">resultado</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="va">base_url</span>, <span class="va">pagina_alvo</span><span class="op">)</span>, </span>
+<span>                 <span class="fu"><a href="https://httr.r-lib.org/reference/write_disk.html">write_disk</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'{temp_folder}/page_{pagina_alvo}.html'</span><span class="op">)</span>,</span>
+<span>                            overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Uma vez que o <em>request</em> foi feito, podemos ver o objeto resultante. É possível ver que tivemos sucesso em nossa requisição através do status 200, e também podemos ver que o conteúdo obtido é um documento HTML (conforme esperado). Beleza, temos o conteúdo; agora precisamos extrair os dados a partir dele.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">'Status code: %.0d'</span>, resultado<span class="sc">$</span>status_code)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">'Status code: %.0d'</span>, <span class="va">resultado</span><span class="op">$</span><span class="va">status_code</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] "Status code: 200"</code></pre>
 </div>
 </div>
-</section>
-<section id="parsear" class="level1 page-columns page-full">
-<h1>Parsear</h1>
+</section><section id="parsear" class="level1 page-columns page-full"><h1>Parsear</h1>
 <p>O que estamos buscando está dentro de uma tabela no código HTML, conforme havíamos visto anteriormente. Podemos tomar vantagem disto e buscar a <em>tag</em> <em>table</em> dentro do código HTML através do respectivo XPath utilizando a função <code>xml_find_all</code>. Com este resultado, podemos então utilizar a função <code>html_table</code> do pacote <code>rvest</code>, que é muito útil em casos como esse: ela é capaz de converter a tabela HTML diretamente para uma <code>tibble</code>. Como o resultado desse processo é uma <code>tibble</code> como o primeiro elemento de uma lista, vou usar a função <code>pluck</code> para extrair este objeto.</p>
 <div class="cell column-body-outset">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## parseando o html para um tibble</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ranking_pagina_1 <span class="ot">&lt;-</span> resultado <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o conteudo do GET</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">content</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o xpath que contém a tabela</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_find_all</span>(<span class="at">xpath =</span> <span class="st">'//table'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parseando o codigo html para o rvest</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extraindo o primeiro elemento da lista</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dropando qualquer valor do ranking the não seja um número</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> <span class="st">`</span><span class="at">Board Game Rank</span><span class="st">`</span>, <span class="at">pattern =</span> <span class="st">'[A-Za-z]'</span>, <span class="at">negate =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ranking_pagina_1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## parseando o html para um tibble</span></span>
+<span><span class="va">ranking_pagina_1</span> <span class="op">&lt;-</span> <span class="va">resultado</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o conteudo do GET</span></span>
+<span>  <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o xpath que contém a tabela</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_all</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//table'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># parseando o codigo html para o rvest</span></span>
+<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># extraindo o primeiro elemento da lista</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># dropando qualquer valor do ranking the não seja um número</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">`Board Game Rank`</span>, pattern <span class="op">=</span> <span class="st">'[A-Za-z]'</span>, negate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ranking_pagina_1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 7
    `Board Game Rank` `Thumbnail image` Title          `Geek Rating` `Avg Rating`
    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;       
- 1 1                 ""                "Brass: Birmi… 8.419         8.60        
- 2 2                 ""                "Pandemic Leg… 8.386         8.53        
- 3 3                 ""                "Gloomhaven\n… 8.370         8.60        
- 4 4                 ""                "Ark Nova\n\t… 8.326         8.54        
- 5 5                 ""                "Twilight Imp… 8.241         8.61        
- 6 6                 ""                "Terraforming… 8.220         8.37        
- 7 7                 ""                "Dune: Imperi… 8.215         8.43        
- 8 8                 ""                "Gloomhaven: … 8.182         8.46        
- 9 9                 ""                "War of the R… 8.181         8.54        
+ 1 1                 ""                "Brass: Birmi… 8.417         8.60        
+ 2 2                 ""                "Pandemic Leg… 8.385         8.53        
+ 3 3                 ""                "Gloomhaven\n… 8.366         8.60        
+ 4 4                 ""                "Ark Nova\n\t… 8.330         8.54        
+ 5 5                 ""                "Twilight Imp… 8.242         8.61        
+ 6 6                 ""                "Terraforming… 8.219         8.36        
+ 7 7                 ""                "Dune: Imperi… 8.219         8.43        
+ 8 8                 ""                "War of the R… 8.181         8.54        
+ 9 9                 ""                "Gloomhaven: … 8.178         8.46        
 10 10                ""                "Star Wars: R… 8.172         8.42        
 # ℹ 90 more rows
 # ℹ 2 more variables: `Num Voters` &lt;chr&gt;, Shop &lt;chr&gt;</code></pre>
@@ -390,27 +334,21 @@ div.csl-indent {
 </div>
 <p>Beleza! Já temos quase tudo o que queríamos! Só faltou uma coisinha: onde estão os links com o <em>id</em> numérico único de cada título? Se voltarmos ao código HTML, essa informação parece não estar presente na tabela…mas calma aí, vamos dar um passo para trás e tentar entender onde estaria essa informação. Se abrirmos a página de alguns jogos e olharmos as <em>urls</em> podemos ver que existe um padrãozinho: a <em>url</em> de cada título usa um sufixo na forma <code>boardgame/&lt;sequência numérica&gt;/&lt;nome do jogo&gt;</code>.</p>
 <div class="cell page-columns page-full">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> <span class="st">'images/parsear_1.jpg'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-body-outset">
+<details><summary>Código</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">'images/parsear_1.jpg'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-body-outset">
 <p><img src="images/parsear_1.jpg" class="img-fluid"></p>
 </div>
 </div>
 <p>Essa sequência numérica ali na <em>url</em> para o título na página nada mais é do que o <em>id</em> que estamos buscando. Se procurarmos este padrão dentro do HTML da página do ranking do BGG, podemos ver que ele está dentro do XPath da tabela que já havíamos rapasdo, mas dentro de uma outra <em>tag</em>. Dado que ainda temos o resultado do nosso <em>request</em>, podemos então utilizar o XPath para pegar todos os <em>links</em> na tabela HTML que possuem a classe <em>primary</em>.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o conteudo do GET</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">content</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando todos as tags de link na classe primary</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_find_all</span>(<span class="at">xpath =</span> <span class="st">'//table//a[@class="primary"]'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando so os primeiros exemplos</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">resultado</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o conteudo do GET</span></span>
+<span>  <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando todos as tags de link na classe primary</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_all</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//table//a[@class="primary"]'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando so os primeiros exemplos</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (6)}
 [1] &lt;a href="/boardgame/224517/brass-birmingham" class="primary"&gt;Brass: Birmi ...
 [2] &lt;a href="/boardgame/161936/pandemic-legacy-season-1" class="primary"&gt;Pand ...
@@ -422,272 +360,241 @@ div.csl-indent {
 </div>
 <p>E aí estão os links! Agora é só pegar eles, colocar como uma coluna dentro da tabela que já havíamos parseado e pronto! Os elementos básicos do que buscávamos estão em seus devidos lugares. Agora é tentar repetir e escalar.</p>
 <div class="cell column-body-outset">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># colocando os links em uma lista</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> resultado <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o conteudo do GET</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">content</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando todos as tags de link na classe primary</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_find_all</span>(<span class="at">xpath =</span> <span class="st">'//table//a[@class="primary"]'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o atributo href</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_attr</span>(<span class="at">attr =</span> <span class="st">'href'</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># colocando os links na tabela</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>ranking_pagina_1 <span class="ot">&lt;-</span> ranking_pagina_1 <span class="sc">%&gt;%</span> </span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># colocando os links em uma coluna</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">link =</span> links</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>ranking_pagina_1</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># colocando os links em uma lista</span></span>
+<span><span class="va">links</span> <span class="op">&lt;-</span> <span class="va">resultado</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o conteudo do GET</span></span>
+<span>  <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando todos as tags de link na classe primary</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_all</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//table//a[@class="primary"]'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o atributo href</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_attr.html">xml_attr</a></span><span class="op">(</span>attr <span class="op">=</span> <span class="st">'href'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># colocando os links na tabela</span></span>
+<span><span class="va">ranking_pagina_1</span> <span class="op">&lt;-</span> <span class="va">ranking_pagina_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="co"># colocando os links em uma coluna</span></span>
+<span>    link <span class="op">=</span> <span class="va">links</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="va">ranking_pagina_1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 8
    `Board Game Rank` `Thumbnail image` Title          `Geek Rating` `Avg Rating`
    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;       
- 1 1                 ""                "Brass: Birmi… 8.419         8.60        
- 2 2                 ""                "Pandemic Leg… 8.386         8.53        
- 3 3                 ""                "Gloomhaven\n… 8.370         8.60        
- 4 4                 ""                "Ark Nova\n\t… 8.326         8.54        
- 5 5                 ""                "Twilight Imp… 8.241         8.61        
- 6 6                 ""                "Terraforming… 8.220         8.37        
- 7 7                 ""                "Dune: Imperi… 8.215         8.43        
- 8 8                 ""                "Gloomhaven: … 8.182         8.46        
- 9 9                 ""                "War of the R… 8.181         8.54        
+ 1 1                 ""                "Brass: Birmi… 8.417         8.60        
+ 2 2                 ""                "Pandemic Leg… 8.385         8.53        
+ 3 3                 ""                "Gloomhaven\n… 8.366         8.60        
+ 4 4                 ""                "Ark Nova\n\t… 8.330         8.54        
+ 5 5                 ""                "Twilight Imp… 8.242         8.61        
+ 6 6                 ""                "Terraforming… 8.219         8.36        
+ 7 7                 ""                "Dune: Imperi… 8.219         8.43        
+ 8 8                 ""                "War of the R… 8.181         8.54        
+ 9 9                 ""                "Gloomhaven: … 8.178         8.46        
 10 10                ""                "Star Wars: R… 8.172         8.42        
 # ℹ 90 more rows
 # ℹ 3 more variables: `Num Voters` &lt;chr&gt;, Shop &lt;chr&gt;, link &lt;chr&gt;</code></pre>
 </div>
 </div>
-</section>
-<section id="validar" class="level1 page-columns page-full">
-<h1>Validar</h1>
+</section><section id="validar" class="level1 page-columns page-full"><h1>Validar</h1>
 <p>Como já sabemos pegar e parsear uma página do ranking do BGG, a ideia aqui será repetir o processo anterior para uma segunda ou uma enésima página. Para isso, vou consolidar o que fizemos anteriormente em duas funções: uma para fazer o <em>request</em> da página do ranking do BGG (<code>pega_pagina</code>) e uma outra função para parsear o conteúdo de um <em>request</em> para uma <code>tibble</code> (<code>parser_pagina</code>).</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># função para fazer o GET</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pega_pagina <span class="ot">&lt;-</span> <span class="cf">function</span>(url_base, pagina, save_dir) {</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## junta a base url com o numero da pagina e salva no diretorio alvo</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  resultado_do_get <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="at">url =</span> <span class="fu">str_glue</span>(url_base, pagina), </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">write_disk</span>(<span class="at">path =</span> <span class="fu">str_glue</span>(<span class="st">'{save_dir}/page_{pagina}.html'</span>), </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># retorna o resultado do GET</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  resultado_do_get</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># função para parsear o resultado</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>parser_pagina <span class="ot">&lt;-</span> <span class="cf">function</span>(pagina_raspada){</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando todos os links que estão dentro da tabela </span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  links_da_pagina <span class="ot">&lt;-</span> pagina_raspada <span class="sc">%&gt;%</span> </span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xml_find_all</span>(<span class="at">xpath =</span> <span class="st">'//table//a[@class="primary"]'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xml_attr</span>(<span class="at">attr =</span> <span class="st">'href'</span>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## parseando o codigo HTML da tabela para um tibble</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  tabela_da_pagina <span class="ot">&lt;-</span> pagina_raspada <span class="sc">%&gt;%</span> </span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xml_find_all</span>(<span class="at">xpath =</span> <span class="st">'//table'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pluck</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> <span class="st">`</span><span class="at">Board Game Rank</span><span class="st">`</span>, <span class="at">pattern =</span> <span class="st">'[A-Za-z]'</span>, <span class="at">negate =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">link =</span> links_da_pagina)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">## retornando a tabela</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  tabela_da_pagina</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># função para fazer o GET</span></span>
+<span><span class="va">pega_pagina</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">url_base</span>, <span class="va">pagina</span>, <span class="va">save_dir</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co">## junta a base url com o numero da pagina e salva no diretorio alvo</span></span>
+<span>  <span class="va">resultado_do_get</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="va">url_base</span>, <span class="va">pagina</span><span class="op">)</span>, </span>
+<span>                          <span class="fu"><a href="https://httr.r-lib.org/reference/write_disk.html">write_disk</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'{save_dir}/page_{pagina}.html'</span><span class="op">)</span>, </span>
+<span>                                     overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="co"># retorna o resultado do GET</span></span>
+<span>  <span class="va">resultado_do_get</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># função para parsear o resultado</span></span>
+<span><span class="va">parser_pagina</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pagina_raspada</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co"># pegando todos os links que estão dentro da tabela </span></span>
+<span>  <span class="va">links_da_pagina</span> <span class="op">&lt;-</span> <span class="va">pagina_raspada</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_all</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//table//a[@class="primary"]'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_attr.html">xml_attr</a></span><span class="op">(</span>attr <span class="op">=</span> <span class="st">'href'</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">## parseando o codigo HTML da tabela para um tibble</span></span>
+<span>  <span class="va">tabela_da_pagina</span> <span class="op">&lt;-</span> <span class="va">pagina_raspada</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_all</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//table'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">`Board Game Rank`</span>, pattern <span class="op">=</span> <span class="st">'[A-Za-z]'</span>, negate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>link <span class="op">=</span> <span class="va">links_da_pagina</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">## retornando a tabela</span></span>
+<span>  <span class="va">tabela_da_pagina</span></span>
+<span><span class="op">}</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Aplicando estas funções à segunda página do ranking do BGG temos então o Top 101 à 200 na tabela.</p>
 <div class="cell column-body-outset">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## pegando o conteudo da segunda pagina do ranking</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ranking_pagina_2 <span class="ot">&lt;-</span> <span class="fu">pega_pagina</span>(<span class="at">url_base =</span> base_url, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">pagina =</span> <span class="dv">2</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">save_dir =</span> temp_folder</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## parseando o resultado do GET</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ranking_pagina_2 <span class="ot">&lt;-</span> <span class="fu">parser_pagina</span>(<span class="at">pagina_raspada =</span> <span class="fu">content</span>(ranking_pagina_2))</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ranking_pagina_2</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## pegando o conteudo da segunda pagina do ranking</span></span>
+<span><span class="va">ranking_pagina_2</span> <span class="op">&lt;-</span> <span class="fu">pega_pagina</span><span class="op">(</span>url_base <span class="op">=</span> <span class="va">base_url</span>, </span>
+<span>                                pagina <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                                save_dir <span class="op">=</span> <span class="va">temp_folder</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## parseando o resultado do GET</span></span>
+<span><span class="va">ranking_pagina_2</span> <span class="op">&lt;-</span> <span class="fu">parser_pagina</span><span class="op">(</span>pagina_raspada <span class="op">=</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">ranking_pagina_2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ranking_pagina_2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 8
    `Board Game Rank` `Thumbnail image` Title          `Geek Rating` `Avg Rating`
    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;       
  1 101               ""                "Raiders of t… 7.528         7.74        
- 2 102               ""                "Caylus\n\t\t… 7.525         7.72        
- 3 103               ""                "Tigris &amp; Eup… 7.523         7.71        
- 4 104               ""                "Dominion: In… 7.523         7.69        
- 5 105               ""                "Lorenzo il M… 7.518         7.85        
- 6 106               ""                "Troyes\n\t\t… 7.518         7.72        
- 7 107               ""                "Eldritch Hor… 7.516         7.76        
- 8 108               ""                "Mombasa\n\t\… 7.516         7.85        
- 9 109               ""                "Concordia Ve… 7.515         8.29        
-10 110               ""                "The Lord of … 7.513         7.92        
+ 2 102               ""                "Caylus\n\t\t… 7.524         7.72        
+ 3 103               ""                "Dominion: In… 7.522         7.69        
+ 4 104               ""                "Tigris &amp; Eup… 7.521         7.70        
+ 5 105               ""                "Concordia Ve… 7.519         8.29        
+ 6 106               ""                "Lorenzo il M… 7.517         7.85        
+ 7 107               ""                "Eldritch Hor… 7.516         7.75        
+ 8 108               ""                "Troyes\n\t\t… 7.516         7.72        
+ 9 109               ""                "Mombasa\n\t\… 7.513         7.85        
+10 110               ""                "Hegemony: Le… 7.512         8.54        
 # ℹ 90 more rows
 # ℹ 3 more variables: `Num Voters` &lt;chr&gt;, Shop &lt;chr&gt;, link &lt;chr&gt;</code></pre>
 </div>
 </div>
-</section>
-<section id="iterar" class="level1 page-columns page-full">
-<h1>Iterar</h1>
+</section><section id="iterar" class="level1 page-columns page-full"><h1>Iterar</h1>
 <p>O objetivo aqui seria passar uma sequência de páginas de 1 até <code>n</code> e usar as funções <code>pega_pagina</code> e <code>parser_pagina</code> para escalar o processo. Como a idéia é apenas demonstrar, vou raspar apenas as 5 primeiras páginas do ranking, fazendo uma pequena modificação na função que criei para não bombardear o BGG de <em>requests</em> num curto período de tempo. Para isso, vou adicionar um <code>Sys.sleep</code> depois do <code>GET</code>, para que ele espere alguns segundos entre requisições, definindo o tempo de espera entre requisições através de uma distribuição uniforme.</p>
 <div class="cell column-body-outset">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando um sys.sleep na função</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pega_pagina_com_espera <span class="ot">&lt;-</span> <span class="cf">function</span>(url_base, pagina, save_dir) {</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## junta a base url com o numero da pagina e salva no diretorio alvo</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  resultado_do_get <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="at">url =</span> <span class="fu">str_glue</span>(url_base, pagina), </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">write_disk</span>(<span class="at">path =</span> <span class="fu">str_glue</span>(<span class="st">'{save_dir}/page_{pagina}.html'</span>), </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="at">time =</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">3</span>))</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># retorna o resultado do GET</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  resultado_do_get</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="do">## raspando todas as paginas do ranking</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(<span class="at">.x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">.f =</span> pega_pagina_com_espera, <span class="at">url_base =</span> base_url, </span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">save_dir =</span> temp_folder)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="do">## listando os arquivos html na pasta temporaria</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>paginas_salvas <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(<span class="at">path =</span> temp_folder)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="do">## parseando as paginas na pasta data</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>paginas_raspadas <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="at">.x =</span> paginas_salvas, <span class="at">.f =</span> read_html) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="at">.f =</span> parser_pagina) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  bind_rows</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>paginas_raspadas</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># adicionando um sys.sleep na função</span></span>
+<span><span class="va">pega_pagina_com_espera</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">url_base</span>, <span class="va">pagina</span>, <span class="va">save_dir</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co">## junta a base url com o numero da pagina e salva no diretorio alvo</span></span>
+<span>  <span class="va">resultado_do_get</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="va">url_base</span>, <span class="va">pagina</span><span class="op">)</span>, </span>
+<span>                          <span class="fu"><a href="https://httr.r-lib.org/reference/write_disk.html">write_disk</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_glue.html">str_glue</a></span><span class="op">(</span><span class="st">'{save_dir}/page_{pagina}.html'</span><span class="op">)</span>, </span>
+<span>                                     overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span>time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="co"># retorna o resultado do GET</span></span>
+<span>  <span class="va">resultado_do_get</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## raspando todas as paginas do ranking</span></span>
+<span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, .f <span class="op">=</span> <span class="va">pega_pagina_com_espera</span>, url_base <span class="op">=</span> <span class="va">base_url</span>, </span>
+<span>     save_dir <span class="op">=</span> <span class="va">temp_folder</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## listando os arquivos html na pasta temporaria</span></span>
+<span><span class="va">paginas_salvas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_ls</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">temp_folder</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## parseando as paginas na pasta data</span></span>
+<span><span class="va">paginas_raspadas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">paginas_salvas</span>, .f <span class="op">=</span> <span class="va">read_html</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.f <span class="op">=</span> <span class="va">parser_pagina</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">bind_rows</span></span>
+<span><span class="va">paginas_raspadas</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 500 × 8
    `Board Game Rank` `Thumbnail image` Title          `Geek Rating` `Avg Rating`
    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;       
- 1 1                 ""                "Brass: Birmi… 8.419         8.60        
- 2 2                 ""                "Pandemic Leg… 8.386         8.53        
- 3 3                 ""                "Gloomhaven\n… 8.370         8.60        
- 4 4                 ""                "Ark Nova\n\t… 8.326         8.54        
- 5 5                 ""                "Twilight Imp… 8.241         8.61        
- 6 6                 ""                "Terraforming… 8.220         8.37        
- 7 7                 ""                "Dune: Imperi… 8.215         8.43        
- 8 8                 ""                "Gloomhaven: … 8.182         8.46        
- 9 9                 ""                "War of the R… 8.181         8.54        
+ 1 1                 ""                "Brass: Birmi… 8.417         8.60        
+ 2 2                 ""                "Pandemic Leg… 8.385         8.53        
+ 3 3                 ""                "Gloomhaven\n… 8.366         8.60        
+ 4 4                 ""                "Ark Nova\n\t… 8.330         8.54        
+ 5 5                 ""                "Twilight Imp… 8.242         8.61        
+ 6 6                 ""                "Terraforming… 8.219         8.36        
+ 7 7                 ""                "Dune: Imperi… 8.219         8.43        
+ 8 8                 ""                "War of the R… 8.181         8.54        
+ 9 9                 ""                "Gloomhaven: … 8.178         8.46        
 10 10                ""                "Star Wars: R… 8.172         8.42        
 # ℹ 490 more rows
 # ℹ 3 more variables: `Num Voters` &lt;chr&gt;, Shop &lt;chr&gt;, link &lt;chr&gt;</code></pre>
 </div>
 </div>
-</section>
-<section id="faxinar-não-incluído-mas-importante" class="level1 page-columns page-full">
-<h1>Faxinar (não incluído, mas importante)</h1>
+</section><section id="faxinar-não-incluído-mas-importante" class="level1 page-columns page-full"><h1>Faxinar (não incluído, mas importante)</h1>
 <p>Apesar desta etapa não estar apresentada de forma explícita na figura da Curso-R, acredito que seja importante e legal a gente dar um jeitinho nos dados antes de terminar. O código abaixo dá conta disso, fazendo algumas coisas: (a) ajeitando o nome das colunas, (b) removendo colunas que não vou precisar, (c) extraindo e organizando o nome do jogo, o ano e sua descrição curta a partir da coluna <code>Title</code>, (d) extraindo o <em>id</em> numérico único de cada jogo e (e) renomeando algumas colunas para algo um pouco mais intuitivo. Com isso, a tabela fica bem arrumada e mais apresentável.</p>
 <div class="cell column-body-outset">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>paginas_faxinadas <span class="ot">&lt;-</span> paginas_raspadas <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># usando o janitor para ajustar o nome das colunas</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando somente algumas das colunas</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>thumbnail_image, <span class="sc">-</span>shop) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ajustando a string do titulo</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># removendo o excesso de espaços da string do title</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_squish</span>(<span class="at">string =</span> title),</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pegando a apenas o titulo do jogo</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">titulo    =</span> <span class="fu">str_extract</span>(<span class="at">string =</span> title, </span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">'(.*)(?=</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">-?[0-9]{1,4}</span><span class="sc">\\</span><span class="st">))'</span>),</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ano de lançamento</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano       =</span> <span class="fu">str_extract</span>(<span class="at">string =</span> title, </span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">'(?&lt;=</span><span class="sc">\\</span><span class="st">()(</span><span class="sc">\\</span><span class="st">-?[0-9]{1,4})(?=</span><span class="sc">\\</span><span class="st">))'</span>),</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># descrição</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">descricao =</span> <span class="fu">str_extract</span>(<span class="at">string =</span> title, </span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">'(?&lt;=</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">-?[0-9]{1,4}</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)(.*)'</span>),</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extraindo o id do jogo</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">id        =</span> <span class="fu">str_extract</span>(<span class="at">string =</span> link, </span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">'(?&lt;=boardgame</span><span class="sc">\\</span><span class="st">/)([0-9]+)(?=</span><span class="sc">\\</span><span class="st">/)'</span>),</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># parseando variaveis que sao numeros para tal</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano         =</span> <span class="fu">parse_number</span>(ano),</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">geek_rating =</span> <span class="fu">parse_number</span>(geek_rating),</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_rating  =</span> <span class="fu">parse_number</span>(avg_rating),</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_voters  =</span> <span class="fu">parse_number</span>(num_voters)</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># organizando a tabela</span></span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    id, titulo, ano, <span class="at">.after =</span> board_game_rank</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    title, <span class="at">.after =</span> num_voters</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># renomeando as colunas</span></span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">rank =</span> board_game_rank, <span class="at">nota_bgg =</span> geek_rating, </span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">nota_usuarios =</span> avg_rating, <span class="at">votos =</span> num_voters</span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>paginas_faxinadas</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">paginas_faxinadas</span> <span class="op">&lt;-</span> <span class="va">paginas_raspadas</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># usando o janitor para ajustar o nome das colunas</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando somente algumas das colunas</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">thumbnail_image</span>, <span class="op">-</span><span class="va">shop</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># ajustando a string do titulo</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="co"># removendo o excesso de espaços da string do title</span></span>
+<span>    title <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_squish</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">title</span><span class="op">)</span>,</span>
+<span>    <span class="co"># pegando a apenas o titulo do jogo</span></span>
+<span>    titulo    <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">title</span>, </span>
+<span>                            pattern <span class="op">=</span> <span class="st">'(.*)(?=\\s\\(\\-?[0-9]{1,4}\\))'</span><span class="op">)</span>,</span>
+<span>    <span class="co"># ano de lançamento</span></span>
+<span>    ano       <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">title</span>, </span>
+<span>                            pattern <span class="op">=</span> <span class="st">'(?&lt;=\\()(\\-?[0-9]{1,4})(?=\\))'</span><span class="op">)</span>,</span>
+<span>    <span class="co"># descrição</span></span>
+<span>    descricao <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">title</span>, </span>
+<span>                            pattern <span class="op">=</span> <span class="st">'(?&lt;=\\s\\(\\-?[0-9]{1,4}\\)\\s)(.*)'</span><span class="op">)</span>,</span>
+<span>    <span class="co"># extraindo o id do jogo</span></span>
+<span>    id        <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">link</span>, </span>
+<span>                            pattern <span class="op">=</span> <span class="st">'(?&lt;=boardgame\\/)([0-9]+)(?=\\/)'</span><span class="op">)</span>,</span>
+<span>    <span class="co"># parseando variaveis que sao numeros para tal</span></span>
+<span>    ano         <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">ano</span><span class="op">)</span>,</span>
+<span>    geek_rating <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">geek_rating</span><span class="op">)</span>,</span>
+<span>    avg_rating  <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">avg_rating</span><span class="op">)</span>,</span>
+<span>    num_voters  <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">num_voters</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># organizando a tabela</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span></span>
+<span>    <span class="va">id</span>, <span class="va">titulo</span>, <span class="va">ano</span>, .after <span class="op">=</span> <span class="va">board_game_rank</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span></span>
+<span>    <span class="va">title</span>, .after <span class="op">=</span> <span class="va">num_voters</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># renomeando as colunas</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
+<span>    rank <span class="op">=</span> <span class="va">board_game_rank</span>, nota_bgg <span class="op">=</span> <span class="va">geek_rating</span>, </span>
+<span>    nota_usuarios <span class="op">=</span> <span class="va">avg_rating</span>, votos <span class="op">=</span> <span class="va">num_voters</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="va">paginas_faxinadas</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 500 × 10
    rank  id     titulo    ano nota_bgg nota_usuarios votos title link  descricao
    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
- 1 1     224517 Brass:…  2018     8.42          8.6  42968 Bras… /boa… Build ne…
- 2 2     161936 Pandem…  2015     8.39          8.53 52379 Pand… /boa… Mutating…
- 3 3     174430 Gloomh…  2017     8.37          8.6  60822 Gloo… /boa… Vanquish…
- 4 4     342942 Ark No…  2021     8.33          8.54 38878 Ark … /boa… Plan and…
- 5 5     233078 Twilig…  2017     8.24          8.61 22583 Twil… /boa… Build an…
- 6 6     167791 Terraf…  2016     8.22          8.37 95461 Terr… /boa… Compete …
- 7 7     316554 Dune: …  2020     8.22          8.43 41145 Dune… /boa… Influenc…
- 8 8     291457 Gloomh…  2020     8.18          8.46 32299 Gloo… /boa… Vanquish…
- 9 9     115746 War of…  2011     8.18          8.54 20415 War … /boa… The Fell…
-10 10    187645 Star W…  2016     8.17          8.42 31448 Star… /boa… Strike f…
+ 1 1     224517 Brass:…  2018     8.42          8.6  43430 Bras… /boa… Build ne…
+ 2 2     161936 Pandem…  2015     8.39          8.53 52588 Pand… /boa… Mutating…
+ 3 3     174430 Gloomh…  2017     8.37          8.6  61068 Gloo… /boa… Vanquish…
+ 4 4     342942 Ark No…  2021     8.33          8.54 39731 Ark … /boa… Plan and…
+ 5 5     233078 Twilig…  2017     8.24          8.61 22814 Twil… /boa… Build an…
+ 6 6     167791 Terraf…  2016     8.22          8.36 96057 Terr… /boa… Compete …
+ 7 7     316554 Dune: …  2020     8.22          8.43 41852 Dune… /boa… Influenc…
+ 8 8     115746 War of…  2011     8.18          8.54 20587 War … /boa… The Fell…
+ 9 9     291457 Gloomh…  2020     8.18          8.46 32678 Gloo… /boa… Vanquish…
+10 10    187645 Star W…  2016     8.17          8.42 31627 Star… /boa… Strike f…
 # ℹ 490 more rows</code></pre>
 </div>
 </div>
 <p>E só para fechar: uma figura sobre os dados que raspamos né! Vamos tentar visualizar qual a relação entre a nota do BGG, a nota média dada pelos usuários e quantidade de votos recebidos por cada jogo. A figura abaixo mostra que as notas dadas pelos usuários parecem ser maiores do que as notas do ranking final do BGG - fato que ocorre pois o BGG usa uma média bayesiana para montar o seu ranking. Além disso, podemos ver que parece existir uma tendência aos jogos que recebem mais votos também terem maiores notas no ranking do BGG. Por outro lado, parece que os jogos mais votados são aqueles com menores notas dadas pelos usuários. Curioso, não?</p>
 <div class="cell preview-image page-columns page-full" data-fig.dpi="300">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>paginas_faxinadas <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_autopoint</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">'deepskyblue3'</span>) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_autodensity</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> .panel_x, <span class="at">y =</span> .panel_y), </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="st">'deepskyblue3'</span>, <span class="at">color =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_matrix</span>(<span class="at">rows =</span> <span class="fu">vars</span>(nota_bgg<span class="sc">:</span>votos), <span class="at">layer.diag =</span> <span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-body-outset">
+<details><summary>Código</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">paginas_faxinadas</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggforce.data-imaginist.com/reference/geom_autopoint.html">geom_autopoint</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="st">'deepskyblue3'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggforce.data-imaginist.com/reference/geom_autohistogram.html">geom_autodensity</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.panel_x</span>, y <span class="op">=</span> <span class="va">.panel_y</span><span class="op">)</span>, </span>
+<span>                   fill <span class="op">=</span> <span class="st">'deepskyblue3'</span>, color <span class="op">=</span> <span class="st">'black'</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggforce.data-imaginist.com/reference/facet_matrix.html">facet_matrix</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">nota_bgg</span><span class="op">:</span><span class="va">votos</span><span class="op">)</span>, layer.diag <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-body-outset">
 <p><img src="index_files/figure-html/figura_exploratoria-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="conclusões" class="level1">
-<h1>Conclusões</h1>
+</section><section id="conclusões" class="level1"><h1>Conclusões</h1>
 <p>Esse foi o passo-a-passo que eu usei para pegar os jogos que estão na página do ranking do BoardGameGeek (BGG) e o <em>id</em> numérico deles. Precisei fazer essa raspagem pois a API XML do BGG funciona melhor através da utilização deste <em>id</em>, e não encontrei outra forma de pegar essa informação em nenhum outro lugar no site ou na API. Existem melhorias que poderiam ser feitas na função e no <em>pipeline</em> de raspagem aqui, tais como adicionar uns <code>safely</code> ou <code>insistently</code> no <code>GET</code> em caso de falhas ou coisas do gênero. Outra melhoria seria também automatizar a identificação da última página que precisa ser raspada. Para este último, deixo até a dica aqui de como pegar o valor: ele está numa <em>tag</em> <em>div</em> no início e no fim do HTML, de forma que basta pegarmos a sua primeira ocorrência para saber o valor máximo da quantidade de páginas; então, é só colocá-lo em um objeto e chamar ele na hora de usar o <code>walk</code> ali em cima.</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ultima_pagina <span class="ot">&lt;-</span> resultado <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando o conteudo do GET</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">content</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pegando a tag que contem o limite de paginas</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_find_first</span>(<span class="at">xpath =</span> <span class="st">'//div//*[@title="last page"]'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># limpando a tag</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_text</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># passando ela para um numero</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parse_number</span>()</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>ultima_pagina</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1513</code></pre>
+<details><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ultima_pagina</span> <span class="op">&lt;-</span> <span class="va">resultado</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando o conteudo do GET</span></span>
+<span>  <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># pegando a tag que contem o limite de paginas</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_find_all.html">xml_find_first</a></span><span class="op">(</span>xpath <span class="op">=</span> <span class="st">'//div//*[@title="last page"]'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># limpando a tag</span></span>
+<span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/xml_text.html">xml_text</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># passando ela para um numero</span></span>
+<span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ultima_pagina</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 1519</code></pre>
 </div>
 </div>
 <p>Dúvidas ou sugestões? É só me procurar que a gente conversa!</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Código</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.1 (2023-06-16 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 11 x64 (build 22621)
@@ -731,19 +638,14 @@ loaded via a namespace (and not attached):
 
 
 
-</section>
-
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Referências</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Referências</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Lente2018" class="csl-entry" role="listitem">
 Lente, Caio. 2018. <span>«O Fluxo do Web Scraping»</span>. <em>Blog da Curso-R</em>. <a href="https://blog.curso-r.com/posts/2018-02-18-fluxo-scraping/">https://blog.curso-r.com/posts/2018-02-18-fluxo-scraping/</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas de rodapé</h2>
-
 <ol>
 <li id="fn1"><p>Essa API ainda está em desenvolvimento, e devo escrever sobre o consumo de informações através dela em outro post<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2021,
+</ol></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2021,
   author = {Marino, Nicholas},
   title = {Raspando a página do ranking do BoardGameGeek},
   date = {2021-09-17},
@@ -753,8 +655,7 @@ Lente, Caio. 2018. <span>«O Fluxo do Web Scraping»</span>. <em>Blog da Curso-R
 </code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Por favor, cite este trabalho como:</div><div id="ref-marino2021" class="csl-entry quarto-appendix-citeas" role="listitem">
 Marino, Nicholas. 2021. <span>“Raspando a página do ranking do
 BoardGameGeek.”</span> September 17, 2021. <a href="https://nacmarino.netlify.app//posts/2021-09-17_scrapper-boardgamegeek">https://nacmarino.netlify.app//posts/2021-09-17_scrapper-boardgamegeek</a>.
-</div></div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1000,12 +901,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script><script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -1015,7 +914,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-
 
 
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>

@@ -1,0 +1,48 @@
+---
+title: "Quais as associações entre as cartas de Gwent nos decks existentes?"
+subtitle: |
+  Eu tenho jogado Gwent: the Witcher Card Game há algum tempo, e é impressionante a quantidade de combos e sinergias que podem haver entre as cartas de acordo com o deck que você monta. Neste post, eu tento identificar as combinações de cartas que aparecem com maior frequência através de uma análise das regras de associação entre elas.
+date: 01-08-2022
+categories:
+  - boardgames
+  - arules
+bibliography: bibliografia.bib
+execute:
+  warning: false
+  fig-align: center
+---
+
+```{r setup, include=FALSE}
+#| code-fold: false
+#| echo: false
+#| fig-dpi: 200
+#| include: false
+#| results: 'hide'
+# loading the renv file associated with this blog post
+renv::use(lockfile = 'renv.lock')
+
+# presetando o ggplot2
+library(ggplot2)
+library(extrafont)
+
+# setando o tema geral do ggplot2
+theme_set(new = theme_minimal(base_family = 'Fira Sans'))
+
+# atualizando o tema
+theme_update(
+  plot.title    = element_text(face = 'bold', size = 10),
+  plot.subtitle = element_text(size = 8),
+  plot.caption  = element_text(size = 8),
+  axis.title    = element_text(face = 'bold', size = 8),
+  axis.text     = element_text(color = 'black', size = 8),
+  strip.text    = element_text(face = 'bold', size = 8)
+)
+
+# cores por faccao
+cores_por_faccao <- c('Monsters' = 'red', 'Nilfgaard' = 'grey30', 'Northern Realms' = 'deepskyblue2', 
+                      "Scoia'tael" = 'forestgreen', 'Skellige' = 'purple3', 'Syndicate' = 'orange2')
+```
+
+# Motivação
+
+Gwent é um jogo de cartas do universo de The Witcher no qual dois jogadores se enfrentam em busca da maior pontuação em pelo menos 2 de 3 rodadas, cada uma com no máximo uns 10 turnos para cada jogador. Esta pontuação é dada pelo poder de cada carta e, também, através da forma que elas interagem entre si. A tabela abaixo traz um exemplo disto para 4 cartas pertencentes aos decks da facção Scoia'tael - uma das 6 facções existentes no jogo.
