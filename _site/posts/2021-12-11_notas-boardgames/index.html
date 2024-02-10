@@ -153,6 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div class="quarto-category">estatistica</div>
                 <div class="quarto-category">boardgames</div>
                 <div class="quarto-category">infer</div>
+                <div class="quarto-category">analise</div>
               </div>
                   </div>
   </div>
@@ -467,7 +468,7 @@ mean difference
 <pre><code># A tibble: 1 × 2
   lower_ci upper_ci
      &lt;dbl&gt;    &lt;dbl&gt;
-1    0.343    0.399</code></pre>
+1    0.342    0.400</code></pre>
 </div>
 </div>
 <p>Como podemos ver, a estatística de teste e o intervalo de confiança extraído do <em>bootstrap</em> são muito parecidos com aqueles que tínhamos observado com a função <code><a href="https://rdrr.io/r/stats/t.test.html">stats::t.test</a></code>. Muito bom!</p>
@@ -494,16 +495,16 @@ Null Hypothesis: point
 # A tibble: 500 × 2
    replicate  stat
        &lt;int&gt; &lt;dbl&gt;
- 1         1 0.189
- 2         2 0.215
- 3         3 0.201
- 4         4 0.205
- 5         5 0.198
- 6         6 0.211
- 7         7 0.219
- 8         8 0.206
- 9         9 0.195
-10        10 0.198
+ 1         1 0.221
+ 2         2 0.200
+ 3         3 0.178
+ 4         4 0.190
+ 5         5 0.224
+ 6         6 0.175
+ 7         7 0.188
+ 8         8 0.195
+ 9         9 0.206
+10        10 0.186
 # ℹ 490 more rows</code></pre>
 </div>
 </div>
@@ -596,18 +597,18 @@ Null Hypothesis: point
 <span><span class="va">resultados_reamostragem</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 500 × 9
-   sample_id estimate statistic  p.value parameter conf.low conf.high method    
-   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     
- 1 1            0.193      1.05 0.304           29  -0.184      0.570 Paired t-…
- 2 2            0.343      2.79 0.00913         29   0.0919     0.594 Paired t-…
- 3 3            0.443      3.30 0.00254         29   0.169      0.717 Paired t-…
- 4 4            0.424      4.00 0.000404        29   0.207      0.642 Paired t-…
- 5 5            0.353      2.46 0.0200          29   0.0598     0.646 Paired t-…
- 6 6            0.263      1.71 0.0987          29  -0.0523     0.579 Paired t-…
- 7 7            0.554      3.88 0.000549        29   0.262      0.846 Paired t-…
- 8 8            0.433      2.83 0.00827         29   0.121      0.746 Paired t-…
- 9 9            0.431      3.47 0.00165         29   0.177      0.685 Paired t-…
-10 10           0.295      2.55 0.0165          29   0.0579     0.532 Paired t-…
+   sample_id estimate statistic   p.value parameter conf.low conf.high method   
+   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    
+ 1 1          0.481     3.50    0.00151          29   0.200      0.761 Paired t…
+ 2 2          0.542     4.89    0.0000346        29   0.315      0.769 Paired t…
+ 3 3          0.449     3.77    0.000754         29   0.205      0.692 Paired t…
+ 4 4          0.00133   0.00865 0.993            29  -0.314      0.317 Paired t…
+ 5 5          0.365     2.62    0.0140           29   0.0797     0.650 Paired t…
+ 6 6          0.122     0.721   0.476            29  -0.225      0.469 Paired t…
+ 7 7          0.434     3.77    0.000745         29   0.198      0.669 Paired t…
+ 8 8          0.435     2.59    0.0149           29   0.0913     0.778 Paired t…
+ 9 9          0.254     1.92    0.0643           29  -0.0161     0.525 Paired t…
+10 10         0.304     1.77    0.0868           29  -0.0467     0.654 Paired t…
 # ℹ 490 more rows
 # ℹ 1 more variable: alternative &lt;chr&gt;</code></pre>
 </div>
@@ -655,7 +656,7 @@ Null Hypothesis: point
 <p><img src="index_files/figure-html/figura_reamostragem-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Já é possível reparar que a diferença média estimada entre as notas associadas à uma mesma posição entre os rankings da Ludopedia e do BGG é bastante similar àquela dos dois testes anteriores - as notas na Ludopedia são 0.38 pontos maiores, em média, do que no BGG. No entanto, o intervalo de confiança ficou bem maior: 0.08 à 0.67 pontos de diferença em favor da Ludopedia. Como podemos ver, o grande número de amostras nos dados tinha algum impacto sobre estas últimas estimativas, e ela me parece muito mais realista agora do que àquelas obtidas anteriormente. Falo isso principalmente pensando na figura que mostra a variação na diferença entre as notas de acordo com a posição do ranking: podemos ver que a diferença se mantém num patamar elevado até certo ponto e de repente despenca. Assim, a diferença que estimamos estava longe de ser tão pequena quanto àquela calculada anteriormente.</p>
+<p>Já é possível reparar que a diferença média estimada entre as notas associadas à uma mesma posição entre os rankings da Ludopedia e do BGG é bastante similar àquela dos dois testes anteriores - as notas na Ludopedia são 0.38 pontos maiores, em média, do que no BGG. No entanto, o intervalo de confiança ficou bem maior: 0.08 à 0.63 pontos de diferença em favor da Ludopedia. Como podemos ver, o grande número de amostras nos dados tinha algum impacto sobre estas últimas estimativas, e ela me parece muito mais realista agora do que àquelas obtidas anteriormente. Falo isso principalmente pensando na figura que mostra a variação na diferença entre as notas de acordo com a posição do ranking: podemos ver que a diferença se mantém num patamar elevado até certo ponto e de repente despenca. Assim, a diferença que estimamos estava longe de ser tão pequena quanto àquela calculada anteriormente.</p>
 <p>Mas, calma aí…tinha esse padrão que eu acabei de falar…será que essa estimativa que tomamos agora faz mesmo sentido, então?</p>
 </section><section id="a-milha-extra" class="level2 page-columns page-full"><h2 class="anchored" data-anchor-id="a-milha-extra">A milha extra</h2>
 <p>Fiquei um bocado incomodado com os resultados que encontrei e os padrões observados naquela figura mostrando a variação na diferença entre as notas de acordo com a posição dos rankings. Fica muito claro ali que as notas dos títulos tendem a ser maiores na Ludopedia até certo ponto, a partir do qual o padrão contrário passa a valer. Assim, me parece mais razoável assumir que existam duas populações distintas dentro da nossa amostra, e que seria importante considerar isso na análise.</p>
@@ -749,16 +750,16 @@ GCV 0.3724764    RSS 1044.425    GRSq 0.4263666    RSq 0.4271832</code></pre>
 <pre><code># A tibble: 1,000 × 10
    sample_id estratificacao estimate statistic    p.value parameter conf.low
    &lt;chr&gt;     &lt;lgl&gt;             &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 1         FALSE            -0.444     -3.49 0.00158           29   -0.705
- 2 1         TRUE              0.502      4.35 0.000155          29    0.266
- 3 2         FALSE            -0.738     -4.07 0.000332          29   -1.11 
- 4 2         TRUE              0.481      4.42 0.000127          29    0.258
- 5 3         FALSE            -0.481     -3.57 0.00126           29   -0.756
- 6 3         TRUE              0.452      3.42 0.00187           29    0.182
- 7 4         FALSE            -0.421     -3.13 0.00394           29   -0.696
- 8 4         TRUE              0.669      5.70 0.00000367        29    0.429
- 9 5         FALSE            -0.405     -2.67 0.0122            29   -0.714
-10 5         TRUE              0.63       5.80 0.00000275        29    0.408
+ 1 1         FALSE            -0.358     -2.91 0.00693           29   -0.610
+ 2 1         TRUE              0.599      4.83 0.0000406         29    0.345
+ 3 2         FALSE            -0.796     -5.08 0.0000204         29   -1.12 
+ 4 2         TRUE              0.418      3.85 0.000593          29    0.196
+ 5 3         FALSE            -0.657     -4.51 0.000100          29   -0.955
+ 6 3         TRUE              0.705      6.17 0.00000100        29    0.471
+ 7 4         FALSE            -0.383     -2.69 0.0116            29   -0.674
+ 8 4         TRUE              0.756      4.88 0.0000355         29    0.439
+ 9 5         FALSE            -0.367     -2.49 0.0187            29   -0.668
+10 5         TRUE              0.61       5.46 0.00000700        29    0.382
 # ℹ 990 more rows
 # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
@@ -792,7 +793,7 @@ GCV 0.3724764    RSS 1044.425    GRSq 0.4263666    RSq 0.4271832</code></pre>
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Grupo"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Diferença estimada"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["IC inferior"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["IC superior"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Até a 2254º posição","2":"0.58","3":"0.37","4":"0.79"},{"1":"Acima da 2254º posição","2":"-0.54","3":"-0.85","4":"-0.26"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Grupo"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Diferença estimada"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["IC inferior"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["IC superior"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Até a 2254º posição","2":"0.60","3":"0.40","4":"0.84"},{"1":"Acima da 2254º posição","2":"-0.54","3":"-0.85","4":"-0.24"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>

@@ -6,6 +6,7 @@ date: 01-08-2022
 categories:
   - boardgames
   - arules
+  - analise
 bibliography: bibliografia.bib
 execute:
   warning: false

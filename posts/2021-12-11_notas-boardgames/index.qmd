@@ -8,6 +8,7 @@ categories:
   - estatistica
   - boardgames
   - infer
+  - analise
 execute:
   warning: false
   fig-align: center
