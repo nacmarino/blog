@@ -7,6 +7,7 @@ categories:
   - boardgames
   - arules
   - analise
+  - r
 bibliography: bibliografia.bib
 execute:
   warning: false

@@ -7,6 +7,8 @@ date-modified: 01-17-2024
 bibliography: bibliografia.bib
 categories:
   - web scraping
+  - r
+  - boardgames
 execute:
   warning: false
   fig-align: center
