@@ -2,13 +2,13 @@
 title: "Quão similares são as notas dos jogos de tabuleiro entre os portais especializados?"
 subtitle: |
   Meu principal objetivo neste post é analisar as notas dadas aos jogos de tabuleiros nos rankings do portal da Ludopedia e do portal do BoardGameGeek para determinar quão similares são as notas dadas aos títulos nas mesmas posições entre os dois rankings. Isto é, será que a nota dada ao título na i-ésima posição no ranking da Ludopedia é parecida com a nota dada ao título na mesma posição no ranking do BoardGameGeek?
-date: 11-30-2021
+date: 11-12-2021
 date-modified: 02-02-2024
 categories:
   - estatistica
   - boardgames
-  - infer
   - analise
+  - r
 execute:
   warning: false
   fig-align: center
