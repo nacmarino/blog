@@ -10,12 +10,13 @@ categories:
   - analise
   - r
 bibliography: bibliografia.bib
+image: "images/rede.png"
 execute:
   warning: false
   fig-align: center
 ---
 
-```{r setup, include=FALSE}
+```{r setup}
 #| code-fold: false
 #| echo: false
 #| fig-dpi: 200
