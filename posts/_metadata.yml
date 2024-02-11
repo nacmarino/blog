@@ -1,6 +1,6 @@
 
 # freeze computational output
-freeze: true
+freeze: auto
 
 # Enable banner style title blocks
 title-block-banner: true
@@ -16,7 +16,7 @@ toc-location: left
 # Default knitr options
 execute:
   echo: true
-  message: true
+  message: false
   warning: false
 
 # Default author
