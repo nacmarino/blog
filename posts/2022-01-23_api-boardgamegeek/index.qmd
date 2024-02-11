@@ -14,7 +14,7 @@ execute:
   fig-align: center
 ---
 
-```{r setup}
+```{r setup, include=FALSE}
 # setando as opções gerais dos code chunks
 #| code-fold: false
 #| echo: false
@@ -22,6 +22,7 @@ execute:
 #| include: false
 #| results: 'hide'
 # loading the renv file associated with this blog post
+options(renv.verbose = FALSE)
 renv::use(lockfile = 'renv.lock')
 ```
 
