@@ -4,7 +4,7 @@ subtitle: |
   Nesse post eu mostro a solução que propus para resolver um problema: converter coordenadas de uma projeção e datum qualquer para SIRGAS2000. Como não encontrei um bom suporte para a conversão no R, tive que recorrer à calculadora geográfica do INPE, criando uma automação para interagir com ela e realizar esta tarefa.
 date: 12-23-2021
 date-modified: 02-09-2024
-preview: images/cartografia.jpeg
+image: "images/cartografia.jpeg"
 categories:
   - web scraping
   - selenium
@@ -265,4 +265,3 @@ Finalmente, uma outra extensão que vejo seria de pegar o código PHP que faz a 
 ```{r}
 conda_remove(envname = 'blog_post_env')
 ```
-
