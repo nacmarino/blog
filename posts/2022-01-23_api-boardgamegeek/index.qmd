@@ -1,0 +1,586 @@
+---
+title: "Interagindo com a API XML do BoardGameGeek"
+subtitle: |
+  Neste post eu mostro como obter e fazer os parser dos dados dos jogos de tabuleiro do BoardGameGeek, obtidos através de sua API XML. O processo apresentado aqui faz uso e complementa o que já foi apresentado no scrapper do ranking do BGG, e servirá de base para alguns posts que penso em escrever no futuro.
+date: 01-23-2022
+date-modified: 02-10-2024
+categories:
+  - web scraping
+  - boardgames
+  - r
+image: "images/logo.png"
+execute:
+  warning: false
+  fig-align: center
+---
+
+```{r setup}
+# setando as opções gerais dos code chunks
+#| code-fold: false
+#| echo: false
+#| fig-dpi: 200
+#| include: false
+#| results: 'hide'
+# loading the renv file associated with this blog post
+renv::use(lockfile = 'renv.lock')
+```
+
+# Motivação
+
+Um dos primeiros [posts](https://nacmarino.github.io/codex/posts/2021-09-17-raspando-a-pgina-do-ranking-do-boardgamegeek/) do blog foi sobre um _scrapper_ para obtermos as informações da página do ranking do [BoardGameGeek](https://boardgamegeek.com/browse/boardgame), um portal especializado em jogos de tabuleiro. Meu principal objetivo com isso não foi o de extrair o ranking em si, mas o de extrair o identificador único de cada jogo para usá-lo junto à API XML oferecida pelo portal. Essa API nos dá acesso à (praticamente) todas as informações sobre os jogos que estão disponíveis em suas respectivas páginas e, portanto, fornece um caminho mais simples para obtermos os dados sobre cada um deles de forma programática. No entanto, o mais importante para mim é que essas informações têm o potencial de facilitar uma das coisas que eu mais tenho dificuldade: encontrar os jogos que combinam com aquilo que eu curto.
+
+Neste post eu mostro como interagir com a API XML do BGG e, também, fazer o _parser_ das informações que obtemos a partir dela. Esse processo vai ser importante para entendermos os tipos de dados que temos disponíveis e as possíveis formas de usá-los nos próximos posts.
+
+# Funcionamento da API
+
+A primeira coisa que precisaremos fazer para interagir com a API do BGG é carregar a base que contém o identificador único de cada jogo. Estes dados podem ser obtidos a partir do _scrapper_ disponível neste [link](https://nacmarino.github.io/codex/posts/2021-09-17-raspando-a-pgina-do-ranking-do-boardgamegeek/), ou você pode simplesmente usar a base de dados disponível junto a esse post. A informação que precisaremos está na coluna `id` na tabela abaixo.
+
+```{r carrega_dados}
+# carregando os pacotes
+library(tidyverse) # core
+library(httr) # para fazer o scraping
+library(xml2) # para o parser
+library(fs) # para manipular paths
+
+## lendo os dados do ranking da BGG para pegar o identificador unico de cada jogo
+ranking <- read_rds(file = 'data/ranking_bgg.rds') %>% 
+  # dropando os jogos que não possuem game_id
+  drop_na(id)
+
+## visualizando a tabela
+rmarkdown::paged_table(x = ranking)
+```
+
+A API do BGG funciona através de requisições do tipo `GET`, que retornam um arquivo `xml` (e**X**tensible **M**arkup **L**anguage) cujos parâmetros e valores seguem o padrão de _tags_ e atributos comum à páginas `HTML`. Não é necessário fazer qualquer tipo de autenticação para usar essa API, bastando fazer àquela requisição diretamente para o _endpoint_ selecionado e empregando os métodos desejados. Falando nisso, não tenho certeza se essa API é RESTful ou não (**RE**presentational **S**tate **T**ransfer), uma vez que (1) apenas requisições do tipo `GET` são suportadas, (2) as requisições para um determinado tipo de informação são todas feitas através de um único _endpoint_ e (3) os nomes dos métodos utilizados devem ser passados diretamente para a `url` da requisição. De toda forma, a documentação da API pode ser encontrada [aqui](https://boardgamegeek.com/wiki/page/BGG_XML_API2) e, se você souber me dizer se ela é RESTful ou não, eu agradeceria.  
+
+Existem diversos tipos de informação disponíveis no site do BGG que podem ser obtidas através dessa API, tais como os dados dos jogos (_i.e._, `thing`), das coleções (_i.e._, `collection`) e dos próprios usuários (_i.e._, `user`) e do fórum (_i.e._, `forum`). Além disso, dentro de cada tipo de informação desta, podemos buscar detalhes específicos, tais como tudo o que há no _marketplace_ para um jogo ou os resultados das partidas dos jogos registrados por cada usuário. Embora haja uma infinidade de informalões, neste post vamos focar apenas nas relativas às características dos jogos e, portanto, vamos usar o _endpoint_ `https://www.boardgamegeek.com/xmlapi2/thing`.
+
+Existem diversos métodos que podemos ser usados junto daquele _endpoint_. Entretanto, vamos usar aqui o `id` do jogo (que vamos extrair da tabela que carregamos acima), as estatísticas relacionadas à cada jogo (setando `stats=1`) e uma amostra de, no máximo, 100 comentários associados à cada jogo (setando `ratingcomments=1` e `pagesize=100`). Existem outros métodos associados a esse _endpoint_, como os vídeos que falam sobre o jogo (_i.e._, `videos=1`) e as informações dos anúncios do _marketplace_ (_i.e._, `marketplace=1`), mas não vamos trabalhar com eles aqui. De toda forma, precisamos juntar o endereço do _endpoint_ e os métodos para compor a `url` para o `GET`: fazemos isso separando a `url` do _endpoint_ das strings dos métodos utilizando o `?` e cada método do outro usando o `&`. Com isso, a `url` ficará assim: `https://www.boardgamegeek.com/xmlapi2/thing?id=<game_id>&stats=1&ratingcomments=1&pagesize=100` - onde o `game_id` vai ser um número correspondente ao identificador numérico do jogo. 
+
+A função abaixo cuidará de fazer essa requisição, salvando uma cópia do HTML da resposta em disco caso o valor passado para o argumento `path_to_save` não seja `NULL`.
+
+```{r funcao_pega_jogo}
+## funcao para pegar o XML de um jogo
+pega_jogo <- function(game_id, path_to_save = NULL) {
+  # url base para pegar um jogo, as estatisticas e a primeira pagina de comentarios
+  base_url <- str_glue('https://www.boardgamegeek.com/xmlapi2/thing?id={game_id}&stats=1&ratingcomments=1&pagesize=100')
+  
+  # fazendo o request e salvando o codigo da resposta se o path nao for nulo
+  if(!is.null(path_to_save)){
+    GET(url = base_url, 
+        write_disk(path = sprintf(fmt = '%s/%08d.html', path_to_save, game_id), 
+                   overwrite = TRUE)
+    )
+  } else {
+    GET(url = base_url)
+  }
+  
+}
+```
+
+Vamos usar a função para fazer a requisição de um jogo, salvando o `xml` resultante em disco. Para isso, vou criar um diretório temporário para armazenar o `xml` e, também, extrair o identificador numérico do jogo que utilizaremos nesse exemplo: o __Ticket to Ride__. Esse é um jogo de construir rotas com trenzinhos, e é muito legal e divertido. 
+
+```{r pega_um_jogo}
+## setando o path onde vamos jogar os arquivos
+path_scrapped_data <- 'temp'
+
+## criando pasta se ela nao existir
+if(!dir_exists(path_scrapped_data)){
+  dir_create(path = path_scrapped_data, recurse = TRUE)
+}
+
+# pegando o id do jogo que vamos usar no exemplo
+id_do_jogo <- ranking %>% 
+  # pegando o jogo wingspan
+  filter(titulo == 'Ticket to Ride') %>% 
+  # pegando o id do jogo
+  pull(id) %>% 
+  # parseando o id para um numero
+  parse_number()
+
+# fazendo o request do XML do jogo
+xml_do_jogo <- pega_jogo(game_id = id_do_jogo, path_to_save = path_scrapped_data)
+```
+
+Podemos pegar o `content` da resposta da requisição e usar a função `xml_structure` para entender a sua estrutura. Isso nos ajuda bastante a identificar as _tags_ que precisamos buscar, bem como o tipo de resultado que deve estar associado à cada uma delas. Como o output dessa função é bastante longo, resolvi usar outra abordagem aqui no post só para dar uma ideia do que existe dentro da resposta: usei a função `as_list` do pacote `xml2` para parsear o código para uma lista do R. O resultado disso, é uma lista aninhada, começando pelo elemento único `items` que, por sua vez, tem outro elemento único chamado `item` dentro dela e, finalmente, os elementos que estamos buscando. Para obter esses objetos e extrair o nome delas, usei a função `pluck`, seguida da função `names` para extrair o nome das _tags_ e `table` para contar quantas vezes cada uma aparece. O resultado que obtemos com isso é apresentado abaixo, onde podemos ver quantas vezes cada _tag_ aparece dentro do `xml`: algumas aparecem uma única vez, outras aparecem dezenas ou centenas de vezes (_i.e._, `links`, `name` e `pool`).
+
+```{r estrutura_do_xml}
+xml_do_jogo %>% 
+  # pega o conteudo da response
+  content() %>% 
+  # coloca o conteudo como uma lista
+  as_list() %>% 
+  # pega os elementos da lista que estao dentro de item
+  pluck('items', 'item') %>% 
+  # olha os nomes dos elementos na sublista
+  names %>% 
+  # contando quantas vezes cada nome aparece
+  table
+```
+
+E com isso fechamos a parte da obtenção dos dados da API do BGG, que se mostrou bastante simples: sem autenticação, só usar o _enpoint_ e os métodos que queremos. Por outro lado, veremos a seguir que fazer o _parser_ dessas informações é bem mais trabalhoso. 
+
+# Parseando o `response`
+
+O conteúdo da requisição é bastante heterogêneo, e fazer o _parser_ dele fica mais fácil de ser entendido se pensarmos em quatro tipos de informação: (1) àquelas de cunho geral e que são representadas por uma única quantidade (_e.g._, idade mínima, tempo de jogo,...) ou facilmente resumidas à uma única informação (_e.g._, nome do jogo), (2) os comentários associados à cada jogo, (3) as que trazem uma opinião específica da comunidade em torno do jogo e que são representadas por tabelas consolidando o resultado de votações (_e.g._, idade recomendada, dependência do idioma) e (4) os metadados que trazem detalhes específicos do jogo e que são apresentadas como tabelas contendo cada um destes metadados de forma discriminada (_e.g._, mecânicas, autores,...). Veremos como fazer o _parser_ de cada informação desta e o que obtemos como resultado em cada caso.
+
+## Informações genéricas
+
+A primeira informação geral que vamos parsear é àquela que está dentro da _tag_ `name`. Para isso, precisaremos pegar tudo o que está associado à essa _tag_ usando um `xml_find_all` e extrair os atributos de cada elemento com `xml_attrs`. O resultado dessa operação é uma lista onde cada elemento é um `data.frame` com uma única linha, contendo um nome do jogo e um indicador se esse nome é o oficial (_i.e._, _primary_) ou o não-oficial (_i.e._, _alternate_). Juntaremos essas linhas usando um `bind_rows` seguido de um `select` para organizar o resultado.  Aplicando essa função ao conteúdo do `xml`, obtemos uma tabelinha com todos os nomes do jogo, onde podemos ver que o os nomes não-oficiais são normalmente aqueles em outras línguas. Essa tabela é bastante útil pois, com base nela, podemos fazer um de-para das informações do BGG para àquelas da [Ludopedia](https://www.ludopedia.com.br/ranking), o que nos permite responder à algumas perguntas que havíamos aberto [anteriormente](https://nacmarino.github.io/codex/posts/2021-12-11-quao-similares-sao-as-notas-dos-jogos-de-tabuleiro-entre-os-portais-especializados/). De toda forma, se quiséssemos extrair apenas o nome oficial do jogo, bastava usar um `filter` pelo valor `primary`, seguido de um `pull` da coluna título.
+
+```{r funcao_parser_nome}
+## funcao para parsear a lista de nomes do jogo
+parser_nome <- function(arquivo_xml) {
+  # pega o arquivo HTML
+  arquivo_xml %>% 
+    # extrai todas as tags name
+    xml_find_all(xpath = '*//name') %>% 
+    # extrai todo os atributos dessas tags
+    xml_attrs() %>% 
+    # junta todos os atributos em uma tibble
+    bind_rows() %>% 
+    # remove a coluna sortindex
+    select(titulo = value, metadado = type)
+}
+
+# parseando os nomes
+parser_nome(arquivo_xml = content(x = xml_do_jogo))
+```
+
+A próxima informação que vamos parsear é a descrição do jogo, que é um string contendo toda a estorinha e contexto sobre o jogo. Essa informação está dentro da _tag_ `description`, e basta usarmos o `xml_text` para pegá-la.
+
+```{r funcao_parser_descricao}
+## funcao para parsear a descricao do jogo
+parser_descricao <- function(arquivo_xml) {
+  # pega o arquivo HTML
+  arquivo_xml %>% 
+    # extrai todas as tags description
+    xml_find_first(xpath = '*//description') %>% 
+    # extrai o texto da descricao
+    xml_text()
+}
+
+# parseando a descricao
+parser_descricao(arquivo_xml = content(x = xml_do_jogo))
+```
+
+O próximo _parser_ estrutura diversas informações relacionadas ao ano de publicação do jogo, quantidade de jogadores, tempo de jogo e idade mínima. Todas essas informações estão como _tags_ soltas dentro do `xml`, portanto tive que usar o `self` dentro do _xpath_ para pegar cada uma delas e colocar dentro do mesmo resultado. Entretanto, uma vez que conseguimos extrair essas informações, usamos um `map_dfr` para as colocarmos como um `tibble` e, depois, um `pivot_wider` para organizá-las entre colunas.
+
+```{r funcao_parser_informacoes}
+## funcao para parsear as informacoes do jogo
+parser_informacoes <- function(arquivo_xml) {
+  # pega o arquivo HTML
+  arquivo_xml %>% 
+    # extrai todas as tags relacionadas às informações sobre o ano de publicacao, quantidade de jogadores
+    # idade minima para o jogo e tempo de jogo
+    xml_find_all(xpath = '*//*[self::yearpublished or self::minplayers or self::maxplayers
+               or self::playingtime or self::minplaytime or self::maxplaytime or self::minage]') %>% 
+    # colocando todos os atributos dessa tag em um tibble
+    map_dfr(
+      ~ list(
+        caracteristica = xml_name(.x),
+        valor = xml_attrs(.x, 'value')
+      )) %>% 
+    # parseando tudo para numerico
+    mutate(valor = parse_number(x = valor)) %>% 
+    # passando o tibble do formato longo para o largo
+    pivot_wider(names_from = caracteristica, values_from = valor)
+}
+
+# parseando as informacoes
+parser_informacoes(arquivo_xml = content(x = xml_do_jogo))
+```
+
+Quando passamos o método `stats=1` para o _endpoint_ também coletamos as informações sobre as estatísticas relacionadas ao _ranking_ do jogo que escolhemos. Com isso vamos ter acesso: (a) às informações relativas às notas e (b) àquelas diretamente relacionadas aos _rankings_ em que cada jogo aparece. A função abaixo dá conta de parsear o primeiro destes, nos dando acesso à quantidade de votos que cada jogo recebeu, a nota média (arimética e bayesiana) e outras informações relacionadas ao interesse dos usuários pelo jogo.
+
+```{r funcao_parser_avaliacoes}
+## funcao para parsear todas as informacoes relacionadas à avaliação de cada jogo
+parser_avaliacoes <- function(arquivo_xml) {
+  # extrai outras informacoes das avaliacoes e junta com as informacoes de rankings e contagem de comentarios
+  arquivo_xml %>% 
+    # extrai todas as tags relacionadas dentro das avaliacoes que nao estejam relacionadas ao rankeamento
+    xml_find_all(xpath = '*/statistics/ratings/*[not(self::ranks)]') %>% 
+    # coloca todas as informacoes dentro de um tibble
+    map_dfr(
+      ~ list(
+        estatistica = xml_name(.x),
+        valor = xml_attrs(.x, 'value')
+      )
+    ) %>% 
+    # parseando tudo para numerico
+    mutate(valor = parse_number(x = valor)) %>% 
+    # passando o tibble do formato longo para o largo
+    pivot_wider(names_from = estatistica, values_from = valor)
+}
+
+# parseando as avaliacoes
+parser_avaliacoes(arquivo_xml = content(x = xml_do_jogo))
+```
+
+Já a função abaixo parseia os _rankings_ em que cada jogo aparece. Além do _ranking_ geral, cada jogo também pode estar posicionado dentro da família de jogos à que pertence e/ou aos tipos de mecânica associados a ele. No nosso exemplo, podemos ver que o _Ticket to Ride_ ocupa a 193º posição do _ranking_ geral e a 40º posição quando o assunto são os jogos familiares.
+
+```{r funcao_parser_rankings}
+## funcao para parsear todas as informacoes relacionadas aos rankings em que cada jogo esta
+parser_rankings <- function(arquivo_xml) {
+  # pega o arquivo html
+  arquivo_xml %>% 
+    # extrai todas as tags que estejam relacionadas ao ranking
+    xml_find_all(xpath = '*/statistics/ratings/ranks/rank') %>% 
+    # extrai todo os atributos dessas tags
+    xml_attrs('value') %>% 
+    # junta todos os atributos em uma tibble
+    bind_rows() %>% 
+    # renomeando colunas
+    rename(nivel = type, tipo = name, nome = friendlyname, 
+           posicao = value, media_bayesiana = bayesaverage) %>% 
+    # parseando os numericos para tal
+    mutate(
+      posicao         = parse_number(x = posicao),
+      media_bayesiana = parse_number(x = media_bayesiana)
+    )
+}
+
+# parseando os rankings
+parser_rankings(arquivo_xml = content(x = xml_do_jogo))
+```
+
+## Comentários
+
+O método `ratingcomments=1` faz com que tenhamos acesso aos comentários e notas individuais associadas à cada jogo. Essas informações estão dentro da _tag_ `comment`, aninhada em `comments`, e podemos usar a função abaixo para extrair os 100 comentários que virão junto do `xml`. O resultado dela é um `tibble` onde temos uma coluna com o identificador único, a nota dada ao jogo e o comentário feito por um dado usuário. Esse identificador do usuário pode até ser usado em outros _endpoints_ disponíveis na API, como aquele que nos dá acesso às coleções.
+
+```{r funcao_parser_comentarios}
+## funcao para parsear os comentarios sobre o jogo
+parser_comentarios <- function(arquivo_xml) {
+  # pega o arquivo HTML
+  arquivo_xml %>% 
+    # extrai todas as tags de comentario
+    xml_find_all(xpath = '*/comments/comment') %>% 
+    # extrai todo os atributos dessas tags
+    xml_attrs() %>% 
+    # junta todos os atributos em uma tibble
+    bind_rows() %>% 
+    # renomeando as colunas
+    rename(usuario = username, nota = rating, comentario = value) %>% 
+    # parseando as notas para numerico
+    mutate(nota = parse_number(x = nota))
+}
+
+# parseando os comentarios
+parser_comentarios(arquivo_xml = content(x = xml_do_jogo))
+```
+
+Um ponto importante é que estamos limitados à obter um máximo de 100 comentários por requisição à API (usamos o método `pagesize=100` para garantir que isso vá acontecer). Desta forma, se quisermos pegar os comentários de 101 à 200 (e assim sucessivamente), devemos correr entre as 'páginas' dos comentários usando o método `page=numero` (onde `número` é o número da página). No entanto, se fossemos fazer isso precisávamos ter noção de quantos comentários existem para poder chegar ao número máximo de páginas que podermos passar para o método. É possível extrairmos estas informações olhando diretamente a _tag_ `comments`, e extraindo o atributo `totalitems`. Assim, para obtermos todos os comentários para esse jogo, bastaria dividirmos essa quantidade por 100, e iterar da página 1 até este máximo usando o método `page` junto do _endpoint_.
+
+```{r funcao_parser_comentarios_total}
+## funcao para parsear a quantidade total de comentarios que um jogo tem
+parser_comentarios_total <- function(arquivo_xml) {
+  # pega o arquivo html
+  arquivo_xml %>% 
+    # pega tudo o que está sobre a tag comments
+    xml_find_all(xpath = '*/comments') %>% 
+    # pega apenas o valor correspondente ao total de comentarios
+    xml_attr('totalitems') %>% 
+    # parseando o string para numero
+    parse_number()
+}
+
+# parseando a descricao
+parser_comentarios_total(arquivo_xml = content(x = xml_do_jogo))
+```
+
+## Resultados das votações
+
+Existem três _tags_ com o nome `pool` dentro do `xml`, e as funções a seguir tratam de fazer o _parser_ deste conteúdo. Essas _tags_ nada mais são do que os resultados de votações abertas sobre o número de jogadores, idade sugerida e dependência do idioma, nas quais os usuários do portal do BGG puderam opinar em torno desses três grupos de informação. 
+
+O _parser_ abaixo pega os resultados da votação relacionada ao número de jogadores, retornando as informações sobre a melhor e a pior quantidade de jogadores, além da quantidade recomendada per se. Se quiséssemos colocar essas informações em suas próprias colunas, faria bastante sentido agrupar a tabela abaixo pela coluna `voto` e pegar o `num_jogadores` que tivesse a maior quantidade de votos usando um `slice_max` com `n = 1`, passando o resultado disso para um `pivot_wider` depois. Não mostro como fazer isso aqui, mas seria uma opção viável para resumirmos essas informações em torno dessas três recomendações (_i.e._ a pior quantidade de jogadores, a melhor quantidade de jogadores, e a quantidade recomendada de jogadores).
+
+```{r funcao_parser_votacao_n_jogadores}
+## funcao para parsear os resultados da votacao do melhor numero de jogadores para se jogar
+parser_votacao_n_jogadores <- function(arquivo_xml) {
+  # pega o arquivo html
+  arquivo_xml %>% 
+    # extrai todas as tags com os resultados da votação relacionada ao melhor numero de jogadores
+    xml_find_all(xpath = '*/poll[@name="suggested_numplayers"]/results') %>% 
+    # coloca tudo dentro de um tibble
+    map_dfr(
+      ~ xml_find_all(.x, xpath = 'result') %>% 
+        xml_attrs() %>% 
+        bind_rows() %>% 
+        mutate(numplayers = xml_attrs(.x))
+    )  %>% 
+    # renomeia e organiza as colunas
+    select(num_jogadores = numplayers, voto = value, num_votos = numvotes) %>% 
+    # parseando votos para numerico
+    mutate(num_votos = parse_number(x = num_votos))
+}
+
+# parseando o resultado da votacao da melhor quantidade de jogadores
+parser_votacao_n_jogadores(arquivo_xml = content(x = xml_do_jogo))
+```
+
+O _parser_ seguinte olha o resultado da votação sobre a idade mínima sugerida para o jogo. Novamente, se quiséssemos resumir as informações dessa tabela à uma única linha (_i.e._, qual a idade recomendada pela comunidade para o jogo), bastaria que usássemos um `filter` para reter a linha que tivesse a maior quantidade de votos (_i.e._, `num_votos == max(num_votos)`) e, então, usar um `pull` na coluna `idade_ideal`.
+
+```{r funcao_parser_votacao_idade}
+## funcao para parsear os resultados da votacao da idade recomendada para o jogo
+parser_votacao_idade <- function(arquivo_xml) {
+  # pega o arquivo html
+  arquivo_xml %>% 
+    # extrai todas as tags com os resultados da votação relacionada à idade recomendada para o jogo
+    xml_find_all(xpath = '*/poll[@name="suggested_playerage"]/results') %>% 
+    # coloca tudo dentro de um tibble
+    map_dfr(
+      ~ xml_find_all(.x, xpath = 'result') %>% 
+        xml_attrs()
+    ) %>% 
+    # renomeia e organiza as colunas
+    select(idade_ideal = value, num_votos = numvotes) %>% 
+    # parseando votos para numerico
+    mutate(num_votos = parse_number(x = num_votos))
+}
+
+# parseando o resultado da votacao da melhor idade para o jogo
+parser_votacao_idade(arquivo_xml = content(x = xml_do_jogo))
+```
+
+Finalmente, o último _parser_ relacionado às votações fala da dependência do idioma para o jogo. Essa informação indica o quanto dependemos de entender o que está escrito no livro de regras, cartas e etc de forma a conseguir jogar. O resultado desse _parser_ é mais uma vez uma tabelinha e, para extrair a recomendação da comunidade, bastaria que repetimos o processo descrito acima, mas usando um `pull` na coluna `voto`.
+
+```{r funcao_parser_votacao_idioma}
+## funcao para parsear os resultados da votacao sobre a dependencia do idioma para jogar o jogo
+parser_votacao_idioma <- function(arquivo_xml) {
+  # pega o arquivo html
+  arquivo_xml %>% 
+    # extrai todas as tags com os resultados da votacao sobre a dependencia do idioma para jogar o jogo
+    xml_find_all(xpath = '*/poll[@name="language_dependence"]/results') %>% 
+    # coloca tudo dentro de um tibble
+    map_dfr(
+      ~ xml_find_all(.x, xpath = 'result') %>% 
+        xml_attrs()
+    ) %>% 
+    # renomeia e organiza as colunas
+    select(voto = value, num_votos = numvotes) %>% 
+    # parseando votos para numerico
+    mutate(num_votos = parse_number(x = num_votos))
+}
+
+# parseando o resultado da votacao da dependencia do idioma
+parser_votacao_idioma(arquivo_xml = content(x = xml_do_jogo))
+```
+
+Para fechar essa seção, acho importante ressaltar que o processo que sugeri fazer aqui resume as informações em cada uma dessas três tabelas em torno de uma única quantidade - _i.e._, a informação com mais votos. No entanto, acredito ser possível criar algum tipo de _embedding_ ou _feature_ a partir das informações em cada uma dessas tabelas, que descreva de que forma a opinião dos usuários variou para aquele jogo. Isto talvez seja interessante para fazer uma caracterização mais refinada dos mesmos.
+
+## Metadados
+
+O _parser_ que deixei para o final é aquele relacionado aos metadados do jogo, que estavam dentro da _tag_ `link`. Se você puder lembrar, essa é àquela _tag_ que tinha umas 200 ocorrências no `xml` e, assim, já podemos imaginar a quantidade de informação que existe nela. De fato, quando parseamos essas informações através da função abaixo, vemos que existe uma diversidade de informações sobre cada jogo. Como o resultado dessa operação são várias `list-columns` dentro de um `tibble`, vamos precisar de mais um pouquinho de trabalho para deixar esse dado organizado.
+
+```{r funcao_parser_metadados}
+## funcao para parsear os metadados do jogo
+parser_metadados <- function(arquivo_xml) {
+  # pega o arquivo HTML
+  arquivo_xml %>% 
+    # extrai todas as tags link
+    xml_find_all(xpath = '*//link') %>% 
+    # extrai todo os atributos dessas tags
+    xml_attrs() %>% 
+    # junta todos os atributos em uma tibble
+    bind_rows() %>% 
+    # organiza as colunas
+    select(id_metadado = id, metadado = value, tipo_metadado = type) %>% 
+    # removendo o padrao boardgame do tipo de metadado
+    mutate(
+      tipo_metadado = str_replace(string = tipo_metadado, 
+                                  pattern = 'boardgame', replacement = 'tbl_')
+      ) %>% 
+    # aninhando informacoes pelo tipo de metadado
+    nest(data = -tipo_metadado) %>% 
+    # passando o dado para o formato largo
+    pivot_wider(names_from = tipo_metadado, values_from = data)
+}
+
+# parseando os metadados
+parser_metadados(arquivo_xml = content(x = xml_do_jogo))
+```
+
+### Desempacotando os metadados
+
+O resultado que obtivemos no _parser_ dos metadados não é muito útil pois ele não está em um formato `tidy`. Apesar de termos uma informação diferente por coluna, ela está totalmente colapsada dentro de `tibbles`, o que dificulta (mas não impede) realizarmos muitas operações que seriam úteis para entender melhor os dados. Como a informação dentro de cada uma das `list-columns` deve ter uma estrutura diferente das demais, vamos começar tratando esse dado passando a base do formato largo para o formato longo, usando a função `pivot_longer`. A partir daí, vamos utilizar a função `split` para quebrar o `tibble` resultante em uma lista de `tibbles` por tipo de informação, desaninhando eles na sequência usando um `unnest` - eu descrevo o que são cada uma dessas informações e todas as demais no final desse post.
+
+```{r desempacota_metadados}
+## expandindo cada uma das tabelas que contem multiplas informacoes sobre cada jogo
+tabelas <- parser_metadados(arquivo_xml = content(x = xml_do_jogo)) %>% 
+  # passando a base para o formato longo
+  pivot_longer(cols = everything(), names_to = 'tabela', values_to = 'dados') %>% 
+  # separando a base em listas de acordo com a dimensao
+  split(.$tabela) %>% 
+  # desaninhando cada tabela
+  map(.f = unnest, cols = dados) %>% 
+  # dropando a coluna do id da tabela
+  map(.f = select, -tabela) %>% 
+  # ordenando as tabelas por jogo em ordem alfabetica do metadado
+  map(.f = arrange, metadado)
+tabelas
+```
+
+Como podemos ver, todas essas informações já são `tidy` por si só, pois temos uma informação diferente por coluna e cada observação em uma linha distinta. Se o nosso objetivo for a manipulação e visualização de dados, então salvar cada uma dessas tabelas no formato em que estão já estaria ok. Por outro lado, se quisermos juntar essas informações para colocar todas as informações sobre um determinado jogo em uma única linha, usar elas para fazer um `join` acabaria replicando todas as informações em muitas linhas, o que não é desejável. Nesse contexto, teríamos duas opções para prevenir que isto ocorra, novamente dependendo do objetivo final que formos dar aos dados:  
+
+a. Se a ideia for criar uma base para a análise de dados, então poderíamos fazer um _one-hot-encoding_ de todas as informações e juntar todas as colunas. Isto, no entanto, geraria uma infinidade de colunas novas e uma matriz super esparsa^[A solução aqui seria basicamente um `pivot_wider` em cada `tibble`, seguida de um `bind_cols` entre elas e delas com todas as demais informações.];  
+b. Se quisermos apenas consolidar essas informações em uma única tabela, então basta que concatenemos cada uma delas em um único _string_ por `tibble` e juntar tudo em uma tabela só. Para isso, podemos usar um `paste0` dentro de um `summarise` para colapsar as informações de cada linha em um string só, seguido de um `bind_rows` para juntar cada `tibble` resultante linha a linha e, finalmente, um `pivot_wider` para colocar cada informação em uma coluna diferente. Para fins ilustrativos, apresento este tratamento abaixo.
+
+```{r metadados_tidy}
+## colocando as tabelas no formato tidy
+tabelas_tidy <- tabelas %>% 
+  # sumarizando todas as informacoes de forma a termos uma linha por jogo
+  map(.f = summarise, metadado = paste0(unique(metadado), collapse = ';')) %>% 
+  # colocando tudo em uma unica tabela
+  bind_rows(.id = 'informacao') %>% 
+  # removendo o prefixo tbl
+  mutate(informacao = str_remove(string = informacao, pattern = 'tbl_')) %>% 
+  # passando a base para o formato largo
+  pivot_wider(names_from = informacao, values_from = metadado)
+tabelas_tidy
+```
+
+Pronto! Já temos uma visão de como colocar as informações dos metadados em um único `tibble` no formato `tidy`, seja para consolidar tudo em uma tabela só ou para a análise de dados. Vamos fechar esse post criando uma função para consolidar todo o _parser_.
+
+# Colocando tudo junto
+
+Todas as funções que criamos para parsear as informações recebem como _input_ o `xml` do jogo e retornam um `tibble`, uma lista de `tibbles` ou um vetor com um único elemento. Portanto, vou criar uma única função para fazer o _parser_ chamando todas essas outras funções que criamos, mas aproveitando para carregar o arquivo `xml` que queremos parsear dentro dela mesmo, facilitando a nossa vida. Com isso, essa função receberá como argumento apenas o _path_ para o arquivo `xml` que foi salvo.
+
+```{r funcao_parser_do_jogo}
+# funcao para parsear o arquivo xml inteiro do jogo
+parser_do_jogo <- function(path_arquivo_xml) {
+  
+  ## lendo o arquivo xml
+  xml_do_jogo <- read_xml(x = path_arquivo_xml)
+  
+  ## parseando o arquivo xml
+  tibble(
+    tbl_nomes             = list(parser_nome(arquivo_xml = xml_do_jogo)),
+    tbl_comentarios       = list(parser_comentarios(arquivo_xml = xml_do_jogo)), 
+    tbl_rankings          = list(parser_rankings(arquivo_xml = xml_do_jogo)), 
+    tbl_votacao_idade     = list(parser_votacao_idade(arquivo_xml = xml_do_jogo)), 
+    tbl_votacao_idioma    = list(parser_votacao_idioma(arquivo_xml = xml_do_jogo)),
+    tbl_votacao_jogadores = list(parser_votacao_n_jogadores(arquivo_xml = xml_do_jogo))
+  ) %>% 
+    # juntando informacoes que ja estao no formato esperado
+    bind_cols(
+      parser_metadados(arquivo_xml = xml_do_jogo),
+      descricao = parser_descricao(arquivo_xml = xml_do_jogo),
+      total_comentarios = parser_comentarios_total(arquivo_xml = xml_do_jogo),
+      parser_avaliacoes(arquivo_xml = xml_do_jogo),
+      parser_informacoes(arquivo_xml = xml_do_jogo)
+    )
+}
+
+## fazendo o parser do jogo
+jogos <- parser_do_jogo(path_arquivo_xml = 'temp/00009209.html')
+
+## olhando a tabela
+jogos
+```
+
+Como podemos ver, temos todas as informações que já cobrimos até aqui nessa tabela, inclusive àquelas `list-columns`. Poderíamos salvar essa tabela como está, ou descartar àquelas `list-columns` e usar àquelas que preparamos acima, criar novas colunas ou fazer qualquer coisa que nos ocorrer - mas acredito que qualquer decisão daqui para a frente depende muito de como esses dados seriam usados. Deixo todas essas opções em aberto por aqui, mas mostrarei como fazer algumas delas em posts futuros, quando pretendo usar esses dados para gerar algumas visualizações, _dashboards_ e análises. Um ponto importante a se notar é que temos apenas um jogo neste exemplo e, portanto, essa tabela acima tem uma só linha. Todavia, caso tivéssemos mais de um, jogo teríamos tantas linhas quanto fossem os jogos, e ainda poderíamos colocar uma coluna com o identificador numérico do jogo para referência. 
+
+Eu mostro como generalizar essa função para vários jogos através do o código que acompanha este post, acessível por esse [link](https://github.com/nacmarino/codex/blob/8985e78a51b49379c7fa9aef5e1eb610ef883aea/_posts/2022-01-23-interagindo-com-a-api-do-boardgamegeek/scripts/01_scrapper.R).
+
+# Dicionário de Dados
+
+Como pretendo usar esses dados em mais de um post, vou deixar aqui um pequeno dicionário para explicar as tabelas e o que temos de informação em cada uma delas. Vou usar como referência as informações que estão dentro do objeto `jogos`, uma vez que o que vier dele vai ser o _output_ padrão do _parser_ que criamos.
+
++ **tbl_nomes:** tabela que contém o nome original e os nomes alternativos do jogo, podendo servir como uma base de-para para ligar os jogos de seu nome em inglês para _e.g._ o português.   
+    + `titulo`: nomes que o jogo pode assumir, dependendo da língua;  
+    + `metadado`: indicam se o nome correspondente é aquele oficial (`primary`) ou se é uma variação dada em outra língua (`alternate`).  
++ **tbl_comentarios**: tabela que contém os comentários e notas dadas ao jogo por cada usuários.  
+    + `usuario`: nome do usuário que fez o comentário;  
+    + `nota`: nota dada pelo usuário ao jogo;    
+    + `comentario`: comentário feito pelo usuário sobre o jogo.    
++ **tbl_rankings:** tabela que contém os rankings nos quais o jogo aparece, sua nota e posição.  
+    + `nivel`: nível geral do ranking avaliado;  
+    + `id`: identificador numérico único do tipo de ranking;  
+    + `tipo`: tipo de ranking analisado;  
+    + `nome`: nome do ranking;  
+    + `posicao`: posição no ranking em questão;  
+    + `media_bayesiana`: média bayesiana da nota do jogo.  
++ **tbl_votacao_idade:** tabela que contém os resultados da votação feita para definir a idade ideal para o jogo.    
+    + `idade_ideal`: categoria de idade votada pelos usuários;  
+    + `num_votos`: quantidade de votos.  
++ **tbl_votacao_idioma:** tabela que contém os resultados da votação feita para definir o grau de dependência do idiomata para se jogar o jogo.  
+    + `voto`: categoria do grau de dependência do idioma votada pelos usuários;  
+    + `num_votos`: quantidade de votos.  
++ **tbl_votacao_jogadores:** tabela que contém os resultados da votação feita para definir a pior, a melhor e a quantidade recomendada de jogadores para o jogo.  
+    + `num_jogadores`: categoria da quantidade de jogadores votada pelos usuários;  
+    + `voto`: categorias existentes associadas à pior, à melhor e à quantidade recomendada de jogadores;    
+    + `num_votos`: quantidade de votos.   
++ **tbl_category:** tabela que contém cada uma das temáticas associadas ao jogo.    
+    + `id_metadado`: identificador numérico único da temática do jogo;
+    + `metadado`: nome da temática associada ao jogo.  
++ **tbl_mechanic:** tabela que contém cada uma das mecânicas que definem a dinâmica do jogo em questão.  
+    + `id_metadado`: identificador numérico único da mecânica;
+    + `metadado`: nome da mecânica de jogo.  
++ **tbl_family:** tabela que contém os nomes de todas as famílias de elementos associadas ao jogo.  
+    + `id_metadado`: identificador numérico único da família;
+    + `metadado`: nome da família associada ao jogo.    
++ **tbl_expansion:** tabela que contém todas as expansões disponíveis para o jogo em questão.  
+    + `id_metadado`: identificador numérico único da expansão do jogo;
+    + `metadado`: nome da expansão do jogo.  
++ **tbl_compilation:** tabela que contém o nome de todas as edições especiais do jogo em questão.  
+    + `id_metadado`: identificador numérico único da edição especial do jogo;
+    + `metadado`: nome da edição especial do jogo.    
++ **tbl_implementation:** tabela que contém todos os jogos que implementam uma versão do jogo em questão e que podem ser utilizados sem a dependência do jogo original.  
+    + `id_metadado`: identificador numérico único da implementação do jogo;
+    + `metadado`: nome da variante que faz a implementação do jogo base.  
++ **tbl_designer:** tabela que contém os nomes de cada uma das pessoas autoras do jogo.  
+    + `id_metadado`: identificador numérico único da pessoa autora do jogo;
+    + `metadado`: nome da pessoa do autora do jogo.  
++ **tbl_artist:** tabela que contém os nomes de cada uma das pessoas responsáveis pela arte do jogo.  
+    + `id_metadado`: identificador numérico único da pessoa artista responsável pela arte jogo;
+    + `metadado`: nome da pessoa artista responsável pela arte jogo.  
++ **tbl_publisher:** tabela que contém os nomes das editoras responsáveis por publicar o jogo ao redor do mundo.  
+    + `id_metadado`: identificador numérico único da editora responsável por publicar o jogo;  
+    + `metadado`: nome da editora responsável por publicar o jogo.    
++ **descricao:** texto com a descrição e contexto do jogo;  
++ **total_comentarios:** quantidade total de comentários existentes sobre o jogo, relativo aos comentários que acompanhados das notas;  
++ **usersrated:** quantidade de usuários que avaliaram o jogo;
++ **average:** média aritmética das notas do jogo;
++ **bayesaverage:** média bayesiana das notas do jogo;
++ **stddev:** desvio padrão das notas do jogo;  
++ **median:** mediana das notas do jogo;  
++ **owned:** quantidade de usuários que têm o jogo;  
++ **trading:** quantidade de usuários que querem trocar este jogo por outro;  
++ **wanting:** quantidade de usuários que estão em busca do jogo;  
++ **wishing:** quantidade de usuários que desejam o jogo;  
++ **numcomments:** quantidade de comentários sobre o jogo;  
++ **numweights:** quantidade de votos sobre a complexidade do jogo;    
++ **averageweight:** grau de complexidade do jogo, medido em uma escala de 0 (nenhuma) à 5 (muito pesado);    
++ **yearpublished:** ano de publicação do jogo;  
++ **minplayers:** quantidade mínima de jogadores necessária para o jogo;  
++ **maxplayers:** quantidade máxima de jogadores sustentada pelo jogo;  
++ **playingtime:** duração média de uma partida do jogo;  
++ **minplaytime:** duração mínima de uma partida do jogo;  
++ **maxplaytime:** duração máxima de uma partida do jogo;  
++ **minage:** idade mínima sugerida para o jogo.    
+
+# Conclusões
+
+A ideia deste post foi criar o _scrapper_ das informações dos jogos de tabuleiro disponíveis no portal do BoardGameGeek, fazendo uso de sua API XML para isso. Essa API é bastante simples e fácil de usar, agilizando o trabalho de obtenção dos dados, apesar das dificuldades impostas para o seu processamento e organização. Neste intuito, desenvolvemos uma série de funções para fazer a requisição destes dados e parseá-los, de forma a chegarmos em uma estrutura de dados tal que tenhamos uma linha de um `data.frame`/`tibble` com as informações de cada jogo. A partir desta estrutura podemos então pensar em extensões do processamento de dados que melhor atendam aos objetivos de visualização e análise de dados, algo que acabaremos focando em posts futuros. Neste contexto, acredito que esse post ficará mais como uma referência futura sobre o método de obtenção dos dados do que qualquer outra coisa em si. 
+
+Um ponto importante é que resolvi explorar neste post apenas o _endpoint_ com as informações sobre cada jogo, e nem toquei nos demais. Assim, algumas outras possibilidades permanecem inexploradas (_e.g._, raspar as informações sobre as coleções de cada usuário), mas podem se provar úteis para outras finalidades relacionadas ao aprendizado.
+
+# Possíveis Extensões
+
+A obtenção desses dados é um passo bastante importante para seguirmos em frente com diversas questões que já foram colocadas em outros posts, e muitas outras que podemos começar a pensar agora que sabemos que dados que temos em mãos:  
+
++ A tabela com os nomes dos jogos na língua original e suas variações pode ser usada para mapear as informações dos jogos no portal do BGG com àquelas no portal da Ludopedia. Nesse contexto, poderíamos usar essa informação para saber o tamanho da diferença na nota dada para um mesmo jogo _j_ entre os dois portais. Já fizemos algo parecido focando na posição do ranking em si, mas seria importante repetir as análises pareando os mesmos jogos;  
++ Esse mapeamento das informações dos jogos entre os dois portais também nos permite responder à uma pergunta relacionada: o sucesso de um jogo fora do Brasil é preditivo de seu sucesso por aqui? A ideia aqui não é focar tanto na estimativa da diferença entre as notas, mas sim em entender os possíveis porquês da nota de um mesmo jogo variar fora _vs_ dentro do país;  
++ Um ponto que seria interessante é entender o que direciona a variação nas notas dos jogos. Isto é: o que faz com que um jogo seja melhor avaliado do que outro? É claro que não dá para encontrar a causa raíz dessas coisas assim tão fácil, mas ponderar sobre alguns fatores que podem estar contribuindo para isso é algo bem razoável;  
++ A ideia que originalmente me motivou a buscar estes dados foi de alguma forma criar um sistema de recomendação de jogos: eu escolheria um jogo de tabuleiro que eu goste e, como resposta, eu receberia o nome de outros jogos que fossem similares. Penso nesse sistema de forma bem simplista mesmo, algo como um vizinho mais próximo;  
++ Dada as informações sobre mecânica, família, categoria dos jogos e outras informações, gostaria de saber quantos jogos de tabuleiro diferentes existem. Isto é, quantas 'personas' podemos identificar olhando para os jogos de tabuleiro?
++ Na linha dos dois últimos pontos, também seria interessante olhar a similaridade entre os jogos de tabuleiro. Eu já havia comentado sobre uma ideia parecida quando escrevi o post sobre os decks de Gwent, onde o objetivo seria entender um pouco mais das métricas de dissimilaridade e análise multivariada. Acredito que os dados vindos dessa API do BGG possam servir ao mesmo propósito;  
++ Os comentários associados à cada jogo de tabuleiro são um prato cheio para fazermos uma análise de sentimentos ou previsão de notas. Isso é especialmente marcante pois espero que estes textos estejam majoritariamente em inglês, e existem muitos modelos de texto pré-treinados disponíveis para essa língua. Neste contexto, algumas perguntas interessantes podem surgir:
+    + Qual o tipo predominante de sentimento sobre um jogo?  
+    + Podemos prever o tipo de sentimento do jogo (ou a nota) com base no comentário?  
+    + De que forma o sentimento varia entre os jogos _e.g._ dependendo da temática do jogo?  
+    + De que forma os comentários estão associados à posição do jogo no ranking (_e.g._, Top 100 _vs_ resto)?  
++ Outra oportunidade para aprender um pouco mais sobre os modelos de texto, de forma até mais avançada, é tentar parear as descrições de cada jogo em inglês e português e tentar prever se elas falam do mesmo jogo ou não. É claro que isso é uma tarefa bem bobinha, mas vejo aí uma oportunidade bem legal para o aprendizado;  
++ As informações que obtemos aqui também podem nos auxiliar a montar um _Shiny App_, através do qual poderíamos explorar as informações sobre os jogos de tabuleiro de forma mais interativa e buscar detalhes sobre algum tipo específico de jogo.  
+
+Dúvidas, sugestões ou críticas? É só me procurar pelo e-mail ou GitHub!
