@@ -1,0 +1,1312 @@
+---
+title: "Como encontrar as cartas de Gwent mais similares entre si?"
+subtitle: |
+  Já olhamos os decks de Gwent para analisar os padrões de co-ocorrência entre as cartas, que utilizou as estratégias já conhecidas pela comunidade. Neste post vamos tomar outra abordagem, empregando uma análise voltada aos padrões de similaridade do texto de descrição das cartas para identificar pares que poderiam gerar estratégias potencialmente viáveis.
+date: 02-28-2022
+date-modified: 02-11-2024
+image: "images/post_cover.png"
+categories:
+  - boardgames
+  - topic models
+  - analise
+  - r
+execute:
+  warning: false
+  fig-align: center
+---
+
+```{r setup}
+#| code-fold: false
+#| echo: false
+#| fig-dpi: 200
+#| include: false
+#| results: 'hide'
+# loading the renv file associated with this blog post
+renv::use(lockfile = 'renv.lock')
+
+# presetando o ggplot2
+library(ggplot2)
+library(extrafont)
+
+# setando o tema geral do ggplot2
+theme_set(new = theme_minimal(base_family = 'Roboto'))
+
+# atualizando o tema
+theme_update(
+  plot.title    = element_text(face = 'bold', size = 12),
+  plot.subtitle = element_text(size = 8),
+  plot.caption  = element_text(size = 8),
+  axis.title    = element_text(face = 'bold', size = 10),
+  axis.text     = element_text(color = 'black', size = 8),
+  strip.text    = element_text(face = 'bold', size = 8)
+)
+
+# cores por faccao
+cores_por_faccao <- c('Monsters' = 'red', 'Nilfgaard' = 'grey30', 'Northern Realms' = 'deepskyblue2', 
+                      "Scoia'tael" = 'forestgreen', 'Skellige' = 'purple3', 'Syndicate' = 'orange2',
+                      'Neutral' = 'tan4')
+```
+
+
+# Motivação
+
+Há algum tempo atrás [construí](https://nacmarino.github.io/codex/posts/2021-11-30-raspando-a-biblioteca-de-decks-de-gwent/) um _scrapper_ para raspar a biblioteca de decks de Gwent, de forma à usar esses dados para tomar melhores decisões na hora de montar meus próprios decks. Uma das primeiras análises que fiz com aqueles dados foi tentar entender os [padrões de co-ocorrência das cartas](https://nacmarino.github.io/codex/posts/2022-01-08-quais-as-associacoes-existentes-entre-as-cartas-dos-decks-de-gwent/) entre os decks contribuídos pela comunidade, utilizando para isso uma análise orientada às regras de associação entre as cartas. Aquele primeiro exercício acabou sendo bastante positivo, pois consegui extrair alguns insights bastante relevantes que acabaram melhorando a minha estratégia e experiência de jogo.
+
+Um ponto importante daquela primeira análise é que ela olhou para os padrões de co-ocorrência de cartas _conhecidos_ e _explorados_ pela comunidade, deixando de fora àquelas combinações de cartas que teriam o _potencial_ de funcionar juntas, mas que nunca foram testadas. Estas combinações normalmente implementam mecânicas específicas de jogo, que podem ser identificadas através da descrição dos efeitos associados à cada carta. Assim, se pudéssemos agrupar as cartas de acordo com os padrões de texto existente em suas descrições, então poderíamos identificar as cartas que implementam mecânicas similares e, portanto, poderiam ser usadas juntas.
+
+Uma forma de implementar este tipo de agrupamento é através da modelagem de tópicos, uma técnica de aprendizado não-supervisionado que faz uso de modelos estatísticos para identificar temas abstratos de acordo com as palavras que compõem os textos analisados. Existem alguns modelos utilizados para esta finalidade, sendo o mais conhecido deles a LDA - _Latent Dirichlet Allocation_; todavia, vou utilizar este post para estudar, explorar e demonstrar as funcionalidades de um outro modelo de tópicos: o STM, _Structural Topic Model_ (@stm). Meu objetivo com isso será utilizar este modelo para criar uma representação abstrata das cartas de acordo com seus padrões de texto e, então, utilizar esta representação para encontrar as cartas mais similares àquela que eu resolver buscar. 
+
+Iniciaremos falando um pouco sobre a aquisição dos dados e faremos uma breve análise exploratória. Passaremos para a modelagem de tópicos falando um pouquinho mais da intuição por trás do STM e, então, vamos ajustar o modelo - implementando uma busca pela quantidade de tópicos no caminho. A partir daí conduziremos algumas análises relacionadas ao pós-processamento e entedimento dos tópicos, bem como à validação do modelo. Fecharemos então o post mostrando a aplicação do modelo para mapear as cartas mais similares entre si.
+
+# Carregando os Dados
+
+Os dados que vamos utilizar neste post podem ser obtidos utilizando o _scrapper_ apresentado neste [post](https://nacmarino.github.io/codex/posts/2021-11-30-raspando-a-biblioteca-de-decks-de-gwent/). No entanto, precisaremos de alguns passos adicionais para usar esses dados, uma vez que o _scrapper_ original retorna um `tibble` com a composição de cartas em cada um dos decks rasparados, bem como os metadados associados à cada uma das cartas. Assim, precisamos reduzir àquela base à uma que fale apenas das cartas, e podemos fazer isso usando um `distict` focando apenas no nome das cartas e em seus metadados. Você pode encontrar esta etapa do pós-processamento no [código que acompanha este post](https://github.com/nacmarino/codex/blob/24feaea52e861d7fce212bc55b53ecfbcbe9901e/_posts/2022-02-28-card-embeddings-parte-1/scripts/01_scrapper_gwent.R).
+
+Assumindo que já temos a base de dados com os metadados de cada carta, vamos carregar alguns pacotes que usaremos neste post e, na sequência, carregar a base de dados _per se_. Precisaremos fazer dois pequenos ajustes, para resolver as seguintes inconsistências:  
+
+- A carta `Solução engenhosa` possui dois nomes em inglês - `Blueprint` e `Engineering solution` -, o que faz com que ela acabe estando duplicada na nossa base de dados. Assim, precisaremos remover uma ocorrência dela (removi a `Blueprint`, mas não faz diferença); e,  
+- Existem duas cartas diferentes com o mesmo nome: `Vidente`, sendo que uma pentercente à facção `Scoia'tael` e a outra é uma carta Neutra. Assim, para evitar confusões, vamos adicionar o nome da facção ao nome dessa carta.  
+
+
+```{r carrega_dados}
+# carregando os pacotes
+library(tidyverse) # core
+library(tidytext) # para manipular texto
+library(patchwork) # para compor figuras
+library(stringi) # para trabalhar com texto
+library(ggrepel) # para ajudar a plotar
+library(reactable) # para tabelas interativas
+library(reactablefmtr) # para ajudar com o reactable
+
+# carregando os dados
+cartas <- read_rds(file = 'data/cartas.rds')
+
+# ajustando a tabela por conta de duas cartas má registradas
+cartas <- cartas %>% 
+  # removendo a carta Solução Engenhosa, que aparece duas vezes por conta de diferencas
+  # em seu nome em ingles
+  filter(!(localizedName == 'Solução engenhosa' & name != 'Blueprint')) %>% 
+  # ajustando o nome da carta Vidente, que aparece duas vezes pois existe uma na facção
+  # neutra e outra na Scoia'tael, mas sao cartas diferentes
+  mutate(
+    localizedName = case_when(localizedName == 'Vidente' ~ paste0(localizedName, ' (', slug, ')'),
+                              TRUE ~ localizedName)
+  ) %>% 
+  # colocando as cartas em ordem alfabetica
+  arrange(localizedName)
+cartas
+```
+
+
+Se tudo estiver correto, devemos ter `r format(x = nrow(cartas), big.mark = '.', decimal.mark = ',')` cartas em nossa base de dados. Além disso, devemos ter muito mais cartas Neutras do que cartas de facção, um pouquinho mais de cartas da facção `Syndicate` do que das demais facções, e um número similar de cartas entre todas as outras cinco facções - conforme apresentado na figura abaixo. Estes padrões de variação na quantidade de cartas parecem estar associados à natureza daquelas duas primeiras facções: cartas neutras podem ser utilizadas com os decks de qualquer facção, assim como algumas cartas específicas da facção `Syndicate`.
+
+
+```{r fig_cartas_por_faccao}
+#| code-fold: true
+cartas %>% 
+  # contando quantidade de cartas existentes por faccao
+  count(slug, name = 'n_cartas') %>% 
+  # ordenando as colunas
+  mutate(slug = fct_reorder(.f = slug, .x = n_cartas)) %>%
+  # criando a figura
+  ggplot(mapping = aes(x = n_cartas, y = slug, fill = slug)) +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  geom_text(mapping = aes(label = n_cartas), nudge_x = 10, fontface = 'bold') +
+  scale_fill_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Quantas cartas diferentes existem por facção?',
+    subtitle = 'Existem muito mais cartas neutras do que cartas de facção na base de dados',
+    x        = 'Quantidade de cartas'
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+Com tudo carregado, podemos começar a análise exploratória dos dados das cartas. Nosso principal foco será entender de onde vem as principais diferenças entre elaas - dentro e/ou entre as facções? -, e como isto está relacionado às estratégias e mecânicas de jogo.
+
+# Análise Exploratória de Dados
+
+Vamos começar as nossas análises focando nos textos de descrição associados à cada carta, informação encontrada na coluna `texto`. Para isso, vamos quebrar os textos em tokens utilizando a função `unnest_tokens`, remover os nomes de algumas das facções que estejam entre os resultados (bem como as cartas que simplesmente não têm nenhum texto associado) e, finalmente, contar quantas vezes cada palavra ocorre em cada carta. Uma vez que tenhamos essa estrutura de dados, vamos usar a função `bind_tf_idf` para calcular o _tf-idf (term frequency-inverse document frequency)_ associado à cada palavra entre as cartas de cada facção. Esta métrica representa o equilíbrio entre a frequência de ocorrência de uma palavra entre todas as cartas de uma dada facção e a frequência com a qual àquela mesma palavra ocorre entre todas as cartas: quanto mais exclusiva à uma facção for uma palavra, maior será o valor desta métrica - desta forma, essa métrica nos ajuda à identificar mais facilmente as palavras mais representativas das cartas de cada facção. 
+
+Os resultados desta análise são apresentados na figura abaixo, que confirma a expectativa de que existem diferenças nas palavras associadas aos textos de descrição de cada carta. Ao que podemos observar, estes textos são muito informativos de alguns temas que parecem ser inerentes à cada facção, e outros temas que parecem ser comuns entre elas. 
+
+
+```{r fig_texto_tfidf}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 8
+#| fig-width: 9
+cartas %>% 
+  # quebrando o string em tokens
+  unnest_tokens(output = token, input = texto, to_lower = TRUE) %>% 
+  # removendo os NAs e algumas palavras que não ajudam a visualização
+  filter(!is.na(token), 
+         str_detect(string = token, pattern = "scoia'tael|reinos|skellige|norte|dos", negate = TRUE)) %>%
+  # contando as categorias por faccao
+  count(slug, token, name = 'ocorrencias') %>% 
+  # calculando o tf-idf
+  bind_tf_idf(term = token, document = slug, n = ocorrencias) %>% 
+  # agrupando pela faccao
+  group_by(slug) %>% 
+  # pegando os 15 tokens com maior tf-idf
+  slice_max(order_by = tf_idf, n = 15, with_ties = FALSE) %>% 
+  # desagrupando
+  ungroup %>% 
+  # ordenando as colunas
+  mutate(token = reorder_within(x = token, by = tf_idf, within = slug)) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = tf_idf, y = token, fill = slug)) +
+  facet_wrap(~ slug, scales = 'free') +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  scale_y_reordered() +
+  scale_x_continuous(labels = scales::label_number(accuracy = 0.001)) +
+  scale_fill_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Quais as palavras mais representativas das cartas de cada facção?',
+    subtitle = 'As palavras associadas à cada facção remetem às mecânicas, estratégias e personagens associados à cada uma delas',
+    x        = 'TF-IDF'
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+Um dos temas comuns que observamos na figura acima é a citação à diversos tipos de personagens de gêneros de RPG. O exemplo mais claro disso é aquele observado na facção `Scoia'tael`, onde vimos que palavras como _elfo_, _anão_ e _dríade_ são bastante característicos. Para validar essa observação, calculei o _tf-idf_ focando na informação dos tipos de personagem associados à cada carta (disponível na coluna `categoryName`), de forma à identificar mais claramente os personagens característicos de cada facção. Em linha com o que esperávamos, os personagens associados à cada facção retratam a natureza de cada uma delas: observamos diversos monstros mas nenhum bruxo na facção `Monsters`, muitas criaturas da floresta, elfos e anões na facção `Scoia'tael` e diversos personagens associados à guerras e batalhas nas facções `Nilfgaard` e `Northern Realms`. Conhecer essas associações são importantes pois algumas mecânicas de jogo dependem do tipo de personagem associado à cada carta (_e.g._, 'invoca uma carta da Caçada Selvagem') e, também, existem modos de jogo que favorecem alguns tipos de personagens específicos (_e.g._, bruxos não são penalizados).
+
+
+```{r fig_tipo_personagem}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 7
+#| fig-width: 8
+cartas %>% 
+  # pegando apenas as cartas de unidade
+  filter(type == 'Unidade') %>% 
+  # quebrando o string em tokens
+  unnest_tokens(output = token, input = categoryName, to_lower = FALSE, 
+                token = 'regex', pattern = ', ') %>% 
+  # contando as categorias por faccao
+  count(slug, token, name = 'ocorrencias') %>% 
+  # calculando o tf-idf
+  bind_tf_idf(term = token, document = slug, n = ocorrencias) %>% 
+  # agrupando pela faccao
+  group_by(slug) %>% 
+  # pegando os 15 tokens com maior tf-idf
+  slice_max(order_by = tf_idf, n = 10, with_ties = FALSE) %>% 
+  # desagrupando
+  ungroup %>% 
+  # ordenando as colunas
+  mutate(token = reorder_within(x = token, by = tf_idf, within = slug)) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = tf_idf, y = token, fill = slug)) +
+  facet_wrap(~ slug, scales = 'free') +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  scale_y_reordered() +
+  scale_x_continuous(breaks = seq(from = 0, to = 0.3, by = 0.05)) +
+  scale_fill_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Quais os tipos de personagem associados às cartas de cada facção?',
+    subtitle = 'Os personagens associados à cada facção retratam a natureza de cada uma delas',
+    x        = 'TF-IDF'
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+Além do texto de descrição das cartas tocar no tema dos tipos de personagem, ela também fala sobre os tipos de habilidade que cada carta possui. Na realidade, existem `r length(unique(purrr::simplify(.x = stringr::str_split(string = cartas$keywords, pattern = ';'))))` habilidades diferentes que podem estar associadas às cartas, sendo que cada carta pode ter um número qualquer de habilidades - de nenhuma à várias. As habilidades associadas à cada carta são apresentadas na coluna `keywords`, e são separadas umas das outras através de um ponto-e-vírgula. Utilizei novamente o _tf-idf_ para continuar construindo a intuição que estamos desenvolvendo até aqui, e o resultado obtido sugere que:    
+
++ Algumas habilidades parecem ser exckusivas à uma determinada facção. Alguns exemplos disso são: `consumir` (`consume`) da facção `Monsters`, `lucrar` (`profit`) e `moedas` (`coin`) da facção `Syndycate` e `assimilar` (`assimilate`) da facção `Nilfgaard`;  
++ Existem habilidades que parecem estar associadas à mais de uma facção, como `desejo de morte` (`deathwish`; `Monsters`, `Northern Realms` e `Skellige`) e `envenenamento` (`poison`; `Neutral`, `Nilfgaard`, `Scoia'tael` e `Syndicate`); e,  
++ Mesmo as cartas Neutras parecem ter habilidades que são características delas, como `iniciativa` (`initiative`) e `cataclisma` (`cataclysm`).  
+
+
+```{r fig_habilidade_tfidf}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 8
+#| fig-width: 9
+cartas %>% 
+  # quebrando o string em tokens
+  unnest_tokens(output = token, input = keywords, to_lower = FALSE, 
+                token = 'regex', pattern = ';') %>% 
+  # removendo os NAs
+  filter(!is.na(token)) %>%
+  # contando as categorias por faccao
+  count(slug, token, name = 'ocorrencias') %>% 
+  # calculando o tf-idf
+  bind_tf_idf(term = token, document = slug, n = ocorrencias) %>% 
+  # agrupando pela faccao
+  group_by(slug) %>% 
+  # pegando os 10 tokens com maior tf-idf
+  slice_max(order_by = tf_idf, n = 10, with_ties = FALSE) %>% 
+  # desagrupando
+  ungroup %>% 
+  # ordenando as colunas
+  mutate(token = reorder_within(x = token, by = tf_idf, within = slug)) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = tf_idf, y = token, fill = slug)) +
+  facet_wrap(~ slug, scales = 'free') +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  scale_y_reordered() +
+  scale_fill_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Quais as habilidades mais representativas das cartas de cada facção?',
+    subtitle = 'Algumas habilidades parecem ser específicas de certas facções, outras são compartilhadas entre poucas',
+    x        = 'TF-IDF'
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+Se a informação dos tipos de habilidades que uma carta têm está relacionada ao seu texto de descrição, então não bastaria utilizarmos àquela primeira informação para achar as cartas mais similares entre si? Embora essa lógica não esteja errada, ela perde de vista um segundo aspecto importante dos textos de descrição das cartas: a forma como as suas habilidades são implementadas. Vamos tomar como exemplo a habilidade `sangramento` (_i.e._, `bleeding`), que está presente entre as cartas de todas as facções: a carta que possui esta habilidade pode adicionar um _status_ à uma carta inimiga, fazendo com que ela perca um ponto de poder por turno de jogo até um limite _n_ de turnos (que depende da carta). Apesar da ideia por trás desta habilidade ser simples, podemos ver na figura abaixo que as cartas à implementam de forma bem diferente entre e dentro das facções: _e.g._ pagando algum tipo de custo, assim que são postas no tabuleiro, quando estão ou têm o seu poder aumentado e etc. Assim, é interessante então que agrupemos as cartas não pelas habilidades que elas compartilham, mas pela forma como as implementam.
+
+
+```{r fig_habilidade_comum_tfidf}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 8
+#| fig-width: 9
+cartas %>% 
+  # filtrando cartas com uma habilidade especifica
+  filter(str_detect(string = keywords, pattern = 'bleeding')) %>% 
+  # quebrando o string em tokens
+  unnest_tokens(output = token, input = texto, to_lower = TRUE) %>% 
+  # removendo os NAs e numeros
+  filter(
+    !is.na(token),
+    str_detect(string = token, pattern = '[0-9]', negate = TRUE),
+    !token %in% c('a', 'à', 'ao', 'com', 'de', 'e', 'na', 'no', 'o', 'um')
+  ) %>%
+  # contando as categorias por faccao
+  count(slug, token, name = 'ocorrencias') %>% 
+  # calculando o tf-idf
+  bind_tf_idf(term = token, document = slug, n = ocorrencias) %>% 
+  # agrupando pela faccao
+  group_by(slug) %>% 
+  # pegando os 10 tokens com maior tf-idf
+  slice_max(order_by = tf_idf, n = 10, with_ties = FALSE) %>% 
+  # desagrupando
+  ungroup %>% 
+  # ordenando as colunas
+  mutate(token = reorder_within(x = token, by = tf_idf, within = slug)) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = tf_idf, y = token, fill = slug)) +
+  facet_wrap(~ slug, scales = 'free') +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  scale_y_reordered() +
+  scale_fill_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Como a habilidade sangramento é implementada entre facções?',
+    subtitle = 'Uma mesma habilidade pode ser implementada de diferentes formas entre e dentro das facções',
+    x        = 'TF-IDF'
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+Acredito que já conseguimos ter um bom entendimento da relação do texto de descrição das cartas com os tipos de personagens, habilidades e mecânicas de jogo que estão associadas à elas. Vamos agora passar para a modelagem de tópicos, onde buscaremos segmentar as cartas usando aqueles textos.
+
+# Modelagem
+
+Começaremos dando um pouco mais de contexto sobre a modelagem de tópicos e de que forma o STM se encaixa dentro deste arcabouço. A partir daí vamos avançar para a preparação dos dados para o modelo, a busca pela quantidade de tópicos que devemos utilizar e, finalmente, ajustaremos o modelo selecionado.
+
+## Intuição geral sobre o STM
+
+Os modelos de tópicos são uma família de modelos estatísticos usados para identificar os temas abstratos que permeiam uma coleção de textos, baseando-se na ideia de que se um texto fala sobre um determinado tema, então algumas palavras devem ocorrer com mais frequência ali do que em textos que falam sobre outros temas. Por exemplo, esse texto fala sobre o jogo Gwent, então possivelmente existirão muito mais citações à palavra 'cartas' aqui do que nos posts que focam em [análises sobre os dados da Fórmula 1](https://nacmarino.github.io/codex/posts/2021-10-08-entendendo-os-padroes-de-duracao-das-provas-da-formula-1/). Neste contexto, os modelos de tópicos buscam identificar àquelas estruturas latentes sem que estas sejam apresentadas explicitamente ao algoritmo, pertencendo à classe de algoritmos de aprendizagem não-supersionado. 
+
+Um dos modelos de tópico mais famosos é a LDA (_Latent Dirichlet Allocation_), que tem a premissa principal de que cada texto pode ser representado por uma distribuição de tópicos (_i.e._, prevalência de tópicos) e que cada tópico é representado por uma distribuição de palavras (_i.e._, conteúdo dos tópicos). Posto de outra forma (e de maneira simplista), se conhecermos a frequência de ocorrência das palavras entre os tópicos e dentro de um texto qualquer, então podemos saber quais os principais temas que aquele texto aborda. Isto é possível pois a LDA é um modelo generativo, que enxerga cada um dos textos analisados como tendo sido amostrados a partir de uma distribuição de probabilidade que descreve uma coleção de tópicos e estes, por sua vez, de uma amostra de palavras vindas de outra distribuição de probabilidade. Ambas as probabilidades são governadas pela distribuição de Dirichlet, sendo que a prevalência dos tópicos $\theta_{d}$^[Prevalência do tópico = proporção de tópicos no documento.] é governada por um parâmetro $\alpha$ vindo daquela distribuição, enquanto o conteúdo dos tópicos $\phi_{t}$^[Conteúdo do tópico = distribuição das palavras por tópico.] é determinada por um parâmetro $\beta$^[A distribuição de Dirichlet possui dois parâmetros, _K_ e $\alpha$: o primeiro representa a quantidade de categorias que serão descritas e o segundo é um parâmetro que controla quão concentrado em torno de uma categoria é a distribuição de probabilidade - maiores valores de $\alpha$ levam à uma distribuição de probabilidade mais uniforme. Assim, o $\alpha$ e o $\beta$ descritos no texto representam o mesmo parâmetro, mas parecem receber nomes diferentes apenas para não causar confusão. Eu repito isso à seguir, mas é justamente para clarificar esse ponto.]. É importante notar que o $\alpha$ e $\beta$ são o mesmo parâmetro da distribuição Dirichlet; todavia, como cada um vêm de uma amostragem diferente, eles acabam recebendo notações diferentes para não causar confusão. Você pode encontrar alguns tutoriais e explicações sobre a LDA [aqui](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/), [aqui](https://www.depends-on-the-definition.com/lda-from-scratch/#:~:text=collection%20of%20documents.-,The%20latent%20Dirichlet%20allocation%20model,by%20a%20distribution%20over%20words.), [aqui](http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/) e [aqui](https://towardsdatascience.com/latent-dirichlet-allocation-lda-9d1cd064ffa2).
+
+
+```{r racional_lda}
+#| code-fold: true
+#| out-width: 80%
+knitr::include_graphics(path = 'images/lda_rationale.png')
+```
+
+
+Apesar do processo de modelagem da LDA parecer ser complexo, a sua implementação em código é bastante simples. Ela consiste em:  
+
+1. Inicializar aleatoriamente a associação das palavras _w_ aos tópicos _t_ e dos documentos _d_ aos tópicos _t_;
+2. Iterar entre os documentos _d_ e as palavras _w_ e:  
+    + Atualizar a estimativa da probabilidade de que cada documento _d_ pertença a um tópico _t_ olhando com que frequência palavras naquele documento são associadss ao tópico _t_; e,  
+    + Atualizar a estimativa da probabilidade de que cada palavra _w_ pertença a um tópico _t_ com base na quantidade de documentos _d_ que contém a palavra _w_ que foram associados ao tópico _t_. 
+
+Com isso, ao longo das iterações, acabamos tendo probabilidades bem calibradas para descrever a associação de cada documento _d_ e de cada palavra _w_ a um tópico _t_ (links para exemplos de implementação da LDA a partir do zero em [Python](https://www.depends-on-the-definition.com/lda-from-scratch/#:~:text=collection%20of%20documents.-,The%20latent%20Dirichlet%20allocation%20model,by%20a%20distribution%20over%20words.) e em [R](http://brooksandrew.github.io/simpleblog/articles/latent-dirichlet-allocation-under-the-hood/)). Todavia, essa simplicidade também traz consigo algumas premissas bem frágeis, como: 
+
+a. A independência entre os tópicos;
+b. O fato de que as palavras associadas à cada tópico não devem diferir entre os documentos;
+c. A ideia de que os tópicos são determinados exclusivamente pelas palavras que os compõem; e,
+d. A ordem das palavras no texto não é relevante para a identificação dos tópicos, apenas a frequência de ocorrência das palavras. 
+
+Apesar do modelo parar de pé mesmo com essas premissas, elas dificilmente são válidas no mundo real.
+
+Uma das alternativas que surgiram para sanar os _gaps_ da LDA foi o _Structural Topic Model_ (@stm). A primeira novidade implementada por esse modelo é que tanto o $\theta_{d}$ (_i.e._, prevalência dos tópicos) quanto o $\phi_{t}$ (_i.e._, conteúdo dos tópicos) podem ser moderados através do efeito de covariáveis (_i.e._, o $X$ e o $\tau$ na figura abaixo). Isto é, algumas covariáveis podem fazer com que a prevalência de alguns tópicos seja naturalmente maior em alguns documentos do que outros (_e.g._, uma característica geral desses documentos) e/ou que algumas palavras de um tópico sejam usadas com mais frequência em algumas condições do que em outras (_e.g._, quando o sentimento do texto muda de positivo para negativo, mas o texto fala da mesma coisa). Outra novidade importante, é que o $\theta_{d}$ é gerado a partir de uma distribuição LogNormal, o que permite que incorporarmos uma estrutura de correlação entre os tópicos (_i.e._, o $\epsilon$ na figura abaixo). Finalmente, o $\phi_{t}$ passa a ser gerado através da soma de algumas distribuições exponenciais, que descrevem coisas como a frequência de ocorrência média das palavras nos tópicos e a contribuição das covariáveis sobre a ocorrência das palavras entre e dentro dos tópicos (_i.e._, o $\mu$ e o $\tau$ na figura abaixo). Todas estas melhorias contribuem para que o STM tenha um potencial de uso maior do que aquele da LDA, principalmente quando existem metadados associados à cada texto. Ainda assim, a utilização do STM para resolução de problemas de modelagem de tópicos ainda permanece pouco explorado.
+
+
+```{r racional_stm}
+#| code-fold: true
+#| out-width: 80%
+knitr::include_graphics(path = 'images/stm_rationale.png')
+```
+
+
+A implementação do _Structural Topic Model_ (STM) que vamos usar é àquela disponível no pacote `stm` do R (@stm). Enquanto escrevo este post, não existe uma implementação deste modelo para o Python, embora existam algumas issues e _threads_ abertas no GitHub do STM. Com essa visão geral, vamos prosseguir agora para a preparação dos dados para a modelagem.
+
+## Preparação dos dados
+
+A estrutura de dados que o `stm` espera receber é uma matriz esparsa onde teremos as cartas como as linhas e as palavras associadas àquela carta como colunas. Além disso, o conteúdo de cada 'célula' deve ser a quantidade de vezes que àquela palavra apareceu naquela carta. Colocar os dados nessa estrutura não é uma tarefa tão complexa, embora exija cuidado com alguns detalhes. Em primeiro lugar, vamos precisar remover algumas palavras simplesmente porque elas são muito frequentes e/ou pouco informativas. Nesse sentido, criei o vetor abaixo para armazenar todas as palavras que serão removidas durante a preparação dos dados - note que existem muitas preposições, substantivos e alguns pronomes entre elas, bem como o nome de algumas facções. Outro ponto importante é que existe uma frase-padrão que é sempre observada ao final do texto das cartas de líder de cada facção. Este texto não é nem um pouco informativo sobre as habilidades da carta e, portanto, devemos removê-lo também - note que teremos que usar expressões regulares para isso, uma vez que existe alguma diferença na forma como a frase é escrita entre algumas cartas.
+
+
+```{r lista_stopwords}
+# lista de palavras para remover
+my_stopwords <- c('a', 'ao', 'aos', 'ate', 'cada', 'com', 'as', 'como', 'da', 'das', 
+                  'de', 'dela', 'delas', 'dele', 'desta',  'deste', 'destas', 'destes',
+                  'deles', 'do', 'dos', 'disso', 'e', 'es', 'em', 'esta',  'ela', 'ele',
+                  'elas', 'eles', 'for', 'foi', 'la', 'lhe', 'mais', 'nas', 'nesta', 
+                  'na', 'nas', 'nela', 'nele', 'no', 'nos', 'o', 'os', 'ou', 'para',
+                  'por', 'pelo', 'que', 'sao', 'se', 'so', 'sos', 'sem', 'seu', 'seus',
+                  'sua', 'suas', 's', 'si', 'todas', 'todos', 'tem', 'um', 'uma', 'voce',
+                  'vez', 'longa', 'distancia', 'corpo', 'duas', 'dois', 'metade', 'reinos',
+                  'norte', "scoia'tael", 'skellige', 'nilfgaard', 'sindicato', 'neutra',
+                  'concede', 'tiver', 'seguida', 'seja', 'caso', 'faz', 'usa', 'usar',
+                  'usando', 'usada', 'usado', 'tambem', 'houver', 'ha', 'pela', 'mesma',
+                  'tiver', 'nao', 'nessa', 'nessas', 'nesse', 'nesses', 'qualquer', 
+                  'estiver', 'entre', 'unidade', 'unidades', 'mobilizacao', 'sempre', 
+                  'mesmo', 'perto', 'apos', 'quando', 'neste', 'nestes', "scoia'tel",
+                  'enquanto')
+
+# regex da frase que precisaremos remover
+txt <- paste('Esta habilidade adiciona [0-9]{2} (?:(?:de )?recrutamento[s]?',
+             'ao limite )?de recrutamento (ao limite )?do (?:seu )?baralho.')
+```
+
+
+Tendo criado os vetores de palavras e a frase que precisaremos remover, vamos agora processar os textos de cada carta de forma a acabarmos em uma estrutura de dados que contenha uma coluna para o nome da carta, uma outra para a palavra e uma terceira para a quantidade de vezes que àquela palavra foi observada naquela carta. Para isso, vamos primeiro remover aquele padrão de texto com expressões regulares do campo de descrição da carta usando o `str_remove` e, na sequência, vamos quebrar o texto em palavras utilizando a função `unnest_tokens`. Vamos então remover toda a acentuação das palavras restantes usando o `stri_trans_general` e, então, remover todas àquelas palavras que listamos anteriormente e todos os números. A partir daí vamos utilizar a função `str_replace` para substiuir a forma do plural para o singular e/ou padronizar a escrita de algumas palavras. Finalmente, vamos utilizar a função `count` para determinar quantas vezes cada palavra ocorreu em cada carta. Com isso, chegamos ao resultado que havíamos planejado.
+
+
+```{r cria_df_tokens}
+# contando ocorrencias de cada token por faccao
+df_tokens <- cartas %>% 
+  # removendo texto comum a todas as cartas de habilidade do lider
+  mutate(
+    texto = str_remove(string = texto, pattern = txt)
+  ) %>% 
+  # quebrando o string em tokens
+  unnest_tokens(output = token, input = texto) %>% 
+  # removendo acentuacao
+  mutate(token = stri_trans_general(str = token, id = 'Latin-ASCII')) %>%
+  # removendo stopwords e os digitos
+  filter(!token %in% my_stopwords,
+         str_detect(string = token, pattern = '[0-9]', negate = TRUE)) %>% 
+  # substituindo algumas as formas de algumas palavras
+  mutate(
+    # removendo o plural de algumas palavras em especifico
+    token = str_replace(string = token, pattern = '(?<=o|a)s$', replacement = ''),
+    token = str_replace(string = token, pattern = '(?<=d|t)es$', replacement = 'e'),
+    token = str_replace(string = token, pattern = '(?<=r)es$', replacement = ''),
+    # padronizando a escrita de algumas habilidades e condicoes
+    token = str_replace(string = token, pattern = 'veneno|envenenamento|envenenad[ao]', replacement = 'envenena'),
+    token = str_replace(string = token, pattern = 'bloqueada|bloquei[ao]', replacement = 'bloqueio'),
+    token = str_replace(string = token, pattern = 'reforcad[ao]', replacement = 'reforcada'),
+    # padronizando a escrita de outras palavras
+    token = str_replace(string = token, pattern = 'anoes', replacement = 'anao'),
+    token = str_replace(string = token, pattern = 'aleatoria(?:mente)?', replacement = 'aleatorio')
+    ) %>% 
+  # contando ocorrencia dos lemmas por carta
+  count(localizedName, token, name = 'ocorrencias') 
+df_tokens
+```
+
+
+Podemos criar a matriz esparsa de input para o `stm` a partir do output do bloco de código anterior utilizando a função `tidytext::cast_sparse`. Essa função espera receber como argumentos o nome da variável que será mapeada para as linhas da matriz esparsa (_i.e._, `row = localizedName`; o nome das cartas), à que será mapeada para as colunas (_i.e._, `column = token`; cada uma das palavras) e àquela que contém os valores de cada célula da matriz (_i.e._, `value = ocorrencias`; a frequência com a qual cada palavra ocorre em cada carta). Com isso chegamos à matriz esparsa que precisamos para ajudar o STM aos dados.
+
+
+```{r parse_para_esparsa}
+# criando matriz no formato document-feature matrix
+df_esparsa <- cast_sparse(data = df_tokens, row = localizedName, 
+                          column = token, value = ocorrencias)
+```
+
+
+Antes de fechar essa seção, existe uma coisa que acredito que valha a pena comentar. Eu acabei optando por passar algumas palavras para o singular e padronizar a escrita de outras palavras específicas em um dos blocos de código anteriores. Fiz isso pois os resultados preliminares sem essas alterações não ficaram muito legais: os tópicos às vezes separavam só as formas do singular para o plural e, em outros casos, falhavam em incluir as variantes de algumas palavras (_e.g._, bloqueada, bloqueio e bloqueia). Eu tentei usar o `spacyr` para corrigir a inflexão das palavras de forma mais robusta (_i.e._, lemmatização), mas como o corpus do `spacy` não têm palavras que remetam ao universo dos jogos de RPG, os resultados acabaram sendo até piores (e bizonhos). Assim, resolvi manter simples, e só corrigir aquilo que de fato parecia estar tendo um maior impacto na modelagem. De toda forma, deixo o código que usei para tentar fazer a lemmatização abaixo só para referência (ele não tem nenhum efeito sobre o objeto `df_tokens`).
+
+
+```{r teste_do_spacyr}
+#| eval: false
+# carregando mais pacotes
+library(spacyr) # para ajudar com lematizacao
+
+# inicializando o spacy
+spacy_initialize(model = 'pt_core_news_lg')
+
+# criando uma base de-para para lemmatizar os tokens
+de_para_lemma <- distinct(df_tokens, token) %>% 
+  # colocando os tokens em um vetor
+  pull(token) %>% 
+  # parseando os tokens para o spacyr
+  spacy_parse(pos = FALSE, tag = FALSE, lemma = TRUE, dependency = FALSE) %>% 
+  # passando o resultado para um tibble
+  tibble %>% 
+  # pegando apenas as colunas que interessam
+  select(token, lemma)
+  
+# lemmatizando os tokens e contando ocorrencias
+df_tokens <- df_tokens %>% 
+  # juntando o de-para de lemmas aos tokens
+  left_join(y = de_para_lemma, by = 'token') %>% 
+  # contando ocorrencia dos lemmas por carta
+  count(localizedName, lemma, name = 'ocorrencias')
+```
+
+
+## Criando features
+
+Como o STM dá suporte ao uso de covariáveis para modelar a prevalência (_i.e._, 'quais são os tópicos?') e o conteúdo dos tópicos (_i.e._, 'quais palavras representam os tópicos?'), vamos criar um `tibble` com alguns metadados sobre cada carta que podem nos ajudar na modelagem. Mais especificamente, a análise exploratória que fizemos sugere que:  
+
++ Os textos de descrição das cartas representam temas distintos, mas que parecem estar relacionados ao conjunto de habilidades que cada carta possui. Posto de outra forma, existe a expectativa de que a prevalência dos tópicos deve variar em função das habilidades existentes entre as cartas (_e.g._, vai existir um tópico para habilidades relacionadas ao envenenamento, outro tópico para habilidades que causam dano direto e etc.); e,  
++ A forma pela qual uma mesma habilidade é implementada varia entre as facções. Isto é, espera-se que o conteúdo de cada tópico varie em função da facção à qual as cartas pertençam (_e.g._, se existe um tópico relacionado à habilidade de envenamento, as palavras que caracterizam este tópico vão variar facção à facção).  
+
+Dada estas duas hipóteses, vamos focar então em criar um `tibble` que nos permita endereçá-las da forma mais simples e objetiva possivel. Neste contexto, representar a relação entre o conteúdo do tópico e as facções é relativamente fácil: basta termos uma coluna que indique à qual facção pertence cada carta. Por outro lado, representar a relação entre a prevalência dos tópicos e as habilidades das cartas é uma tarefa bem mais complexa: existem `r format(x = nrow(cartas), big.mark = '.', decimal.mark = ',')` habilidades distintas, e precisaríamos criar uma coluna para cada uma dessas habilidades. Como essa alternativa não é muito prática, resolvi separar as habilidades em 3 grupos distintos baseado no meu conhecimento sobre o jogo: as habilidades que causam ou dão algum tipo de status à uma carta (_e.g._, sangramento, envenenamento,...), as habilidades que têm algum tipo de área de efeito (_e.g._, 'causam dano à todas as unidades inimigas') e todas as habilidades que não se encaixarem nestes dois últimos grupos. Embora esse agrupamento esteja longe de ser a melhor solução, acredito que ele possa servir pelo menos para nos dar uma noção mínima da relevância de usar a informação das habilidades para modelar a prevalência. O bloco de código abaixo cria todas estas covariáveis e as organiza no `tibble` `df_covariáveis`, que será usado dentro da função `stm` mais tarde.  
+
+
+```{r cria_covariaveis}
+# listando todas as habilidades associadas a um status
+hab_status <- c('bleeding', 'blood_moon', 'bounty', 'defender', 'doomed', 'immune', 
+                'lock', 'poison', 'resilient', 'rupture', 'shield', 'spying', 'vitality',
+                'veil')
+
+# listando todas as habilidade que causam algum tipo de efeito de area
+hab_aoe <- c('blood_moon', 'cataclysm', 'dragons_dream', 'fog', 'frost', 'rain', 'storm')
+
+# criando tabela com as covariaveis de cada carta
+df_covariaveis <- cartas %>% 
+  # codificando os dois grupos bem marcados de habilidades e criando um nivel para tudo o que
+  # nao se encaixa naqueles dois
+  mutate(
+    # habilidades associadas que causam ou dao um status a carta
+    habilidade_status = str_detect(string = keywords, 
+                                   pattern = paste0(hab_status, collapse = '|')),
+    # habilidades com efeito de area
+    habilidade_aoe = str_detect(string = keywords, 
+                                pattern = paste0(hab_aoe, collapse = '|')),
+    # todas as habilidades que não se encaixarem nas duas ultimas
+    habilidade_outras = str_detect(string = keywords, negate = TRUE,
+                                   pattern = paste0(c(hab_status, hab_aoe), collapse = '|'))
+  ) %>% 
+  # selecionando apenas as covariaveis que vamos usar
+  select(localizedName, slug, contains('habilidade')) %>% 
+  # substituindo os valores faltantes nas colunas das habilidades por FALSE
+  mutate(across(.cols = contains('habilidade'), .fns = replace_na, FALSE))
+df_covariaveis
+```
+
+
+## Determinando a quantidade de tópicos
+
+Como em outras técnicas de aprendizado não-supervisionado voltadas ao agrupamento por similaridade, precisamos determinar a quantidade de tópicos K a ser utilizada pelo STM antes de ajustá-lo. Como não temos noção do melhor valor de K, faremos uma busca em passos incrementais de 3 tópicos dentro de um intervalo de `K = 6` à `K = 30` tópicos. Além disso, aproveitaremos para determinar se faz sentido ou não utilizar as covariáveis para modelar o conteúdo dos tópicos, a prevalência dos tópicos ou ambos. Nesse contexto, utilizaremos a identidade da facção como a covariável para modelar a variação no conteúdo dos tópicos (_i.e._, testar a hipótese de que as palavras que representam um mesmo tópico variam entre facções), e a presença ou ausência de cada um dos três grupos de habilidades na carta para modelar a prevalência dos tópicos (_i.e._, testar a hipótese de que a proporção dos tópicos entre as cartas variam em função da presença ou ausência destes três grupos de habilidades). Como precisaremos ajustar 36 modelos de tópicos aos dados (9 valores de K x 4 modelos com estrutura de covariáveis distintas), essa será uma etapa bem demorada e, portanto, vamos alavancar o processo multisessão do `furrr` para ganhar um pouco mais de velocidade. 
+
+
+```{r procura_valor_k}
+# carregando mais pacotes
+library(stm) # para a modelagem de topicos
+library(furrr) # para paralelizar a busca
+
+# setando o processamento paralelo
+plan(multisession)
+
+# setando a seed
+set.seed(33)
+
+# buscando melhor valor de K
+search_K <- tibble(
+  K = seq(from = 6, to = 30, by = 3)
+) %>% 
+  mutate(
+    # rodando o STM padrao
+    Nenhuma = future_map(.x = K, 
+                         .f = ~ stm(documents = df_esparsa, init.type = 'Spectral', 
+                                    seed = 333, K = .x, verbose = FALSE),
+                         .options = furrr_options(seed = TRUE)
+    ),
+    # rodando o STM com covariaveis apenas para o conteudo dos topicos
+    Conteudo = future_map(.x = K, 
+                          .f = ~ stm(documents = df_esparsa, init.type = 'Spectral', 
+                                     seed = 333, K = .x, content = ~ slug, data = df_covariaveis,
+                                     verbose = FALSE),
+                          .options = furrr_options(seed = TRUE)
+    ),
+    # rodando o STM com covariaveis apenas para a prevalencia dos topicos
+    Prevalencia = future_map(.x = K, 
+                             .f = ~ stm(documents = df_esparsa, init.type = 'Spectral', 
+                                        seed = 333, K = .x, 
+                                        prevalence = ~ habilidade_status + habilidade_aoe + habilidade_outras, 
+                                        data = df_covariaveis, verbose = FALSE),
+                             .options = furrr_options(seed = TRUE)
+    ),
+    # rodando o STM com covariaveis para o conteudo o prevalencia dos topicos
+    Ambas = future_map(.x = K, 
+                       .f = ~ stm(documents = df_esparsa, init.type = 'Spectral', 
+                                  seed = 333, K = .x, content = ~ slug,
+                                  prevalence = ~ habilidade_status + habilidade_aoe + habilidade_outras, 
+                                  data = df_covariaveis, verbose = FALSE),
+                       .options = furrr_options(seed = TRUE)
+    )
+  ) %>% 
+  pivot_longer(cols = c(Nenhuma, Conteudo, Prevalencia, Ambas), 
+               names_to = 'tipo', values_to = 'modelos')
+
+# setando o processamento sequencial
+plan(sequential)
+```
+
+
+Uma vez que os modelos estejam ajustados, vamos calcular três métricas para nos ajudar a avaliar o ajuste do modelo aos dados para cada combinação de valor de K e tipo de covariável no modelo. A primeira métrica é a coerência semântica, que é uma medida do quão frequente as palavras que compõem um tópico co-ocorrem entre os documentos: quanto maior o valor desta métrica (_i.e._, menos negativo), maior a qualidade dos tópicos gerados. A métrica seguinte é a exclusividade, que mede o quanto as palavras associadas a um tópico são exclusivas a ele: quanto maior o valor desta métrica, menor o compartilhamento de palavras entre tópicos e, portanto, maior a qualidade dos tópicos. Um ponto importante aqui é que a métrica de exclusividade foi pensada para modelos sem covariáveis para o conteúdo dos tópicos, então não conseguiremos extrai-la para 2 dos 4 tipos de modelos que ajustamos; não há uma explicação junto à documentação da função ou do pacote sobre isso, mas acredito que isto ocorra pelo fato de que ao passar estas covariáveis estamos fazendo com que o modelo considere que as palavras podem ser compartilhadas entre os tópicos e, portanto, não são exclusivas. Finalmente, olharemos a dispersão dos resíduos do STM: quanto mais próximo de 1 eles são, maior a força da evidência de que a quantidade de tópicos está bem ajustada.  
+
+A figura abaixo apresenta os padrões de variação daquelas três métricas de acordo com o valor de K e o tipo de modelo implementado. Alguns padrões importantes são:  
+
++ Modelos com a covariável da identidade da facção para o conteúdo dos tópicos tendem a apresentar maior coerência semântica e menor dispersão dos resíduos do que modelos que não fazem uso dessa covariável para um mesmo valor de K;  
++ Apesar da coerência semântica voltar a aumentar quando usamos mais de 27 tópicos, os resíduos do modelo de tópicos aumentam muito; e,  
++ A exclusividade das palavras aumenta com o valor de K, mas parece o fazem de forma mais lenta depois dos 18 tópicos.   
+
+
+```{r fig_metricas de avaliacao}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 8
+# extraindo as metricas de avaliacao da clusterizacao
+search_K %>% 
+  # calculando a exclusividade e a coerencia dos topicos
+  mutate(
+    coerencia     = map(.x = modelos, .f = semanticCoherence, documents = df_esparsa),
+    exclusividade = map(.x = modelos, .f = safely(exclusivity)),
+    exclusividade = map(.x = exclusividade, .f = 'result'),
+    residuos      = map(.x = modelos, .f = checkResiduals, df_esparsa),
+    residuos      = map(.x = residuos, 'dispersion')
+  ) %>% 
+  # dropando a coluna com os modelos
+  select(-modelos) %>% 
+  # desaninhando as colunas de coerencia e exclusividade
+  unnest(cols = c(exclusividade, coerencia, residuos)) %>% 
+  # passando a base para o formato longo
+  pivot_longer(cols = c(exclusividade, coerencia, residuos), 
+               names_to = 'metrica', values_to = 'valor') %>% 
+  # dropando valores nulos
+  drop_na() %>% 
+  # agrupando pelo valor de K e da metrica
+  group_by(K, metrica, tipo) %>% 
+  # calculando o valor da media da metrica por valor de K
+  summarise(
+    valor = mean(x = valor, na.rm = TRUE), .groups = 'drop'
+  ) %>% 
+  # renomeando as metricas
+  mutate(
+    metrica = case_when(metrica == 'coerencia' ~ 'Coerência Semântica',
+                        TRUE ~ str_to_title(string = metrica))
+  ) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = as.factor(K), y = valor, group = tipo, color = tipo)) +
+  facet_wrap(~ metrica, scales = 'free') +
+  geom_line(size = 1, show.legend = TRUE) +
+  geom_point(fill = 'white', color = 'black', shape = 21, size = 2, show.legend = FALSE) +
+  labs(
+    title    = 'Quantos tópicos devemos usar?', 
+    subtitle = 'A quantidade de tópicos escolhida deve atender ao melhor balanço entre uma alta coerência semântica e exclusividade, mas baixos resíduos',
+    x        = 'Quantidade de tópicos (K)',
+    y        = 'Valor da métrica',
+    color    = 'Covariáveis'
+  ) +
+  theme(
+    legend.position = 'bottom'
+  )
+```
+
+
+De acordo com os padrões observados acima e usando um pouco de parcimônia, parece que o melhor modelo de tópicos a ser utilizado é aquele que faz uso de 18 tópicos e da covariável da identidade da facção para modelar o conteúdo dos tópicos (esse modelo é mais simples do que aquele que faz uso de covariáveis para o conteúdo e a prevalência dos tópicos).
+
+## Ajustando o modelo
+
+Como já ajustamos o modelo descrito acima quando fizemos a busca pelo valor de K e o tipo de modelo, não precisamos repetir todo o processo. Para poupar tempo, basta filtramos a linha correspondente aquele modelo de dentro do `tibble` que armazena os resultados da busca, e extrairmos o objeto do modelo treinado.
+
+
+```{r pega_modelo}
+# extraindo o melhor modelo
+modelo <- search_K %>% 
+  # pegando o modelo selecionado
+  filter(K == 18, tipo == 'Conteudo') %>% 
+  # extraindo o modelo selecionado
+  pull(modelos) %>% 
+  # tirando o modelo da lista
+  pluck(1)
+modelo
+```
+
+
+# Entendendo os tópicos
+
+Vamos começar o entendimento dos tópicos através dos padrões de ocorrência das palavras entre eles, o que nos permitirá ter uma noção dos temas que cercam cada um deles. Esta informação é àquela que está dentro da matriz $\beta$, que descreve a probabilidade de ocorrência de cada palavra em cada tópico e, normalmente, poderia ser extraída usando a função `tidy` através do argumento `matrix = 'beta'`. Todavia, esta função não funciona direito quando utilizamos uma covariável para modelar o conteúdo dos tópicos: quando usamos essa covariável, o que fizemos foi 'pedir' para o STM calcular uma matriz $\beta$ para cada facção, e utilizar a média dos $\beta$'s entre elas para mapear as palavras associadas à cada tópico. Assim, precisaremos aplicar a função `pluck` ao modelo treinado para extrair as matrizes $\beta$ associadas à cada uma das facções, tratar cada tabelinha resultante para colocá-la em um formato `tidy` e converter os valores observados para probabilidades (o conteúdo das matrizes é o logarítimo das probabilidades). Depois desse tratamento, podemos visualizar as 10 palavras com maior probabilidade média de ocorrência em cada tópico abaixo, onde podemos ver que:  
+
++ Alguns tópicos misturam um pouco as habilidades entre e dentro das facções, como no caso do Tópico 1 que fala claramente sobre a implementação das habilidades sangramento e envenamento;  
++ Existem casos em que os tópicos falam sobre estratégias de jogo, como no caso do Tópico 2 e do Tópico 4: o primeiro fala da estratégia de usar a habilidade de escudo para aumentar o poder das cartas e o segundo sobre movimentar cartas para a pilha de descarte e/ou banil-las^[Sei que essa leitura dos temas dos tópicos parece um tanto quanto abstrata, mas para quem já jogou Gwent isso é bastante claro - então peço para que você confie em mim.];  
++ Também é possível observar casos que falam muito sobre um tipo de específico de carta. Isto é especialmente marcante no Tópico 16, onde as palavras-chave remetem diretamente às cartas de cenário: essas são cartas cujas habilidades são disparadas ao longo de três capítulos, cada um dos quais tendo seu efeito cada vez que uma carta de um tipo específico de personagem é usada; e,  
++ Existem tópicos que parecem focar majoritariamente nas habilidades e cartas associadas à uma única facção. Isso pode ser observado, por exemplo no Tópico 5, cujas palavras remetem diretamente à alguns padrões exclusivos às cartas da facção `Syndicate` (_e.g._, `moeda`) e `Northern Realms` (_e.g._, `paciencia`).  
+
+
+```{r fig_beta}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 9
+#| fig-width: 9
+# extraindo os dados dos betas por topico
+df_betas <- modelo %>% 
+  # pegando a matriz com o log das probabilidades para o beta
+  pluck('beta', 'logbeta') %>% 
+  # parseando as matrizes para um dataframe
+  map(.f = data.frame) %>% 
+  # passando o log da probabilidade para probabilidade
+  map(.f = exp) %>% 
+  # colocando o nome nas colunas
+  map(.f = ~ `colnames<-`(x = ., value = df_esparsa@Dimnames[[2]])) %>%
+  # adicionando o identificador do topico a cada linha
+  map(.f = mutate, topic = 1:n()) %>% 
+  # renomeando os elementos da lista
+  `names<-`(value = c('Monsters', 'Neutral', 'Nilfgaard', 'Northern Realms', 
+                      "Scoia'tael", 'Skellige', 'Syndicate')) %>% 
+  # juntando todos
+  map_dfr(tibble, .id = 'slug') %>%
+  # passando a base para o formato longo
+  pivot_longer(cols = -c(slug, topic), names_to = 'term', values_to = 'beta')
+
+# criando figura das palavras por topicos
+df_betas %>% 
+  # agrupando pelo topico e token
+  group_by(topic, term) %>% 
+  # calculando a media da probabilidade para aquele token naquele topico
+  summarise(beta = mean(x = beta, na.rm = TRUE), .groups = 'drop') %>% 
+  # agrupando pelo topico
+  group_by(topic) %>% 
+  # pegando as 10 palavras com maior afinade com cada tópico
+  slice_max(order_by = beta, n = 10, with_ties = FALSE) %>% 
+  # criando escala numerica para colorir dentro dos topicos
+  mutate(escala = beta / max(beta)) %>% 
+  # desagrupando os dados
+  ungroup %>% 
+  # organizando as informacoes para plotar
+  mutate(
+    topic = ifelse(test = topic < 10, 
+                   yes = paste0('Tópico 0', topic), no = paste0('Tópico', topic)),
+    term = reorder_within(x = term, by = beta, within = topic)
+  ) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = beta, y = term, fill = escala)) +
+  facet_wrap(~ topic, scales = 'free', ncol = 4) +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  scale_y_reordered() +
+  scale_fill_viridis_c(begin = 0.2, end = 0.9) +
+  labs(
+    title    = 'Quais as palavras mais prováveis de serem observadas em cada tópico?',
+    subtitle = 'Os temas de que tratam cada tópico podem ser identificados através da análise das palavras mais fortementes associadas à cada tópico',
+    x        = expression(bold(paste('Probabilidade de ocorrência, ', beta)))
+  ) +
+  theme(axis.title.y = element_blank())
+
+# o codigo abaixo pode ser usado para criar a figura das palavras mais relacionadas com
+# cada topico no caso de não utilizarmos covariáveis para modelar o conteúdo dos tópicos,
+# uma vez que nesse caso temos apenas uma matriz beta como output do modelo
+# tidy(x = modelo, matrix = 'beta') %>% 
+#   # agrupando pelo topico
+#   group_by(topic) %>% 
+#   # pegando as 10 palavras com maior afinade com cada tópico
+#   slice_max(order_by = beta, n = 10, with_ties = FALSE) %>% 
+#   # criando escala numerica para colorir dentro dos topicos
+#   mutate(escala = beta / max(beta)) %>% 
+#   # desagrupando os dados
+#   ungroup %>% 
+#   # organizando as informacoes para plotar
+#   mutate(
+#     topic = ifelse(test = topic < 10, 
+#                    yes = paste0('Tópico 0', topic), no = paste0('Tópico', topic)),
+#     term = reorder_within(x = term, by = beta, within = topic)
+#   ) %>% 
+#   # criando a figura
+#   ggplot(mapping = aes(x = beta, y = term, fill = escala)) +
+#   facet_wrap(~ topic, scales = 'free', ncol = 4) +
+#   geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+#   scale_y_reordered() +
+#   scale_fill_viridis_c(begin = 0.2, end = 0.9) +
+#   labs(
+#     title    = 'Quais as palavras mais prováveis de serem observadas em cada tópico?',
+#     x        = expression(bold(paste('Probabilidade de ocorrência, ', beta)))
+#   ) +
+#   theme(axis.title.y = element_blank())
+```
+
+
+O resultado acima sugere que é pouco provável que haja um mapeamento perfeito entre um tópico e uma facção. Para confirmar esta expectativa, podemos utilizar a função `estimateEffect` do pacote `stm`: esta função ajusta uma regressão diferente para cada tópico, e busca avaliar de que forma a prevalência do tópico varia em função de um conjunto de covariáveis. No nosso caso, vamos utilizar a identidade da facção como a covariável e suprimir o intercepto do modelo, de forma que as estimativas obtidas representem diretamente a frequência de ocorrência de cada tópico entre as cartas de cada facção. Podemos utilizar a função `summary` para extrair os detalhes do resultado da função, o que nos retorna uma lista de tabelas com os parâmetros da regressão linear, como se tivéssemos usado a função `lm` mesmo. Para demonstrar o conteúdo dessa tabela, eu uso a função `pluck` abaixo para extrair a variação na prevalência do tópico 15 entre as cartas de cada facção: podemos ver que cartas da facção `Nilfgaard` parecem estar mais frequentemente associadas à esse tópico, enquanto as do `Syndicate` estariam menos frequentemente associadas.
+
+
+```{r modela_topicos_metadados}
+# estimando a contribuicao das features para explicar os topicos
+explica_topicos <- estimateEffect(1:18 ~ 0 + slug, stmobj = modelo, 
+                                  metadata = df_covariaveis, uncertainty = 'Global')
+# pegando um output de exemplo
+pluck(summary(explica_topicos), 'tables', 15)
+```
+
+
+O legal da função `estimateEffect` é que ela nos permite quantificar quais tópicos estão mais fortemente associados à quais metadados. No entanto, com 18 tópicos no modelo, seria impraticável explorar visualmente os tópicos mais fortemente associados com cada facção e, principalmente, determinar se existe de fato um mapeamento específico entre um tópico e uma facção. Assim, decidi extrair os coeficientes do `estimateEffect` para todas as combinações de facção e tópico, e estruturá-las numa `tibble` onde temos os nomes das facções nas linhas, os tópicos nas colunas e os coeficientes nas células. Uma vez que cheguei à essa estrutura de dados, ajustei uma PCA^[Eu usei a função `rda` do pacote `vegan` para isso, mas no formato utilizado ela funciona como uma PCA e não uma RDA (Análise de Redundância).] aos dados, de forma à criar uma visualização que nos permitisse identificar quais facções são mais frequentemente associadas à quais tópicos. O resultado dessa análise é apresentado abaixo, onde podemos ver alguns padrões interessantes^[Novamente, todas as leituras que seguem vêm da experiência de jogar Gwent por algum tempo.]:
+
++ Existem grupos de tópicos que tendem a conversar mais frequentemente com as cartas de algumas facções do que outras. Isso é perfeitamente razoável de ser entendido, uma vez que alguns tópicos acabaram tocando em temas que são mais comumente observados nas cartas de algumas facções do que de outras (e.g., o jogo de palavras `desejo de morte` são quase que exclusivas da facção `Monsters`); e,  
++ A forma como as facções ficaram dispersas na ordenação me parece bem intuitiva, mas não sei explicar exatamente o porquê. Por exemplo, eu sei que as cartas da facção `Nilfgaard` têm um conjunto de habilidades que implementam uma mecânica de controle que é muito forte, baseada principalmente em anular as cartas e jogadas do adversário. Por outro lado, eu vejo que as cartas outras facções focam muito na questão de causar dano às cartas do oponente, mas vejo que a forma como as fazem é bem distinta (_e.g._, em `Northern Realms` isso acontece de forma ativa, em `Scoia'tael` isso normalmente acontece naturalmente ao longo da rodada, e etc). Nâo sei se é exatamente isso que a dispersão das facções está mostrando na figura abaixo, mas tenho o sentimento de que a intuição que ela transmite está certa.  
+
+
+```{r fig_topicos_explicados}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 5
+#| fig-width: 7
+# pegando as estimativas do modelo e ajustando elas à uma PCA usando o vegan
+df_beta_escores <- tidy(x = explica_topicos) %>% 
+  # ajustando os dados para plotar
+  mutate(
+    # ajustando o nome das faccoes
+    term  = str_remove(string = term, pattern = 'slug'),
+    # ajustando o nome dos topicos
+    topic = ifelse(
+      test = topic < 10, yes = paste0('T0', topic), no = paste0('T', topic)
+    )
+  ) %>% 
+  # pegando apenas o topico, o nome da faccao e o beta da regressao
+  select(topic, term, estimate) %>% 
+  # passando o tibble para o formato largo, com as faccoes nas linhas, os topicos
+  # nas colunas e os betas como os valores das celulas
+  pivot_wider(id_cols = term, names_from = topic, values_from = estimate) %>% 
+  # passando o tibble para um dataframe, de forma a conseguirmos usar rownames
+  data.frame %>% 
+  # passando o nome da faccao para o rownames
+  `rownames<-`(value = .$term) %>% 
+  # dropando a coluna com o nome da faccao
+  select(-term) %>% 
+  # padronizando os betas topico a topico
+  scale %>%
+  # ajustando a PCA usando o vegan
+  vegan::rda() %>% 
+  # extraindo os escores da PCA
+  vegan::scores() %>% 
+  # passando o objeto resultante para um dataframe
+  map(.f = data.frame) %>% 
+  # colocando o nome da faccao ou topico como uma coluna
+  map(.f = rownames_to_column, var = 'nome')
+
+# criando a figura
+ggplot() +
+  geom_hline(yintercept = 0, color = 'grey70') +
+  geom_vline(xintercept = 0, color = 'grey70') +
+  geom_point(data = pluck(df_beta_escores, 'sites'), 
+             mapping = aes(x = PC1, y = PC2, fill = nome), 
+             size = 3, shape = 21) +
+  geom_text_repel(data = pluck(df_beta_escores, 'sites'), 
+                  mapping = aes(x = PC1, y = PC2, label = nome, color = nome),
+                  fontface = 'bold', seed = 66) +
+  geom_text(data = pluck(df_beta_escores, 'species'), 
+            mapping = aes(x = PC1, y = PC2, label = nome)) +
+  scale_fill_manual(values = cores_por_faccao) + 
+  scale_color_manual(values = cores_por_faccao) +
+  labs(
+    title    = 'Quais facções estão mais fortemente associadas com quais tópicos?',
+    subtitle = 'A disposição das facções na ordenação representa a similaridade nos padrões de prevalência dos tópicos',
+    x        = 'Componente Principal 1',
+    y        = 'Componente Principal 2'
+  ) +
+  theme(
+    legend.position = 'none'
+  )
+```
+
+
+Até então, focamos principalmente na associação entre as palavras e os tópicos, e tentamos tirar algum insight disso. Todavia, existem outros dois padrões que podemos explorar a partir do resultado do modelo de tópicos que ajustamos. O primeiro deles é a informação da prevalência dos tópicos - isto é, quais os tópicos que mais aparecem entre as cartas de Gwent? A figura abaixo sintetiza a resposta para esta pergunta, e mostra que os temas mais frequentes entre as cartas são principalmente dois: ou o reforço (_i.e._, alguma ação ou efeito que aumenta o poder base da carta), ou o dano às cartas ou o uso de alguma carta especial (_i.e._, um tipo de carta que tem efeito imediato a não permanece no tabuleiro do jogo após utilizada). Isto faz bastante sentido, uma vez que: (1) quanto maior o somatório do poder das cartas que você jogou ao final de cada rodada maior a chance de você sair vitorioso e (2) as cartas especiais normalmente não podem ser anuladas, e podem funcionar como contra-medidas ou te dar alguma uma vantagem na rodada.
+
+
+```{r fig_gamma}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 6
+#| fig-width: 10
+# # criando dataframe com as palavras mais frequentes por topico na media
+# # é necessário descomentar as linhas abaixo se usarmos o modelo sem covariáveis no conteudo
+# df_top_palavras <- tidy(x = modelo, matrix = 'beta') %>%
+#   # agrupando pelo topico
+#   group_by(topic) %>%
+#   # pegando as 10 palavras com maior afinade com cada tópico
+#   slice_max(order_by = beta, n = 5, with_ties = FALSE) %>%
+#   # colocando essas palavras em um vetor
+#   summarise(palavras = paste0(term, collapse = ', '))
+
+# é necessário descomentar as linhas abaixo se usarmos o modelo com covariáveis no conteudo
+df_top_palavras <- df_betas %>%
+  # agrupando pelo topico e token
+  group_by(topic, term) %>% 
+  # calculando a media da probabilidade para aquele token naquele topico
+  summarise(beta = mean(x = beta, na.rm = TRUE), .groups = 'drop') %>% 
+  # agrupando pelo topico
+  group_by(topic) %>%
+  # pegando as palavras com maior afinade com cada tópico
+  slice_max(order_by = beta, n = 5, with_ties = FALSE) %>%
+  # colocando essas palavras em um vetor
+  summarise(palavras = paste0(term, collapse = ', '))
+
+# criando a figura de prevalencia por topico
+tidy(x = modelo, matrix = 'gamma') %>% 
+  # agrupando pelo topico
+  group_by(topic) %>% 
+  # extraindo a media da probabilidade para cada topico
+  # esse é o valor esperado da prevalencia do tópico
+  summarise(
+    media = mean(x = gamma), .groups = 'drop'
+  ) %>% 
+  # juntando as palavras mais frequentes por topico
+  left_join(y = df_top_palavras, by = 'topic') %>% 
+  # reordenando as colunas
+  mutate(
+    topic = ifelse(test = topic < 10, yes = paste0('0', topic), no = topic),
+    topic = paste('Tópico', topic),
+    topic = fct_reorder(.f = topic, .x = media)
+  ) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = media, y = topic, fill = media)) +
+  geom_col(color = 'black', size = 0.3, show.legend = FALSE) +
+  geom_text(mapping = aes(label = round(x = media, digits = 3), color = media <= 0.04), 
+            nudge_x = -0.01, fontface = 'bold', show.legend = FALSE) +
+  geom_text(mapping = aes(label = palavras), nudge_x = 0.005, hjust = 0) +
+  scale_x_continuous(breaks = seq(from = 0, to = 0.25, by = 0.05),
+                     limits = c(0, 0.27)) +
+  scale_fill_viridis_c(begin = 0.2, end = 0.9) +
+  scale_color_manual(values = c('black', 'white')) +
+  labs(
+    title    = 'Quais os tópicos mais prevalentes entre as cartas?',
+    subtitle = '',
+    x        = expression(bold(paste('Probabilidade de ocorrência, ', theta)))
+  ) +
+  theme(axis.title.y = element_blank())
+```
+
+
+O outro padrão que podemos explorar a partir do modelo que treinamos é a correlação entre os tópicos. Podemos ter acesso à essa informação aplicando a função `topicCorr` ao modelo, e extraindo a matriz `cor` do objeto resultante. Os padrões de correlação observados entre os tópicos que encontramos pode ser observado na figura abaixo, onde aproveitei para suprimir as correlações menores do que |0.3| apenas para facilitar a visualização. Como podemos ver, poucos tópicos compartilham uma correlação um pouco mais forte (positiva ou negativa), mas aqueles que o fazem ilustram a vantagem dessa aplicação no STM. A correlação entre os tópicos 4 e 15, por exemplo, é bastante compreensível pois ambos falam de mecânicas de movimentação de deck (_i.e._, mover cartas para a pilha de descarte, comprar cartas do deck, criar cópias de cartas e etc) que podem acabar co-ocorrendo entre as cartas.
+
+
+```{r fig_correlacao_topicos}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 5
+#| fig-width: 8
+# carregando pacotes
+library(corrr) # para o plot abaixo
+
+# criando uma plot de correlacao entre os topicos
+topicCorr(model = modelo) %>% 
+  # pegando a matriz de correlacao
+  pluck('cor') %>% 
+  # colocando o nome das dimensoes
+  `rownames<-`(value = paste0('Tópico ', 1:18)) %>% 
+  `colnames<-`(value = paste0('Tópico ', 1:18)) %>% 
+  # passando para uma matriz do corrr
+  as_cordf() %>% 
+  # passando a matriz de correlacao para o formato longo
+  stretch(na.rm = TRUE, remove.dups = TRUE) %>% 
+  # adicionando contagem de ocorrencias de x e y para ordenar as linhas
+  # e colunas da figura
+  add_count(x, name = 'n_x') %>% 
+  add_count(y, name = 'n_y') %>% 
+  mutate(
+    y = fct_reorder(.f = y, .x = n_y, .desc = TRUE),
+    x = fct_reorder(.f = x, .x = n_x, .desc = TRUE)
+  ) %>% 
+  # criando a figura
+  ggplot(mapping = aes(x = x, y = y, fill = r)) +
+  geom_tile(color = 'black', show.legend = FALSE) +
+  geom_text(mapping = aes(label = round(x = r, digits = 2), color = abs(x = r) > 0.3), 
+            fontface = 'bold', show.legend = FALSE) +
+  scale_fill_gradient2(low = 'firebrick', mid = 'white', high = 'dodgerblue2', midpoint = 0) +
+  scale_color_manual(values = c('NA', 'black')) +
+  labs(
+    title    = 'Qual a relação entre os tópicos?',
+    subtitle = 'São poucos os tópicos que compartilham algum tipo de relação entre si'
+  ) +
+  theme(
+    axis.title  = element_blank(),
+    panel.grid  = element_blank(),
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+
+Acredito que podemos parar por aqui o entendimento dos tópicos e passar agora para uma análise de similaridade baseada na informação da prevalência dos tópicos entre as cartas.
+
+# Utilizando os tópicos
+
+Como comentado anteriormente, uma das ideias principais da modelagem de tópicos é que cada texto analisado é representado por diferentes proporções dos K tópicos identificados. Desta forma, podemos alavancar esta ideia e usar a proporção de cada tópico que caracteriza cada carta para criar uma representação abstrata de cada uma delas. A partir deste _embedding_ podemos então visualizar e buscar as cartas mais similares entre si de acordo com o seu texto de descrição. Para obter este _embedding_ basta usarmos a função `tidy` para extrair a matriz $\theta_{d}$ do modelo treinado - é confuso, mas precisamos usar o argumento `matrix = 'gamma'` para isso -, e aproveitarei para enriquecer a matriz resultante com alguns metadados sobre cada carta.
+
+
+```{r embedding_matrix}
+# pegando a matriz gamma - as probabilidade de cada topico por documento
+embeddings <- tidy(x = modelo, matrix = 'gamma') %>% 
+  # juntando o prefixo topic_ ao numero de cada topico
+  mutate(topic = paste0('topic_', topic)) %>% 
+  # pivoteando a tabela para o formato largo
+  pivot_wider(id_cols = document, names_from = topic, values_from = gamma) %>% 
+  # agrupando o dataframe por linha
+  rowwise() %>% 
+  # extraindo o topico mais provavel por linha
+  mutate(
+    topK = which.max(c_across(contains('topic_'))),
+    topK = ifelse(test = topK < 10, 
+                  yes = paste0('Tópico 0', topK), no = paste0('Tópico ', topK))
+  ) %>% 
+  # desagrupando o dataframe
+  ungroup %>% 
+  # colocando o nome das cartas na coluna do nome do documento
+  mutate(document = cartas$localizedName) %>% 
+  # juntando os metadados das cartas
+  left_join(y = cartas, by = c('document' = 'localizedName'))
+embeddings
+```
+
+
+Na sequência, vamos usar o t-SNE para criar uma projeção daquele _embedding_ em duas dimensões, que nos ajudará à entender a similaridade entre as cartas de acordo com o seu texto de descrição. Como podemos observar, as cartas tendem a se agrupar em torno dos tópicos mais prevalentes entre elas, mas é difícil identificar grupos que estejam muito separados uns dos outros. Isso não é surpreendente, uma vez que a modelagem de tópicos prevê que cada texto vai ter uma contribuição de cada tópico, ainda que pequena. De toda forma, ainda é possível visualizar alguns padrões consistentes de similaridade entre as cartas. Um exemplo disto é uma nuvem de cartas no canto esquerdo, onde todas as cartas falam de diferentes implementações da habilidade de reforço (_i.e._, aumento do poder base da carta): quando a carta têm ou recebe um _status_, quando outras cartas recebem um _status_, quando um custo é pago e etc. Assim, parece que a modelagem de tópicos foi capaz sim de atingir o objetivo de agrupar as cartas pela similaridade dos textos de descrição.
+
+
+```{r visualiza_tsne}
+#| column: body-outset
+#| code-fold: true
+# carregando o pacote
+library(Rtsne) # para rodar o TSNE
+library(plotly) # para visualizar o TSNE
+
+# setando a seed
+set.seed(33)
+
+# ajustando o TSNE
+tsne_results <- select(embeddings, contains('topic_')) %>% 
+  # passando objeto para matrix
+  as.matrix() %>% 
+  # ajustando tSNE
+  Rtsne(check_duplicates = FALSE, perplexity = 25)
+
+# plotando resultados do TSNE
+tsne_results %>% 
+  # pegando os resultado do TSNE
+  pluck('Y') %>% 
+  # passando para um dataframe
+  data.frame %>% 
+  # renomeando as colunas
+  `names<-`(value = c('tsne1', 'tsne2')) %>% 
+  # passando para um tibble
+  tibble %>% 
+  # juntando com o nome das cartas
+  bind_cols(embeddings) %>% 
+  # criando a figura
+  plot_ly(x = ~ tsne1, y = ~ tsne2, color = ~ slug, data = ., colors = cores_por_faccao,
+          mode = 'markers', type = 'scatter', marker = list(size = 7, opacity = 0.7),
+          hoverinfo = 'text', 
+          hovertext = ~ paste0(
+            '<b>Tópico prevalente:</b> ', topK, '<br>',
+            '<b>Carta:</b> ', document, '<br>',
+            '<b>Raridade:</b> ', rarity, '<br>',
+            '<b>Tipo:</b> ', type, '<br>',
+            str_wrap(string = texto, width = 50)
+            )
+  ) %>% 
+  layout(
+    title = '<b>Como estão organizadas as cartas de Gwent de<br>acordo com a similaridade em seu texto de descrição?</b>',
+    xaxis = list(title = '<b>Dimensão 1</b>'), 
+    yaxis = list(title = '<b>Dimensão 2</b>')
+  )
+```
+
+
+Uma vez que validamos o uso dos _embeddings_ criados através da STM, podemos agora implementar um algoritmo para nos ajudar a encontrar os vizinhos mais próximos de cada carta que selecionarmos. Para isso, eu usei o algoritmo que é apresentado no capítulo 5 do livro _Supervised Machine Learning for Text Analysis in R_ (@smlta), fazendo algumas pequenas alterações em seu funcionamento para que ele atendesse às peculiaridades do problema de dados que estamos trabalhando. Mais especificamente, como no geral não podemos misturar as cartas de facções diferentes a não ser com as cartas neutras, eu trabalhei na função para que ela recebesse o nome de uma carta e extraísse a facção à qual ela pertence para que, a partir daí, ela trabalhasse apenas com o subconjunto das cartas que são passíveis de serem usadas juntas. Um ponto importante na implementação desse algoritmo é que ele faz uso da função `widely` do pacote `widyr`, que recebe como _input_ uma base em formato longo e aplica uma função empacotada à ela, passando a base para o formato largo durante o processamento (_i.e._, tipo como se desse um `pivot_wider` na hora de aplicar a função) e retornando novamente uma base no formato longo (_i.e._, como se desse um `pivot_longer` no resultado da função empacotada). Eu nunca tinha usado esse pacote, e achei a ideia por trás dele bastante interessante. O código para o algoritmo de vizinhos mais próximos que implementei está abaixo, assim como uma descrição detalhada do que está sendo feito dentro da função empacota no `widely` linha-a-linha.
+
+
+```{r nearest_neighbors}
+# carregando funcoes
+library(widyr) # para trabalhar em formato largo
+
+# colocando os embeddings no formato para a funcao abaixo
+df_embedding <- select(embeddings, document, contains('topic_')) %>% 
+  # passando a base para o formato longo
+  pivot_longer(cols = contains('topic_'), names_to = 'topico', values_to = 'probabilidade')
+
+# criando funcao para calcular o nearest neighbors
+nearest_neighbors <- function(df, carta, vizinhos) {
+  
+  # pegando a faccao da carta selecionada
+  faccao_selecionada <- cartas %>% 
+    # filtrando a carta selecionada
+    filter(localizedName == carta) %>% 
+    # pegando a faccao da carta
+    pull(slug)
+  
+  # filtrando as cartas que serao comparadas
+  if(faccao_selecionada != 'Neutral') {
+  cartas_usaveis <- cartas %>% 
+    # filtrando todas as cartas da faccao da carta selecionada
+    filter(slug %in% faccao_selecionada) %>% 
+    # pegando o nome das cartas
+    pull(localizedName)
+  # pegando todas as cartas caso a facção da carta alvo seja a neutra
+  } else {
+    cartas_usaveis <- pull(cartas, localizedName)
+  }
+  
+  # calculando a similaridade de coseno entre todas as cartas e a carta alvo
+  df %>%
+    # filtrando apenas as cartas que serao comparadas
+    filter(document %in% cartas_usaveis) %>% 
+    # aplicando a funcao
+    widely(
+      ~ {
+        # cria matriz n x m, onde n eh o numero de cartas que existem na base de dados, e m
+        # é o número de tópicos identificados através do STM - o conteúdo de cada célular na
+        # matriz é a probabilidade de que àquela carta esteja associada aquele tópico
+        y <- .[rep(carta, nrow(.)), ]
+        # no codigo abaixo o '.' representa a matriz de probablidades de cada carta possuir
+        # cada tópico, e é uma matriz n x m onde o n é cada uma das cartas e o m corresponde
+        # a várias colunas que representam cada um dos tópicos. Calcularemos então a similaridade
+        # do conseno a carta selecionado e o embedding representado por cada outra carta:
+        # - rowSums(. * y): multiplica a matriz do embedding de todos as cartas pela matriz
+        # da carta selecionada
+        # - sqrt(rowSums(. ^ 2)): retorna um vetor numerico, com um elemento por carta o valor
+        # associado à cada carta representa o somatorio dos valores entre todas as dimensoes
+        # de seu embedding (i.e., todos os topicos associado àquela carta)
+        # sqrt(sum(.[token, ] ^ 2)): retorna um valor numérico, que representa o somatório dos
+        # valores entre todas as dimensoes do embedding para a carta selecionada
+        # (sqrt(rowSums(. ^ 2)) * sqrt(sum(.[token, ] ^ 2))): multiplica o valor do embedding
+        # de cada carta pelo da carta selecionado, padronizando a similaridade calculada
+        # pelo 'rowSums(. * y)'
+        similaridade_coseno <- rowSums(. * y) / (sqrt(rowSums(. ^ 2)) * sqrt(sum(.[carta, ] ^ 2)))
+        # coloca o resultado em uma matriz com o nome de linha vinda do nome das cartas
+        #matrix(similaridade_coseno, ncol = 1, dimnames = list(x = names(similaridade_coseno)))
+      },
+      sort = TRUE
+    )(document, topico, probabilidade) %>%
+    # organizando as cartas em ordem decrescente de similaridade
+    arrange(desc(item2)) %>% 
+    # pegando apenas a quantidade desejada de cartas similares
+    slice_max(order_by = item2, n = vizinhos + 1) %>% 
+    # juntando com metadados das cartas resultantes
+    left_join(
+      y = select(cartas, localizedName, slug, small, texto), 
+      by = c('item1' = 'localizedName')
+    )
+}
+```
+
+
+Uma vez que tenhamos a função que implementa o algoritmo de vizinhos mais próximos definida, vamos aplicá-la à uma carta aleatória de algumas facções para encontrar os seus 5 vizinhos mais próximos. Começando pela facção `Scoia'tael`, vamos aplicar à busca com base na carta `Zoltan Chivay`...
+
+
+```{r nearest_neighbors_scoiatael}
+#| column: body-outset
+#| code-fold: true
+df_embedding %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Zoltan Chivay', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, item2, texto) %>% 
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>%
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'), 
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 90),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+...à carta `Imortais` da facção `Northern Realms`...
+
+
+```{r nearest_neighbors_northern_realms}
+#| column: body-outset
+#| code-fold: true
+df_embedding %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Imortais', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, item2, texto) %>% 
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>%
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'), 
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 140),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+..à carta `Artorius Viggo` da facção `Nilfgaard`...
+
+
+```{r nearest_neighbors_nilfgaard}
+#| column: body-outset
+#| code-fold: true
+df_embedding %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Artorius Viggo', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, item2, texto) %>% 
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>%
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'), 
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 140),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+..e à carta neutra `Regis`.
+
+
+```{r nearest_neighbors_neutral}
+#| column: body-outset
+#| code-fold: true
+df_embedding %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Regis', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, slug, item2, texto) %>%
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>% 
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'),
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 140),
+      slug  = colDef(name = 'Facção', maxWidth = 90),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+Salvo uma ou outra exceção, os vizinhos mais próximos das cartas selecionadas parecem fazer algum sentido. Isso fornece mais evidências de que os _embeddings_ criados através do STM são capazes de nos fornecer uma boa noção da similaridade entre as cartas de acordo com o seu texto de descrição. Desta forma, acredito que estamos quase prontos para concluir o post...só tem uma coisinha que eu ainda queria falar...
+
+# E se focássemos em uma facção só?
+
+Enquanto eu escrevia esse post, resolvi testar os _embeddings_ usando algumas cartas específicas que eu uso em alguns decks, e que sei que basicamente funcionam como o motor principal dos combos. Um exemplo de carta que testei foi a `Bruxo Gato`, da facção `Scoia'tael`, que ajuda em um combo baseado na mecânica de movimentação de cartas no tabuleiro (esse combo é descrito em detalhes no início desse post [aqui](https://nacmarino.github.io/codex/posts/2022-01-08-quais-as-associacoes-existentes-entre-as-cartas-dos-decks-de-gwent/)). Quando usei os _embeddings_ que criamos para achar os vizinhos mais próximos à essa carta, acabei chegando ao resultado abaixo.
+
+
+```{r nearest_neighbors_scoiatael_demo}
+#| column: body-outset
+#| code-fold: true
+df_embedding %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Bruxo Gato', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, item2, texto) %>% 
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>%
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'), 
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 90),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+Conhecendo as cartas da facção `Scoia'tael`, acabei achando estranha a combinação de cartas que foi sugerida, uma vez que não vi muito sentido em algumas cartas que foram sugeridas (_e.g._, `Dríade Jovem`). Pensei um pouco, e me ocorreu se não seria o caso de que ao combinar as cartas de várias facções ao criar os _embeddings_, eu tivesse acabado por colocar muita heterogeneidade na segmentação das cartas entre os tópicos e perdido um pouco dos padrões de similaridade mais finos entre elas. Com base nisso, resolvi rodar a modelagem de tópicos toda de novo, mas desta vez focando apenas nas cartas Neutras e da facção `Scoia'tael` (que podem ser combinadas no mesmo deck) - você encontra o script que usei [aqui](https://github.com/nacmarino/codex/blob/24feaea52e861d7fce212bc55b53ecfbcbe9901e/_posts/2022-02-28-card-embeddings-parte-1/scripts/02_ajusta_stm_faccao.R). De forma geral, encontrei novamente 18 tópicos como sendo a melhor quantidade para segmentar as cartas, mas o modelo selecionado foi aquele que incorporava as covariáveis do tipo de habilidade das cartas como preditor da prevalência dos tópicos. Salvei os _embeddings_ gerados por esse modelo, e uso ele abaixo para buscar novamente os vizinhos mais próximos da carta `Bruxo Gato`.
+
+
+```{r nearest_neighbors_scoiatael_solo}
+#| column: body-outset
+#| code-fold: true
+# carregando o embedding treinado apenas para Scoia'tael e Neutral
+embedding_scoiatael <- read_rds(file = 'data/embeddings_scoiatael.rds')
+# embedding_scoiatael <- read_rds(file = '_posts/2022-02-28-card-embeddings-parte-1/data/embeddings_scoiatael.rds')
+
+# pegando os vizinhos mais proximos usando o embedding especifico para scoia'tael
+embedding_scoiatael %>% 
+  # calculando o nearest neighbors
+  nearest_neighbors(carta = 'Bruxo Gato', vizinhos = 5) %>% 
+  # selecionando as colunas que vamos plotar
+  select(small, item1, item2, texto) %>% 
+  # adicionando o prefixo do link para a imagem
+  mutate(small = paste0('https://www.playgwent.com/', small)) %>%
+  # colocando os exemplos em um reactable
+  reactable(
+    compact = TRUE, borderless = TRUE, defaultColDef = colDef(align = 'left'), 
+    style = list(fontFamily = "Roboto", fontSize = "12px"),
+    columns = list(
+      small = colDef(name = '', cell = embed_img(height = 80, width = 60), maxWidth = 65),
+      item1 = colDef(name = 'Carta', maxWidth = 90),
+      item2 = colDef(name = 'Similaridade', maxWidth = 90, format = colFormat(digits = 3)),
+      texto = colDef(name = 'Descrição')
+    )
+  )
+```
+
+
+Como podemos ver, existe uma diferença notável no resultado dos vizinhos mais próximos usando os _embeddings_ que são específicos para a facção `Scoia'tael` _vs_ aquele criado usando todas as cartas, de forma que o primeiro faz muito mais sentido do que o último. Acredito que este resultado reforce a ideia de que a grande heterogeneidade entre as cartas das diferentes facções fez com que o _embedding_ criado perdesse um pouco da capacidade de identificar essas pequenas nuances entre as cartas. Outra evidência em favor desta ideia é que a identidade da facção deu lugar aos tipos de habilidade das cartas como a melhor covariável para o modelo de tópicos quando focamos apenas nas cartas Neutras e `Scoia'tael`. Isto também sugere que apesar das habilidades compartilhadas entre as cartas serem muitas vezes similares, a implementação delas é muito heterogênea - e, eventualmente, valeria até a pena avaliar até que grau o texto de descrição das cartas é informativo da facção a que pertencem.
+
+Vamos salvar o modelo final, e fechar por aqui.
+
+
+```{r exporta_modelo_treinado}
+# criando diretorio para salvar o modelo caso ele nao exista
+if(!fs::dir_exists(path = 'modelos')){
+  fs::dir_create(path = 'modelos')
+}
+
+# salvando o rds do modelo no diretorio criado
+write_rds(x = modelo, file = 'modelos/stm_full_dataset.rds')
+```
+
+
+# Conclusões
+
+Neste post eu busquei entender a similaridade entre as cartas de Gwent de acordo com o texto de descrição que as acompanha. Vimos que estes textos fornecem informações importantes sobre os tipos de personagem associados às cartas, as habilidades que elas possuem e a forma como as implementam, e que todas essas coisas não são totalmente dependentes da facção associada à cada carta. De toda forma, buscamos avaliar estes padrões de maneira analítica, utilizando uma modelagem de tópicos através da implementação do _Structural Topic Model_. O modelo implementado foi capaz de segmentar os textos de descrição em 18 tópicos, através dos quais pudemos gerar representações abstratas (_i.e._, _embeddings_) das cartas e utilizá-las para visualizar os padrões de similaridade entre elas e explorar um algoritmo de vizinhos mais próximos.
+
+Eu usei o STM para pôr em prática a ideia por trás do _document embeddings_ (_i.e._, representações abstratas de um ou mais documentos). Sei que existem muitas outras alternativas para se chegar ao mesmo objetivo, mas achei a ideia de usar o STM como sendo computacionalmente simples e, ao mesmo tempo, uma oportunidade de estudar a ferramenta. Nesse contexto, achei muito interessante as funcionalidades que o modelo em si nos fornece e o suporte que o pacote `stm` nos dá para implementá-lo e explorá-lo. No entanto, o método não é sem limitações, e fiquei um pouco incomodado com a perda da sensibilidade dos _embeddings_ quando injetamos muita heterogeneidade nos dados. Ainda assim, acredito que para uma abordagem tão simples como essa, o exercício valeu a pena.
+
+Finalmente, muito do que desenvolvi aqui foi inspirado em muito material bom encontrado na internet. Uma fonte que achei sensacional foram estes três posts da Julia Silge, [aqui](https://juliasilge.com/blog/sherlock-holmes-stm/), [aqui](https://juliasilge.com/blog/evaluating-stm/) e [aqui](https://juliasilge.com/blog/spice-girls/) - e acabei aproveitando muito das ideias que ela apresenta para a visualização, exploração e modelagem de dados textuais. Esses são dados bem desafiadores de trabalhar, especialmente no português, mas que acredito serem capazes de dar insights muito interessantes em diversos tipos de situação.
+
+# Possíveis Extensões
+
+Esse post acabou ficando bastante longo, mas ele fecha um arco básico de análise de dados que só fazia sentido usando estes dados. Ainda assim, vejo algumas outras coisas que poderiam ser feitas, mas muito mais para estudar outras técnicas que não foram usadas aqui ou confirmar alguns padrões encontrados aqui. Além das extensões que já listei no post do _scrapper_ da [biblioteca de decks]((https://nacmarino.github.io/codex/posts/2021-11-30-raspando-a-biblioteca-de-decks-de-gwent/) e naquele sobre os [padrões de co-ocorrência das cartas](https://nacmarino.github.io/codex/posts/2022-01-08-quais-as-associacoes-existentes-entre-as-cartas-dos-decks-de-gwent/), acredito que podemos adicionar:  
+
++ Acabei focando no modelo com covariáveis para modelar o conteúdo dos tópicos, mas seria interessante olhar para os outros três modelos para entender que tipo de resultado eles geraram;  
++ Outro ponto em que seria possível atuar é na forma como as covariáveis sobre a presença ou ausência das habilidades das cartas foram usadas. Eu tomei o caminho mais simples, e as aloquei em três grandes grupos; todavia, seria interessante avaliar como uma escolha de agrupamento diferente ou até mesmo usar algumas dessas habilidades explicitamente poderia trazer resultados diferentes;  
++ A visualização da variação na prevalência dos tópicos entre as facções através da PCA sugere que devem existir diferenças entre as facções no que tange os textos de descrição das cartas. Seria então interessante trabalhar em cima de algum classificador que pudesse nos fornecer mais insights sobre a importância desta informação e dos outros metadados das cartas para esta previsão;  
++ Trabalhamos sobre o texto de descrição das cartas, mas cada habilidade na coluna `keywords` também possui o seu próprio texto de descrição. Este texto explica apenas o que é àquela habilidade, e não dá detalhes sobre a sua implementação. No entanto, acredito que seria interessante criar algum tipo de _embedding_ focando nessa informação do texto das `keywords`, de forma a também criarmos uma representação abstrata da similaridade das habilidades.
++ A ideia inicial era que solução desenvolvida aqui seria complementar àquela baseada nos padrões de co-ocorrência das cartas entre os decks de Gwent. Assim, seria interessante examinar a frequência com a qual os vizinhos mais próximos de cada carta são observadas também entre as regras de associação utilizadas para identificar os padrões de co-ocorrência. A minha perspectiva é que o resultado dos vizinhos mais próximos utilizando o _embedding_ deve ser útil principalmente quando as associações sugeridas por ele não forem tão frequentes quando olhamos as regras de associação. Acredito que isso seria mais para a validação das abordagens propostas do que qualquer outra coisa, mas é algo que seria importante ser feito; e,  
++ Mais uma vez, acredito que empacotar as análises que mostrei aqui num ShinyApp junto de tudo o que mais que foi gerado nos outros posts sobre Gwent seria muito legal.
+
+Dúvidas, sugestões ou críticas? É só me procurar pelo e-mail ou GitHub!
+

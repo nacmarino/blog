@@ -538,7 +538,11 @@ A figura abaixo apresenta os padrões de variação daquelas três métricas de 
 + Apesar da coerência semântica voltar a aumentar quando usamos mais de 27 tópicos, os resíduos do modelo de tópicos aumentam muito; e,  
 + A exclusividade das palavras aumenta com o valor de K, mas parece o fazem de forma mais lenta depois dos 18 tópicos.   
 
-```{r fig_metricas de avaliacao, layout = 'l-body-outset', code_folding = TRUE, fig.height = 4, fig.width = 8}
+```{r fig_metricas de avaliacao}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 8
 # extraindo as metricas de avaliacao da clusterizacao
 search_K %>% 
   # calculando a exclusividade e a coerencia dos topicos
@@ -613,7 +617,11 @@ Vamos começar o entendimento dos tópicos através dos padrões de ocorrência 
 + Também é possível observar casos que falam muito sobre um tipo de específico de carta. Isto é especialmente marcante no Tópico 16, onde as palavras-chave remetem diretamente às cartas de cenário: essas são cartas cujas habilidades são disparadas ao longo de três capítulos, cada um dos quais tendo seu efeito cada vez que uma carta de um tipo específico de personagem é usada; e,  
 + Existem tópicos que parecem focar majoritariamente nas habilidades e cartas associadas à uma única facção. Isso pode ser observado, por exemplo no Tópico 5, cujas palavras remetem diretamente à alguns padrões exclusivos às cartas da facção `Syndicate` (_e.g._, `moeda`) e `Northern Realms` (_e.g._, `paciencia`).  
 
-```{r fig_beta, layout = 'l-body-outset', code_folding = TRUE, fig.height = 9, fig.width = 9}
+```{r fig_beta}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 9
+#| fig-width: 9
 # extraindo os dados dos betas por topico
 df_betas <- modelo %>% 
   # pegando a matriz com o log das probabilidades para o beta
@@ -713,7 +721,11 @@ O legal da função `estimateEffect` é que ela nos permite quantificar quais t�
 + Existem grupos de tópicos que tendem a conversar mais frequentemente com as cartas de algumas facções do que outras. Isso é perfeitamente razoável de ser entendido, uma vez que alguns tópicos acabaram tocando em temas que são mais comumente observados nas cartas de algumas facções do que de outras (e.g., o jogo de palavras `desejo de morte` são quase que exclusivas da facção `Monsters`); e,  
 + A forma como as facções ficaram dispersas na ordenação me parece bem intuitiva, mas não sei explicar exatamente o porquê. Por exemplo, eu sei que as cartas da facção `Nilfgaard` têm um conjunto de habilidades que implementam uma mecânica de controle que é muito forte, baseada principalmente em anular as cartas e jogadas do adversário. Por outro lado, eu vejo que as cartas outras facções focam muito na questão de causar dano às cartas do oponente, mas vejo que a forma como as fazem é bem distinta (_e.g._, em `Northern Realms` isso acontece de forma ativa, em `Scoia'tael` isso normalmente acontece naturalmente ao longo da rodada, e etc). Nâo sei se é exatamente isso que a dispersão das facções está mostrando na figura abaixo, mas tenho o sentimento de que a intuição que ela transmite está certa.  
 
-```{r fig_topicos_explicados, layout = 'l-body-outset', code_folding = TRUE,  fig.height = 5, fig.width = 7}
+```{r fig_topicos_explicados}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 5
+#| fig-width: 7
 # pegando as estimativas do modelo e ajustando elas à uma PCA usando o vegan
 df_beta_escores <- tidy(x = explica_topicos) %>% 
   # ajustando os dados para plotar
@@ -774,7 +786,11 @@ ggplot() +
 
 Até então, focamos principalmente na associação entre as palavras e os tópicos, e tentamos tirar algum insight disso. Todavia, existem outros dois padrões que podemos explorar a partir do resultado do modelo de tópicos que ajustamos. O primeiro deles é a informação da prevalência dos tópicos - isto é, quais os tópicos que mais aparecem entre as cartas de Gwent? A figura abaixo sintetiza a resposta para esta pergunta, e mostra que os temas mais frequentes entre as cartas são principalmente dois: ou o reforço (_i.e._, alguma ação ou efeito que aumenta o poder base da carta), ou o dano às cartas ou o uso de alguma carta especial (_i.e._, um tipo de carta que tem efeito imediato a não permanece no tabuleiro do jogo após utilizada). Isto faz bastante sentido, uma vez que: (1) quanto maior o somatório do poder das cartas que você jogou ao final de cada rodada maior a chance de você sair vitorioso e (2) as cartas especiais normalmente não podem ser anuladas, e podem funcionar como contra-medidas ou te dar alguma uma vantagem na rodada.
 
-```{r fig_gamma, layout = 'l-body-outset', code_folding = TRUE, fig.height = 6, fig.width = 10}
+```{r fig_gamma}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 6
+#| fig-width: 10
 # # criando dataframe com as palavras mais frequentes por topico na media
 # # é necessário descomentar as linhas abaixo se usarmos o modelo sem covariáveis no conteudo
 # df_top_palavras <- tidy(x = modelo, matrix = 'beta') %>%
@@ -835,7 +851,11 @@ tidy(x = modelo, matrix = 'gamma') %>%
 
 O outro padrão que podemos explorar a partir do modelo que treinamos é a correlação entre os tópicos. Podemos ter acesso à essa informação aplicando a função `topicCorr` ao modelo, e extraindo a matriz `cor` do objeto resultante. Os padrões de correlação observados entre os tópicos que encontramos pode ser observado na figura abaixo, onde aproveitei para suprimir as correlações menores do que |0.3| apenas para facilitar a visualização. Como podemos ver, poucos tópicos compartilham uma correlação um pouco mais forte (positiva ou negativa), mas aqueles que o fazem ilustram a vantagem dessa aplicação no STM. A correlação entre os tópicos 4 e 15, por exemplo, é bastante compreensível pois ambos falam de mecânicas de movimentação de deck (_i.e._, mover cartas para a pilha de descarte, comprar cartas do deck, criar cópias de cartas e etc) que podem acabar co-ocorrendo entre as cartas.
 
-```{r fig_correlacao_topicos, layout = 'l-body-outset', code_folding = TRUE, fig.height=5, fig.width=8}
+```{r fig_correlacao_topicos}
+#| column: body-outset
+#| code-fold: true
+#| fig-height: 5
+#| fig-width: 8
 # carregando pacotes
 library(corrr) # para o plot abaixo
 
@@ -908,7 +928,9 @@ embeddings
 
 Na sequência, vamos usar o t-SNE para criar uma projeção daquele _embedding_ em duas dimensões, que nos ajudará à entender a similaridade entre as cartas de acordo com o seu texto de descrição. Como podemos observar, as cartas tendem a se agrupar em torno dos tópicos mais prevalentes entre elas, mas é difícil identificar grupos que estejam muito separados uns dos outros. Isso não é surpreendente, uma vez que a modelagem de tópicos prevê que cada texto vai ter uma contribuição de cada tópico, ainda que pequena. De toda forma, ainda é possível visualizar alguns padrões consistentes de similaridade entre as cartas. Um exemplo disto é uma nuvem de cartas no canto esquerdo, onde todas as cartas falam de diferentes implementações da habilidade de reforço (_i.e._, aumento do poder base da carta): quando a carta têm ou recebe um _status_, quando outras cartas recebem um _status_, quando um custo é pago e etc. Assim, parece que a modelagem de tópicos foi capaz sim de atingir o objetivo de agrupar as cartas pela similaridade dos textos de descrição.
 
-```{r visualiza_tsne, layout = 'l-body-outset', code_folding = TRUE}
+```{r visualiza_tsne}
+#| column: body-outset
+#| code-fold: true
 # carregando o pacote
 library(Rtsne) # para rodar o TSNE
 library(plotly) # para visualizar o TSNE
@@ -1032,7 +1054,9 @@ nearest_neighbors <- function(df, carta, vizinhos) {
 
 Uma vez que tenhamos a função que implementa o algoritmo de vizinhos mais próximos definida, vamos aplicá-la à uma carta aleatória de algumas facções para encontrar os seus 5 vizinhos mais próximos. Começando pela facção `Scoia'tael`, vamos aplicar à busca com base na carta `Zoltan Chivay`...
 
-```{r nearest_neighbors_scoiatael, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_scoiatael}
+#| column: body-outset
+#| code-fold: true
 df_embedding %>% 
   # calculando o nearest neighbors
   nearest_neighbors(carta = 'Zoltan Chivay', vizinhos = 5) %>% 
@@ -1055,7 +1079,9 @@ df_embedding %>%
 
 ...à carta `Imortais` da facção `Northern Realms`...
 
-```{r nearest_neighbors_northern_realms, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_northern_realms}
+#| column: body-outset
+#| code-fold: true
 df_embedding %>% 
   # calculando o nearest neighbors
   nearest_neighbors(carta = 'Imortais', vizinhos = 5) %>% 
@@ -1078,7 +1104,9 @@ df_embedding %>%
 
 ..à carta `Artorius Viggo` da facção `Nilfgaard`...
 
-```{r nearest_neighbors_nilfgaard, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_nilfgaard}
+#| column: body-outset
+#| code-fold: true
 df_embedding %>% 
   # calculando o nearest neighbors
   nearest_neighbors(carta = 'Artorius Viggo', vizinhos = 5) %>% 
@@ -1101,7 +1129,9 @@ df_embedding %>%
 
 ..e à carta neutra `Regis`.
 
-```{r nearest_neighbors_neutral, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_neutral}
+#| column: body-outset
+#| code-fold: true
 df_embedding %>% 
   # calculando o nearest neighbors
   nearest_neighbors(carta = 'Regis', vizinhos = 5) %>% 
@@ -1129,7 +1159,9 @@ Salvo uma ou outra exceção, os vizinhos mais próximos das cartas selecionadas
 
 Enquanto eu escrevia esse post, resolvi testar os _embeddings_ usando algumas cartas específicas que eu uso em alguns decks, e que sei que basicamente funcionam como o motor principal dos combos. Um exemplo de carta que testei foi a `Bruxo Gato`, da facção `Scoia'tael`, que ajuda em um combo baseado na mecânica de movimentação de cartas no tabuleiro (esse combo é descrito em detalhes no início desse post [aqui](https://nacmarino.github.io/codex/posts/2022-01-08-quais-as-associacoes-existentes-entre-as-cartas-dos-decks-de-gwent/)). Quando usei os _embeddings_ que criamos para achar os vizinhos mais próximos à essa carta, acabei chegando ao resultado abaixo.
 
-```{r nearest_neighbors_scoiatael_demo, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_scoiatael_demo}
+#| column: body-outset
+#| code-fold: true
 df_embedding %>% 
   # calculando o nearest neighbors
   nearest_neighbors(carta = 'Bruxo Gato', vizinhos = 5) %>% 
@@ -1152,7 +1184,9 @@ df_embedding %>%
 
 Conhecendo as cartas da facção `Scoia'tael`, acabei achando estranha a combinação de cartas que foi sugerida, uma vez que não vi muito sentido em algumas cartas que foram sugeridas (_e.g._, `Dríade Jovem`). Pensei um pouco, e me ocorreu se não seria o caso de que ao combinar as cartas de várias facções ao criar os _embeddings_, eu tivesse acabado por colocar muita heterogeneidade na segmentação das cartas entre os tópicos e perdido um pouco dos padrões de similaridade mais finos entre elas. Com base nisso, resolvi rodar a modelagem de tópicos toda de novo, mas desta vez focando apenas nas cartas Neutras e da facção `Scoia'tael` (que podem ser combinadas no mesmo deck) - você encontra o script que usei [aqui](https://github.com/nacmarino/codex/blob/24feaea52e861d7fce212bc55b53ecfbcbe9901e/_posts/2022-02-28-card-embeddings-parte-1/scripts/02_ajusta_stm_faccao.R). De forma geral, encontrei novamente 18 tópicos como sendo a melhor quantidade para segmentar as cartas, mas o modelo selecionado foi aquele que incorporava as covariáveis do tipo de habilidade das cartas como preditor da prevalência dos tópicos. Salvei os _embeddings_ gerados por esse modelo, e uso ele abaixo para buscar novamente os vizinhos mais próximos da carta `Bruxo Gato`.
 
-```{r nearest_neighbors_scoiatael_solo, code_folding = TRUE, layout = 'l-body-outset'}
+```{r nearest_neighbors_scoiatael_solo}
+#| column: body-outset
+#| code-fold: true
 # carregando o embedding treinado apenas para Scoia'tael e Neutral
 embedding_scoiatael <- read_rds(file = 'data/embeddings_scoiatael.rds')
 # embedding_scoiatael <- read_rds(file = '_posts/2022-02-28-card-embeddings-parte-1/data/embeddings_scoiatael.rds')
