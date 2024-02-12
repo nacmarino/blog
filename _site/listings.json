@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2022-06-24_state-of-data-2021/index.html",
       "/posts/2022-03-25_api-ludopedia/index.html",
       "/posts/2022-02-28_card_embeddings/index.html",
       "/posts/2022-01-23_api-boardgamegeek/index.html",

@@ -6,6 +6,7 @@ date: 08-27-2021
 categories:
   - machine learning
   - analise
+  - competicao
   - r
 image: "niteroi.jpeg"
 bibliography: bibliografia.bib
