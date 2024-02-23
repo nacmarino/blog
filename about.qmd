@@ -1,6 +1,7 @@
 ---
 title: "Sobre"
 image: profile.jpeg
+css: about.css
 about:
   template: jolla
   links:
@@ -13,7 +14,10 @@ about:
     - icon: github
       text: Github
       href: https://github.com/nacmarino
-
 ---
 
+Acredito que tudo pode ser muito interessante se você for fundo o suficiente para descobrir, souber fazer as perguntas certas e buscar nos dados as suas respostas. É essa curiosidade e paixão por dados que me move à buscar uma melhor compreensão de um problema para propor soluções que possam melhorar a nossa qualidade de vida e levar à decisões melhor informadas. 
 
+Encontrei na ciência um meio de realizar esse propósito, tanto quando estive na academia quanto atualmente no mundo corporativo. Nessa jornada, tenho tido a oportunidade de colocar em prática tudo o que eu aprendi até aqui, além de absorver toda nova experiência que a evolução de carreira nos traz. É claro que nem sempre conseguimos colocar em prática tudo aquilo que aprendemos, mas isso não quer dizer que não devamos tentar de alguma forma. Esse blog é uma das formas de atender ao meu propósito pessoal além de ajudar a consolidar o aprendizado contínuo.
+
+Os posts que você encontrará aqui são principalmente motivados por alguma curiosidade minha, necessidade de endereçar um problema que tenho ou simplesmente manifestar um ponto de vista sobre a atuação no mundo de dados. Todas essas obras são de minha propriedade intelectual, não tendo relação com demandas que surgem no trabalho, além de não representar necessariamente os pontos de vista de qualquer empregador ao qual esteja associado (muito embora, caso representem, acredito que seja um evento fortuito).

@@ -1,0 +1,11 @@
+{
+  "hash": "20d63efa09d565438051095ccbb68e97",
+  "result": {
+    "markdown": "---\ntitle: \"Sobre\"\nimage: profile.jpeg\nabout:\n  template: jolla\n  links:\n    - icon: globe-americas\n      text: Lattes\n      href: http://lattes.cnpq.br/8609169672498445\n    - icon: linkedin\n      text: LinkedIn\n      href: https://www.linkedin.com/in/nicholas-marino-7590361b/\n    - icon: github\n      text: Github\n      href: https://github.com/nacmarino\n---\n\n```{css}\n#| echo: false\np {\n  text-align: justify\n}\n```\n\n\nAcredito que tudo pode ser muito interessante se você for fundo o suficiente para descobrir, souber fazer as perguntas certas e buscar nos dados as suas respostas. É essa curiosidade e paixão por dados que me move à buscar uma melhor compreensão de um problema para propor soluções que possam melhorar a nossa qualidade de vida e levar à decisões melhor informadas. \n\nEncontrei na ciência um meio de realizar esse propósito, tanto quando estive na academia quanto atualmente no mundo corporativo. Nessa jornada, tenho tido a oportunidade de colocar em prática tudo o que eu aprendi até aqui, além de absorver toda nova experiência que a evolução de carreira nos traz. É claro que nem sempre conseguimos colocar em prática tudo aquilo que aprendemos, mas isso não quer dizer que não devamos tentar de alguma forma. Esse blog é uma das formas de atender ao meu propósito pessoal além de ajudar a consolidar o aprendizado contínuo.\n\nOs posts que você encontrará aqui são principalmente motivados por alguma curiosidade minha, necessidade de endereçar um problema que tenho ou simplesmente manifestar um ponto de vista sobre a atuação no mundo de dados. Todas essas obras são de minha propriedade intelectual, não tendo relação com demandas que surgem no trabalho, além de não representar necessariamente os pontos de vista de qualquer empregador ao qual esteja associado (muito embora, caso representem, acredito que seja um evento fortuito).\n\n",
+    "supporting": [
+      "about_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
