@@ -105,6 +105,14 @@ Ministrei um curso de *Introdução ao Manejo e Visualização de Dados* para os
 
 ## Skills
 
+```{r renv_lock}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: hide
+renv::use(lockfile = 'renv.lock')
+```
+
 ```{r hard_skills}
 #| echo: false
 #| warning: false
@@ -167,9 +175,13 @@ tbl1 <- df1 %>%
   cols_width(skill ~ px(250)) %>% 
   cols_label(skill = md('**HARD SKILLS**'), 'avaliacao' = '') %>% 
   tab_options(column_labels.padding = px(10), table.font.names = 'IBM Plex Sans', 
-              column_labels.border.top.width = px(3), column_labels.border.top.color = 'grey70', 
-              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'grey70',
-              table.border.bottom.color = 'grey70', table.border.bottom.width = px(3))
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 
 # pegando as skills que vao ficar do outro lado do painel
 tbl2 <- df1 %>% 
@@ -181,9 +193,13 @@ tbl2 <- df1 %>%
   cols_width(skill ~ px(250)) %>% 
   cols_label(skill = '', avaliacao = '') %>% 
   tab_options(column_labels.padding = px(20), table.font.names = 'IBM Plex Sans', 
-              column_labels.border.top.width = px(3), column_labels.border.top.color = 'grey70', 
-              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'grey70',
-              table.border.bottom.color = 'grey70', table.border.bottom.width = px(3))
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 
 # juntando as duas tabelas em uma só
 gt_two_column_layout(tables = list(tbl1, tbl2)) 
@@ -203,10 +219,15 @@ df %>%
   cols_width(skill ~ px(250)) %>% 
   tab_options(table.align = 'right', table.margin.left = 40, table.font.names = 'IBM Plex Sans',
               column_labels.padding = px(10), 
-              column_labels.border.top.width = px(3), column_labels.border.top.color = 'grey70', 
-              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'grey70',
-              table.border.bottom.color = 'grey70', table.border.bottom.width = px(3)) %>% 
-  cols_label(skill = md('**SOFT SKILLS**'), 'avaliacao' = '') 
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3), 
+              ) %>% 
+  cols_label(skill = md('**SOFT SKILLS**'), 'avaliacao' = '') %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 ```
 
 ## Ferramentas
@@ -249,9 +270,13 @@ tbl1 <- df %>%
   gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue', scaled = TRUE) %>% 
   cols_width(ferramenta ~ px(200)) %>% 
   tab_options(table.font.names = 'IBM Plex Sans', column_labels.hidden = TRUE, table.align = 'right', 
-              table.margin.left = 60, table.border.top.color = 'grey70', table.border.top.width = px(3),
-              table.border.bottom.color = 'grey70', table.border.bottom.width = px(3)) %>% 
-  cols_label()
+              table.margin.left = 60, table.border.top.color = 'white', table.border.top.width = px(3),
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  cols_label() %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 
 # pegando as ferramentas que vao ficar do outro lado do painel
 tbl2 <- df %>% 
@@ -262,9 +287,13 @@ tbl2 <- df %>%
   gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue', scaled = TRUE) %>% 
   cols_width(ferramenta ~ px(200)) %>% 
   tab_options(table.font.names = 'IBM Plex Sans', column_labels.hidden = TRUE, table.align = 'left', 
-              table.margin.right = 60, table.border.top.color = 'grey70', table.border.top.width = px(3),
-              table.border.bottom.color = 'grey70', table.border.bottom.width = px(3)) %>% 
-  cols_label()
+              table.margin.right = 60, table.border.top.color = 'white', table.border.top.width = px(3),
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  cols_label() %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 
 # juntando as duas tabelas em uma só
 gt_two_column_layout(tables = list(tbl1, tbl2)) 
@@ -311,7 +340,7 @@ tribble(
   ) %>% 
   tab_options(column_labels.hidden = TRUE, row_group.as_column = TRUE, table.font.names = 'IBM Plex Sans',
               table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'grey70',
-              table.border.top.color = 'grey70')
+              table.border.top.color = 'grey70', data_row.padding = px(3))
 ```
 
 ::: {.no-print}
@@ -407,39 +436,50 @@ tribble(
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
-  cols_width(fornecedor ~ px(75)) %>% 
+  cols_width(fornecedor ~ px(150)) %>%
+  
   cols_align(align = 'center', columns = 'fornecedor') %>% 
   tab_style(
     style = cell_text(v_align = "middle", align = 'center', weight = 'bold'), locations = cells_group()
   ) %>% 
   tab_style(
-    style = cell_text(indent = px(20)), locations = cells_body(columns = c('curso', 'fornecedor'))
+    style = cell_text(size = 'small'), locations = cells_body(columns = c('curso', 'fornecedor'))
   ) %>% 
-  tab_options(column_labels.hidden = TRUE, row_group.as_column = TRUE, table.font.names = 'IBM Plex Sans',
-              table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'grey70',
-              table.border.top.color = 'grey70')
+  tab_style(
+    style = list(cell_fill('midnightblue'), cell_text(color = "white", weight = "bold"), 
+                 cell_borders(sides = c('top', 'bottom'), color = 'white', weight = px(3))),
+    locations = cells_row_groups()
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE, table.font.names = 'IBM Plex Sans',
+              table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'white',
+              table.border.top.color = 'white', data_row.padding = px(3), row_group.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
 ```
 :::
 
 ::: {.no-print}
 ## Apresentações
 
--   Talk: [Misadventures with Reproducibility in R](https://github.com/cynthiahqy/rladies-2022-11) (30 Nov 2022, R Ladies Melbourne Meetup)
--   Talk: [Designing R Packages](https://github.com/cynthiahqy/design-r-magic_2022-10) (4 Oct 2022, Monash EBS Data Science Research Software Study Group)
--   Talk: [Quarto Websites as Research Compendiums](https://github.com/cynthiahqy/quarto-wiki-template) (16 Aug 2022, Monash EBS Data Science Research Software Study Group)
--   Workshop: [Writing academic papers with Rmarkdown and friends](https://www.cynthiahqy.com/posts/r-markdown-and-friends/) (9 Aug 2022, Monash University)
+-   Inúmeras apresentações realizadas em congressos e outros eventos acadêmicos nacionais e internacionais da área da Ecologia e da Limnologia;  
+-   Análise multivariada dos dados do monitoramento geotécnico aplicada à detecção de anomalias (19 Out 2023, GTGH - Grupo Temático de Geotecnia e Hidrogeologia - Belo Horizonte, Brasil);  
+-   Monitoramento geotécnico orientado à dados: desafios, a jornada e lições aprendidas (27 Set 2023, I Encontro Nacional de Centros de Monitoramento Geotécnico - Belo Horizonte, Brasil);  
+-   Advanced analytics applied to InSAR monitoring program (02 Dez 2023, LOP - Large Open Pit Project - Vancouver, Canadá).  
 :::
 
 ::: {.no-print}
 ## Publicações
 
--   Talk: [Misadventures with Reproducibility in R](https://github.com/cynthiahqy/rladies-2022-11) (30 Nov 2022, R Ladies Melbourne Meetup)
--   Talk: [Designing R Packages](https://github.com/cynthiahqy/design-r-magic_2022-10) (4 Oct 2022, Monash EBS Data Science Research Software Study Group)
--   Talk: [Quarto Websites as Research Compendiums](https://github.com/cynthiahqy/quarto-wiki-template) (16 Aug 2022, Monash EBS Data Science Research Software Study Group)
--   Workshop: [Writing academic papers with Rmarkdown and friends](https://www.cynthiahqy.com/posts/r-markdown-and-friends/) (9 Aug 2022, Monash University)
+-   25+ publicações em revistas acadêmicas internacionais de alto impacto, focando na pesquisa que desenvolvi dentro da Ecologia (listadas no meu [Lattes](https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4234927A9&tokenCaptchar=03AFcWeA5goIsh4A2Kc2kbrKkwlK0RPXLRXnZTPi-V775ODi4ClXy4MRf6jU5Fr0YwXOH-Cu5wOW1fUovY-qwCrlGusr-9KaSBKk5zQRI7mx_6hZSOEU1BQgwRprGyg00thMJUD_CldDZK2ozJvNII-yAMv18EezQVu9Hf1wDd_NkyGDHD_1u2J37ov0TVoUfELclqDNdqZajAJibTbQlnFIHt84EOHOSOAPPeKO98vq4piH4jhoOwSlPaRZFgZ9NiFg9ZIbZ5jtZ2Bp35CI2dHyp-THByPpQpkvltMYgc_7pD-Tc1QjHKWW7DQ62XqFV_1aVm-YiyPulMW6s-T9eoGFkOBJuITzFKDgLyToxfmEgs4dpfHwN39KNtthaoIopJ0xcbkaBRPU_7Pg5E1zotrYO_4AjMCF2U0F9YWinbE0T9AKnurLXZm0Kuyh39v-QnwoNetXawX-6Lk5OyndLnMhh_QtZqP68Vk-psPJQYPqD6U5EY1FTT5fcmPsslOIR-GuWjO-8oTNdStXDJJzbl77RzLLCTVzt3UwVkNHJ8BmeYIE6NtxnaKG_bQOXOwKrhGruL9G7otXPtlrsFVdJoFvFrLtAoqL8ccq3g9FTHRHaxlhKaLDHhGA2T3glIlXOfa663KmRUNRSeTKjCGIEa8A6o2Z-Cmxrm9X908mf9GiAxDT-LcXdswVqFbfGUZRjR7gMZ9Cc9B7lANX0YX5p38rIFrC_wU3100ozcMv09YTXOqcLuO7YO9dyfNyNgO7urv7c5Pja9ZONhnspin_3nJWoPmHPrKKI-7Q));  
+-   [Blog e portfolio pessoal](https://nacmarino.netlify.app/): https://nacmarino.netlify.app/;  
+-   [8 Lições na construção do monitoramento geotécnico orientado à dados](https://www.linkedin.com/pulse/8-li%2525C3%2525A7%2525C3%2525B5es-na-constru%2525C3%2525A7%2525C3%2525A3o-do-monitoramento-geot%2525C3%2525A9cnico-gabriel%3FtrackingId=BxfM2HDRvLOm7XVg58igZQ%253D%253D/?trackingId=BxfM2HDRvLOm7XVg58igZQ%3D%3D);  
+-   Machine learning applied to control levels and anomaly detection in a tailing dam monitoringd data (9th International Conference on Tailings Management 2023, Chile);  
+-   Advanced analytics applied to InSAR Dam Monitoring Program (Tailings and Mine Waste 2023, Vancouver, Canadá).  
 :::
 
 ::: {.print-only}
 ## Referências
-Available upon request
+Disponível sob demanda.
 :::
