@@ -14,144 +14,468 @@ format-links: [pdf]
 nac.marino@gmail.com
 :::
 
-## EDUCATION
+## Education
 
-**Doctor of Philosophy -- Econometrics and Business Statistics** <br> *Monash University* [*Aug 2021 --- Present*]{.cvdate}
+**Postdoctoral Research in Ecology -- Climate Change and Trophic Interactions** <br> *Universidade Federal do Rio de Janeiro* [*Mar 2016 --- Jun 2019*]{.cvdate}
 
--   New principles and methods for complex data preparation and integration, with applications to official statistics, web-scrapped data and satellite raster images
--   Monash Data Futures Institute PhD Top-Up Scholarship (2021-2024)
--   Expected submission date: Nov 2024
+-   Effect of climate change on ecological interactions
+-   Fellow of the National Postdoctoral Program (CAPES)
 
-## WORK EXPERIENCE{style="page-break-before: always"}
+**Ph.D. in Ecology -- Climate Change, Community Ecology, and Ecosystems** <br> *Universidade Federal do Rio de Janeiro* [*Mar 2012 --- Feb 2016*]{.cvdate}
 
-### Data Scientist
+-   The effect of predators on the structure and functioning of trophic chains and their interaction with climate change
+-   CAPES Fellow
+-   Best Ph.D. thesis defended in the Ecology Graduate Program (UFRJ) in 2016
+-   Sandwich Ph.D. period at the University of British Columbia (Oct 2014 - May 2015)
 
-***Freelance, Multiple Clients*** [Jan 2020 -- June 2021]{.cvdate}
+**Master's in Ecology -- Community Ecology and Ecosystems** <br> *Universidade Federal do Rio de Janeiro* [*Aug 2009 --- Jul 2011*]{.cvdate}
 
-Providing data collection, pre-processing, exploratory analysis and modelling services to clients in the early R&D stages of developing data driven products. Projects include:
+-   Structuring of the community of aquatic macroinvertebrates in tank bromeliads
+-   CAPES Fellow
 
--   Data description and preliminary product feasibility insights for a start-up real estate bond platform; including assessing suitability of various property transaction databases for use in initial product prototype.
--   Development of statistical anomaly detection regimes and key historical insights from internet quality time-series data for use in parametric insurance products, including documenting analysis tools in an R package.
+**Bachelor's in Biological Sciences -- Ecology** <br> *Universidade Federal do Rio de Janeiro* [*Aug 2005 --- Jul 2009*]{.cvdate}
+
+-   Tank bromeliads as islands: the influence of habitat characteristics on the richness of aquatic macroinvertebrates
+-   Scientific Initiation - FAPERJ Fellow
+
+## Experience{style="page-break-before: always"}
+
+### Accenture
+
+***Data Science Principal*** [Jan 2021 -- Current]{.cvdate}
+
+*Tech Lead* in teams and projects related to data science, working across the entire analytical solution flow, particularly in analysis, technical design, and proposing solutions to data problems, extracting insights from data, and communicating with stakeholders and clients. I also assist with the management of data teams, especially in mentoring younger professionals. My main contributions have been:
+
+-   Involvement in Geotechnical projects, focusing on the development of data products for monitoring terrain deformations in mining structures, based on the multi-temporal analysis of interferometric images captured by satellite-borne synthetic aperture radars (InSAR). The products developed here have over 30 examples of use cases, contributing to business risk management and reduction;
+-   Development of analytical solutions for geophysics, where we seek to facilitate the analysis of data from soil electrical monitoring (electrical resistivity) for the identification of areas with water accumulation within dams;
+-   Development of analytical solutions to improve the tactical and operational planning of the Corporate Security team operating in a large port in Brazil;
+-   Management of a demand forecasting project (i.e., forecasting the expected volume of sales) for a large Brazilian food company;
+-   Mentoring data professionals at all levels of seniority;
+-   Preparation of technical design for data problems in proposals;
+-   Collaboration with project managers, teams, and other peers for the development of a better working environment.
+
+***Data Science Consultant*** [Jul 2019 -- Dec 2020]{.cvdate}
+
+I worked with projects related to data science, with a special focus on predictive analyses. I led and collaborated on the design of solutions for data problems, exploratory, descriptive, and predictive analyses, measurement of deliverable benefits, as well as assisting leadership in guiding younger project members. My main contributions were:
+
+-   Development of analytical solutions to improve the tactical and operational planning of the Corporate Security team to reduce the impact of forced train stoppages on -   production flow in a railway. The business area attributed a 30% reduction in train stoppage volume to the analytical solution in the first months of solution operation;
+-   Development of analytical solutions to improve the tactical and operational planning of the Corporate Security team to reduce the impact of theft on signaling assets in a railway. The business area reported a roughly 50% drop in the rate of asset thefts in the first months of solution operation, while data monitoring showed a decrease of up to 70% in false alarm response during the night period;
+-   Conducted a root cause analysis to understand the results of an experiment on the impact of feeding briquettes into a calcining furnace, providing important insights into the state of the briquettes and the operation of the calcining furnace, which clarified the results and guided a new experiment;
+-   Collaborated on delivering forecasts of expected sales volumes for food products for a large company operating in Brazil.
+
+### Programa de Pós-Graduação em Ecologia (UFRJ)
+
+***Visiting Scholar*** [Mar 2016 -- Jun 2019]{.cvdate}
+
+I implemented several disciplines related to programming and data analysis in the postgraduate program, such as: (1) Introduction to the R Language, (2) Data Handling, Visualization, and Sharing, and (3) Systematic Review and Meta-analysis. Additionally, I contributed as one of the instructors for the course on Experimental Design and Statistics, as well as co-supervised master's and doctoral students in the program.
+
+### Laboratório de Limnologia (UFRJ)
+
+***Researcher*** [May 2006 -- Jun 2019]{.cvdate}
+
+I studied and researched topics related to the functioning and dynamics of aquatic ecosystems such as rivers, streams, and ponds, as well as model aquatic ecosystems like tank bromeliads. The main highlights here were:
+
+-   Planning, designing, and conducting experiments, and statistical analysis of data;
+-   Writing and publishing over 20 papers in high-impact international scientific journals;
+-   Participation in international research groups;
+-   Learning and performing various physicochemical analyses of water quality, both in the laboratory and in the field;
+-   Identification of insects and other aquatic organisms;
+-   Supervision of undergraduate, master's, and doctoral students;
+-   Presentation of papers at conferences and lectures for undergraduate, master's, and doctoral students.
+
+***Projeto de Monitoramento dos Igarapés da FLONA Sacará-Taquera*** [Sep 2009 -- Dec 2019]{.cvdate}
+
+I was the technical leader and responsible for the field teams in this project, which aimed to develop an environmental integrity index for the FLONA streams based on the composition and abundance of aquatic invertebrate and fish species. The idea was to use this information to determine the impact of a mining operation on each of the streams near the operation. We successfully achieved this objective and presented the methodology used to the relevant regulatory authority, which evaluated it as unprecedented in the country. The main highlights here were:
+
+-   Planning fieldwork and coordinating the collection team;
+-   Curation and organization of project data around a relational database;
+-   Design of the project's analytical framework;
+-   Development of an algorithm for discriminating impacted and non-impacted streams;
+-   Writing technical reports for submission to the relevant regulatory authority (IBAMA).
+
+***Projeto de Monitoramento das Lagoas Costeiras do Norte Fluminense*** [Jan 2007 -- Jun2010]{.cvdate}
+
+I collaborated in conducting field surveys, chemical analyses, and data interpretation regarding the water characteristics and planktonic fauna of the studied lagoons.
+
+### Programa de Pós-Graduação em Ecologia (UNICAMP) 
+
+***Visiting Scholar*** [Jun 2019]{.cvdate}
+
+I taught a course on *Introduction to Data Handling and Visualization* for the master's and doctoral students in the postgraduate program.
+
+## Skills
+
+```{r renv_lock}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: hide
+renv::use(lockfile = 'renv.lock')
+```
+
+```{r hard_skills}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse) # core
+library(gt) # tabelas
+library(gtExtras) # mais tabelas
+
+# criando a minha tabela de skills - nome da skill, range de avaliação de 1 à 5 e minha auto avaliação neste range
+# a skill é realmente uma habilidade ou um conhecimento, que não dependa de uma ferramenta específica
+df <- tribble(
+   ~tipo , ~skill                          , ~avaliacao,
+   'hard', 'Programming'                   , 4         , 
+   'hard', 'Relational Databases'          , 3         ,  
+   'hard', 'Frequentist Statistics'        , 5         , 
+   'hard', 'Bayesian Statistics'           , 2         , 
+   'hard', 'Machine Learning (Non DL)'     , 4         , 
+   'hard', 'Deep Learning'                 , 4         , 
+   'hard', 'Exploratory Analysis'          , 5         , 
+   'hard', 'Data Wrangling'                , 5         , 
+   'hard', 'Version Control'               , 3         , 
+   'hard', 'Data Visualization'            , 4         , 
+   'soft', 'Storytelling'                  , 4         , 
+   'soft', 'English'                       , 5         , 
+   'soft', 'Spanish'                       , 3         , 
+   'soft', 'Written Communication'         , 4         , 
+   'hard', 'AWS'                           , 2         , 
+   'hard', 'Azure'                         , 3         , 
+   'hard', 'Geospatial Analysis'           , 3         , 
+   'hard', 'Time Series'                   , 3         , 
+   'hard', 'MLOps'                         , 3         , 
+   'hard', 'Meta-analysis'                 , 5         , 
+   'hard', 'GenAI'                         , 2         , 
+   'hard', 'PLN'                           , 3         , 
+   'hard', 'Experimental Design'           , 5         , 
+   'hard', 'Web Scraping'                  , 3         , 
+   'soft', 'Problem Solving'               , 4         , 
+   'soft', 'Self-organization'             , 4         , 
+   'soft', 'People Management'             , 3         , 
+   'soft', 'Creativity'                    , 4         , 
+   'soft', 'Proactive'                     , 4         , 
+   'soft', 'Flexibility'                   , 2         , 
+) %>%
+  arrange(-avaliacao, skill)
+
+# pegando as hard skills e criando coluna para codificar linha sim e linha nao - a ideia é que consigamos
+# colocar skills que tenham o mesmo nivel de entendimento lado a lado, ao inves de um embaixo do outro
+df1 <- df %>% 
+  filter(tipo == 'hard') %>% 
+  select(-tipo) %>% 
+  mutate(grupo = 1:n() %% 2)
+
+# pegando as skills que vao ficar em um lado do painel
+tbl1 <- df1 %>% 
+  filter(grupo == 1) %>% 
+  select(-grupo) %>% 
+  gt() %>% 
+  gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue') %>% 
+  tab_options(table.align = 'right', table.margin.left = 40) %>% 
+  cols_width(skill ~ px(250)) %>% 
+  cols_label(skill = md('**HARD SKILLS**'), 'avaliacao' = '') %>% 
+  tab_options(column_labels.padding = px(10), table.font.names = 'IBM Plex Sans', 
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+
+# pegando as skills que vao ficar do outro lado do painel
+tbl2 <- df1 %>% 
+  filter(grupo == 0) %>% 
+  select(-grupo) %>% 
+  gt() %>% 
+  gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue') %>% 
+  tab_options(table.align = 'left', table.margin.right = 40) %>% 
+  cols_width(skill ~ px(250)) %>% 
+  cols_label(skill = '', avaliacao = '') %>% 
+  tab_options(column_labels.padding = px(20), table.font.names = 'IBM Plex Sans', 
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+
+# juntando as duas tabelas em uma só
+gt_two_column_layout(tables = list(tbl1, tbl2)) 
+```
+
+```{r soft_skills}
+#| echo: false
+#| warning: false
+#| message: false
+
+# criando uma tabela para colocar o ranking das soft skills
+df %>% 
+  filter(tipo == 'soft') %>% 
+  select(-tipo) %>% 
+  gt() %>% 
+  gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue') %>%
+  cols_width(skill ~ px(250)) %>% 
+  tab_options(table.align = 'right', table.margin.left = 40, table.font.names = 'IBM Plex Sans',
+              column_labels.padding = px(10), 
+              column_labels.border.top.width = px(3), column_labels.border.top.color = 'white', 
+              column_labels.border.bottom.width = px(2), column_labels.border.bottom.color = 'white',
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3), 
+              ) %>% 
+  cols_label(skill = md('**SOFT SKILLS**'), 'avaliacao' = '') %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+```
+
+## Tools
+
+```{r ferramentas}
+#| echo: false
+#| warning: false
+#| message: false
+
+# criando a minha tabela de ferramenta - nome da ferramenta, range de avaliação de 1 à 5 e minha auto avaliação neste range
+# a ferramenta é realmente uma tecnologia
+df <- tribble(
+  ~ferramenta                           , ~avaliacao, 
+  'Python'                              , 4         ,
+  'R'                                   , 5         , 
+  'SQL'                                 , 2         , 
+  'pandas'                              , 4         , 
+  'tidyverse'                           , 4         , 
+  'ggplot2'                             , 4         , 
+  'Tensorflow'                          , 2         ,
+  'Keras'                               , 2         ,
+  'Torch for R'                         , 2         ,
+  'PyTorch'                             , 2         ,
+  'scikit-learn'                        , 4         ,
+  'tidymodels'                          , 3         ,
+  'Power BI'                            , 2         ,
+  'Power Point'                         , 4         ,
+  'Azure Machine Learning'              , 3         ,
+  'Shiny'                               , 3         ,
+) %>% 
+  arrange(-avaliacao, ferramenta) %>% 
+  mutate(grupo = 1:n() %% 2)
+
+# pegando as ferramentas que vao ficar em um lado do painel
+tbl1 <- df %>% 
+  filter(grupo == 1) %>% 
+  select(-grupo) %>% 
+  mutate(avaliacao = 100 * (avaliacao / 5)) %>% 
+  gt() %>% 
+  gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue', scaled = TRUE) %>% 
+  cols_width(ferramenta ~ px(200)) %>% 
+  tab_options(table.font.names = 'IBM Plex Sans', column_labels.hidden = TRUE, table.align = 'right', 
+              table.margin.left = 60, table.border.top.color = 'white', table.border.top.width = px(3),
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  cols_label() %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+
+# pegando as ferramentas que vao ficar do outro lado do painel
+tbl2 <- df %>% 
+  filter(grupo == 0) %>% 
+  select(-grupo) %>% 
+  mutate(avaliacao = 100 * (avaliacao / 5)) %>% 
+  gt() %>% 
+  gt_plt_bar_pct(column = 'avaliacao', fill = 'midnightblue', scaled = TRUE) %>% 
+  cols_width(ferramenta ~ px(200)) %>% 
+  tab_options(table.font.names = 'IBM Plex Sans', column_labels.hidden = TRUE, table.align = 'left', 
+              table.margin.right = 60, table.border.top.color = 'white', table.border.top.width = px(3),
+              table.border.bottom.color = 'white', table.border.bottom.width = px(3), data_row.padding = px(3)) %>% 
+  cols_label() %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+
+# juntando as duas tabelas em uma só
+gt_two_column_layout(tables = list(tbl1, tbl2)) 
+```
+
+## Licenses and Certifications
+
+```{r licencas}
+#| echo: false
+#| warning: false
+#| message: false
+
+tribble(
+  ~fornecedor  , ~curso                                               , ~ano,
+  'Datacamp'   , 'Interactive Data Visualization with R'              , 2020,
+  'Datacamp'   , 'Unsupervised Machine Learning with R'               , 2020,
+  'Datacamp'   , 'Supervised Machine Learning with R'                 , 2020,
+  'Datacamp'   , 'Machine Learning Specialist with R'                 , 2020,
+  'Datacamp'   , 'Python Programmer'                                  , 2019,
+  'Datacamp'   , 'Data Scientist with Python'                         , 2019,
+  'Datacamp'   , 'Data Analyst with Python'                           , 2019,
+  'Coursera'   , 'Natural Language Processing Specialization'         , 2022,
+  'Coursera'   , 'Deep Learning Specialization'                       , 2022,
+  'Coursera'   , 'Mathematics for Machine Learning'                   , 2022,
+  'Coursera'   , 'Generative Adversarial Networks (GANs)'             , 2022,
+  'Coursera'   , 'Machine Learning Engineering for Production (MLOps)', 2023,
+  'Coursera'   , 'AI for Medicine'                                    , 2022,
+  'Coursera'   , 'DeepLearning.AI TensorFlow Developer Specialization', 2022,
+  'Coursera'   , 'Machine Learning Specialization'                    , 2023,
+  'AWS'        , 'AWS Certified Machine Learning Specialty'           , 2022,
+  'AWS'        , 'AWS Certified Solutions Architect Associate'        , 2022,
+  'AWS'        , 'AWS Certified Cloud Practitioner'                   , 2022,
+  'Coursera'   , 'Data Science: Foundations using R Specialization'   , 2022,
+) %>% 
+  arrange(ano, fornecedor, curso) %>% 
+  gt(groupname_col = 'ano') %>%
+  cols_width(fornecedor ~ px(75)) %>% 
+  cols_align(align = 'center', columns = 'fornecedor') %>% 
+  tab_style(
+    style = cell_text(v_align = "middle", align = 'center', weight = 'bold'), locations = cells_group()
+  ) %>% 
+  tab_style(
+    style = cell_text(indent = px(20)), locations = cells_body(columns = c('curso', 'fornecedor'))
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE, row_group.as_column = TRUE, table.font.names = 'IBM Plex Sans',
+              table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'grey70',
+              table.border.top.color = 'grey70', data_row.padding = px(3))
+```
 
 ::: {.no-print}
-## PRESENTATIONS AND WORKSHOPS
+## Courses
 
--   Talk: [Misadventures with Reproducibility in R](https://github.com/cynthiahqy/rladies-2022-11) (30 Nov 2022, R Ladies Melbourne Meetup)
--   Talk: [Designing R Packages](https://github.com/cynthiahqy/design-r-magic_2022-10) (4 Oct 2022, Monash EBS Data Science Research Software Study Group)
--   Talk: [Quarto Websites as Research Compendiums](https://github.com/cynthiahqy/quarto-wiki-template) (16 Aug 2022, Monash EBS Data Science Research Software Study Group)
--   Workshop: [Writing academic papers with Rmarkdown and friends](https://www.cynthiahqy.com/posts/r-markdown-and-friends/) (9 Aug 2022, Monash University)
+```{r cursos}
+#| echo: false
+#| warning: false
+#| message: false
+tribble(
+  ~fornecedor            , ~curso                                                                                       , ~ano,
+  'Datacamp'             , 'Data Scientist: Customer Channel/Marketing (Basic, Intermediate & Advanced)'                , 2021, 
+  'Datacamp'             , 'Data Scientist: Risk (Basic)'                                                               , 2021,
+  'Datacamp'             , 'Interactive Data Visualization with R'                                                      , 2020,
+  'Datacamp'             , 'Unsupervised Machine Learning with R'                                                       , 2020,
+  'Datacamp'             , 'Supervised Machine Learning with R'                                                         , 2020,
+  'Datacamp'             , 'Machine Learning Specialist with R'                                                         , 2020,
+  'Datacamp'             , 'Machine Learning Fundamentals with R'                                                       , 2020,
+  'Datacamp'             , 'Python Programmer'                                                                          , 2019,
+  'Datacamp'             , 'Data Scientist with Python'                                                                 , 2019,
+  'Datacamp'             , 'Data Analyst with Python'                                                                   , 2019,
+  'Datacamp'             , 'Shiny Fundamentals with R'                                                                  , 2019,
+  'Data Science Academy' , 'Python Fundamentos para a Análise de Dados'                                                 , 2020,
+  'Data Science Academy' , 'Microsoft Power BI para Data Science'                                                       , 2020,
+  'Data Science Academy' , 'Big Data Fundamentos'                                                                       , 2020,
+  'Data Science Academy' , 'Introdução à Inteligência Artificial'                                                       , 2020,
+  'Data Science Academy' , 'Web Scrapping e Análise de Dados'                                                           , 2020,
+  'Data Science Academy' , 'Soft Skills: Desenvolvendo Suas Habilidades Comportamentais'                                , 2020,
+  'Data Science Academy' , 'Deep Learning I'                                                                            , 2021,
+  'Data Science Academy' , 'Deep Learning II'                                                                           , 2021,
+  'Data Science Academy' , 'Deep Learning Frameworks'                                                                   , 2020,
+  'Data Science Academy' , 'Programação Paralela em GPU'                                                                , 2021,
+  'Curso-R'              , 'Dashboards'                                                                                 , 2021,
+  'Curso-R'              , 'Web Scrapping'                                                                              , 2021,
+  'Curso-R'              , 'Deploy'                                                                                     , 2021,
+  'Curso-R'              , 'Relatórios e Visualizaçãoo de Dados'                                                        , 2021,
+  'Curso-R'              , 'Deep Learning'                                                                              , 2020,
+  'Coursera'             , 'Reproducible Research'                                                                      , 2021,
+  'Coursera'             , 'Exploratory Data Analysis'                                                                  , 2021,
+  'Coursera'             , 'Getting and Cleaning Data'                                                                  , 2021,
+  'Coursera'             , 'R Programming'                                                                              , 2021,
+  'Coursera'             , "The Data Scientist's Toolbox"                                                               , 2021,
+  'Coursera'             , 'Natural Language Processing with Sequence Models'                                           , 2022,
+  'Coursera'             , 'Natural Language Processing with Probabilistic Models'                                      , 2022,
+  'Coursera'             , 'Natural Language Processing with Classification and Vector Spaces'                          , 2022,
+  'Coursera'             , 'Learn to Program: Crafting Quality Code'                                                    , 2021,
+  'Coursera'             , 'Introduction to Mathematical Thinking'                                                      , 2021,
+  'Coursera'             , 'Sequence Models'                                                                            , 2022,
+  'Coursera'             , 'Convolutional Neural Networks'                                                              , 2022,
+  'Coursera'             , 'Structuring Machine Learning Projects'                                                      , 2022,
+  'Coursera'             , 'Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization'     , 2022,
+  'Coursera'             , 'Neural Networks and Deep Learning'                                                          , 2022,
+  'Coursera'             , 'Principal Component Analysis'                                                               , 2022,
+  'Coursera'             , 'Multivariate Calculus'                                                                      , 2021,
+  'Coursera'             , 'Linear Algebra'                                                                             , 2021,
+  'Coursera'             , 'Generative AI for Everyone'                                                                 , 2023,
+  'Coursera'             , 'Generative AI with Large Language Models'                                                   , 2023,
+  'Coursera'             , 'Mathematics for Machine Learning: Linear Algebra'                                           , 2021,
+  'Coursera'             , 'Natural Language Processing in TensorFlow'                                                  , 2022,
+  'Coursera'             , 'AI for Medical Diagnosis'                                                                   , 2022,
+  'Coursera'             , 'Improving Deep Neural Networks: HyperparameterTuning, Regularization and Optimization'      , 2022,
+  'Coursera'             , 'Mathematics for Machine Learning: PCA'                                                      , 2022,
+  'Coursera'             , 'Mathematics for Machine Learning: Multivariate Calculus'                                    , 2022,
+  'Coursera'             , 'Machine Learning Data Lifecycle in Production'                                              , 2023,
+  'Coursera'             , 'Sequences, Time Series and Prediction'                                                      , 2022,
+  'Coursera'             , 'Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning', 2022,
+  'Coursera'             , 'AI for Medical Prognosis'                                                                   , 2022,
+  'Coursera'             , 'Natural Language Processing with Attention Models'                                          , 2022,
+  'Coursera'             , 'AI For Medical Treatment'                                                                   , 2022,
+  'Coursera'             , 'Convolutional Neural Networks in TensorFlow'                                                , 2022,
+  'Coursera'             , 'Build Basic Generative Adversarial Networks (GANs)'                                         , 2022,
+  'Coursera'             , 'Mathematics for Machine Learning: Linear Algebra'                                           , 2022,
+  'Coursera'             , 'Build Better Generative Adversarial Networks (GANs)'                                        , 2023,
+  'Coursera'             , 'Introduction to Machine Learning in Production'                                             , 2023,
+  'Coursera'             , 'Machine Learning Modeling Pipelines in Production'                                          , 2023,
+  'Coursera'             , 'Advanced Learning Algorithms'                                                               , 2023,
+  'Coursera'             , 'Supervised Machine Learning: Regression and Classification'                                 , 2023,
+  'Coursera'             , 'Unsupervised Learning, Recommenders, Reinforcement Learning'                                , 2023,
+  'Coursera'             , 'Deploying Machine Learning Models in Production'                                            , 2023,
+  'Coursera'             , 'Apply Generative Adversarial Networks (GANs)'                                               , 2023,
+  'DeepLearning.AI'      , 'ChatGPT Prompt Engineering for Developers'                                                  , 2023,
+  'DeepLearning.AI'      , 'Building Systems with the ChatGPT API'                                                      , 2023,
+  'DeepLearning.AI'      , 'LangChain for LLM Application Development'                                                  , 2023,
+  'DeepLearning.AI'      , 'LangChain: Chat with Your Data'                                                             , 2023,
+  'DeepLearning.AI'      , 'Finetuning Large Language Models'                                                           , 2023,
+  'DeepLearning.AI'      , 'Large Language Models with Semantic Search'                                                 , 2023,
+  'DeepLearning.AI'      , 'Building Generative AI Applications with Gradio'                                            , 2023,
+  'DeepLearning.AI'      , 'Evaluating and Debugging Generative AI Models Using Weights and Biases'                     , 2023,
+  'DeepLearning.AI'      , 'How Diffusion Models Work'                                                                  , 2023,
+  'DeepLearning.AI'      , 'Pair Programming with a Large Language Model'                                               , 2023,
+  'DeepLearning.AI'      , 'Understanding and Applying Text Embeddings'                                                 , 2023,
+  'DeepLearning.AI'      , 'How Business Thinkers Can Start Building AI Plugins With Semantic Kernel'                   , 2023
+) %>% 
+  arrange(ano, fornecedor, curso) %>% 
+  gt(groupname_col = 'ano') %>%
+  cols_width(fornecedor ~ px(150)) %>%
+  
+  cols_align(align = 'center', columns = 'fornecedor') %>% 
+  tab_style(
+    style = cell_text(v_align = "middle", align = 'center', weight = 'bold'), locations = cells_group()
+  ) %>% 
+  tab_style(
+    style = cell_text(size = 'small'), locations = cells_body(columns = c('curso', 'fornecedor'))
+  ) %>% 
+  tab_style(
+    style = list(cell_fill('midnightblue'), cell_text(color = "white", weight = "bold"), 
+                 cell_borders(sides = c('top', 'bottom'), color = 'white', weight = px(3))),
+    locations = cells_row_groups()
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE, table.font.names = 'IBM Plex Sans',
+              table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'white',
+              table.border.top.color = 'white', data_row.padding = px(3), row_group.padding = px(3)) %>% 
+  tab_style(
+    style = cell_borders(sides = c('top', 'bottom'), color = 'white'),
+    locations = cells_body()
+  )
+```
 :::
+
+## Presentations
+
+-   Numerous presentations given at national and international ecology and limnology conferences and other academic events;    
+-   Multivariate analysis of geotechnical monitoring data applied to anomaly detection (19 Oct 2023, GTGH - Grupo Temático de Geotecnia e Hidrogeologia - Belo Horizonte, Brazil);  
+-   Monitoramento geotécnico orientado à dados: desafios, a jornada e lições aprendidas (27 Sep 2023, I Encontro Nacional de Centros de Monitoramento Geotécnico - Belo Horizonte, Brazil);  
+-   Advanced analytics applied to InSAR monitoring program (02 Dez 2023, LOP - Large Open Pit Project - Vancouver, Canada).  
+
+## Publications
+
+-   25+ publications in high-impact international academic journals, focusing on the research I conducted within Ecology (you can find all of them listed on my [Lattes](https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4234927A9&tokenCaptchar=03AFcWeA5goIsh4A2Kc2kbrKkwlK0RPXLRXnZTPi-V775ODi4ClXy4MRf6jU5Fr0YwXOH-Cu5wOW1fUovY-qwCrlGusr-9KaSBKk5zQRI7mx_6hZSOEU1BQgwRprGyg00thMJUD_CldDZK2ozJvNII-yAMv18EezQVu9Hf1wDd_NkyGDHD_1u2J37ov0TVoUfELclqDNdqZajAJibTbQlnFIHt84EOHOSOAPPeKO98vq4piH4jhoOwSlPaRZFgZ9NiFg9ZIbZ5jtZ2Bp35CI2dHyp-THByPpQpkvltMYgc_7pD-Tc1QjHKWW7DQ62XqFV_1aVm-YiyPulMW6s-T9eoGFkOBJuITzFKDgLyToxfmEgs4dpfHwN39KNtthaoIopJ0xcbkaBRPU_7Pg5E1zotrYO_4AjMCF2U0F9YWinbE0T9AKnurLXZm0Kuyh39v-QnwoNetXawX-6Lk5OyndLnMhh_QtZqP68Vk-psPJQYPqD6U5EY1FTT5fcmPsslOIR-GuWjO-8oTNdStXDJJzbl77RzLLCTVzt3UwVkNHJ8BmeYIE6NtxnaKG_bQOXOwKrhGruL9G7otXPtlrsFVdJoFvFrLtAoqL8ccq3g9FTHRHaxlhKaLDHhGA2T3glIlXOfa663KmRUNRSeTKjCGIEa8A6o2Z-Cmxrm9X908mf9GiAxDT-LcXdswVqFbfGUZRjR7gMZ9Cc9B7lANX0YX5p38rIFrC_wU3100ozcMv09YTXOqcLuO7YO9dyfNyNgO7urv7c5Pja9ZONhnspin_3nJWoPmHPrKKI-7Q));  
+-   [Blog and personal portfolio](https://nacmarino.netlify.app/): https://nacmarino.netlify.app/;  
+-   [8 Lições na construção do monitoramento geotécnico orientado à dados](https://www.linkedin.com/pulse/8-li%2525C3%2525A7%2525C3%2525B5es-na-constru%2525C3%2525A7%2525C3%2525A3o-do-monitoramento-geot%2525C3%2525A9cnico-gabriel%3FtrackingId=BxfM2HDRvLOm7XVg58igZQ%253D%253D/?trackingId=BxfM2HDRvLOm7XVg58igZQ%3D%3D);  
+-   Machine learning applied to control levels and anomaly detection in a tailing dam monitoringd data (9th International Conference on Tailings Management 2023, Chile);  
+-   Advanced analytics applied to InSAR Dam Monitoring Program (Tailings and Mine Waste 2023, Vancouver, Canadá).  
 
 ::: {.print-only}
 ## References
-Available upon request
+Available upon request.
 :::
-
-
-
-# FormaÃ§Ã£o
-
-#### Superior
-
-**UNIVERSIDADE FEDERAL DO RIO DE JANEIRO** | Rio de Janeiro, RJ
-
-- **PÃ³s-Doutorado Ecologia** | Programa de PÃ³s-GraduaÃ§Ã£o em Ecologia | MarÃ§o 2016 - Junho 2019
-    + Efeito das MudanÃ§as ClimÃ¡ticas sobre as InteraÃ§Ãµes EcolÃ³gicas
-    + Bolsista PNPD/CAPES  
-</br>
-
-- **Ph.D. Ecologia** | Programa de PÃ³s-GraduaÃ§Ã£o em Ecologia | MarÃ§o 2012 - Fevereiro 2016
-    + O efeito de predadores na estrutura e funcionamento de cadeias traficas e sua interaÃ§Ã£o com as mudanÃ§as climÃ¡ticas
-    + Bolsista CAPES
-    + PrÃªmio de Melhor Tese de Doutorado defendida no Programa em 2016  
-</br>
-
-- **M.Sc. Ecologia** | Programa de PÃ³s-GraduaÃ§Ã£o em Ecologia | Agosto 2009 - Outubro 2011
-    + EstruturaÃ§Ã£o da comunidade de macroinvertebrados aquÃ¡ticos em bromÃ©lias-tanque
-    + Bolsista CAPES  
-</br>
-
-- **B.Sc. CiÃªncias BiolÃ³gicas** | EspecializaÃ§Ã£o em Ecologia | Agosto 2005 - Julho 2009
-    + BromÃ©lias como ilhas: InfluÃªncia das caracterÃ­sticas do habitat sobre a riqueza de macroinvertebrados aquÃ¡ticos
-    + Bolsista FAPERJ  
-</br>
-
-#### Complementar
-
-- **DATACAMP**
-    + Data Scientist: Customer Channel/Marketing (Basic, Intermediate & Advanced) | 2021
-    + Data Scientist: Risk (Basic) | 2021
-    + Interactive Data Visualization with R | 2020
-    + Unsupervised Machine Learning with R | 2020
-    + Supervised Machine Learning with R | 2020
-    + Machine Learning Specialist with R | 2020
-    + Machine Learning Fundamentals with R | 2020
-    + Python Programmer | 2019
-    + Data Scientist with Python | 2019
-    + Data Analyst with Python | 2019
-    + Shiny Fundamentals with R | 2019  
-</br>
-- **DATA SCIENCE ACADEMY**
-    + FormaÃ§Ã£o InteligÃªncia Artificial | Em andamento
-    + Python Fundamentos para a AnÃ¡lise de Dados | 2020
-    + Microsoft Power BI para Data Science | 2020
-    + Big Data Fundamentos | 2020
-    + IntroduÃ§Ã£o Ã  InteligÃªncia Artificial | 2020
-    + Web Scrapping e AnÃ¡lise de Dados | 2020
-    + Soft Skills: Desenvolvendo Suas Habilidades Comportamentais | 2020  
-</br>
-- **CURSO-R**
-    + Dashboards | 2021
-    + Web Scrapping | 2021
-    + Deploy | 2021
-    + RelatÃ³rios e VisualizaÃ§Ã£o de Dados | 2021
-    + Deep Learning | 2020  
-</br>
-- **COURSERA**
-    + Data Science | Johns Hopkins University | Em andamento
-        + Reproducible Research | 2021
-        + Exploratory Data Analysis | 2021
-        + Getting and Cleaning Data | 2021
-        + R Programming | 2021
-        + The Data Scientist's Toolbox | 2021
-    + NLP Specialization | Em andamento
-        + Natural Language Processing with Sequence Models | Em andamento
-        + Natural Language Processing with Probabilistic Models | 2022
-        + Natural Language Processing with Classification and Vector Spaces | 2022
-    + Deep Learning Specialization | 2022
-        + Sequence Models | 2022
-        + Convolutional Neural Networks | 2022
-        + Structuring Machine Learning Projects | 2022
-        + Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization | 2022
-        + Neural Networks and Deep Learning | 2022
-    + Introduction to Mathematical Thinking | 2021
-    + Learn to Program: Crafting Quality Code | 2021
-    + Mathematics for Machine Learning 
-        + Principal Component Analysis | 2022
-        + Multivariate Calculus | 2021
-        + Linear Algebra | 2021  
-- **CLOUD**
-    + AWS Cloud Practitioner | 2022
-  
-# ExperiÃªncia
-
-- **Accenture** | Cientista de Dados | Julho 2019 - Presente
-    + Data Science Principal | Abril 2021 - Atual
-    + Data Science Manager | Janeiro 2021 - MarÃ§o 2021
-    + Data Science Consultant | Julho 2019 - Dezembro 2020  
-</br>
-
-- **Programa de PÃ³s-GraduaÃ§Ã£o em Ecologia/UNICAMP** | Professor Colaborador | Q1 2019
-    +  IntroduÃ§Ã£o ao Manejo e Visualizacao de Dados  
-</br>
-
-- **Programa de PÃ³s-GraduaÃ§Ã£o em Ecologia/UFRJ** | Professor Colaborador | MarÃ§o 2016 - Junho 2019
-    + Manejo, Visulizacao e Compartilhamento de Dados | 2018  
-    + RevisÃ£o SistemÃ¡tica e Meta-AnÃ¡lise | 2016 - 2019
-    + Delineamento Experimental e EstatÃ­stica | 2016 - 2019
-    + IntroduÃ§Ã£o Ã  Linguagem R | 2016 - 2019  
-</br>
-
-- **LaboratÃ³rio de Limnologia/UFRJ** | Pesquisador | Maio 2005 - Junho 2019
-    + Programa de Monitoramento Integrado dos IgarapÃ©s da FLONA SaracÃ¡-Taquera | 2009 - 2020
-    + Programa de Monitoramento das Lagoas do Norte Fluminense - ECOLagoas | 2005 - 2009

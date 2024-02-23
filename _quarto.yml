@@ -18,9 +18,12 @@ website:
     #foreground: '#34375E'
     right:
       - about.qmd
-      - text: 'Autor'
+      - text: 'CV'
         menu:
-        - cv.qmd
+        - text: 'Português'
+          href: cv.qmd
+        - text: 'Englisht'
+          href: cv-en.qmd
     tools:
       - icon: github
         url: https://github.com/nacmarino/blog
