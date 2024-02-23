@@ -417,7 +417,7 @@ tribble(
   ) %>% 
   tab_options(column_labels.hidden = TRUE, row_group.as_column = TRUE, table.font.names = 'IBM Plex Sans',
               table.border.bottom.width = px(3), table.border.top.width = px(3), table.border.bottom.color = 'grey70',
-              table.border.top.color = 'grey70', row_group.border.bottom.with = 4)
+              table.border.top.color = 'grey70')
 ```
 :::
 
