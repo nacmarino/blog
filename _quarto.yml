@@ -20,9 +20,9 @@ website:
       - about.qmd
       - text: 'CV'
         menu:
-        - text: 'Português'
+        - text: 'Portugues'
           href: cv.qmd
-        - text: 'Englisht'
+        - text: 'English'
           href: cv-en.qmd
     tools:
       - icon: github
