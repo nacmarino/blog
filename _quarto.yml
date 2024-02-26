@@ -21,9 +21,9 @@ website:
       - text: 'CV'
         menu:
         - text: 'Portugues'
-          href: cv.qmd
+          href: cv/cv.qmd
         - text: 'English'
-          href: cv-en.qmd
+          href: cv/cv-en.qmd
     tools:
       - icon: github
         url: https://github.com/nacmarino/blog
