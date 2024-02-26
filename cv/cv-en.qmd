@@ -3,7 +3,7 @@ title: "Resume"
 format:
   html:
     toc: true
-css: cv.css
+css: cv/cv.css
 ---
 
 ::: {.print-only .contact-block}
