@@ -1,0 +1,34 @@
+---
+title: "La e de volta outra vez"
+subtitle: |
+  Teste
+image: "images/image_2.jpg"
+date: 02-28-2024
+date-modified: 02-28-2024
+categories:
+  - notas
+execute:
+  warning: false
+  fig-align: center
+draft: true
+---
+
+Introdução geral: resgatar o histórico do blog, até onde fui e por quê parei e por quê voltei.
+
+# Lições aprendidas
+
+Desafio de passar para quarto.
+
+Controlar versão.
+
+Amadurecimento: gerei o que não geraria hoje em dia.
+
+# Novas metas
+
+Visualização
+
+Pontos de vista
+
+Reviews
+
+Análises e modelagem não estão no topo da lista de prioridades.
