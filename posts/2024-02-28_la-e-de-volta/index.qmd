@@ -1,7 +1,7 @@
 ---
-title: "La e de volta outra vez"
+title: "Lá e de volta outra vez"
 subtitle: |
-  Teste
+  Depois de um longo período de hiato, coloquei o blog de volta no ar e quero voltar à escrever. Esse post fala um pouco mais sobre esse retorno, o aprendizado envolvido no processo e meus novos objetivos com esse blog.
 image: "images/image_2.jpg"
 date: 02-28-2024
 date-modified: 02-28-2024
@@ -13,7 +13,11 @@ execute:
 draft: true
 ---
 
-Introdução geral: resgatar o histórico do blog, até onde fui e por quê parei e por quê voltei.
+Em 2021 comecei a escrever esse blog, com a intenção de praticar e documentar meu aprendizado enquanto eu tentava abordar as perguntas e curiosidades que eu tinha no meu dia a dia. Além disso, ele também era uma válvula de escape das tarefas do trabalho, onde muitas vezes acabamos tendo que ficar mais distantes de colocar a mão na massa nós mesmos para poder atuar através das outras pessoas. Olhando para trás, acredito que a ideia do blog foi boa e funcional, conseguindo preencher bem a necessidade que eu sinto de continuar perto da área técnica.  
+
+Outro nascimento importante em 2021 foi o do meu filho. Essa é uma experiência de vida incrível e, como não queria perder um momento sequer, fui alocando cada vez menos tempo para o blog e outras coisas além do trabalho e estar com ele. Com isso, acabei parando de escrever lá em meados de 2022.
+
+Até hoje pouca coisa mudou em termos de tempo livre pra me dedicar à outras coisas que não à criança e ao trabalho. No entanto, aquela necessidade de área técnica continuou 
 
 # Lições aprendidas
 
@@ -25,10 +29,8 @@ Amadurecimento: gerei o que não geraria hoje em dia.
 
 # Novas metas
 
+Posts mais curtos
+
 Visualização
 
-Pontos de vista
-
-Reviews
-
-Análises e modelagem não estão no topo da lista de prioridades.
+Pontos de vista e reviews, análises e modelagem não estão no topo da lista de prioridades.
