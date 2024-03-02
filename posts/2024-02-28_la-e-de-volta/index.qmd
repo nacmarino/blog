@@ -1,36 +1,40 @@
 ---
 title: "Lá e de volta outra vez"
 subtitle: |
-  Depois de um longo período de hiato, coloquei o blog de volta no ar e quero voltar à escrever. Esse post fala um pouco mais sobre esse retorno, o aprendizado envolvido no processo e meus novos objetivos com esse blog.
+  Depois de um longo período de hiato, coloquei o blog de volta no ar e quero voltar à escrever. Esse post fala um pouco mais sobre esse retorno, o aprendizado envolvido no processo e meus novos objetivos.
 image: "images/image_2.jpg"
-date: 02-28-2024
-date-modified: 02-28-2024
+date: 03-02-2024
 categories:
   - notas
 execute:
   warning: false
   fig-align: center
-draft: true
 ---
 
-Em 2021 comecei a escrever esse blog, com a intenção de praticar e documentar meu aprendizado enquanto eu tentava abordar as perguntas e curiosidades que eu tinha no meu dia a dia. Além disso, ele também era uma válvula de escape das tarefas do trabalho, onde muitas vezes acabamos tendo que ficar mais distantes de colocar a mão na massa nós mesmos para poder atuar através das outras pessoas. Olhando para trás, acredito que a ideia do blog foi boa e funcional, conseguindo preencher bem a necessidade que eu sinto de continuar perto da área técnica.  
+Em 2021 comecei a escrever esse blog com a intenção de praticar e documentar meu aprendizado enquanto eu tentava abordar as perguntas e curiosidades do meu dia a dia. Além disso, ele também era uma válvula de escape das tarefas do trabalho, onde muitas vezes acabamos tendo que ficar mais distantes de colocar a mão na massa para poder atuar através das outras pessoas. Olhando para trás, acredito que a ideia do blog foi boa e funcional, conseguindo preencher bem a necessidade que eu sinto de continuar perto da área técnica.  
 
-Outro nascimento importante em 2021 foi o do meu filho. Essa é uma experiência de vida incrível e, como não queria perder um momento sequer, fui alocando cada vez menos tempo para o blog e outras coisas além do trabalho e estar com ele. Com isso, acabei parando de escrever lá em meados de 2022.
+Outro nascimento importante em 2021 foi o do meu filho. Essa é uma experiência de vida incrível e, como não queria perder um momento sequer, fui alocando cada vez menos tempo para o blog e outras coisas além do trabalho e estar com ele. Com isso, resolvi dar uma parada com o blog e acabei parando de escrever em meados de 2022. 
 
-Até hoje pouca coisa mudou em termos de tempo livre pra me dedicar à outras coisas que não à criança e ao trabalho. No entanto, aquela necessidade de área técnica continuou 
+De lá para cá a disponibilidade de tempo está cada vez menor...então, por quê voltar com o blog? O ponto é que a vontade de sujar as mãos continua alta e, na realidade, eu só deixei de escrever sobre o perocesso, não de fazê-lo. Outra coisa foi o amadurecimento que veio com a minha atuação profissional: seus pontos de vista, comentários e orientações passam a ter um valor e impacto maior, podendo ser tão relevantes quanto o código que você escreve^[Não acho que eu escreva código tão bem, tampouco que seja um influenciador na área de dados, IA, ML...no entanto, fico feliz se o que penso faz sentido e possa ajudar uma ou outra pessoa de vez em quando.]. Assim, me pareceu certo voltar a ter esse espaço que me faz bem e que, agora, pode ser usado para outras coisas que não só codar.
 
-# Lições aprendidas
+# O que muda nessa volta?
 
-Desafio de passar para quarto.
+A decisão principal que veio junto de voltar com o blog foi a de mudar a forma como eu vinha desenvolvendo ele. Meus principais objetivos com essa mudança são:  
 
-Controlar versão.
+- **Reduzir o tamanho do que eu posto**. Eu não tinha noção que os posts estavam tão longos até que eu comecei a gerá-los no `quarto`. Acho ok um ou outro post ser um pouco mais extenso por conta dos detalhes técnicos, mas isso deveria ser a exceção. Então vou tentar reduzir ao máximo a quantidade de texto que coloco aqui;  
+- **Novas prioridades de aprendizado**. Uma coisa que tenho me interessado bastante é *storytelling* com dados: tive algumas experiências muito legais nos últimos anos sobre o poder de boas visualizações para uma comunicação mais efetiva, e acho que essa é uma habilidade que falta muito nas pessoas da área de dados. Além do mais, uma boa visualização de um resultado ajuda à economizar no texto, colaborando para gerar um conteúdo mais conciso;  
+- **Novas formas de contribuir**. Pelo o que já coloquei acima, uma meta será focar mais em visualização de dados; no entanto, também pretendo começar a escrever um pouco mais sobre pontos de vista, reflexões e outras coisas mais que penso e eventualmente converso com meus mentores e mentorados. Então não vou focar só no tecniquês, mas também em visões de liderança técnica.  
+- **Falta tempo para manter a velocidade de escrita do material que acabava aqui**. Minha realidade atual é completamente diferente da de dois anos atrás, então sei que é pouco provável que eu vá conseguir gerar um alto volume de conteúdo no ritmo daquela época (considerando quantidade e tamanho). Nesse aspecto, tenho uma meta bem modesta de tentar criar pelo menos 2 conteúdos técnicos e 2 não-técnicos este ano - se eu conseguir mais, ótimo.   
 
-Amadurecimento: gerei o que não geraria hoje em dia.
+# Que lições aprendi com essa volta?
 
-# Novas metas
+Além de ter compreendido a necessidade que tenho de ter esse espaço como uma válvula de escape, trazer o blog de volta me fez aprender muitas coisas legais. As principais foram:
 
-Posts mais curtos
+- **Mudar da tecnologia do `distill` para o `quarto` não foi tão fácil**. A versão anterior do blog foi toda desenvolvida utilizando [`distill` para R Markdown](https://rstudio.github.io/distill/). Entretanto, com a liberação do [`quarto`](https://quarto.org/) e tudo o que ele promete entregar, achei razoável buscar uma solução mais *nativa* para trazer o blog de volta à ativa. Achei que esse processo de transição seria mais suave (🤡), mas acabei suando um pouco para ajustar o layout da página e entender como o ecossistema funciona (e.g., a necessidade de renderizar tudo de novo para fazer com que o menu superior seja atualizado entre todas as páginas). Algumas fontes legais que me ajudaram foram esse [post] (https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/#change-the-colors-of-your-blog) para colocar o blog de pé, [esse](https://albert-rapp.de/) e [esse](https://ucsb-meds.github.io/customizing-quarto-websites//#/title-slide) para editar o layout e esse [aqui](https://www.cynthiahqy.com/posts/cv-html-pdf/) para ajustar o currículo;  
+- **Mudar de OS dificulta tudo**. Comecei desenvolvendo o blog usando um Macbook, mas agora o estou fazendo usando uma máquina Windows. Não é preciso dizer que tive um bocado de problemas com essa mudança, principalmente com as fontes que utilizava para criar as figuras em cada post. Instalar fontes no Windows e fazer o R entender isso pode ser um pesadelo;   
+- **Versão de pacotes pode ser um inferno até no R**. Por essa eu não esperava...eu tive muitos problemas com as versões mais atualizadas dos pacotes do R, principalmente com aqueles relacionados ao `tidymodels`. Acredito que isso reflita muito a evolução nesse ecossistema nos últimos anos, mas ainda assim algumas *breaking changes* me pegaram desprevenidos^[E, para piorar, eu não sabia a versão dos pacotes que havia usado há dois anos atrás]. O resultado? Tive que alterar algumas partes dos códigos, mas não consegui parar para garantir que todo o texto fazia 100% sentido com os resultados. Por outro lado, isso me levou à usar o [`renv`](https://rstudio.github.io/renv/articles/renv.html) para controlar os pacotes que utilizei para gerar cada um dos conteúdos que coloquei no ar, então espero que isso reduza as chances de um problema similar no futuro. 
+- **Quem foi que me deixou gerar isso aqui?**. Fiquei chocado com as figuras que eu gerava no passado: poucas delas seguiam aquilo que hoje em dia aprendi ser importante em uma visualização de dados mais informativa. É claro que dá uma certa *vergonha* disso mas, por outro lado, acredito que perceber isso e conseguir fazer essa auto-crítica é um sinal de aprendizado. Todo mundo começa de algum lugar, geralmente mais simples ou básico...mas acredito que o importante é ver evolução com o tempo.  
 
-Visualização
+E é isso que temos para esse post de retorno! Vamos ver até onde chego dessa vez...sem pressão, sem correria...só diversão e curiosidade.
 
-Pontos de vista e reviews, análises e modelagem não estão no topo da lista de prioridades.
+> A imagem de capa desse post foi gerada no `ideogram.ai` através do prompt: a person walking in a natural setting, the road ahead that suggests an infinite loop or a journey without end, with the path ahead similar to the past path. The atmosphere is introspective, contemplative, but inspiring, with a hint of philosophical wonder. 
