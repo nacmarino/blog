@@ -429,7 +429,8 @@ tribble(
   'DeepLearning.AI'      , 'Pair Programming with a Large Language Model'                                               , 2023,
   'DeepLearning.AI'      , 'Understanding and Applying Text Embeddings'                                                 , 2023,
   'DeepLearning.AI'      , 'How Business Thinkers Can Start Building AI Plugins With Semantic Kernel'                   , 2023,
-  'DeepLearning.AI'      , 'Quality and Safety for LLM Applications'                                                    , 2024
+  'DeepLearning.AI'      , 'Quality and Safety for LLM Applications'                                                    , 2024,
+  'DeepLearning.AI'      , 'Serverless LLM Apps Amazon Bedrock'                                                         , 2024
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
