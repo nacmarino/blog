@@ -44,15 +44,124 @@ Escrevi este post originalmente há alguns anos atrás para compartilhar com alg
 
 # O __Science__ em Data
 
-Comecei a minha carreira na academia, onde tive a oportunidade de aprender algumas coisas interessantes e incorporá-las à minha forma de pensar. Dentre estas coisas, acredito que as principais foram o costume de duvidar e de questionar aquilo que me é mostrado. Como exemplo disto, podemos utilizar [este video](https://youtu.be/Yx6UgfQreYY), que descreve um suposto experimento sobre o impacto do bullying em plantas^[Sim, plantas. E, antes de mais nada, os resultados desse video são totalmente _fake_].
+Comecei a minha carreira na academia, onde tive a oportunidade de aprender algumas coisas interessantes e incorporá-las à forma de pensar. Uma delas foi a habilidade de duvidar, questionar e criticar^[Não é no sentido ruim, mas sim no de ter bom-senso para julgar o que me é mostrado.]. Existem casos em que é muito fácil exercitar essa habilidade, como [aqui](https://youtu.be/Yx6UgfQreYY)^[Isso é um pseudo-experimento, com um desenho experimental horroroso e resultados que não se sustentam.], mas têm vezes que a questão não é tão trivial. Ainda assim, esse tipo de exercício tende a ser inconsciente para mim. Mas o que é que isso tem haver com Ciência de Dados?
 
-Mas o que isso tudo tem haver com Ciência de Dados?
+Ás vezes me parece que passamos batido, mas existe a palavra **ciência** no nome daquela disciplina - e a ciência nos oferece um jeito muito poderoso de pensar, testar hipóteses e avaliar o que nos é mostrado. Por exemplo: como você sabe que A é melhor do que B, que uma intervenção funciona, que não tem diferença entre duas coisas...como saber se você realmente descobriu o que você diz ter descoberto^[Isto é, algo robusto, generalizável, livre de artefatos, viéses ou frutos de relações espúrias.]? O método científico é a resposta para estas perguntas, e ele nos ensina a pensar de forma estruturada para ir do primeiro ao segundo. E essas são os tipos de coisas que estão diretamente relacionadas ao nosso dia a dia enquanto pessoas que trabalham com ciência de dados^[~~ou como qualquer ser humano~~].
 
-Existem vários aspectos relacionados ao desenho de um experimento para testar uma hipótese que eu gostaria de falar aqui.
+Com isso em mente, o objetivo desse post é falar um pouco mais sobre como pensar cientificamente no nosso dia a dia. Vamos focar primeiro em uma tarefa mais cotidiana, que é a modelagem preditiva; depois, vamos ver como esse tipo de pensamento faz parte não só da modelagem, mas de qualquer outra etapa de um projeto de Ciência de Dados.
 
-# O que é um baseline, então?
+# Como você sabe que seu modelo é bom?
 
-Um dos principais fundamentos ao testarmos algum tipo de intervenção sobre uma variável resposta é a possibilidade de contrastarmos o efeito deste __tratamento__ contra um cenário __controle__. Em outras palavras, buscamos contrastar duas condições que são o mais similares possíveis em todos os aspectos, menos aquele de interesse. Esta é uma das bases do método científico, e um aspecto fundamental de qualquer tipo de experimento.
+Quando pensamos em criar um modelo preditiva, geralmente o fazemos porque achamos que de alguma forma ele vai ser melhor do que alguma coisa. Mas que coisa é essa? Isso é um ponto importante termos em mente quando começamos essa tarefa: precisamos ter um ponto de partida para definir se aquilo que estamos propondo vai ser melhor do que aquilo que já temos. O nome que damos à isso é *baseline*.
+
+É difícil chegarmos à uma regra geral para definir esse *baseline*, uma vez que temos diferentes tipos de problemas de dados (e.g., classificação, regressão, séries temporais,...). Cada um daqueles problemas de dados têm peculiaridades distintas, que balizam a forma como devemos definir um *baseline* - por exemplo, a dependência temporal entre observações pode ser muito informativa para séries temporais, mas ela está ausente em problemas de regressão tradicionais. Assim, cada problema traz uma abordagem diferente para a definição do *baseline*, mas todas elas convergem para o mesmo objetivo: nos ajudar a definir se o modelo realmente tem o potencial de trazer um benefício sobre o que já temos.
+
+# Baselines de livro-texto
+
+Em um problema de classificação normalmente estamos querendo fornecer pelo menos uma categoria à uma observação. Nesse caso, nosso ponto de partida - o *baseline* - pode ser utilizarmos uma abordagem mais inocente, como se não houvesse nenhuma inteligência por traz do fenômeno em questão, e 'dizermos' que todas as observações pertencem à uma única categoria - normalmente àquela com maior frequência em nossa base de dados. Ao 'chutarmos' que toda a observação pertence à categoria mais frequente, estamos definindo um ponto de partida bem otimista para nossa tarefa de modelagem^[Inclusive, prevenindo problemas que normalmente acontecem quando trabalhamos com uma frequência muito desigual de representação das categorias na base de dados, mas isso é estória para outro momento.]. Essa noção é representada no exemplo abaixo:
+
+```{r}
+library(tidyverse) # manipulação de dados
+library(tidymodels) # modelagem
+library(modeldata) # dados
+
+########################################################################################
+#                          Separando a base em treino e teste                          #
+########################################################################################
+
+# criando um split entre treino e teste, estratificando a separação da base pelo variável
+# que queremos usar no problema de classificação; além disso, setando uma constante para
+# o gerador de números aleatórios para garantir que vamos conseguir reproduzir o split
+set.seed(42)
+splits <- initial_split(data = credit_data, prop = 0.7, strata = 'Status')
+
+########################################################################################
+#        Estimando a performance do baseline: prevendo a classe mais frequente         #
+########################################################################################
+
+# estimando a classe mais frequente na base de treino: contando quantas vezes cada classe
+# aparece dentro da variável que queremos prever e, então, tirando o nome da classe mais comum
+classe_frequente <- training(x = splits) %>% 
+  count(Status) %>% 
+  top_n(n = 1, wt = n) %>% 
+  pull(Status) %>% 
+  as.character()
+
+# calculando a performance do baseline na base de teste - a ideia aqui vai ser definir que todas
+# as instancias na base de teste pertencem à classe mais frequente na base de treino (como a função
+# accuracy precisa receber um fato, o tratamento dentro do mutate serve apenas para compatibilizar
+# o tipo de dado esperado pela funcao)
+metricas_baseline <- testing(splits) %>% 
+  mutate(baseline = factor(classe_frequente, levels = unique(training(x = splits)$Status))) %>% 
+  accuracy(truth = Status, estimate = baseline) %>% 
+  mutate(origem = 'baseline')
+
+########################################################################################
+#            Ajustando e estimando a performance de um algoritmo preditivo             # 
+########################################################################################
+
+# criando uma regressão logística simples para o problema de classificação
+## primeiro setando o algoritmo
+algoritmo <- logistic_reg() %>% 
+  set_engine(engine = 'glm') %>% 
+  set_mode(mode = 'classification')
+
+## agora ajustando o algoritmo aos dados
+data_prep <- recipe(Status ~ Income + Amount + Debt + Price + Home + Job, data = splits) %>% 
+  step_impute_mean(all_numeric_predictors()) %>% 
+  step_impute_mode(all_nominal_predictors()) %>% 
+  step_dummy(all_nominal_predictors())
+
+## conectando os dados com o algoritmo
+wf <- workflow() %>% 
+  add_model(algoritmo) %>% 
+  add_recipe(data_prep)
+
+## ajustando o algoritmo
+modelo <- fit(object = wf, data = training(x = splits))
+
+# usando a classe mais frequente para definir a performance do baseline para o problema de classificação
+metricas_modelo <- modelo %>% 
+  augment(new_data = testing(x = splits)) %>% 
+  accuracy(truth = Status, estimate = .pred_class) %>% 
+  mutate(origem = 'modelo')
+
+########################################################################################
+#                        Visualizando os resultados encontrados                        #
+########################################################################################
+
+bind_rows(metricas_baseline, metricas_modelo) %>% 
+  arrange(origem) %>% 
+  mutate(
+    .estimate = ifelse(test = origem == 'baseline', yes = .estimate, no = .estimate - first(.estimate)),
+    origem    = fct_relevel(origem, 'modelo')
+  ) %>% 
+  ggplot(mapping = aes(x = 1, y = .estimate, fill = origem)) +
+  geom_col(color = 'black', show.legend = FALSE, linewidth = 1, width = 0.6) +
+  scale_fill_manual(values = c('white', 'grey50')) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 1)) +
+  labs(
+    y = 'Acurácia'
+  ) +
+  coord_flip() +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y  = element_blank(),
+    panel.grid   = element_blank(),
+    axis.line.x  = element_line()
+  )
+```
+
+
+# Baselines não-tão-óbivos
+
+# Em resumo...
+
+Existe uma forma simples de pensar nisso: conseguimos dizer que uma **intervenção**^[i.e., um *tratamento*] é melhor do que a **condição atual**^[i.e., o *baseline* ou o *controle*] se a única diferença entre os dois é aquilo que estamos querendo testar e tudo o mais é igual. 
+
+# Mas o baseline pára na modelagem?
+
+Esta é uma das bases do método científico, e um aspecto fundamental de qualquer tipo de experimento.
 
 Como uma ciência, também é necessário termos esse tipo de pensamento em todas as etapas de um trabalho de Ciência de Dados. Isto é especialmente importante quando iniciamos a etapa de modelagem, quando deveríamos fazer perguntas como:  
 
@@ -243,3 +352,4 @@ Este é um ponto fundamental para continuarmos esta discussão, mas não é uma 
 A discussão sobre a escolha das métricas de performance por si só é bastante extensa, e merecerá um espaço para isso em breve. 
 
 # Conclusão
+Existem vários aspectos relacionados ao desenho de um experimento para testar uma hipótese que eu gostaria de falar aqui.

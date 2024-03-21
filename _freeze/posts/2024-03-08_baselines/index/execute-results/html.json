@@ -1,0 +1,14 @@
+{
+  "hash": "46463169f13f416c76e72907a8b26fc4",
+  "result": {
+    "markdown": "---\ntitle: \"Por quê você precisa de um baseline?\"\nsubtitle: |\n  Adicionar descrição.\ndate: 03-08-2024\ncategories:\n  - machine learning\n  - r\nexecute:\n  warning: false\n  fig-align: center\ndraft: true\n---\n\n\n\n\n::: {.callout-note}\nEscrevi este post originalmente há alguns anos atrás para compartilhar com alguns colegas de trabalho, mas acredito que ele ainda é contemporâneo. Portanto, trouxe basicamente o mesmo conteúdo, apenas fazendo algumas atualizações necessárias aqui e ali.\n:::\n\n# O __Science__ em Data\n\nComecei a minha carreira na academia, onde tive a oportunidade de aprender algumas coisas interessantes e incorporá-las à minha forma de pensar. Uma delas foi a habilidade de duvidar, questionar e criticar^[Não é no sentido ruim, mas sim no sentido de ter bom-senso para julgar o que me é mostrado.]. Existem casos em que é muito fácil fazer isso, como no caso [deste video](https://youtu.be/Yx6UgfQreYY) aqui^[Isso é um pseudo-experimento, com um desenho experimental horroroso e resultados que não se sustentam.], mas têm vezes que a questão não é tão trivial. Ainda assim, esse tipo de exercício tende a ser inconsciente para mim. Mas o que é que isso tem haver com Ciência de Dados?\n\nApesar de às vezes passarmos batido, existe a palavra **ciência** no nome dessa disciplina - e a ciência nos oferece um jeito muito poderoso de pensar, testar hipóteses e avaliar o que nos é mostrado. Por exemplo: como você sabe que A é melhor do que B, que uma intervenção funciona, que não tem diferença entre duas coisas...como saber se você realmente descobriu o que você diz ter descoberto^[Isto é, algo robusto, generalizável, livre de artefatos, viéses ou frutos de relações espúrias.]? O método científico é a resposta para estas perguntas, e ele nos ensina a pensar de forma estruturada para responder esses tipos de pergunta. E essas coisas estão diretamente relacionadas ao nosso dia a dia enquanto pessoas que trabalham com ciência de dados^[~ou como qualquer ser humano~].\n\nO objetivo desse post então será falar um pouco mais sobre como fazer isso. Primeiro em uma tarefa mais cotidiana, que é a modelagem preditiva; depois, mostrando como esse tipo de pensamento faz parte não só da modelagem, mas de qualquer outra etapa de um projeto de Ciência de Dados.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
