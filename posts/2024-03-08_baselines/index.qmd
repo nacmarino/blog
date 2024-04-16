@@ -7,7 +7,7 @@ image: "images/imagem.jpeg"
 categories:
   - machine learning
   - estatistica
-  - notas
+  - pov
   - r
 execute:
   warning: false
