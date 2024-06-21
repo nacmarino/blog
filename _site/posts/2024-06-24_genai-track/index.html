@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Nicholas Marino">
+<title>Nicholas Marino - Como eu começaria a estudar GenAI hoje?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../books.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Nicholas Marino - Como eu começaria a estudar GenAI hoje?">
+<meta name="twitter:description" content="Essa é uma pergunta atualmente relevante, mas cuja resposta pode não ser tão óbvia - ela pode depender do seu propósito, quão fundo você quer ir, quanto tempo você tem e muitos outros aspectos. Nesse post eu trago uma perspectiva sobre essa questão, focando na recomendação de alguns conteúdos que podem ajudar nessa jornada.">
+<meta name="twitter:image" content="https://nacmarino.netlify.app/posts/2024-06-24_genai-track/images/red_queen.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Nicholas Marino</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cv" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">CV</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-cv">
+<li>
+    <a class="dropdown-item" href="../../cv/cv.html" rel="" target="">
+ <span class="dropdown-text">Portugues</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../cv/cv-en.html" rel="" target="">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<div class="quarto-navbar-tools">
+    <a href="https://github.com/nacmarino/blog" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Como eu começaria a estudar GenAI hoje?</h1>
+            <p class="subtitle lead"></p>
+<p>Essa é uma pergunta atualmente relevante, mas cuja resposta pode não ser tão óbvia - ela pode depender do seu propósito, quão fundo você quer ir, quanto tempo você tem e muitos outros aspectos. Nesse post eu trago uma perspectiva sobre essa questão, focando na recomendação de alguns conteúdos que podem ajudar nessa jornada.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">learning</div>
+                <div class="quarto-category">dataviz</div>
+                <div class="quarto-category">genai</div>
+                <div class="quarto-category">pov</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="nacmarino.netlify.app">Nicholas Marino</a> <a href="https://orcid.org/0000-0002-5702-5466" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Data de Publicação</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">24 de junho de 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Conteudo</h2>
+   
+  <ul>
+<li><a href="#contexto" id="toc-contexto" class="nav-link active" data-scroll-target="#contexto">Contexto</a></li>
+  <li><a href="#considera%C3%A7%C3%B5es-sobre-as-recomenda%C3%A7%C3%B5es" id="toc-considerações-sobre-as-recomendações" class="nav-link" data-scroll-target="#considera%C3%A7%C3%B5es-sobre-as-recomenda%C3%A7%C3%B5es">Considerações sobre as recomendações</a></li>
+  <li><a href="#como-estruturei-essa-jornada" id="toc-como-estruturei-essa-jornada" class="nav-link" data-scroll-target="#como-estruturei-essa-jornada">Como estruturei essa jornada?</a></li>
+  <li><a href="#jornada-sugerida" id="toc-jornada-sugerida" class="nav-link" data-scroll-target="#jornada-sugerida">Jornada sugerida</a></li>
+  <li><a href="#considera%C3%A7%C3%B5es-finais" id="toc-considerações-finais" class="nav-link" data-scroll-target="#considera%C3%A7%C3%B5es-finais">Considerações finais</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><section id="contexto" class="level1"><h1>Contexto</h1>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carregando o reticulate para interagir com o Python</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># criando um ambiente do conda para esse post, caso ele nao exista</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">condaenv_exists</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># criando o ambiente do conda que sera usado nessa sessao</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_create</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, python_version <span class="op">=</span> <span class="st">'3.11'</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># lendo os pacotes e versoes que precisam ser instaladas no ambiente a partir do requirements.txt</span></span>
+<span>  <span class="va">requirements</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'requirements.txt'</span>, header <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span></span>
+<span>  </span>
+<span>  <span class="co"># importando as libs para este post</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_install</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, packages <span class="op">=</span> <span class="va">requirements</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># apontando para o ambiente desse post</span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a></span><span class="op">(</span>condaenv <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Uma ideia que sempre me fez muito sentido é a fala da Rainha Vermelha, do conto <em>Alice no País das Maravilhas</em>: ‘<em>…aqui, você vê, é necessário correr o mais rápido que puder para continuar no mesmo lugar. Se você quiser chegar a algum outro lugar, você deve correr pelo menos duas vezes mais rápido do que está fazendo.</em>’. No mundo de Dados, IA e Machine Learning, isso acontece o tempo todo: ciência de dados era a profissão mais sexy na <a href="https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century">última</a> <a href="https://hbr.org/2022/07/is-data-scientist-still-the-sexiest-job-of-the-21st-century">década</a>…nessa, parece ser a de <a href="https://medium.com/@lunadoan/data-job-market-2024-insights-you-need-to-boost-your-career-d05c7e18a5c1">analista</a> de <a href="https://paulovasconcellos.com.br/analista-de-dados-a-nova-profiss%C3%A3o-mais-sexy-do-s%C3%A9culo-xxi-3e13f228ba7a?source=collection_home---2------0-----------------------">dados</a>. De forma similar, novas ferramentas e tecnologias surgem todo dia, e é difícil conseguir manter o ritmo e se manter atualizado.</p>
+<p><img src="images/red_queen.jpeg" class="img-fluid"></p>
+<p>Nessa linha, a <em>hype</em> da vez é IA Generativa (<em>i.e.</em>, GenAI), que tomou o mundo desde o ano passado. Se você não vive em uma caverna, deve estar sendo bombardeado com um volume enorme de notícias, informações, aplicações, casos de uso e tudo o mais relacionado à essa nova tecnologia. Inclusive, é possível até que você tenha visto casos em que GenAI esteja sendo adicionado à soluções à qualquer custo - ainda que isso não faça sentido. De qualquer forma, tudo isso pode gerar um medo de ficar de fora e, voltando à Rainha Vermelha, por mais que tentemos nos manter à par de tudo o que está rolando, o volume de novidades e coisas para aprender é alto demais para darmos vazão.</p>
+<p>Como uma das inúmeras pessoas que vive esse dilema diariamente, acredito que a primeira ação para mudar um pouco essa perspectiva é aceitar que realmente não há como manter o ritmo de aprendizado. E está tudo bem com isso: afinal, existem muitos outros pratinhos que precisamos equilibrar e prioridades que têm mais valor em nossa vida. A segunda ação é tentar enxergar que volume de informação não é a mesma coisa que qualidade: a maior parte dos conteúdos não vão agregar tanta informação nova, complementar ou que vai ser realmente uma tendência. Assim, se conseguíssemos focar naquilo que têm mais impacto, poderíamos conseguir nos manter dentro de uma zona de conhecimento que talvez seja mais sustentável.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Assumindo que essa linha de raciocínio faça sentido, voltamos ao problema inicial: têm muita material disponível, e pode ser difícil saber separar o que é útil e o que não é. Ao longo dos últimos meses tenho percebido esse padrão, e colocado um bocado de energia em tentar me manter atualizado e informado sobre o que têm saído. E, durante um tempo, eu achei que estava dando sorte em achar e escolher os conteúdos certos…mas depois o que eu comecei a pensar é que talvez eu esteja em uma posição muito privilegiada de saber distilar o que faz sentido e o que não faz, e priorizar no que focar no tempo que tenho.</p>
+<p>Isso me trouxe um questionamento…<em>e se eu estivesse começando hoje a estudar IA Generativa, que jornada eu percorreria?</em> Mais do que isso…nem todo mundo quer ou precisa ser um <em>expert</em> em IA Generativa…pode ser que só saber a ferramenta esteja de bom tamanho, ou ter mais profundidade sobre um assunto específico no tema. Por outro lado, pode ser o caso de querer ter um conhecimento mais abrangente, focando não só em IA Generativa, mas tudo o que está na fundação e por trás disso.</p>
+<div class="cell" data-fig.dpi="200">
+<details><summary>Código</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carregando os pacotes para esse post</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> patches</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># criando um dataframe para armazenar as informacoes que vamos plotar e facilitar o processo</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'id'</span>       : [<span class="st">'rect_'</span> <span class="op">+</span> <span class="bu">str</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'position'</span> : [(<span class="dv">0</span>, <span class="dv">0</span>), (<span class="fl">0.3</span>, <span class="fl">0.1</span>), (<span class="fl">0.58</span>, <span class="fl">0.15</span>), (<span class="fl">0.8</span>, <span class="fl">0.2</span>), (<span class="fl">0.84</span>, <span class="fl">0.21</span>), (<span class="fl">0.87</span>, <span class="fl">0.22</span>)],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'x'</span>        : [<span class="dv">1</span>, <span class="fl">0.65</span>, <span class="fl">0.35</span>, <span class="fl">0.12</span>, <span class="fl">0.07</span>, <span class="fl">0.03</span>],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'y'</span>        : [<span class="dv">1</span>, <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="fl">0.12</span>, <span class="fl">0.06</span>, <span class="fl">0.01</span>],</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'texto'</span>    : [<span class="st">'Inteligência Artificial'</span>, <span class="st">'Aprendizado de Máquina'</span>, <span class="st">'Deep Learning'</span>, np.nan, np.nan, np.nan],</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'subs'</span>     : [<span class="st">'(e.g., sistemas baseados em regra, aprendizado de máquina,...)'</span>, <span class="st">'(e.g., supervisionado, não-supervisionado,</span><span class="ch">\n</span><span class="st">por reforço,...)'</span>, <span class="st">'(e.g., redes convolucionais,</span><span class="ch">\n</span><span class="st">recorrentes, atenção,...)'</span>, np.nan, np.nan, np.nan],</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'linecolor'</span>: [<span class="st">'black'</span>, <span class="st">'white'</span>, <span class="st">'white'</span>, <span class="st">'white'</span>, <span class="st">'white'</span>, <span class="st">'white'</span>],</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'linesize'</span> : [<span class="dv">1</span>, <span class="fl">0.7</span>, <span class="fl">0.7</span>, <span class="fl">0.7</span>, <span class="fl">0.7</span>, <span class="fl">0.7</span>],</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rectfill'</span> : [<span class="st">'#C6DBEF'</span>, <span class="st">'#9ECAE1'</span>, <span class="st">'#6BAED6'</span>, <span class="st">'#4292C6'</span>, <span class="st">'#2171B5'</span>, <span class="st">'#08306B'</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">'texto_x'</span>  : [<span class="fl">0.03</span>, <span class="fl">0.33</span>, <span class="fl">0.61</span>, <span class="fl">0.63</span>, np.nan, np.nan],</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">'texto_y'</span>  : [<span class="fl">0.95</span>, <span class="fl">0.65</span>, <span class="fl">0.4</span>, <span class="fl">0.35</span>, np.nan, np.nan],</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sub_x'</span>    : [<span class="fl">0.03</span>, <span class="fl">0.33</span>, <span class="fl">0.61</span>, np.nan, np.nan, np.nan],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sub_y'</span>    : [<span class="fl">0.92</span>, <span class="fl">0.6</span>, <span class="fl">0.35</span>, np.nan, np.nan, np.nan]</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># criando um dicionario para definir a fonte associada à maior parte dos textos</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>fonte <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">12</span>, <span class="st">'weight'</span>: <span class="st">'bold'</span>, <span class="st">'family'</span>: <span class="st">'Permanent Marker'</span>}</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>subs <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">8</span>, <span class="st">'family'</span>: <span class="st">'Raleway'</span>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># criando o canvas da figura</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows <span class="op">=</span> <span class="dv">1</span>, ncols <span class="op">=</span> <span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma lista vazia para armazenar cada um dos retangulos criados no loop</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>rects <span class="op">=</span> []</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># criando cada um dos retângulos através de um loop</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> df.itertuples(index <span class="op">=</span> <span class="va">False</span>):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  rects.append(patches.Rectangle(</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    xy <span class="op">=</span> row.position, width <span class="op">=</span> row.x, height <span class="op">=</span> row.y, </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    linewidth <span class="op">=</span> row.linesize,edgecolor <span class="op">=</span> row.linecolor, facecolor <span class="op">=</span> row.rectfill)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> row.texto <span class="kw">is</span> <span class="kw">not</span> np.nan:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    plt.text(x <span class="op">=</span> row.texto_x, y <span class="op">=</span> row.texto_y, s <span class="op">=</span> row.texto, color <span class="op">=</span> <span class="st">'black'</span>, fontdict <span class="op">=</span> fonte)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    plt.text(x <span class="op">=</span> row.sub_x, y <span class="op">=</span> row.sub_y, s <span class="op">=</span> row.subs, color <span class="op">=</span> <span class="st">'black'</span>, fontdict <span class="op">=</span> subs)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando cada um dos retângulos em um loop através da lista</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rect <span class="kw">in</span> rects:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  ax.add_patch(rect)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando anotações na lateral direita do plot</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'GANs'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.35</span>), fontsize <span class="op">=</span> <span class="dv">12</span>, fontweight <span class="op">=</span> <span class="st">'bold'</span>, annotation_clip <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            family <span class="op">=</span> <span class="st">'Permanent Marker'</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'(Generative Adversarial</span><span class="ch">\n</span><span class="st">Networks; aka GenAI)'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.31</span>), fontsize <span class="op">=</span> <span class="dv">7</span>, </span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">''</span>, xy <span class="op">=</span> (<span class="fl">0.88</span>, <span class="fl">0.29</span>), xytext <span class="op">=</span> (<span class="fl">1.04</span>, <span class="fl">0.36</span>), xycoords <span class="op">=</span> <span class="st">'data'</span>, </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            arrowprops <span class="op">=</span> <span class="bu">dict</span>(arrowstyle <span class="op">=</span> <span class="st">'-|&gt;'</span>, color <span class="op">=</span> <span class="st">'black'</span>, lw <span class="op">=</span> <span class="dv">1</span>, connectionstyle <span class="op">=</span> <span class="st">"arc3,rad=0.3"</span>))</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'LMs'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.25</span>), fontsize <span class="op">=</span> <span class="dv">12</span>, fontweight <span class="op">=</span> <span class="st">'bold'</span>, annotation_clip <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            family <span class="op">=</span> <span class="st">'Permanent Marker'</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'(Language</span><span class="ch">\n</span><span class="st">Models)'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.21</span>), fontsize <span class="op">=</span> <span class="dv">7</span>, annotation_clip <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            family <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">''</span>, xy <span class="op">=</span> (<span class="fl">0.88</span>, <span class="fl">0.24</span>), xytext <span class="op">=</span> (<span class="fl">1.04</span>, <span class="fl">0.26</span>), xycoords <span class="op">=</span> <span class="st">'data'</span>, </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            arrowprops <span class="op">=</span> <span class="bu">dict</span>(arrowstyle <span class="op">=</span> <span class="st">'-|&gt;'</span>, color <span class="op">=</span> <span class="st">'black'</span>, lw <span class="op">=</span> <span class="dv">1</span>, connectionstyle <span class="op">=</span> <span class="st">"arc3,rad=0.2"</span>))</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'GPT-family'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.15</span>), fontsize <span class="op">=</span> <span class="dv">12</span>, fontweight <span class="op">=</span> <span class="st">'bold'</span>, annotation_clip <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            family <span class="op">=</span> <span class="st">'Permanent Marker'</span>)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'(GPT-4 Turbo, GPT-4,</span><span class="ch">\n</span><span class="st">GPT-3.5 Turbo,...)'</span>, xy <span class="op">=</span> (<span class="fl">1.05</span>, <span class="fl">0.11</span>), fontsize <span class="op">=</span> <span class="dv">7</span>, </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>            annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">''</span>, xy <span class="op">=</span> (<span class="fl">0.88</span>, <span class="fl">0.225</span>), xytext <span class="op">=</span> (<span class="fl">1.04</span>, <span class="fl">0.17</span>), xycoords <span class="op">=</span> <span class="st">'data'</span>, </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>            arrowprops <span class="op">=</span> <span class="bu">dict</span>(arrowstyle <span class="op">=</span> <span class="st">'-|&gt;'</span>, color <span class="op">=</span> <span class="st">'black'</span>, lw <span class="op">=</span> <span class="dv">1</span>, connectionstyle <span class="op">=</span> <span class="st">"arc3,rad=0.3"</span>))</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando anotações na parte de baixo da figura</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'A relação entre o tamanho das caixas é apenas qualitativa e ilustrativa.'</span>, </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            xy <span class="op">=</span> (<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.02</span>), fontsize <span class="op">=</span> <span class="dv">6</span>, annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'nacmarino.netlify.app'</span>, xy <span class="op">=</span> (<span class="fl">1.1</span>, <span class="op">-</span><span class="fl">0.02</span>), fontsize <span class="op">=</span> <span class="dv">6</span>, ha <span class="op">=</span> <span class="st">'left'</span>, </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>            annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Passion One'</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co"># removendo os completamente as informações dos eixos da figura </span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>fig.patch.set_facecolor(<span class="st">'white'</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co"># plotando a figura</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="index_files/figure-html/esquema_genai-1.png" class="img-fluid figure-img" alt="Esquema mostrando a hierarquia de temas e conhecimentos dentro da área de Inteligência Artificial, onde IA Generativa e os Language Models são um pedaço de algo muito maior." width="576"></p>
+<figcaption class="figure-caption">Apesar de parecer que IA Generativa e Language Models são uma coisa por si só, na realidade, eles são um dos componentes e campos do conhecimento de algo muito maior - e que fornece todas as bases teóricas para podemos entender no detalhe como funcionam e fazem o que fazem. No entanto, uma pessoa não precisa dominar toda essa hierarquia de conhecimento para atuar com IA Generativa - os focos e jornadas de aprendizado são individuais, e é perfeitamente possível pular alguns desses níveiss dependendo do seu objetivo.</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota sobre a figura
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A figura acima abstrai um pouco algumas complexidades de se colocar àquelas áreas do conhecimento em caixinhas. Por exemplo, os <em>(Large) Language Models</em> combinam alguma coisa de Redes Generativas Adversariais, arquitetura de Transformers e aprendizagem por reforço (além de outras áreas do conhecimento como, por exemplo, linguística). Ficaria bem difícil representar toda essa sobreposição em uma imagem em 2D, então optei pelo caminho mais simples para facilitar a compreensão da mensagem principal. De toda forma, achei relevante ter esse <em>disclaimer</em> aqui.</p>
+</div>
+</div>
+</div>
+<p>Essas questões me levaram a pensar em por quê não criar uma lista que consolide uma jornada de aprendizado em IA Generativa. Talvez uma lista mais genérica, que possa servir tanto de guia para quem só está interessado em ter contexto, quanto para quem quiser percorrer uma jornada de aprendizado mais longa e profunda. O intuito não é ter a lista definitiva ou a lista certa, nem nada disso…mas talvez uma lista que tenha um sentido lógico e uma cadência, que não seja nada muito complexo ou que vá exigir foco contínuo por muito tempo…e, mais importante, que seja flexível o suficiente para a maior parte dos objetivos de aprendizado.</p>
+</section><section id="considerações-sobre-as-recomendações" class="level1"><h1>Considerações sobre as recomendações</h1>
+<p>É desafiador fazer uma lista como essa, então queria deixar alguns <em>disclaimers</em> importantes aqui:</p>
+<ul>
+<li>Todos os recursos que vou listar aqui são conteúdos que eu li, assisti, experimentei e/ou acompanho, e posso dizer que, para mim, funcionou. Pode ser que não seja o caso para você mas, novamente, meu intuito não é trazer uma verdade absoluta, só um ponto de vista mesmo;<br>
+</li>
+<li>Se você discordar ou der falta de algum ponto ou conteúdo é só me sugerir, que vou experimentar, avaliar e colocar aqui se tiver sentido com a jornada maior;<br>
+</li>
+<li>Muitos dos materiais que tive acesso estão em inglês, e sei que isso pode ser uma barreira para muita gente. Muitos desses recursos tem legendas e tudo o mais, mas acho que ainda existe um gap considerável de conteúdos sobre IA Generativa traduzidos para o português. Se você tiver conhecimento de material traduzido ou estiver a fim de criar um, me avisa, pois acredito que tenha interesse em contribuir com isso;<br>
+</li>
+<li>Outro ponto importante é que a lista de recomendações foca em conteúdos *que não dependem de uma <em>self-paced</em>, que não depende de um horário marcado ou algo do gênero para você acompanhar (e.g., aulas online, lives não gravadas e etc). Por conta disso, tive que deixar de fora cursos bastante legais e úteis, como aqueles do pessoal da <a href="https://curso-r.com/cursos/">Curso-R</a>. Se você quiser recomendações dessa natureza, é só me procurar.</li>
+<li>Minha intenção vai ser manter essa lista atualizada, conforme eu mesmo for avançando nos meus estudos, amadurecendo o conhecimento, e novos e melhores conteúdos forem sendo lançados.</li>
+</ul></section><section id="como-estruturei-essa-jornada" class="level1"><h1>Como estruturei essa jornada?</h1>
+<p>Uma vez que IA Generativa, <em>(Large) Language Models</em> e tudo o mais é parte de algo muito maior e que é possível existir diferentes objetivos de aprendizado, resolvi estruturar a lista de recomendações fazendo uma adaptação da <a href="https://pt.wikipedia.org/wiki/Taxonomia_dos_objetivos_educacionais">taxonomia dos objetivos educacionais de Bloom</a>. A ideia principal desse arcabouço é que a capacidade de compreensão sobre um tema vai se aprofundando através de uma hierarquia de domínio cognitivo, partindo de um ponto em que um indíviduo apenas lembra de uma informação até o ponto em que ele é capaz de criar coisas novas a partir da combinação de informações e ideias distintas. Acredito que isso representa bem uma jornada de aprendizado e, como o próprio arcabouço trás, cada um dos níveis desta hierarquia pode ser descrito através de um verbo que deve definir o resultado principal obtido ali.</p>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># criando um conjunto de dados que sera usado para criar a figura</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'objetivo'</span> : [<span class="st">'Conhecer'</span>, <span class="st">'Entender'</span>, <span class="st">'Aplicar'</span>, <span class="st">'Adaptar'</span>, <span class="st">'Avaliar'</span>, <span class="st">'Inovar'</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'descricao'</span>: [</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Reconhecer e lembrar de fatos'</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Entender o que os fatos significam'</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Aplicar os fatos, regras, conceitos e ideias'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Combinar componentes independentes para</span><span class="ch">\n</span><span class="st">criar uma aplicação conhecida'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Criticar o valor da informação e ideias'</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Combinar componentes independentes para criar uma</span><span class="ch">\n</span><span class="st">aplicação inédita'</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cores'</span>  : [<span class="st">'#7030A0'</span>, <span class="st">'#0070C0'</span>, <span class="st">'#00B050'</span>, <span class="st">'#FFD54F'</span>, <span class="st">'#FF9933'</span>, <span class="st">'#FF2F2F'</span>]</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># criando dicionarios para definir o estilo dos textos da figura</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>objetivo_dict <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">20</span>, <span class="st">'weight'</span>: <span class="st">'bold'</span>, <span class="st">'family'</span>: <span class="st">'Staatliches'</span>}</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>descricao_dict <span class="op">=</span> {<span class="st">'size'</span>: <span class="dv">12</span>, <span class="st">'family'</span>: <span class="st">'Raleway'</span>}</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># criando o canvas da figura</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows <span class="op">=</span> <span class="dv">1</span>, ncols <span class="op">=</span> <span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># criando os pontos que marcam os limites inferiores e superiores do trapezio no</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># eixo x</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>x_left_min, x_right_min <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">4</span>, <span class="fl">0.5</span>), np.arange(<span class="dv">7</span>, <span class="dv">4</span>, <span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>x_left_max, x_right_max <span class="op">=</span> np.arange(<span class="fl">1.5</span>, <span class="fl">4.5</span>, <span class="fl">0.5</span>), np.arange(<span class="fl">6.5</span>, <span class="fl">3.5</span>, <span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># criando os pontos que marcam os limites inferiores e superiores do trapezio no</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># eixo y</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>y_min, y_max <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">6</span>), <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># iterando entre as coordenadas para criar cada um dos trapezios e o triangulo</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x1_min, x2_min, x2_max, x1_max, y1, y2, cor <span class="kw">in</span> <span class="bu">zip</span>(x_left_min, x_right_min, x_right_max, x_left_max, y_min, y_max, df.cores.values):</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># consolidando a lista de coordenadas do trapezio no eixo x - x1 é a parte de</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># baixo do trapezio e x2 é a parte de cima, min é o que está à esquer e o max</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># é o que está à direita</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> [x1_min, x2_min, x2_max, x1_max]</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># consolidando a lista de coordenadas com a altura dos trapezios, onde o y1 </span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># representa a altura da parte de baixo e o y2 o da parte de cima</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> [y1, y1, y2, y2]</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># criando um trapezio ou triangulo coloridos</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  ax.add_patch(patches.Polygon(xy <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(x,y)), fill <span class="op">=</span> <span class="va">True</span>, color <span class="op">=</span> cor, edgecolor <span class="op">=</span> <span class="st">'black'</span>))</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># criando a mesma figura geometrica, mas dessa vez sem cor e com a borda branca</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  ax.add_patch(patches.Polygon(xy <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(x,y)), fill <span class="op">=</span> <span class="va">False</span>, edgecolor <span class="op">=</span> <span class="st">'white'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>))</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma lista de valores para definir as coordenadas dos textos que descritivos</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>y_title <span class="op">=</span> np.arange(<span class="fl">0.7</span>, <span class="dv">6</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>y_text <span class="op">=</span> np.arange(<span class="fl">0.4</span>, <span class="dv">6</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>x_text <span class="op">=</span> np.arange(<span class="dv">7</span>, <span class="fl">4.9</span>, <span class="op">-</span><span class="fl">0.4</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># iterando entre os textos que queremos escrever e as coordenadas de onde os textos</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># estarão para escrever ele num loop - tanto o verbo quando a descrição</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> title_height, text_height, position, objetivo, descricao, cor <span class="kw">in</span> <span class="bu">zip</span>(y_title, y_text, x_text, df.objetivo, df.descricao, df.cores):</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  ax.text(x <span class="op">=</span> position, y <span class="op">=</span> title_height <span class="cf">if</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span> <span class="kw">in</span> descricao <span class="cf">else</span> title_height <span class="op">-</span> <span class="fl">0.12</span>, s <span class="op">=</span> objetivo, fontdict <span class="op">=</span> objetivo_dict, color <span class="op">=</span> cor)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  ax.text(x <span class="op">=</span> position, y <span class="op">=</span> text_height <span class="op">-</span> <span class="fl">0.2</span> <span class="cf">if</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span> <span class="kw">in</span> descricao <span class="cf">else</span> text_height <span class="op">-</span> <span class="fl">0.1</span>, s <span class="op">=</span> descricao, fontdict <span class="op">=</span> descricao_dict)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando a identidade visual na figura gerada</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'nacmarino.netlify.app'</span>, xy <span class="op">=</span> (<span class="fl">8.3</span>, <span class="op">-</span><span class="fl">0.2</span>), fontsize <span class="op">=</span> <span class="dv">10</span>, ha <span class="op">=</span> <span class="st">'left'</span>, </span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Passion One'</span>)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co"># removendo os completamente as informações dos eixos da figura </span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>fig.patch.set_facecolor(<span class="st">'white'</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co">## ajustando os limites da figura no eixo x e no eixo y</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">10</span>])<span class="op">;</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="dv">0</span>, <span class="dv">7</span>])<span class="op">;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando um titulo para a figura</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'Adaptação da Taxonomia de Bloom utilizada na lista de recomendações'</span>, xy <span class="op">=</span> (<span class="fl">1.5</span>, <span class="fl">6.5</span>), annotation_clip <span class="op">=</span> <span class="va">False</span>, </span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>            fontsize <span class="op">=</span> <span class="dv">20</span>, family <span class="op">=</span> <span class="st">'Staatliches'</span>)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co"># plotando a figura</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="index_files/figure-html/custom_bloom-3.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</section><section id="jornada-sugerida" class="level1 page-columns page-full"><h1>Jornada sugerida</h1>
+<p>A lista de sugestões está organizada principalmente ao redor daquela adaptação da taxonomia de Bloom.Aalguns conteúdos que sugiro se encaixam em mais de um dos níveis da taxonomia de Bloom, mas na maior parte dos casos decidi usar aquele em que tenho mais confiança que deve ajudar a atingir um determinado nível conhecimento. Além disso, adicionei algumas outras informações para deixar mais claro quanto esforço cada conteúdo demanda (em termos de tempo de dedicação) bem como o tipo de conteúdo (<em>i.e.</em>, curso, especialização, livro,…) e o foco central de cada conteúdo (<em>i.e.</em>, GenAI, fundação de aprendizado de máquina [ML], fundação de deep learning [DL]). Em algum ponto considerei definir uma sequência explícita, mas desisti dessa ideia depois de pensar que o que funciona para cada um é diferente. Vamos à lista.</p>
+<div class="cell page-columns page-full">
+<details><summary>Código</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># importando pacotes do R para a visualização abaixo</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># criando o conjunto de dados e a tabela interative</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">fornecedor</span>      , <span class="op">~</span><span class="va">material</span>                                                                  , <span class="op">~</span><span class="va">foco</span>     , <span class="op">~</span><span class="va">tipo</span>           , <span class="op">~</span><span class="va">momento</span>    , <span class="op">~</span><span class="va">duracao</span> , <span class="op">~</span><span class="va">link</span>,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI for Everyone'</span>                                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.coursera.org/learn/generative-ai-for-everyone'</span>                                      , </span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI with Large Language Models'</span>                                 , <span class="st">'GenAI'</span>   , <span class="st">'Especialização'</span>, <span class="st">'remember'</span>  , <span class="st">'Dias'</span>   , <span class="st">'https://www.coursera.org/learn/generative-ai-with-llms'</span>                                         ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Understanding and Applying Text Embeddings'</span>                               , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/google-cloud-vertex-ai/'</span>                              , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'ChatGPT Prompt Engineering for Developers'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/'</span>           , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Systems with the ChatGPT API'</span>                                    , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/'</span>                       , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Open Source Models with Hugging Face'</span>                                     , <span class="st">'ML'</span>      , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/'</span>                     , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Evaluating and Debugging Generative AI Models Using Weights and Biases'</span>   , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'evaluate'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/'</span>                  , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Finetuning Large Language Models'</span>                                         , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'create'</span>    , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/finetuning-large-language-models/'</span>                    , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Large Language Models with Semantic Search'</span>                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/large-language-models-semantic-search/'</span>               , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain for LLM Application Development'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/'</span>           , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain: Chat with Your Data'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/'</span>                       , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Preprocessing Unstructured Data for LLM Applications'</span>                     , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/preprocessing-unstructured-data-for-llm-applications/'</span>, </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Serverless LLM Apps Amazon Bedrock'</span>                                       , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/serverless-llm-apps-amazon-bedrock/'</span>                  , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'How Diffusion Models Work'</span>                                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/how-diffusion-models-work/'</span>                           ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Quantization Fundamentals'</span>                                                , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/quantization-fundamentals-with-hugging-face/'</span>         ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Machine Learning'</span>                                                         , <span class="st">'ML'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/machine-learning-introduction'</span>                         ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Deep Learning'</span>                                                            , <span class="st">'DL'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Meses'</span>  , <span class="st">'https://www.coursera.org/specializations/deep-learning'</span>                                         ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Natural Language Processing'</span>                                              , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/natural-language-processing'</span>                           ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative Adversarial Networks'</span>                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/generative-adversarial-networks-gans'</span>                  ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'AI for Medicine'</span>                                                          , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'analyze'</span>   , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/ai-for-medicine'</span>                                       ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Generative AI Applications with Gradio'</span>                          , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-generative-ai-applications-with-gradio/'</span>     ,</span>
+<span>  <span class="st">'d2l.ai'</span>         , <span class="st">'Dive into Deep Learning'</span>                                                  , <span class="st">'DL/GenAI'</span>, <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.d2l.ai/index.html'</span>                                                                  ,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Neural Networks'</span>                                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Video'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB'</span>    ,</span>
+<span>  <span class="st">'Andrej Karpathy'</span>, <span class="st">'Intro to Large Language Models'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=zjkBMFhNj_g'</span>                                                    ,</span>
+<span>  <span class="st">"O'Reilly"</span>       , <span class="st">'Designing Machine Learning Systems'</span>                                       , <span class="st">'ML'</span>      , <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/'</span></span>
+<span><span class="op">)</span>      </span>
+<span></span>
+<span><span class="co"># tabela com a ordem dos objetivos para facilitar organização da tabela</span></span>
+<span><span class="va">df_ordem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">momento</span>    , <span class="op">~</span><span class="va">ordem</span>, <span class="op">~</span><span class="va">objetivo</span> ,</span>
+<span>  <span class="st">'remember'</span>  , <span class="fl">6L</span>    , <span class="st">'Conhecer'</span>,</span>
+<span>  <span class="st">'understand'</span>, <span class="fl">5L</span>    , <span class="st">'Entender'</span>,</span>
+<span>  <span class="st">'apply'</span>     , <span class="fl">4L</span>    , <span class="st">'Aplicar'</span> ,</span>
+<span>  <span class="st">'analyze'</span>   , <span class="fl">3L</span>    , <span class="st">'Adaptar'</span>, </span>
+<span>  <span class="st">'evaluate'</span>  , <span class="fl">2L</span>    , <span class="st">'Criticar'</span>,</span>
+<span>  <span class="st">'create'</span>    , <span class="fl">1L</span>    , <span class="st">'Inovar'</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># consolidando uma tabela com todas as informações necessarias para criar a tabela</span></span>
+<span><span class="va">df_temp</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">df_ordem</span>, by <span class="op">=</span> <span class="st">'momento'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    objetivo <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span>.f <span class="op">=</span> <span class="va">objetivo</span>, .x <span class="op">=</span> <span class="va">ordem</span><span class="op">)</span>,</span>
+<span>    duracao  <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span>.f <span class="op">=</span> <span class="va">duracao</span>, <span class="st">'Horas'</span>, <span class="st">'Dias'</span>, <span class="st">'Semanas'</span>, <span class="st">'Meses'</span><span class="op">)</span>,</span>
+<span>    link     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">'&lt;p&gt;&lt;a href="%s"&gt;Link&lt;/a&gt;&lt;/p&gt;'</span>, <span class="va">link</span><span class="op">)</span>,</span>
+<span>    link     <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">link</span>, <span class="fu">gt</span><span class="fu">::</span><span class="va"><a href="https://gt.rstudio.com/reference/html.html">html</a></span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">objetivo</span>, <span class="va">material</span>, <span class="va">foco</span>, <span class="va">tipo</span>, <span class="va">fornecedor</span>, <span class="va">duracao</span>, <span class="va">link</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">objetivo</span>, <span class="va">duracao</span>, <span class="va">material</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="co"># criando a tabela com recomendacoes</span></span>
+<span><span class="va">df_temp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">objetivo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># renomeando as colunas</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
+<span>    material <span class="op">=</span> <span class="st">'Título'</span>, tipo <span class="op">=</span> <span class="st">'Tipo'</span>, fornecedor <span class="op">=</span> <span class="st">'Fornecedor'</span>,</span>
+<span>    duracao <span class="op">=</span> <span class="st">'Duração'</span>, link <span class="op">=</span> <span class="st">'Link'</span>, foco <span class="op">=</span> <span class="st">'Foco'</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># editando estilo do texto e borda dos nomes das colunas</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="st">'bottom'</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_labels.html">cells_column_labels</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># colocando uma linha para separar as linhas de cada grupo</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'grey40'</span>, sides <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">df_temp</span>, <span class="va">objetivo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">cumsum</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># colocando o nome dos materiais em negrito </span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">material</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># centralizando o texto da duracao, tipo de material, fornecedor e link centralizados</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">foco</span>, <span class="va">duracao</span>, <span class="va">tipo</span>, <span class="va">fornecedor</span>, <span class="va">link</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># ordenando os grupos da tabela de acordo com a taxonomia de bloom</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/row_group_order.html">row_group_order</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Conhecer'</span>, <span class="st">'Entender'</span>, <span class="st">'Aplicar'</span>, <span class="st">'Adaptar'</span>, <span class="st">'Criticar'</span>, <span class="st">'Inovar'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># definindo um estilo comum para a coluna que contem as informacoes do grupo</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'white'</span>, align <span class="op">=</span> <span class="st">'center'</span>, v_align <span class="op">=</span> <span class="st">'middle'</span>, weight <span class="op">=</span> <span class="st">'bold'</span><span class="op">)</span>, </span>
+<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'top'</span>, <span class="st">'bottom'</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># estilizando cada uma das colunas de grupo</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#7030A0'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Conhecer'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#0070C0'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Entender'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#00B050'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Aplicar'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FFD54F'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Adaptar'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF9933'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Criticar'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF2F2F'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Inovar'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># passando a coluna do grupo de uma linha para uma coluna em si</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># customizando outros aspectos da tabela, como linhas e fontes</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_lines.html">opt_table_lines</a></span><span class="op">(</span><span class="st">'none'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html">google_font</a></span><span class="op">(</span><span class="st">'Raleway'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co">#</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html">html</a></span><span class="op">(</span><span class="st">'&lt;p align="right"&gt;nacmarino.netlify.app&lt;/p&gt;'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html">google_font</a></span><span class="op">(</span><span class="st">"Passion One"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_footnotes.html">cells_footnotes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-page">
+
+<div id="eqvhacmjdt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Passion+One:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#eqvhacmjdt table {
+  font-family: Raleway, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eqvhacmjdt thead, #eqvhacmjdt tbody, #eqvhacmjdt tfoot, #eqvhacmjdt tr, #eqvhacmjdt td, #eqvhacmjdt th {
+  border-style: none;
+}
+
+#eqvhacmjdt p {
+  margin: 0;
+  padding: 0;
+}
+
+#eqvhacmjdt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: none;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#eqvhacmjdt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#eqvhacmjdt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#eqvhacmjdt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#eqvhacmjdt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#eqvhacmjdt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#eqvhacmjdt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#eqvhacmjdt .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#eqvhacmjdt .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#eqvhacmjdt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#eqvhacmjdt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eqvhacmjdt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#eqvhacmjdt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#eqvhacmjdt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#eqvhacmjdt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eqvhacmjdt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#eqvhacmjdt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#eqvhacmjdt .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#eqvhacmjdt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eqvhacmjdt .gt_first_summary_row {
+  border-top-style: none;
+  border-top-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#eqvhacmjdt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eqvhacmjdt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: none;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#eqvhacmjdt .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eqvhacmjdt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eqvhacmjdt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eqvhacmjdt .gt_left {
+  text-align: left;
+}
+
+#eqvhacmjdt .gt_center {
+  text-align: center;
+}
+
+#eqvhacmjdt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#eqvhacmjdt .gt_font_normal {
+  font-weight: normal;
+}
+
+#eqvhacmjdt .gt_font_bold {
+  font-weight: bold;
+}
+
+#eqvhacmjdt .gt_font_italic {
+  font-style: italic;
+}
+
+#eqvhacmjdt .gt_super {
+  font-size: 65%;
+}
+
+#eqvhacmjdt .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#eqvhacmjdt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#eqvhacmjdt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#eqvhacmjdt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#eqvhacmjdt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#eqvhacmjdt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#eqvhacmjdt .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Título">Título</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Foco">Foco</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Tipo">Tipo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Fornecedor">Fornecedor</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Duração">Duração</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-size: 14px; text-align: center; font-weight: bold; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40;" scope="col" id="Link">Link</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr class="gt_row_group_first">
+<td headers="Inovar stub_1_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #FF2F2F;">Inovar</td>
+<td headers="Inovar stub_1_1 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Finetuning Large Language Models</td>
+<td headers="Inovar stub_1_1 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Inovar stub_1_1 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Curso</td>
+<td headers="Inovar stub_1_1 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Inovar stub_1_1 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Horas</td>
+<td headers="Inovar stub_1_1 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/finetuning-large-language-models/">Link</a></p></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Criticar stub_1_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #FF9933;">Criticar</td>
+<td headers="Criticar stub_1_2 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Evaluating and Debugging Generative AI Models Using Weights and Biases</td>
+<td headers="Criticar stub_1_2 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Criticar stub_1_2 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Curso</td>
+<td headers="Criticar stub_1_2 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Criticar stub_1_2 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Horas</td>
+<td headers="Criticar stub_1_2 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/">Link</a></p></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Adaptar stub_1_3 stub_1" rowspan="3" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #FFD54F;">Adaptar</td>
+<td headers="Adaptar stub_1_3 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Building Generative AI Applications with Gradio</td>
+<td headers="Adaptar stub_1_3 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Adaptar stub_1_3 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Adaptar stub_1_3 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Adaptar stub_1_3 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Adaptar stub_1_3 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/building-generative-ai-applications-with-gradio/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Adaptar material_4 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Serverless LLM Apps Amazon Bedrock</td>
+<td headers="Adaptar material_4 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Adaptar material_4 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Adaptar material_4 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Adaptar material_4 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Adaptar material_4 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/serverless-llm-apps-amazon-bedrock/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Adaptar material_5 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">AI for Medicine</td>
+<td headers="Adaptar material_5 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">ML/DL</td>
+<td headers="Adaptar material_5 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Adaptar material_5 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Adaptar material_5 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Adaptar material_5 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/ai-for-medicine">Link</a></p></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Aplicar stub_1_6 stub_1" rowspan="5" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #00B050;">Aplicar</td>
+<td headers="Aplicar stub_1_6 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">LangChain: Chat with Your Data</td>
+<td headers="Aplicar stub_1_6 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Aplicar stub_1_6 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Aplicar stub_1_6 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Aplicar stub_1_6 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Aplicar stub_1_6 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Aplicar material_7 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Large Language Models with Semantic Search</td>
+<td headers="Aplicar material_7 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Aplicar material_7 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Aplicar material_7 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Aplicar material_7 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Aplicar material_7 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/large-language-models-semantic-search/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Aplicar material_8 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Open Source Models with Hugging Face</td>
+<td headers="Aplicar material_8 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
+<td headers="Aplicar material_8 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Aplicar material_8 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Aplicar material_8 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Aplicar material_8 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Aplicar material_9 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Generative Adversarial Networks</td>
+<td headers="Aplicar material_9 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Aplicar material_9 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Aplicar material_9 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Aplicar material_9 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Aplicar material_9 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/generative-adversarial-networks-gans">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Aplicar material_10 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Natural Language Processing</td>
+<td headers="Aplicar material_10 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">ML/DL</td>
+<td headers="Aplicar material_10 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Aplicar material_10 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Aplicar material_10 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Aplicar material_10 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/natural-language-processing">Link</a></p></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Entender stub_1_11 stub_1" rowspan="12" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #0070C0;">Entender</td>
+<td headers="Entender stub_1_11 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Building Systems with the ChatGPT API</td>
+<td headers="Entender stub_1_11 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender stub_1_11 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender stub_1_11 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender stub_1_11 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender stub_1_11 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_12 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">ChatGPT Prompt Engineering for Developers</td>
+<td headers="Entender material_12 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_12 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_12 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_12 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_12 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_13 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">How Diffusion Models Work</td>
+<td headers="Entender material_13 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_13 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_13 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_13 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_13 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/how-diffusion-models-work/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_14 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Intro to Large Language Models</td>
+<td headers="Entender material_14 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_14 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
+<td headers="Entender material_14 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Andrej Karpathy</td>
+<td headers="Entender material_14 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_14 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_15 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">LangChain for LLM Application Development</td>
+<td headers="Entender material_15 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_15 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_15 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_15 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_15 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_16 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Preprocessing Unstructured Data for LLM Applications</td>
+<td headers="Entender material_16 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_16 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_16 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_16 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_16 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/preprocessing-unstructured-data-for-llm-applications/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_17 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Quantization Fundamentals</td>
+<td headers="Entender material_17 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL</td>
+<td headers="Entender material_17 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_17 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_17 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_17 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/quantization-fundamentals-with-hugging-face/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_18 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Understanding and Applying Text Embeddings</td>
+<td headers="Entender material_18 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL</td>
+<td headers="Entender material_18 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Entender material_18 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Entender material_18 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Entender material_18 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/google-cloud-vertex-ai/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_19 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Designing Machine Learning Systems</td>
+<td headers="Entender material_19 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
+<td headers="Entender material_19 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Livro</td>
+<td headers="Entender material_19 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">O'Reilly</td>
+<td headers="Entender material_19 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Entender material_19 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_20 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Dive into Deep Learning</td>
+<td headers="Entender material_20 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Entender material_20 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Livro</td>
+<td headers="Entender material_20 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">d2l.ai</td>
+<td headers="Entender material_20 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Entender material_20 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.d2l.ai/index.html">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_21 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Machine Learning</td>
+<td headers="Entender material_21 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
+<td headers="Entender material_21 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Entender material_21 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Entender material_21 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Entender material_21 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/machine-learning-introduction">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_22 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Deep Learning</td>
+<td headers="Entender material_22 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">DL</td>
+<td headers="Entender material_22 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Entender material_22 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Entender material_22 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Meses</td>
+<td headers="Entender material_22 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/deep-learning">Link</a></p></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Conhecer stub_1_23 stub_1" rowspan="3" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #7030A0;">Conhecer</td>
+<td headers="Conhecer stub_1_23 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Generative AI for Everyone</td>
+<td headers="Conhecer stub_1_23 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Conhecer stub_1_23 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Conhecer stub_1_23 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Conhecer stub_1_23 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Conhecer stub_1_23 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-for-everyone">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Conhecer material_24 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Neural Networks</td>
+<td headers="Conhecer material_24 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Conhecer material_24 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
+<td headers="Conhecer material_24 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Conhecer material_24 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Conhecer material_24 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Conhecer material_25 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Generative AI with Large Language Models</td>
+<td headers="Conhecer material_25 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Conhecer material_25 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Conhecer material_25 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Conhecer material_25 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Dias</td>
+<td headers="Conhecer material_25 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-with-llms">Link</a></p></td>
+</tr>
+</tbody>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" style="font-family: 'Passion One'; font-size: 12px;" colspan="7"> <p align="right">nacmarino.netlify.app</p>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</section><section id="considerações-finais" class="level1"><h1>Considerações finais</h1>
+<p>Mais uma vez, a jornada de aprendizado e as coisas que funcionam variam de pessoa para pessoa, e meu propósito aqui não é definir uma lista de recomendações absoluta. Mas acredito que referências são importantes para termos um ponto de partida e não gastarmos tempo que muitas vezes não temos. Dúvidas, sugestões e críticas? É só me procurar!</p>
+<blockquote class="blockquote">
+<p>A imagem de capa desse post foi gerada por uma IA Generativa, disponibilizada através do <code>ideogram.ai</code>. Como toda ferramenta dessa natureza, ela é passível de falhas e podemos reparar que ela cometeu alguns pequenos erros na redação da frase que aparece na figura - esse é um dos exemplos que mostra que essa tecnologia não é perfeita. De uma forma ou de outra, para gerá-a, utilizei o prompt: A captivating and futuristic portrait of the Red Queen as an intricately designed robot, running gracefully through an enchanting landscape. She is adorned in her signature real attire, with a crown adorned with a striking red gemstone. Her metallic body showcases the gears and wires that reveal her mechanical nature. The background is a seamless blend of Victorian and steampunk elements, featuring dreamlike landscapes and machinery that lend an air of mystique. There is a phrase written in a clear bold text displayed on the image, which reads: “It takes all the running you can do, to keep in the same place.”</p>
+</blockquote>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># deletando o ambiente que usei para criar especificamente esse post</span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_remove</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas de rodapé</h2>
+<ol>
+<li id="fn1"><p>Sei que isso pode parecer conformismo ou falta de vontade de se esforçar, mas meu ponto de vista é que existem inúmeras formas de se chegar no mesmo lugar…a escolha entre elas vai depender de quanto tempo você tem e quão rápido você quer percorrer esse caminho.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2024,
+  author = {Marino, Nicholas},
+  title = {Como eu começaria a estudar GenAI hoje?},
+  date = {2024-06-24},
+  url = {https://nacmarino.netlify.app//posts/2024-06-24_genai-track},
+  langid = {pt}
+}
+</code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Por favor, cite este trabalho como:</div><div id="ref-marino2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Marino, Nicholas. 2024. <span>“Como eu começaria a estudar GenAI
+hoje?”</span> June 24, 2024. <a href="https://nacmarino.netlify.app//posts/2024-06-24_genai-track">https://nacmarino.netlify.app//posts/2024-06-24_genai-track</a>.
+</div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/nacmarino\.netlify\.app\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script><script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Blog created with <a href="https://quarto.org/">Quarto</a> by Nicholas Marino. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -323,6 +323,7 @@ tribble(
   'AWS'        , 'AWS Certified Solutions Architect Associate'        , 2022,
   'AWS'        , 'AWS Certified Cloud Practitioner'                   , 2022,
   'Coursera'   , 'Data Science: Foundations using R Specialization'   , 2022,
+  'Azure'      , 'AZ-900: Azure Fundamentals'                         , 2024
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
@@ -436,7 +437,9 @@ tribble(
   'DeepLearning.AI'      , 'Building and Evaluating Advanced RAG'                                                       , 2024,
   'DeepLearning.AI'      , 'Functions, Tools and Agents with LangChain'                                                 , 2024,
   'DeepLearning.AI'      , 'Vector Databases: from Embeddings to Applications'                                          , 2024,
-  'DeepLearning.AI'      , 'Preprocessing Unstructured Data for LLM Applications'                                       , 2024
+  'DeepLearning.AI'      , 'Preprocessing Unstructured Data for LLM Applications'                                       , 2024,
+  'DeepLearning.AI'      , 'Getting Started with Mistral'                                                               , 2024,
+  'DeepLearning.AI'      , 'Quantization Fundamentals'                                                                  , 2024
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
