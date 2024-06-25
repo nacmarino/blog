@@ -9,6 +9,8 @@ categories:
   - dataviz
   - genai
   - pov
+  - r
+  - python
 execute:
   warning: false
   fig-align: center
@@ -185,8 +187,10 @@ Essas questões me levaram a pensar em por quê não criar uma lista que consoli
 * Todos os recursos que vou listar aqui são conteúdos que eu li, assisti, experimentei e/ou acompanho, e posso dizer que, para mim, funcionou. Pode ser que não seja o caso para você mas, novamente, meu intuito não é trazer uma verdade absoluta, só um ponto de vista mesmo;  
 * Se você discordar ou der falta de algum ponto ou conteúdo é só me sugerir, que vou experimentar, avaliar e colocar aqui se tiver sentido com a jornada maior;  
 * Muitos dos materiais que tive acesso estão em inglês, e sei que isso pode ser uma barreira para muita gente. Muitos desses recursos tem legendas e tudo o mais, mas acho que ainda existe um gap considerável de conteúdos sobre IA Generativa traduzidos para o português. Se você tiver conhecimento de material traduzido ou estiver a fim de criar um, me avisa, pois acredito que tenha interesse em contribuir com isso;  
-* Outro ponto importante é que a lista de recomendações foca em conteúdos *que não dependem de uma _self-paced_, que não depende de um horário marcado ou algo do gênero para você acompanhar (e.g., aulas online, lives não gravadas e etc). Por conta disso, tive que deixar de fora cursos bastante legais e úteis, como aqueles do pessoal da [Curso-R](https://curso-r.com/cursos/). Se você quiser recomendações dessa natureza, é só me procurar. 
-* Minha intenção vai ser manter essa lista atualizada, conforme eu mesmo for avançando nos meus estudos, amadurecendo o conhecimento, e novos e melhores conteúdos forem sendo lançados.  
+* Outro ponto importante é que a lista de recomendações foca em conteúdos *que não dependem de uma _self-paced_, que não depende de um horário marcado ou algo do gênero para você acompanhar (e.g., aulas online, lives não gravadas e etc). Por conta disso, tive que deixar de fora cursos bastante legais e úteis, como o de Deep Learning do pessoal da [Curso-R](https://curso-r.com/cursos/). Se você quiser recomendações dessa natureza, é só me procurar;  
+* Meu foco aqui foi criar uma lista de recomendações cujo objetivo final é trazer mais entendimento sobre IA Generativa, e não necessariamente sobre Machine Learning, Estatístico ou Data Science. Ainda assim, considerei um ou outro conteúdo relacionado aos três últimos temas para ajudar a trazer mais clareza e compreensão sobre os detalhes técnicos associados à IA Generativa para quem estiver interessado. De toda forma, certamente haveriam outros conteúdos nessa lista caso o foco fosse qualquer um daqueles outros três temas;  
+* Minha intenção vai ser manter essa lista atualizada, conforme eu mesmo for avançando nos meus estudos, amadurecendo o conhecimento, e novos e melhores conteúdos forem sendo lançados;  
+* Um último ponto importante é que a **colocar a mão na massa** sempre vai ser um importante método de aprendizado. Portanto, apesar das minhas recomendações serem focadas em cursos e outros conteúdos teóricos, não deixe de encontrar alguma forma de praticar.
 
 # Como estruturei essa jornada?
 
