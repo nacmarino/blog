@@ -439,7 +439,9 @@ tribble(
   'DeepLearning.AI'      , 'Vector Databases: from Embeddings to Applications'                                          , 2024,
   'DeepLearning.AI'      , 'Preprocessing Unstructured Data for LLM Applications'                                       , 2024,
   'DeepLearning.AI'      , 'Getting Started with Mistral'                                                               , 2024,
-  'DeepLearning.AI'      , 'Quantization Fundamentals'                                                                  , 2024
+  'DeepLearning.AI'      , 'Quantization Fundamentals'                                                                  , 2024,
+  'DeepLearning.AI'      , 'Prompt Engineering with Llama 2 & 3'                                                        , 2024,
+  'DeepLearning.AI'      , 'Reinforcement Learning from Human Feedback'                                                 , 2024
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
@@ -471,7 +473,8 @@ tribble(
 -   Numerous presentations given at national and international ecology and limnology conferences and other academic events;    
 -   Multivariate analysis of geotechnical monitoring data applied to anomaly detection (19 Oct 2023, GTGH - Grupo Temático de Geotecnia e Hidrogeologia - Belo Horizonte, Brazil);  
 -   Monitoramento geotécnico orientado à dados: desafios, a jornada e lições aprendidas (27 Sep 2023, I Encontro Nacional de Centros de Monitoramento Geotécnico - Belo Horizonte, Brazil);  
--   Advanced analytics applied to InSAR monitoring program (02 Dez 2023, LOP - Large Open Pit Project - Vancouver, Canada).  
+-   Advanced analytics applied to InSAR monitoring program (02 Dez 2023, LOP - Large Open Pit Project - Vancouver, Canadá);  
+-   IA na Geotecnia: desafios e oportunidades (19 Jun 2024, GTGH - Grupo Temático de Geotecnia e Hidrogeologia - Belo Horizonte, Brasil).  
 
 ## Publications
 

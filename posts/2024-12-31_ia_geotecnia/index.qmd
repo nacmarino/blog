@@ -1,0 +1,45 @@
+---
+title: "IA na Geotecnia: desafios e oportunidades"
+subtitle: |
+  Ministrei uma palestra com o mesmo título deste post em um evento da área de Geotecnia, e achei tanto a discussão muito produtiva quanto as perspectivas de IA para a área. Como acredito que o tema é de interesse para um público maior do que aquele que estava no evento, resolvi colocar a parte da apresentação que posso compartilhar aqui.
+date: 07-03-2024
+image: "geotecnia.jpeg"
+categories:
+  - pov
+  - geotecnia
+execute:
+  warning: false
+  fig-align: center
+  embed-resources: true
+---
+
+# Background
+
+O campo do conhecimento da geotecnia é bem diverso, tanto em termos teóricos quanto em práticos. Entretanto, um aspecto que permeia todas essas aplicações são o papel fundamental que os dados têm para buscar uma melhor compreensão de  padrões e processos, auxiliar no monitoramento e na tomada de decisão. E isso reflete bastante na grande quantidade e variedade de dados coletados atualmente em um trabalho desta natureza - isso sem falar na frequência de coleta, onde sensores estão trazendo informações sobre o estado de uma estrutura com uma granularidade de tempo cada vez menor.
+
+Tendo atuado nessa área já há algum tempo, o que percebo é um desafio cada vez maior de fazer sentido dessa massa de dados, trazendo insights acionáveis para sustentar uma tomada de decisão um pouco mais embasada por dados. E é um pouco nessa linha que tenho atuado por aqui, tentando ajudar a trazer um pouquinho mais de inteligência analítica principalmente para dados de InSAR, além daquelas da instrumentação de monitoramento tradicional e outros métodos usados na área. Além disso, e o mais importante, é que essa jornada também me levou à conhecer pessoas incríveis, que me ensinaram bastante sobre o dia a dia da pessoa geotécnica, o esforço, dedicação, as dores que elas têm para analisar e agir sobre esses dados.
+
+Essa vivência junto à área combinada com o conhecimento em dados e IA é muito importante, principalmente para ajudar a enxergar um pouco melhor os desafios e oportunidades da aplicação de IA na Geotecnia. E esse foi o tema de uma palestra que ministei para a área nesse último mês, em que trouxe uma breve noção sobre o básico de IA, como ela tem sido usada (de forma geral) nas publicações acadêmicas voltadas para a geotecnia (e geociências como um todo), os principais desafios que a vivência mostrou até aqui, e algumas ideias que acredito podem ajudar à superar esse obstáculo. 
+
+Como acredito que o tema pode ser de interesse para um público muito maior que não estava presente, decidi compartilhar aqui nesse post uma parte dessa apresentação. É claro que o que eu trago aqui é um ponto de vista, e pode ser que essa visão esteja enviesada ou errada. Mas creio que é saudável trazer esse ponto para uma discussão e reflexão. Afinal, a aplicação de IA na geotecnia pode trazer muitos beneficios, e é uma abordagem muito tranformadora para a pessoa geotécnica: por exemplo, trazendo uma nova perspectiva sobre o que é uma análise de dados, facilitando a identificacao de um problema através dos dados e melhorando a produtividade em tarefas do dia a dia.
+
+Finalmente, a adoção de IA na geotecnia vai demandar cada vez mais uma cultura analítica mais robusta dentro da área (que acredito ser o maior desafio fora do mundo academico), particularmente no entendimento, desenho e avaliação de soluções que possam atuar junto das pessoas nos processos de tomada decisão.
+
+# Apresentação
+
+{{< pdf apresentacao.pdf width=600 height=400 >}}
+
+# Decisões sobre o storytelling
+
+Essa apresentação também foi um desafio pessoal para melhorar minhas habilidades em _storytelling_, pois sabia que meu público teria um bom background acadêmico focado em geotecnia, hidrogeologia, geologia, geofísica e etc, mas sem necessariamente ter o background em inteligência artificial e áreas afins. Portanto:
+
+1. Decidi começar com os resultados de uma pequena revisão sistemática da literatura acadêmica, para dar uma visão geral do quão importante era o tema da palestra, o tamanho do gap que existia e já trazer provocações sobre aspectos que eu abordaria na apresentação;  
+2. A partir daí, precisava dar acesso a todas as pessoas sobre algum conhecimento básico e visão geral sobre aprendizado de máquina e inteligência artificial, para que todos pudessem ter uma dimensão do porquê alguns desafios que eu traria logo adiante eram críticos;  
+3. Criei _momentum_ com essa última parte da apresentação para mostrar como IA é geralmente aplicada na literatura acadêmica, para em seguida desconstruir essa narrativa trazendo duas principais inconsistências na aplicação de IA na área;  
+4. A partir daí resolvi trazer os 5 principais desafios que acreditei serem mais relevantes para o público e a discussão. Os slides aqui ficaram mais densos pois sabia que a apresentação seria compartilhada depois e que o conteúdo era mais denso - então achei ok trazer mais material para quem quer que os visse depois pudesse recriar o conteúdo do que foi falado;  
+5. Concluí com dois slides...um trazendo uma perspectiva de acionáveis para superar o desafio e outro para desconstrair, mostrando o potencial das tecnologias de IA nos ajudar até da forma mais inusitada.  
+
+Não sei se a narrativa ficou boa, mas certamente foi uma experiência muito boa! Só tenho a agradecer a oportunidade!
+
+> A imagem de capa desse post foi gerada por uma IA Generativa, através do `ideogram.ai`. Para gerá-la, utilizei o prompt: A captivating image of a modern mining operation, where advanced AI solutions are driving efficient and strategic decision-making processes. The foreground showcases a high-tech control room, filled with monitors displaying real-time data and analytics. Miners are seen working with state-of-the-art machinery, while AI-powered drones surveil the area and optimize productivity. The background features a vast, sprawling mining site, with large excavators and conveyor belts transporting resources. The entire scene exudes an aura of innovation and progress.
+
