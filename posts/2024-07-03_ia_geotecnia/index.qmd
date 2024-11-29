@@ -42,4 +42,3 @@ Essa apresentação também foi um desafio pessoal para melhorar minhas habilida
 Não sei se a narrativa ficou boa, mas certamente foi uma experiência muito boa! Só tenho a agradecer a oportunidade!
 
 > A imagem de capa desse post foi gerada por uma IA Generativa, através do `ideogram.ai`. Para gerá-la, utilizei o prompt: A captivating image of a modern mining operation, where advanced AI solutions are driving efficient and strategic decision-making processes. The foreground showcases a high-tech control room, filled with monitors displaying real-time data and analytics. Miners are seen working with state-of-the-art machinery, while AI-powered drones surveil the area and optimize productivity. The background features a vast, sprawling mining site, with large excavators and conveyor belts transporting resources. The entire scene exudes an aura of innovation and progress.
-

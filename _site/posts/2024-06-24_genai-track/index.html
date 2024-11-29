@@ -174,6 +174,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Data de Modificação</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">29 de novembro de 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -430,31 +436,37 @@ Nota sobre a figura
 <span><span class="co"># criando o conjunto de dados e a tabela interative</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">fornecedor</span>      , <span class="op">~</span><span class="va">material</span>                                                                  , <span class="op">~</span><span class="va">foco</span>     , <span class="op">~</span><span class="va">tipo</span>           , <span class="op">~</span><span class="va">momento</span>    , <span class="op">~</span><span class="va">duracao</span> , <span class="op">~</span><span class="va">link</span>,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI for Everyone'</span>                                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.coursera.org/learn/generative-ai-for-everyone'</span>                                      , </span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI with Large Language Models'</span>                                 , <span class="st">'GenAI'</span>   , <span class="st">'Especialização'</span>, <span class="st">'remember'</span>  , <span class="st">'Dias'</span>   , <span class="st">'https://www.coursera.org/learn/generative-ai-with-llms'</span>                                         ,</span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Understanding and Applying Text Embeddings'</span>                               , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/google-cloud-vertex-ai/'</span>                              , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'ChatGPT Prompt Engineering for Developers'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/'</span>           , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Systems with the ChatGPT API'</span>                                    , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/'</span>                       , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Open Source Models with Hugging Face'</span>                                     , <span class="st">'ML'</span>      , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/'</span>                     , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Evaluating and Debugging Generative AI Models Using Weights and Biases'</span>   , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'evaluate'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/'</span>                  , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Finetuning Large Language Models'</span>                                         , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'create'</span>    , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/finetuning-large-language-models/'</span>                    , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Large Language Models with Semantic Search'</span>                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/large-language-models-semantic-search/'</span>               , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain for LLM Application Development'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/'</span>           , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain: Chat with Your Data'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/'</span>                       , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Preprocessing Unstructured Data for LLM Applications'</span>                     , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/preprocessing-unstructured-data-for-llm-applications/'</span>, </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Serverless LLM Apps Amazon Bedrock'</span>                                       , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/serverless-llm-apps-amazon-bedrock/'</span>                  , </span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'How Diffusion Models Work'</span>                                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/how-diffusion-models-work/'</span>                           ,</span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Quantization Fundamentals'</span>                                                , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/quantization-fundamentals-with-hugging-face/'</span>         ,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Machine Learning'</span>                                                         , <span class="st">'ML'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/machine-learning-introduction'</span>                         ,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Deep Learning'</span>                                                            , <span class="st">'DL'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Meses'</span>  , <span class="st">'https://www.coursera.org/specializations/deep-learning'</span>                                         ,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Natural Language Processing'</span>                                              , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/natural-language-processing'</span>                           ,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative Adversarial Networks'</span>                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/generative-adversarial-networks-gans'</span>                  ,</span>
-<span>  <span class="st">'Coursera'</span>       , <span class="st">'AI for Medicine'</span>                                                          , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'analyze'</span>   , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/ai-for-medicine'</span>                                       ,</span>
-<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Generative AI Applications with Gradio'</span>                          , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-generative-ai-applications-with-gradio/'</span>     ,</span>
-<span>  <span class="st">'d2l.ai'</span>         , <span class="st">'Dive into Deep Learning'</span>                                                  , <span class="st">'DL/GenAI'</span>, <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.d2l.ai/index.html'</span>                                                                  ,</span>
-<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Neural Networks'</span>                                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Video'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB'</span>    ,</span>
-<span>  <span class="st">'Andrej Karpathy'</span>, <span class="st">'Intro to Large Language Models'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=zjkBMFhNj_g'</span>                                                    ,</span>
-<span>  <span class="st">"O'Reilly"</span>       , <span class="st">'Designing Machine Learning Systems'</span>                                       , <span class="st">'ML'</span>      , <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/'</span></span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI for Everyone'</span>                                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.coursera.org/learn/generative-ai-for-everyone'</span>                                          , </span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative AI with Large Language Models'</span>                                 , <span class="st">'GenAI'</span>   , <span class="st">'Especialização'</span>, <span class="st">'remember'</span>  , <span class="st">'Dias'</span>   , <span class="st">'https://www.coursera.org/learn/generative-ai-with-llms'</span>                                             ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Understanding and Applying Text Embeddings'</span>                               , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/google-cloud-vertex-ai/'</span>                                  , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'ChatGPT Prompt Engineering for Developers'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/'</span>               , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Systems with the ChatGPT API'</span>                                    , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/'</span>                           , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Open Source Models with Hugging Face'</span>                                     , <span class="st">'ML'</span>      , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/open-source-models-hugging-face/'</span>                         , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Evaluating and Debugging Generative AI Models Using Weights and Biases'</span>   , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'evaluate'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/'</span>                      , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Finetuning Large Language Models'</span>                                         , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'create'</span>    , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/finetuning-large-language-models/'</span>                        , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Large Language Models with Semantic Search'</span>                               , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/large-language-models-semantic-search/'</span>                   , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain for LLM Application Development'</span>                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/'</span>               , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'LangChain: Chat with Your Data'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'apply'</span>     , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/'</span>                           , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Preprocessing Unstructured Data for LLM Applications'</span>                     , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/preprocessing-unstructured-data-for-llm-applications/'</span>    , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Serverless LLM Apps Amazon Bedrock'</span>                                       , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/serverless-llm-apps-amazon-bedrock/'</span>                      , </span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'How Diffusion Models Work'</span>                                                , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/how-diffusion-models-work/'</span>                               ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Quantization Fundamentals'</span>                                                , <span class="st">'DL'</span>      , <span class="st">'Curso'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/quantization-fundamentals-with-hugging-face/'</span>             ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Machine Learning'</span>                                                         , <span class="st">'ML'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/machine-learning-introduction'</span>                             ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Deep Learning'</span>                                                            , <span class="st">'DL'</span>      , <span class="st">'Especialização'</span>, <span class="st">'understand'</span>, <span class="st">'Meses'</span>  , <span class="st">'https://www.coursera.org/specializations/deep-learning'</span>                                             ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Natural Language Processing'</span>                                              , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/natural-language-processing'</span>                               ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'Generative Adversarial Networks'</span>                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Especialização'</span>, <span class="st">'apply'</span>     , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/generative-adversarial-networks-gans'</span>                      ,</span>
+<span>  <span class="st">'Coursera'</span>       , <span class="st">'AI for Medicine'</span>                                                          , <span class="st">'ML/DL'</span>   , <span class="st">'Especialização'</span>, <span class="st">'analyze'</span>   , <span class="st">'Semanas'</span>, <span class="st">'https://www.coursera.org/specializations/ai-for-medicine'</span>                                           ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'Building Generative AI Applications with Gradio'</span>                          , <span class="st">'GenAI'</span>   , <span class="st">'Curso'</span>         , <span class="st">'analyze'</span>   , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/building-generative-ai-applications-with-gradio/'</span>         ,</span>
+<span>  <span class="st">'d2l.ai'</span>         , <span class="st">'Dive into Deep Learning'</span>                                                  , <span class="st">'DL/GenAI'</span>, <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.d2l.ai/index.html'</span>                                                                      ,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Neural Networks'</span>                                                          , <span class="st">'DL/GenAI'</span>, <span class="st">'Video'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB'</span>        ,</span>
+<span>  <span class="st">'Andrej Karpathy'</span>, <span class="st">'Intro to Large Language Models'</span>                                           , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Horas'</span>  , <span class="st">'https://www.youtube.com/watch?v=zjkBMFhNj_g'</span>                                                        ,</span>
+<span>  <span class="st">"O'Reilly"</span>       , <span class="st">'Designing Machine Learning Systems'</span>                                       , <span class="st">'ML'</span>      , <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/'</span>                     ,</span>
+<span>  <span class="st">'DeepLearning.ai'</span>, <span class="st">'AI Python for Beginners: Basics of AI Python Coding'</span>                      , <span class="st">'Python'</span>  , <span class="st">'Curso'</span>         , <span class="st">'remember'</span>  , <span class="st">'Horas'</span>  , <span class="st">'https://www.deeplearning.ai/short-courses/ai-python-for-beginners/'</span>                                 ,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Large Language Models explained briefly'</span>                                  , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'remember'</span>  , <span class="st">'Minutos'</span>, <span class="st">'https://www.youtube.com/watch?v=LPZh9BOjkQs'</span>                                                        ,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Transformers (how LLMs work) explained visually'</span>                          , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Minutos'</span>, <span class="st">'https://www.youtube.com/watch?v=wjZofJX0v4M&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=6&amp;pp=iAQB'</span>,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'Attention in transformers, visually explained'</span>                            , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Minutos'</span>, <span class="st">'https://www.youtube.com/watch?v=eMlx5fFNoYc&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=7&amp;pp=iAQB'</span>,</span>
+<span>  <span class="st">'3Blue1Brown'</span>    , <span class="st">'How might LLMs store facts'</span>                                               , <span class="st">'GenAI'</span>   , <span class="st">'Video'</span>         , <span class="st">'understand'</span>, <span class="st">'Minutos'</span>, <span class="st">'https://www.youtube.com/watch?v=9-Jl0dxWQs8&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=8&amp;pp=iAQB'</span>,</span>
+<span>  <span class="st">'Springer'</span>       , <span class="st">'An Introduction to Statistical Learning'</span>                                  , <span class="st">'ML'</span>      , <span class="st">'Livro'</span>         , <span class="st">'understand'</span>, <span class="st">'Semanas'</span>, <span class="st">'https://www.statlearning.com/'</span></span>
 <span><span class="op">)</span>      </span>
 <span></span>
 <span><span class="co"># tabela com a ordem dos objetivos para facilitar organização da tabela</span></span>
@@ -475,7 +487,7 @@ Nota sobre a figura
 <span>    objetivo <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span>.f <span class="op">=</span> <span class="va">objetivo</span>, .x <span class="op">=</span> <span class="va">ordem</span><span class="op">)</span>,</span>
 <span>    duracao  <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span>.f <span class="op">=</span> <span class="va">duracao</span>, <span class="st">'Horas'</span>, <span class="st">'Dias'</span>, <span class="st">'Semanas'</span>, <span class="st">'Meses'</span><span class="op">)</span>,</span>
 <span>    link     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">'&lt;p&gt;&lt;a href="%s"&gt;Link&lt;/a&gt;&lt;/p&gt;'</span>, <span class="va">link</span><span class="op">)</span>,</span>
-<span>    link     <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">link</span>, <span class="fu">gt</span><span class="fu">::</span><span class="va"><a href="https://gt.rstudio.com/reference/html.html">html</a></span><span class="op">)</span></span>
+<span>    link     <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">link</span>, <span class="fu">gt</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/gt/man/html.html">html</a></span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">objetivo</span>, <span class="va">material</span>, <span class="va">foco</span>, <span class="va">tipo</span>, <span class="va">fornecedor</span>, <span class="va">duracao</span>, <span class="va">link</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">objetivo</span>, <span class="va">duracao</span>, <span class="va">material</span><span class="op">)</span></span>
@@ -483,101 +495,101 @@ Nota sobre a figura
 <span><span class="co"># criando a tabela com recomendacoes</span></span>
 <span><span class="va">df_temp</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">objetivo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># renomeando as colunas</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cols_label.html">cols_label</a></span><span class="op">(</span></span>
 <span>    material <span class="op">=</span> <span class="st">'Título'</span>, tipo <span class="op">=</span> <span class="st">'Tipo'</span>, fornecedor <span class="op">=</span> <span class="st">'Fornecedor'</span>,</span>
 <span>    duracao <span class="op">=</span> <span class="st">'Duração'</span>, link <span class="op">=</span> <span class="st">'Link'</span>, foco <span class="op">=</span> <span class="st">'Foco'</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># editando estilo do texto e borda dos nomes das colunas</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="st">'bottom'</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/px.html">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="st">'bottom'</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_labels.html">cells_column_labels</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_column_labels.html">cells_column_labels</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># colocando uma linha para separar as linhas de cada grupo</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'grey40'</span>, sides <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">df_temp</span>, <span class="va">objetivo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">cumsum</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_borders.html">cell_borders</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'grey40'</span>, sides <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_body.html">cells_body</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">df_temp</span>, <span class="va">objetivo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">cumsum</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># colocando o nome dos materiais em negrito </span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">material</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_text.html">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">'bold'</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">material</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># centralizando o texto da duracao, tipo de material, fornecedor e link centralizados</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">foco</span>, <span class="va">duracao</span>, <span class="va">tipo</span>, <span class="va">fornecedor</span>, <span class="va">link</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_text.html">cell_text</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">'center'</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">foco</span>, <span class="va">duracao</span>, <span class="va">tipo</span>, <span class="va">fornecedor</span>, <span class="va">link</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># ordenando os grupos da tabela de acordo com a taxonomia de bloom</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/row_group_order.html">row_group_order</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Conhecer'</span>, <span class="st">'Entender'</span>, <span class="st">'Aplicar'</span>, <span class="st">'Adaptar'</span>, <span class="st">'Criticar'</span>, <span class="st">'Inovar'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/row_group_order.html">row_group_order</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Conhecer'</span>, <span class="st">'Entender'</span>, <span class="st">'Aplicar'</span>, <span class="st">'Adaptar'</span>, <span class="st">'Criticar'</span>, <span class="st">'Inovar'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># definindo um estilo comum para a coluna que contem as informacoes do grupo</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'white'</span>, align <span class="op">=</span> <span class="st">'center'</span>, v_align <span class="op">=</span> <span class="st">'middle'</span>, weight <span class="op">=</span> <span class="st">'bold'</span><span class="op">)</span>, </span>
-<span>      <span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'top'</span>, <span class="st">'bottom'</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_text.html">cell_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'white'</span>, align <span class="op">=</span> <span class="st">'center'</span>, v_align <span class="op">=</span> <span class="st">'middle'</span>, weight <span class="op">=</span> <span class="st">'bold'</span><span class="op">)</span>, </span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_borders.html">cell_borders</a></span><span class="op">(</span>sides <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'top'</span>, <span class="st">'bottom'</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">'grey40'</span><span class="op">)</span></span>
 <span>    <span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># estilizando cada uma das colunas de grupo</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#7030A0'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Conhecer'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#7030A0'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Conhecer'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#0070C0'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Entender'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#0070C0'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Entender'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#00B050'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Aplicar'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#00B050'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Aplicar'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FFD54F'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Adaptar'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FFD54F'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Adaptar'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF9933'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Criticar'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF9933'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Criticar'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF2F2F'</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Inovar'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_fill.html">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'#FF2F2F'</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_row_groups.html">cells_row_groups</a></span><span class="op">(</span>groups <span class="op">=</span> <span class="st">'Inovar'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># passando a coluna do grupo de uma linha para uma coluna em si</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_options.html">tab_options</a></span><span class="op">(</span>row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># customizando outros aspectos da tabela, como linhas e fontes</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_lines.html">opt_table_lines</a></span><span class="op">(</span><span class="st">'none'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html">google_font</a></span><span class="op">(</span><span class="st">'Raleway'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/opt_table_lines.html">opt_table_lines</a></span><span class="op">(</span><span class="st">'none'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/opt_table_font.html">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/google_font.html">google_font</a></span><span class="op">(</span><span class="st">'Raleway'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co">#</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html">html</a></span><span class="op">(</span><span class="st">'&lt;p align="right"&gt;nacmarino.netlify.app&lt;/p&gt;'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html">google_font</a></span><span class="op">(</span><span class="st">"Passion One"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_footnotes.html">cells_footnotes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_footnote.html">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/html.html">html</a></span><span class="op">(</span><span class="st">'&lt;p align="right"&gt;nacmarino.netlify.app&lt;/p&gt;'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_style.html">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cell_text.html">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/google_font.html">google_font</a></span><span class="op">(</span><span class="st">"Passion One"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/px.html">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gt/man/cells_footnotes.html">cells_footnotes</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display column-page">
 
-<div id="ayduizjzxr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nnktkmzvsn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Passion+One:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ayduizjzxr table {
+#nnktkmzvsn table {
   font-family: Raleway, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ayduizjzxr thead, #ayduizjzxr tbody, #ayduizjzxr tfoot, #ayduizjzxr tr, #ayduizjzxr td, #ayduizjzxr th {
+#nnktkmzvsn thead, #nnktkmzvsn tbody, #nnktkmzvsn tfoot, #nnktkmzvsn tr, #nnktkmzvsn td, #nnktkmzvsn th {
   border-style: none;
 }
 
-#ayduizjzxr p {
+#nnktkmzvsn p {
   margin: 0;
   padding: 0;
 }
 
-#ayduizjzxr .gt_table {
+#nnktkmzvsn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -603,12 +615,12 @@ Nota sobre a figura
   border-left-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_caption {
+#nnktkmzvsn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ayduizjzxr .gt_title {
+#nnktkmzvsn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -620,7 +632,7 @@ Nota sobre a figura
   border-bottom-width: 0;
 }
 
-#ayduizjzxr .gt_subtitle {
+#nnktkmzvsn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -632,7 +644,7 @@ Nota sobre a figura
   border-top-width: 0;
 }
 
-#ayduizjzxr .gt_heading {
+#nnktkmzvsn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -644,13 +656,13 @@ Nota sobre a figura
   border-right-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_bottom_border {
+#nnktkmzvsn .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_col_headings {
+#nnktkmzvsn .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +677,7 @@ Nota sobre a figura
   border-right-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_col_heading {
+#nnktkmzvsn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,7 +697,7 @@ Nota sobre a figura
   overflow-x: hidden;
 }
 
-#ayduizjzxr .gt_column_spanner_outer {
+#nnktkmzvsn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -697,15 +709,15 @@ Nota sobre a figura
   padding-right: 4px;
 }
 
-#ayduizjzxr .gt_column_spanner_outer:first-child {
+#nnktkmzvsn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ayduizjzxr .gt_column_spanner_outer:last-child {
+#nnktkmzvsn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ayduizjzxr .gt_column_spanner {
+#nnktkmzvsn .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -717,11 +729,11 @@ Nota sobre a figura
   width: 100%;
 }
 
-#ayduizjzxr .gt_spanner_row {
+#nnktkmzvsn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ayduizjzxr .gt_group_heading {
+#nnktkmzvsn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -747,7 +759,7 @@ Nota sobre a figura
   text-align: left;
 }
 
-#ayduizjzxr .gt_empty_group_heading {
+#nnktkmzvsn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -762,15 +774,15 @@ Nota sobre a figura
   vertical-align: middle;
 }
 
-#ayduizjzxr .gt_from_md > :first-child {
+#nnktkmzvsn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ayduizjzxr .gt_from_md > :last-child {
+#nnktkmzvsn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ayduizjzxr .gt_row {
+#nnktkmzvsn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,7 +801,7 @@ Nota sobre a figura
   overflow-x: hidden;
 }
 
-#ayduizjzxr .gt_stub {
+#nnktkmzvsn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -802,7 +814,7 @@ Nota sobre a figura
   padding-right: 5px;
 }
 
-#ayduizjzxr .gt_stub_row_group {
+#nnktkmzvsn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -816,15 +828,15 @@ Nota sobre a figura
   vertical-align: top;
 }
 
-#ayduizjzxr .gt_row_group_first td {
+#nnktkmzvsn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ayduizjzxr .gt_row_group_first th {
+#nnktkmzvsn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ayduizjzxr .gt_summary_row {
+#nnktkmzvsn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -834,16 +846,16 @@ Nota sobre a figura
   padding-right: 5px;
 }
 
-#ayduizjzxr .gt_first_summary_row {
+#nnktkmzvsn .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_first_summary_row.thick {
+#nnktkmzvsn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ayduizjzxr .gt_last_summary_row {
+#nnktkmzvsn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,7 +865,7 @@ Nota sobre a figura
   border-bottom-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_grand_summary_row {
+#nnktkmzvsn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -863,7 +875,7 @@ Nota sobre a figura
   padding-right: 5px;
 }
 
-#ayduizjzxr .gt_first_grand_summary_row {
+#nnktkmzvsn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -873,7 +885,7 @@ Nota sobre a figura
   border-top-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_last_grand_summary_row_top {
+#nnktkmzvsn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -883,11 +895,11 @@ Nota sobre a figura
   border-bottom-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_striped {
+#nnktkmzvsn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ayduizjzxr .gt_table_body {
+#nnktkmzvsn .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -896,7 +908,7 @@ Nota sobre a figura
   border-bottom-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_footnotes {
+#nnktkmzvsn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -910,7 +922,7 @@ Nota sobre a figura
   border-right-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_footnote {
+#nnktkmzvsn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -919,7 +931,7 @@ Nota sobre a figura
   padding-right: 5px;
 }
 
-#ayduizjzxr .gt_sourcenotes {
+#nnktkmzvsn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -933,7 +945,7 @@ Nota sobre a figura
   border-right-color: #D3D3D3;
 }
 
-#ayduizjzxr .gt_sourcenote {
+#nnktkmzvsn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -941,63 +953,63 @@ Nota sobre a figura
   padding-right: 5px;
 }
 
-#ayduizjzxr .gt_left {
+#nnktkmzvsn .gt_left {
   text-align: left;
 }
 
-#ayduizjzxr .gt_center {
+#nnktkmzvsn .gt_center {
   text-align: center;
 }
 
-#ayduizjzxr .gt_right {
+#nnktkmzvsn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ayduizjzxr .gt_font_normal {
+#nnktkmzvsn .gt_font_normal {
   font-weight: normal;
 }
 
-#ayduizjzxr .gt_font_bold {
+#nnktkmzvsn .gt_font_bold {
   font-weight: bold;
 }
 
-#ayduizjzxr .gt_font_italic {
+#nnktkmzvsn .gt_font_italic {
   font-style: italic;
 }
 
-#ayduizjzxr .gt_super {
+#nnktkmzvsn .gt_super {
   font-size: 65%;
 }
 
-#ayduizjzxr .gt_footnote_marks {
+#nnktkmzvsn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ayduizjzxr .gt_asterisk {
+#nnktkmzvsn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ayduizjzxr .gt_indent_1 {
+#nnktkmzvsn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ayduizjzxr .gt_indent_2 {
+#nnktkmzvsn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ayduizjzxr .gt_indent_3 {
+#nnktkmzvsn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ayduizjzxr .gt_indent_4 {
+#nnktkmzvsn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ayduizjzxr .gt_indent_5 {
+#nnktkmzvsn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1097,7 +1109,7 @@ Nota sobre a figura
 <td headers="Aplicar material_10 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/natural-language-processing">Link</a></p></td>
 </tr>
 <tr class="gt_row_group_first">
-<td headers="Entender stub_1_11 stub_1" rowspan="12" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #0070C0;">Entender</td>
+<td headers="Entender stub_1_11 stub_1" rowspan="16" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #0070C0;">Entender</td>
 <td headers="Entender stub_1_11 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Building Systems with the ChatGPT API</td>
 <td headers="Entender stub_1_11 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
 <td headers="Entender stub_1_11 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
@@ -1162,61 +1174,109 @@ Nota sobre a figura
 <td headers="Entender material_18 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/google-cloud-vertex-ai/">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Entender material_19 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Designing Machine Learning Systems</td>
+<td headers="Entender material_19 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">An Introduction to Statistical Learning</td>
 <td headers="Entender material_19 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
 <td headers="Entender material_19 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Livro</td>
-<td headers="Entender material_19 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">O'Reilly</td>
+<td headers="Entender material_19 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Springer</td>
 <td headers="Entender material_19 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
-<td headers="Entender material_19 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Link</a></p></td>
+<td headers="Entender material_19 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.statlearning.com/">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Entender material_20 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Dive into Deep Learning</td>
-<td headers="Entender material_20 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Entender material_20 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Designing Machine Learning Systems</td>
+<td headers="Entender material_20 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
 <td headers="Entender material_20 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Livro</td>
-<td headers="Entender material_20 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">d2l.ai</td>
+<td headers="Entender material_20 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">O'Reilly</td>
 <td headers="Entender material_20 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
-<td headers="Entender material_20 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.d2l.ai/index.html">Link</a></p></td>
+<td headers="Entender material_20 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Entender material_21 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Machine Learning</td>
-<td headers="Entender material_21 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
-<td headers="Entender material_21 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
-<td headers="Entender material_21 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Entender material_21 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Dive into Deep Learning</td>
+<td headers="Entender material_21 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Entender material_21 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Livro</td>
+<td headers="Entender material_21 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">d2l.ai</td>
 <td headers="Entender material_21 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
-<td headers="Entender material_21 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/machine-learning-introduction">Link</a></p></td>
+<td headers="Entender material_21 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.d2l.ai/index.html">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Entender material_22 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Deep Learning</td>
-<td headers="Entender material_22 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">DL</td>
-<td headers="Entender material_22 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
-<td headers="Entender material_22 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
-<td headers="Entender material_22 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Meses</td>
-<td headers="Entender material_22 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/deep-learning">Link</a></p></td>
+<td headers="Entender material_22 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Machine Learning</td>
+<td headers="Entender material_22 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">ML</td>
+<td headers="Entender material_22 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Entender material_22 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Entender material_22 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Semanas</td>
+<td headers="Entender material_22 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/machine-learning-introduction">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_23 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Deep Learning</td>
+<td headers="Entender material_23 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL</td>
+<td headers="Entender material_23 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Entender material_23 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Entender material_23 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Meses</td>
+<td headers="Entender material_23 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/specializations/deep-learning">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_24 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Attention in transformers, visually explained</td>
+<td headers="Entender material_24 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_24 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
+<td headers="Entender material_24 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Entender material_24 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Minutos</td>
+<td headers="Entender material_24 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=eMlx5fFNoYc&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=7&amp;pp=iAQB">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_25 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">How might LLMs store facts</td>
+<td headers="Entender material_25 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_25 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
+<td headers="Entender material_25 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Entender material_25 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Minutos</td>
+<td headers="Entender material_25 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=9-Jl0dxWQs8&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=8&amp;pp=iAQB">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Entender material_26 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Transformers (how LLMs work) explained visually</td>
+<td headers="Entender material_26 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Entender material_26 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Video</td>
+<td headers="Entender material_26 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Entender material_26 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Minutos</td>
+<td headers="Entender material_26 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=wjZofJX0v4M&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=6&amp;pp=iAQB">Link</a></p></td>
 </tr>
 <tr class="gt_row_group_first">
-<td headers="Conhecer stub_1_23 stub_1" rowspan="3" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #7030A0;">Conhecer</td>
-<td headers="Conhecer stub_1_23 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Generative AI for Everyone</td>
-<td headers="Conhecer stub_1_23 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
-<td headers="Conhecer stub_1_23 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
-<td headers="Conhecer stub_1_23 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
-<td headers="Conhecer stub_1_23 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
-<td headers="Conhecer stub_1_23 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-for-everyone">Link</a></p></td>
+<td headers="Conhecer stub_1_27 stub_1" rowspan="5" class="gt_row gt_left gt_stub_row_group" style="color: #FFFFFF; text-align: center; vertical-align: middle; font-weight: bold; border-top-width: 1px; border-top-style: solid; border-top-color: grey40; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; background-color: #7030A0;">Conhecer</td>
+<td headers="Conhecer stub_1_27 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">AI Python for Beginners: Basics of AI Python Coding</td>
+<td headers="Conhecer stub_1_27 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Python</td>
+<td headers="Conhecer stub_1_27 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Conhecer stub_1_27 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DeepLearning.ai</td>
+<td headers="Conhecer stub_1_27 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Conhecer stub_1_27 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.deeplearning.ai/short-courses/ai-python-for-beginners/">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Conhecer material_24 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Neural Networks</td>
-<td headers="Conhecer material_24 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
-<td headers="Conhecer material_24 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
-<td headers="Conhecer material_24 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">3Blue1Brown</td>
-<td headers="Conhecer material_24 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
-<td headers="Conhecer material_24 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB">Link</a></p></td>
+<td headers="Conhecer material_28 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Generative AI for Everyone</td>
+<td headers="Conhecer material_28 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Conhecer material_28 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Curso</td>
+<td headers="Conhecer material_28 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Conhecer material_28 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Conhecer material_28 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-for-everyone">Link</a></p></td>
 </tr>
 <tr>
-<td headers="Conhecer material_25 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Generative AI with Large Language Models</td>
-<td headers="Conhecer material_25 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
-<td headers="Conhecer material_25 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Especialização</td>
-<td headers="Conhecer material_25 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Coursera</td>
-<td headers="Conhecer material_25 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Dias</td>
-<td headers="Conhecer material_25 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-with-llms">Link</a></p></td>
+<td headers="Conhecer material_29 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Neural Networks</td>
+<td headers="Conhecer material_29 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">DL/GenAI</td>
+<td headers="Conhecer material_29 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Video</td>
+<td headers="Conhecer material_29 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Conhecer material_29 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Horas</td>
+<td headers="Conhecer material_29 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;pp=iAQB">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Conhecer material_30 material" class="gt_row gt_left" style="font-size: 12px; font-weight: bold;">Generative AI with Large Language Models</td>
+<td headers="Conhecer material_30 foco" class="gt_row gt_left" style="font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Conhecer material_30 tipo" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Especialização</td>
+<td headers="Conhecer material_30 fornecedor" class="gt_row gt_left" style="font-size: 12px; text-align: center;">Coursera</td>
+<td headers="Conhecer material_30 duracao" class="gt_row gt_center" style="font-size: 12px; text-align: center;">Dias</td>
+<td headers="Conhecer material_30 link" class="gt_row gt_center" style="font-size: 12px; text-align: center;"><p><a href="https://www.coursera.org/learn/generative-ai-with-llms">Link</a></p></td>
+</tr>
+<tr>
+<td headers="Conhecer material_31 material" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; font-weight: bold;">Large Language Models explained briefly</td>
+<td headers="Conhecer material_31 foco" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">GenAI</td>
+<td headers="Conhecer material_31 tipo" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Video</td>
+<td headers="Conhecer material_31 fornecedor" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">3Blue1Brown</td>
+<td headers="Conhecer material_31 duracao" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;">Minutos</td>
+<td headers="Conhecer material_31 link" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey40; font-size: 12px; text-align: center;"><p><a href="https://www.youtube.com/watch?v=LPZh9BOjkQs">Link</a></p></td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes"><tr>

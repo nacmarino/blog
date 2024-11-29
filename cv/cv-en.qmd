@@ -38,7 +38,11 @@ nac.marino@gmail.com
 
 ### Accenture
 
-***Data Science Principal*** [Jan 2021 -- Current]{.cvdate}
+***AI/ML Computational Science Manager*** [Jun 2024 -- Current]{.cvdate}
+
+*Tech lead* and *solution architect* for projects related to artificial intelligence, machine learning and data science, focused on Data & AI problems in the mining industry.
+
+***Data Science Principal*** [Jan 2021 -- May 2024]{.cvdate}
 
 *Tech Lead* in teams and projects related to data science, working across the entire analytical solution flow, particularly in analysis, technical design, and proposing solutions to data problems, extracting insights from data, and communicating with stakeholders and clients. I also assist with the management of data teams, especially in mentoring younger professionals. My main contributions have been:
 
@@ -439,9 +443,17 @@ tribble(
   'DeepLearning.AI'      , 'Vector Databases: from Embeddings to Applications'                                          , 2024,
   'DeepLearning.AI'      , 'Preprocessing Unstructured Data for LLM Applications'                                       , 2024,
   'DeepLearning.AI'      , 'Getting Started with Mistral'                                                               , 2024,
-  'DeepLearning.AI'      , 'Quantization Fundamentals'                                                                  , 2024,
+  'DeepLearning.AI'      , 'Quantization Fundamentals with Hugging Face'                                                , 2024,
   'DeepLearning.AI'      , 'Prompt Engineering with Llama 2 & 3'                                                        , 2024,
-  'DeepLearning.AI'      , 'Reinforcement Learning from Human Feedback'                                                 , 2024
+  'DeepLearning.AI'      , 'Reinforcement Learning from Human Feedback'                                                 , 2024,
+  'DeepLearning.AI'      , 'Prompt Engineering for Vision Models'                                                       , 2024,
+  'DeepLearning.AI'      , 'Embedding Models: from Architecture to Implementation'                                      , 2024,
+  'DeepLearning.AI'      , 'Introductionto on-device AI'                                                                , 2024,
+  'DeepLearning.AI'      , 'Carbon Aware Computing for GenAI Developers'                                                , 2024,
+  'DeepLearning.AI'      , 'Red Teaming LLM Applications'                                                               , 2024,
+  'DeepLearning.AI'      , 'Introduction to on-device AI'                                                               , 2024,
+  'DeepLearning.AI'      , 'Intro to Federated Learning'                                                                , 2024,  
+  'DeepLearning.AI'      , 'AI Python for Beginners: Basics of AI Python Coding'                                        , 2024
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
