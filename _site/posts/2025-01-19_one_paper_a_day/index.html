@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Nicholas Marino">
+<title>Nicholas Marino - Um paper por dia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../books.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Nicholas Marino - Um paper por dia">
+<meta name="twitter:description" content="Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu falo sobre como funcionou definir essa meta, como foi o a jornada e avalio se consegui atingi-la.">
+<meta name="twitter:image" content="https://nacmarino.netlify.app/posts/2025-01-19_one_paper_a_day/leitura.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Nicholas Marino</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cv" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">CV</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-cv">
+<li>
+    <a class="dropdown-item" href="../../cv/cv.html" rel="" target="">
+ <span class="dropdown-text">Portugues</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../cv/cv-en.html" rel="" target="">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<div class="quarto-navbar-tools">
+    <a href="https://github.com/nacmarino/blog" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Um paper por dia</h1>
+            <p class="subtitle lead"></p>
+<p>Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu falo sobre como funcionou definir essa meta, como foi o a jornada e avalio se consegui atingi-la.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">pov</div>
+                <div class="quarto-category">python</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="nacmarino.netlify.app">Nicholas Marino</a> <a href="https://orcid.org/0000-0002-5702-5466" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Data de Publicação</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">19 de janeiro de 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Conteudo</h2>
+   
+  <ul>
+<li><a href="#como-fazer-a-leitura-di%C3%A1ria-funcionar" id="toc-como-fazer-a-leitura-diária-funcionar" class="nav-link active" data-scroll-target="#como-fazer-a-leitura-di%C3%A1ria-funcionar">Como fazer a leitura diária funcionar?</a></li>
+  <li><a href="#mas-e-a%C3%AD-consegui-manter-a-meta-de-leitura-di%C3%A1ria" id="toc-mas-e-aí-consegui-manter-a-meta-de-leitura-diária" class="nav-link" data-scroll-target="#mas-e-a%C3%AD-consegui-manter-a-meta-de-leitura-di%C3%A1ria">Mas e aí, consegui manter a meta de leitura diária?</a></li>
+  <li><a href="#que-aprendizados-posso-compartilhar" id="toc-que-aprendizados-posso-compartilhar" class="nav-link" data-scroll-target="#que-aprendizados-posso-compartilhar">Que aprendizados posso compartilhar?</a></li>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content"><style>
+body {
+text-align: justify}
+</style>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carregando o reticulate para interagir com o Python</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># criando um ambiente do conda para esse post, caso ele nao exista</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">condaenv_exists</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># criando o ambiente do conda que sera usado nessa sessao</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_create</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, python_version <span class="op">=</span> <span class="st">'3.11'</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># lendo os pacotes e versoes que precisam ser instaladas no ambiente a partir</span></span>
+<span>  <span class="co"># do requirements.txt</span></span>
+<span>  <span class="va">requirements</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'requirements.txt'</span>, header <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span></span>
+<span>  </span>
+<span>  <span class="co"># importando as libs para este post</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_install</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, packages <span class="op">=</span> <span class="va">requirements</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># apontando para o ambiente desse post</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/use_python.html">use_condaenv</a></span><span class="op">(</span>condaenv <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Estudar é uma das atividades que mais gosto de fazer no meu tempo livre (quando eu tinha tempo livre), pois considero empolgante estar exposto a temas diferentes, novidades e outros pontos de vista. Acredito que isso não só amplia nosso conhecimento, mas também expande nossa visão sobre o mundo e nos ajuda a conectar pontos que talvez nunca conectássemos no dia a dia. E aqui não estou falando apenas de conhecimento técnico voltado para o trabalho, mas de assuntos gerais também, como fotografia, colecionismo, quadrinhos, áudio, perfumaria e vários outros temas que tentei aprender um pouco mais sobre este ano.</p>
+<p>Pensando nisso, este ano resolvi resgatar um hábito que tinha durante a época do meio do doutorado até o fim do pós-doutorado: tentar ler um paper por dia. Talvez a primeira impressão ao ouvir sobre essa meta seja que ela é uma tarefa impossível, uma vez que associamos trabalhos acadêmicos a leituras pesadas que podem demandar um conhecimento profundo sobre um determinado domínio. Essa é a realidade na maior parte dos casos, mas a tarefa em si não é impossível! Se você começar pelo motivo pelo qual vai ler o paper - isto é, o que você está buscando com essa leitura - é bem provável que perceba que essa é uma meta bem razoável.</p>
+<p>Eu tinha dois objetivos com aquele hábito na época: (1) entender de onde vinham as ideias e teorias (que circundavam a área da ecologia) e (2) me manter atualizado sobre as últimas tendências e discussões (ou seja, o que estava sendo pesquisado, quais resultados estavam sendo observados e métodos utilizados). Portanto, eu não precisava das leituras para implementar ou estruturar nada (ou seja, criar um conhecimento vertical), mas apenas expandir meu leque de conteúdo (ou seja, conhecimento horizontal). Com isso, uma simples passada pelo paper já era suficiente para captar o que buscava, e o melhor: quanto mais eu lia, mais fácil e rápido era esse processo. Além disso, isso também me ajudou a melhorar a forma como estruturava minha linha de raciocínio para explicar algo, colaborando não só com a tarefa de ensinar um tema a outra pessoa, mas também na forma como eu escrevia um texto. Finalmente, o último benefício que tive foi começar a olhar algumas ideias por outros ângulos, enxergando maneiras de conectá-las de forma que (pareciam) não ter sido vistas antes. Como dá para ver, esse hábito pode trazer muitos benefícios para o dia a dia de quem o adota.</p>
+<p>Apesar dos benefícios, deixei esse hábito de lado nos últimos anos para focar em outras formas de aprendizado, deixando a leitura de artigos apenas quando precisava resolver algum tipo de problema específico no trabalho. Então, por que retornar com esse hábito agora? Ter focado tanto em MOOCs nesse período me deu uma boa visão sobre o <em>mainstream</em> das coisas em inteligência artificial, aprendizado de máquina e alguns problemas de negócio específicos. No entanto, passei a sentir falta de entender a jornada que essas coisas tomaram até chegar onde chegaram, bem como de conseguir enxergar para onde elas iriam e voltar a conectar aqueles pontos</p>
+<p>Mas, e agora, como manter uma meta de leitura frequente com tantas demandas e falta de tempo?</p>
+<section id="como-fazer-a-leitura-diária-funcionar" class="level1"><h1>Como fazer a leitura diária funcionar?</h1>
+<p>Ainda que esse seja um momento diferente da vida, muitas das práticas para fazer a meta de leitura diária funcionar continuam valendo. Com algumas adaptações (à falta de tempo e correria), algumas coisas que você pode implementar para fazer a coisa funcionar são:</p>
+<ul>
+<li>
+<strong>Coloque tudo o que você quer ler em uma pasta:</strong> isso é importante para você ter um portfólio de possíveis leituras e não gastar tempo todo dia procurando o que ler;</li>
+<li>
+<strong>Nomeie os arquivos pelo título dos artigos:</strong> isso fornece uma ideia rápida sobre o que se trata o artigo e/ou a sua mensagem principal. Além disso, isso ajuda a te fazer ler coisas diferentes a cada dia, uma vez que alguns títulos acabam sendo mais ou menos atrativos dependendo da nossa rotina;</li>
+<li>
+<strong>Separe um tempo todo dia para ler:</strong> essa parte é a mais difícil, mas é a mais importante para que isso funcione. Minha sugestão é que você bloqueie todo dia o mesmo horário para fazer isso, e não precisa ser muito tempo… de 30 minutos a 1 hora por dia já são suficientes. Duas coisas aqui: não (se) permita interrupções nesse período (ou seja, assuma que é um compromisso, como uma reunião de trabalho que você não pode deixar de participar, por exemplo) e tenha em mente que se você não se der esse tempinho, ninguém vai te dar;</li>
+<li>
+<strong>Não vai dar para ler um artigo todo dia</strong>, por mais que você se organize e tente: imprevistos acontecem (por exemplo, computador quebrou) e demandas que nos sugam surgem o tempo todo (por exemplo, uma viagem de trabalho). Portanto, se não der para ler em um dia, tudo bem, porque…</li>
+<li>
+<strong>Um paper por dia, na média:</strong> tem dias que você vai acabar lendo mais de um trabalho (por exemplo, durante um voo) ou que façam sentido ter esse hábito dada a sua realidade (por exemplo, fins de semana). O hábito de leitura diária não deve ser encarado como uma corrida de 100m rasos, mas uma maratona;</li>
+<li>
+<strong>Leia o que puder ler no tempo que você tem:</strong> existem artigos mais curtos e outros mais longos, alguns mais fáceis de ler, outros com mais detalhes técnicos. Também haverá dias em que seu tempo está mais limitado ou você não estará com muita cabeça. Portanto, escolha o que você vai ler de acordo com a realidade do seu dia;</li>
+<li>
+<strong>Foque nas ideias do artigo</strong>, não nos detalhes e minúcias técnicas: o foco da leitura vai variar de pessoa para pessoa, mas o que eu geralmente busco é tentar entender a ideia que o artigo está tentando trazer. Isto é, meu objetivo é conseguir colocar em uma sentença (e com as minhas palavras) a mensagem principal do artigo ao terminar sua leitura e, para isso, não há necessidade de entender cada engrenagem, teste ou comparação com outros trabalhos;</li>
+<li>
+<strong>Organize o que você leu de acordo com alguma lógica:</strong> existem várias formas de fazer isso, e o jeito certo é aquele que funcionar melhor para você. Por exemplo, eu mantenho um registro do que li pra evitar de ler a mesma coisa duas vezes (já usei várias ferramentas, como Excel, Notion,…) e também vou jogando o que li em outro diretório, organizando em subpastas de acordo com o tema geral (e.g., LLMs, visão computacional, redes neurais,…);<br>
+</li>
+<li>
+<strong>Otimize o tempo:</strong> aproveite momentos ociosos para ler, como durante deslocamentos ou aqueles momentos de espera (e.g., uma consulta médica ou algo assim).</li>
+</ul>
+<p>Essas são algumas das práticas que eu adoto, muito embora imagine que hajam muitas outras que funcionam também. Portanto, te encorajo a buscar algumas outras formas que talvez façam mais sentido para você.</p>
+</section><section id="mas-e-aí-consegui-manter-a-meta-de-leitura-diária" class="level1 page-columns page-full"><h1>Mas e aí, consegui manter a meta de leitura diária?</h1>
+<p>Tendo em vista a minha realidade atual, defini que seria irreal achar que eu conseguiria ler alguma coisa fora dos dias de trabalho. Portanto, assumi que (inicialmente) teria 5 dias por semana para fazer minhas leituras. Se descontarmos os feriados, folga, férias, ausências médias e etc, isso daria cerca de 240 <em>papers</em>. Além disso, tinha convicção de que imprevistos aconteceriam[^ainda mais com uma criança de pequena entrando para a escola], de forma que haveriam dias que eu certamente não conseguiria ter tempo para ler. Portanto, defini como meta que eu deveria ler em pelo menos 75% dos meus dias de trabalho: isto equivale à uma meta de ler pelo menos <strong>180 papers</strong> ao longo do ano de 2024. Mas e aí, consegui?</p>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carregando os pacotes que precisamos para extrair os resumos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> clrs</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> patches</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># lendo o arquivo excel contendo a lista de coisas que li esse ano</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>artigos <span class="op">=</span> pd.read_excel(io <span class="op">=</span> <span class="st">'data/leituras.xlsx'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># parseando a coluna de conclusão para um datetime</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>artigos[<span class="st">'conclusao'</span>] <span class="op">=</span> pd.to_datetime(artigos.Conclusão)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># pegando só as anotacoes de artigos que li em 2024</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>artigos <span class="op">=</span> artigos.loc[(artigos.conclusao.dt.year <span class="op">==</span> <span class="dv">2024</span>) <span class="op">&amp;</span> (artigos.Tipo <span class="op">==</span> <span class="st">'Artigo'</span>), :]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Quantidade de artigos lidos em 2024: </span><span class="sc">{</span>artigos<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.'</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Quantidade de artigos lidos em 2024: 196.</code></pre>
+</div>
+</div>
+<p>Consegui bater a meta com um pouquinho de folga! 😉</p>
+<p>E como que foi a dinâmica de leitura ao longo do ano?</p>
+<div class="cell page-columns page-full">
+<details><summary>Código</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lista de dias que foram feriados ou que eu nao trabalhei por algum motivo</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dias_fora <span class="op">=</span> [</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'2024-01-01'</span>, <span class="st">'2024-02-12'</span>, <span class="st">'2024-02-13'</span>, <span class="st">'2024-03-29'</span>, <span class="st">'2024-04-23'</span>, <span class="st">'2024-05-01'</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'2024-11-15'</span>, <span class="st">'2024-11-20'</span>, <span class="st">'2024-12-24'</span>, <span class="st">'2024-12-25'</span>, <span class="st">'2024-12-31'</span>, <span class="st">'2024-01-02'</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'2024-01-03'</span>, <span class="st">'2024-01-04'</span>, <span class="st">'2024-01-05'</span>, <span class="st">'2024-05-29'</span>, <span class="st">'2024-05-30'</span>, <span class="st">'2024-08-12'</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'2024-10-17'</span>, <span class="st">'2024-12-26'</span>, <span class="st">'2024-12-27'</span>, <span class="st">'2024-12-30'</span>, <span class="st">'2024-12-31'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># listando o inicio e fim do ano</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>inicio, fim <span class="op">=</span> pd.to_datetime(<span class="st">'2024-01-01'</span>), pd.to_datetime(<span class="st">'2024-12-31'</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># contando quantos artigos eu li em cada dia</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>artigos <span class="op">=</span> artigos.conclusao.value_counts()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># preenchendo com zeros os dias faltantes na serie temporal</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>artigos <span class="op">=</span> artigos.reindex(pd.date_range(inicio, fim), fill_value <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># dias que nao entrarao para a conta pois ou foram feriados ou eu estava fora por algum</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># motivo e, portanto, nao trabalhei</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>artigos[dias_fora] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma lista para armazenar o nome dos dias da semana e dos meses, para que eles </span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># possam ser usados na figura que vamos criar</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>DIAS_SEMANA <span class="op">=</span> [<span class="st">'Dom'</span>, <span class="st">'Seg'</span>, <span class="st">'Ter'</span>, <span class="st">'Qua'</span>, <span class="st">'Qui'</span>, <span class="st">'Sex'</span>, <span class="st">'Sab'</span>]</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>MESES <span class="op">=</span> [</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Jan'</span>, <span class="st">'Fev'</span>, <span class="st">'Mar'</span>, <span class="st">'Abr'</span>, <span class="st">'Mai'</span>, <span class="st">'Jun'</span>, <span class="st">'Jul'</span>, <span class="st">'Ago'</span>, <span class="st">'Set'</span>, <span class="st">'Out'</span>, <span class="st">'Nov'</span>, <span class="st">'Dez'</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># mapeando a data do primeiro domingo antes do dia 1 de janeiro e aquele logo depois do</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># dia 31 de dezembro para que consigamos criar uma figura similar aquela do volume de </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># commits no historico do github</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>PRIMEIRO_DOMINGO <span class="op">=</span> inicio <span class="op">-</span> np.timedelta64((inicio.dayofweek <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="dv">7</span>, <span class="st">'D'</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>fim <span class="op">+=</span> np.timedelta64(<span class="dv">1</span>, <span class="st">'D'</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>ULTIMO_DOMINGO <span class="op">=</span> fim <span class="op">+</span> np.timedelta64(<span class="dv">7</span> <span class="op">-</span> fim.dayofweek <span class="op">-</span> <span class="dv">1</span>, <span class="st">'D'</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># calculando a quantidade total de semanas entre o primeiro e o ultimo domingo que vamos</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># utilizar e criando um numpy array vazio para podermos popula-lo com o volume de artigos</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># lidos em cada dia ao longo do ano; tambem vamos criar um dicionario vazio para que</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co"># possamos armazenar o texto dos tickmarks em pontos especificos da figura posteriormente</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>N_SEMANAS <span class="op">=</span> (ULTIMO_DOMINGO <span class="op">-</span> PRIMEIRO_DOMINGO).days <span class="op">//</span> <span class="dv">7</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>heatmap <span class="op">=</span> np.zeros((<span class="dv">7</span>, N_SEMANAS))</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>ticks <span class="op">=</span> {}</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co"># iterando entre cada uma das semanas (i.e., colunas do numpy array) para poder popular a </span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co"># quantidade de artigos lidos nos dias de cada uma delas</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> semana <span class="kw">in</span> <span class="bu">range</span>(N_SEMANAS):</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># iterando entre cada um dos dias (i.e., linhas do numpy array) dentro de cada semana, </span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># para poder colocar quantos artigos li em cada dia</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> dia <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># criando a data de referencia para ser usada dentro do loop, que eh a data do primeiro</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># domingo acrescida da quantidade de dias que transcorreu até a semana usada dentro do </span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loop, além do dia dentro da semana em que estamos percorrendo no loop</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    referencia <span class="op">=</span> PRIMEIRO_DOMINGO <span class="op">+</span> np.timedelta64(<span class="dv">7</span> <span class="op">*</span> semana <span class="op">+</span> dia, <span class="st">'D'</span>)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># se estivermos olhando o primeiro dia do mes, entao vamos criar uma chave para a semana</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># no dicionario e associar o valor do mes correspondente. Isto, em essencia, mapeia cada </span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mês à semana do ano em que ele comecou - e esta informacao entrará como os tickmarks </span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># no eixo x</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> referencia.day <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>      ticks[semana] <span class="op">=</span> MESES[referencia.month <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># se for tambem o primeiro dia do dia ano, entao criaremos chaves especiais que vao</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># codificar o ano de que estamos falando naquele tickmark</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> referencia.dayofyear <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>      ticks[semana] <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>MESES[referencia.month <span class="op">-</span> <span class="dv">1</span>]<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>referencia<span class="sc">.</span>year<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># se a data do loop estiver entre o primeiro domingo (inclusive) e o ultimo domingo </span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (exclusive), entao vamos pegar a quantidade de artigos lidos associada àquela data</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> inicio <span class="op">&lt;=</span> referencia <span class="op">&lt;</span> fim:</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>      heatmap[dia, semana] <span class="op">=</span> artigos.get(referencia, <span class="dv">0</span>)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma sequencia para marcar as posicoes dos dias da semana e dos meses do ano, </span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># tomando o cuidado para centra-los no meio do tickmark</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.arange(<span class="dv">8</span>) <span class="op">-</span> <span class="fl">0.5</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(N_SEMANAS <span class="op">+</span> <span class="dv">1</span>) <span class="op">-</span> <span class="fl">0.5</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma lista de cores customizadas, para mapear os dias que nao vao entrar para a </span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co"># conta (cinza), dias em que nao li artigos (branco), dias que li um artigo (verde claro)</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="co"># e dias que li dois ou mais artigos (verde escuro)</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>custom_cmap <span class="op">=</span> clrs.ListedColormap(colors <span class="op">=</span> [<span class="st">'silver'</span>, <span class="st">'white'</span>, <span class="st">'limegreen'</span>, <span class="st">'darkgreen'</span>])</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co"># criando a area de plotagem da figura</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows <span class="op">=</span> <span class="dv">1</span>, ncols <span class="op">=</span> <span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">16</span>, <span class="dv">3</span>))</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co"># criando a figura do heatmap</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>mesh <span class="op">=</span> ax.pcolormesh(</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  x, y, heatmap, edgecolor <span class="op">=</span> <span class="st">'black'</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span>, cmap <span class="op">=</span> custom_cmap</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="co"># customizando o eixo x do grafico para que os nomes dos meses aparecam nas posicoes que </span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co"># marcam as semanas em que eles comecaram</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(<span class="bu">list</span>(ticks.keys()))</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(<span class="bu">list</span>(ticks.values()), fontsize <span class="op">=</span> <span class="dv">10</span>, fontfamily <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_ticks_position(<span class="st">'none'</span>) </span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co"># customizando o eixo y do grafico para que a semana va de domingo para o sabado e, tambem,</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co"># para que os nomes dos dias das semana estejam centrado no meio do tickmarks</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(np.arange(<span class="dv">7</span>))</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(DIAS_SEMANA, fontsize <span class="op">=</span> <span class="dv">10</span>, fontfamily <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_ticks_position(<span class="st">'none'</span>) </span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="co"># customizando a o aspecto da figura para que os quadradinhos do heatmap tenham todos o </span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="co"># mesmo tamanho e plotando a imagem</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="co"># criando uma lista para armazenar as informacoes necessarias para criar a legenda</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>legendas <span class="op">=</span> [</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>  (<span class="st">'silver'</span>, <span class="st">'Abonado'</span>), (<span class="st">'white'</span>, <span class="st">'Nenhum'</span>), </span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>  (<span class="st">'limegreen'</span>, <span class="st">'1 artigo'</span>), (<span class="st">'darkgreen'</span>, <span class="st">'2 artigos'</span>)</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="co"># iterando entre as informacoes da legenda para poder plotar cada uma delas iterativamente</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, legenda <span class="kw">in</span> <span class="bu">enumerate</span>(legendas):</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>  ax.add_patch(</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>    patches.Rectangle((<span class="fl">53.5</span>, <span class="fl">1.6</span> <span class="op">*</span> idx), <span class="fl">0.8</span>, <span class="fl">0.8</span>, facecolor <span class="op">=</span> legenda[<span class="dv">0</span>], </span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>    edgecolor <span class="op">=</span> <span class="st">'black'</span>, clip_on <span class="op">=</span> <span class="va">False</span>, linewidth <span class="op">=</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>  ax.text(x <span class="op">=</span> <span class="fl">54.7</span>, y <span class="op">=</span> <span class="fl">0.7</span> <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> idx, s <span class="op">=</span> legenda[<span class="dv">1</span>], fontfamily <span class="op">=</span> <span class="st">'Raleway'</span>)</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando um titulo para a figura</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>plt.title(</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>  label <span class="op">=</span> <span class="st">'Como foi a minha rotina de leitura de artigos ao longo de 2024?'</span>, </span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>  fontdict <span class="op">=</span> {<span class="st">'family'</span>: <span class="st">'Raleway'</span>, <span class="st">'size'</span>: <span class="dv">12</span>, <span class="st">'weight'</span>: <span class="st">'bold'</span>},</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>  loc <span class="op">=</span> <span class="st">'left'</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="co"># adicionando marca do site na figura</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>ax.annotate(text <span class="op">=</span> <span class="st">'nacmarino.netlify.app'</span>, xy <span class="op">=</span> (<span class="fl">48.5</span>, <span class="fl">8.8</span>), fontsize <span class="op">=</span> <span class="dv">12</span>, ha <span class="op">=</span> <span class="st">'left'</span>, </span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            annotation_clip <span class="op">=</span> <span class="va">False</span>, family <span class="op">=</span> <span class="st">'Passion One'</span>)</span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="co"># plotando a figura</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display column-page">
+<p><img src="index_files/figure-html/calendario_leituras-1.png" class="img-fluid" alt="Mapa de calor descrevendo minha rotina de leitura de artigos em cada dia ao longo de 2024." width="1536"></p>
+</div>
+</div>
+<p>Alguns padrões interessantes que pude notar:<br>
+1. Consegui manter o hábito de leitura apenas durante os dias de semana, particularmente aqueles de trabalho;<br>
+2. Mantive a média de um paper por dia, lendo um adicional quando não consegui ler nos dias anteriores (ou quando sabia que não o faria no dia seguinte);<br>
+3. Houveram alguns dias durante a semana que eu não li nada e, tampouco, compensei lendo <em>papers</em> à mais - e tudo bem, isso acontece;<br>
+4. Em algum ponto no meio de fevereiro eu me toquei que meu objetivo não seria impactado se eu deixasse de ler um dia por semana. Portanto, eu decidi que não priorizaria a leitura de artigos às sextas-feiras, e focaria em outras demandas.</p>
+</section><section id="que-aprendizados-posso-compartilhar" class="level1"><h1>Que aprendizados posso compartilhar?</h1>
+<ul>
+<li>Uma das chaves para o sucesso de manter o hábito da leitura é conseguir dedicar o tempo para tal em sua rotina. Para mim funcionou bem bloquear 30 minutos à 1 hora na minha agenda para ler algo; se tivesse que ir ao escritório todo dia, possivelmente leria enquanto estou comutando. Por outro lado, se minha meta fosse uma leitura semanal, possivelmente bloquearia um tempinho em um dia para isso (por exemplo, toda sexta-feira entre as 13 horas e as 14 horas). O importante aqui é consolidar um momento em que você você vai ter (alguma) previsibilidade de tempo para ler;<br>
+</li>
+<li>Ajuste o que você vai ler de acordo com o tempo que você vai ter disponível. Eu geralmente consigo ler um <em>paper</em> de até 10 páginas com coluna dupla em 1 hora (descontando as páginas de referências e apêndice), mas se o dia está apertado e não tenho esse tempo, eu possivelmente vou recorrer ao meu porfolio de leituras para buscar um <em>paper</em> menor (por exemplo, se eu tiver só 15 minutos, vou tentar achar um paper de até 5 páginas e coluna simples para ler);<br>
+</li>
+<li>Já mencionei a questão da organização anteriormente, mas volto aqui a esse ponto pois ele é realmente importante e ajuda muito a tornar a fazer a coisa se manter no dia a dia;</li>
+<li>Imprevistos acontecem e vão haver períodos em que você não vai conseguir manter a meta de leitura. No entanto, é importante lembrar que essa meta deveria ser uma maratona e não uma corrida de 100 metros rasos. Portanto, você pode tentar compensar o déficit de leitura posteriormente, por exemplo, lendo uma quantidade maior de trabalhos pequenos nos próximos períodos (por exemplo, 2 trabalhos de até 5 páginas à cada dia);<br>
+</li>
+<li>A maioria esmagadora dos <em>papers</em> disponíveis está escrito em inglês, e sei que isso pode ser uma barreira para muitas pessoas. Todavia, existem ferramentas hoje em dia que podem ajudar na tradução destes textos e, também, é possível ajustar a sua meta à essa realidade (isto é, assumindo que você vai levar mais tempo para ler um <em>paper</em>, tornando sua meta semanal, quinzenal ou mensal). De qualquer forma, um benefício deste hábito também será que com o tempo seu inglês vai melhorar e você vai ler cada vez mais rápido. Portanto, não deixe que o inglês seja uma barreira para você.</li>
+</ul>
+<div class="cell">
+<details><summary>Código</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># deletando o ambiente que usei para criar especificamente esse post</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_remove</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>A imagem de capa desse post foi gerada no ideogram.ai através do prompt: A photo of a man sitting in a library, reading a book. The man has short, dark hair and is wearing a brown blazer and a white shirt. He is sitting in a chair near a bookshelf. The library has high ceilings and large windows on the left and right. There are multiple bookshelves filled with books, and a few chairs scattered around. The atmosphere is introspective and contemplative, yet inspiring and filled with philosophical wonder.</p>
+</blockquote>
+
+
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2025,
+  author = {Marino, Nicholas},
+  title = {Um paper por dia},
+  date = {2025-01-19},
+  url = {https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day},
+  langid = {pt}
+}
+</code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Por favor, cite este trabalho como:</div><div id="ref-marino2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Marino, Nicholas. 2025. <span>“Um paper por dia.”</span> January 19,
+2025. <a href="https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day">https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day</a>.
+</div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/nacmarino\.netlify\.app\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script><script src="https://giscus.app/client.js" data-repo="nacmarino/blog" data-repo-id="R_kgDOKH7ZGw" data-category="Announcements" data-category-id="DIC_kwDOKH7ZG84Cbmfw" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Blog created with <a href="https://quarto.org/">Quarto</a> by Nicholas Marino. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
