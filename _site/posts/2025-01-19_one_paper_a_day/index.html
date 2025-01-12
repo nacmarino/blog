@@ -92,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Nicholas Marino - Um paper por dia">
-<meta name="twitter:description" content="Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu falo sobre como funcionou definir essa meta, como foi o a jornada e avalio se consegui atingi-la.">
+<meta name="twitter:description" content="Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu busco explorar como integrar o hábito de leitura diária de artigos científicos na sua rotina, dando dicas práticas para organizar suas leituras, ajustar metas e superar desafios, tornando a leitura uma atividade enriquecedora.">
 <meta name="twitter:image" content="https://nacmarino.netlify.app/posts/2025-01-19_one_paper_a_day/leitura.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title column-body">
       <h1 class="title">Um paper por dia</h1>
             <p class="subtitle lead"></p>
-<p>Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu falo sobre como funcionou definir essa meta, como foi o a jornada e avalio se consegui atingi-la.</p>
+<p>Uma das resoluções de 2024 foi voltar com o hábito de tentar ler um paper por dia (de trabalho) que mantive entre a época do doutorado ao pós-doutorado. Aqui eu busco explorar como integrar o hábito de leitura diária de artigos científicos na sua rotina, dando dicas práticas para organizar suas leituras, ajustar metas e superar desafios, tornando a leitura uma atividade enriquecedora.</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">pov</div>
                 <div class="quarto-category">python</div>
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Data de Publicação</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">19 de janeiro de 2025</p>
+        <p class="date">11 de janeiro de 2025</p>
       </div>
     </div>
     
@@ -197,36 +197,39 @@ text-align: justify}
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># criando um ambiente do conda para esse post, caso ele nao exista</span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">condaenv_exists</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">condaenv_exists</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># criando o ambiente do conda que sera usado nessa sessao</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_create</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, python_version <span class="op">=</span> <span class="st">'3.11'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_create</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, python_version <span class="op">=</span> <span class="st">'3.11'</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="co"># lendo os pacotes e versoes que precisam ser instaladas no ambiente a partir</span></span>
 <span>  <span class="co"># do requirements.txt</span></span>
 <span>  <span class="va">requirements</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'requirements.txt'</span>, header <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span></span>
 <span>  </span>
 <span>  <span class="co"># importando as libs para este post</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_install</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, packages <span class="op">=</span> <span class="va">requirements</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_install</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span>, packages <span class="op">=</span> <span class="va">requirements</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># apontando para o ambiente desse post</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/use_python.html">use_condaenv</a></span><span class="op">(</span>condaenv <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a></span><span class="op">(</span>condaenv <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Estudar é uma das atividades que mais gosto de fazer no meu tempo livre (quando eu tinha tempo livre), pois considero empolgante estar exposto a temas diferentes, novidades e outros pontos de vista. Acredito que isso não só amplia nosso conhecimento, mas também expande nossa visão sobre o mundo e nos ajuda a conectar pontos que talvez nunca conectássemos no dia a dia. E aqui não estou falando apenas de conhecimento técnico voltado para o trabalho, mas de assuntos gerais também, como fotografia, colecionismo, quadrinhos, áudio, perfumaria e vários outros temas que tentei aprender um pouco mais sobre este ano.</p>
-<p>Pensando nisso, este ano resolvi resgatar um hábito que tinha durante a época do meio do doutorado até o fim do pós-doutorado: tentar ler um paper por dia. Talvez a primeira impressão ao ouvir sobre essa meta seja que ela é uma tarefa impossível, uma vez que associamos trabalhos acadêmicos a leituras pesadas que podem demandar um conhecimento profundo sobre um determinado domínio. Essa é a realidade na maior parte dos casos, mas a tarefa em si não é impossível! Se você começar pelo motivo pelo qual vai ler o paper - isto é, o que você está buscando com essa leitura - é bem provável que perceba que essa é uma meta bem razoável.</p>
-<p>Eu tinha dois objetivos com aquele hábito na época: (1) entender de onde vinham as ideias e teorias (que circundavam a área da ecologia) e (2) me manter atualizado sobre as últimas tendências e discussões (ou seja, o que estava sendo pesquisado, quais resultados estavam sendo observados e métodos utilizados). Portanto, eu não precisava das leituras para implementar ou estruturar nada (ou seja, criar um conhecimento vertical), mas apenas expandir meu leque de conteúdo (ou seja, conhecimento horizontal). Com isso, uma simples passada pelo paper já era suficiente para captar o que buscava, e o melhor: quanto mais eu lia, mais fácil e rápido era esse processo. Além disso, isso também me ajudou a melhorar a forma como estruturava minha linha de raciocínio para explicar algo, colaborando não só com a tarefa de ensinar um tema a outra pessoa, mas também na forma como eu escrevia um texto. Finalmente, o último benefício que tive foi começar a olhar algumas ideias por outros ângulos, enxergando maneiras de conectá-las de forma que (pareciam) não ter sido vistas antes. Como dá para ver, esse hábito pode trazer muitos benefícios para o dia a dia de quem o adota.</p>
-<p>Apesar dos benefícios, deixei esse hábito de lado nos últimos anos para focar em outras formas de aprendizado, deixando a leitura de artigos apenas quando precisava resolver algum tipo de problema específico no trabalho. Então, por que retornar com esse hábito agora? Ter focado tanto em MOOCs nesse período me deu uma boa visão sobre o <em>mainstream</em> das coisas em inteligência artificial, aprendizado de máquina e alguns problemas de negócio específicos. No entanto, passei a sentir falta de entender a jornada que essas coisas tomaram até chegar onde chegaram, bem como de conseguir enxergar para onde elas iriam e voltar a conectar aqueles pontos</p>
+<p>Pensando nisso, este ano resolvi resgatar um hábito que tinha durante a época do meio do doutorado até o fim do pós-doutorado: tentar ler um artigo científico por dia. Talvez a primeira impressão ao ouvir sobre essa meta seja que ela é uma tarefa impossível, uma vez que associamos trabalhos acadêmicos a leituras pesadas que podem demandar um conhecimento profundo sobre um determinado domínio. Essa é a realidade na maior parte dos casos, mas a tarefa em si não é impossível! Se você começar pelo motivo pelo qual vai ler o artigo - isto é, o que você está buscando com essa leitura - é bem provável que perceba que essa é uma meta bem razoável.</p>
+<p>Eu tinha dois objetivos com aquele hábito na época: (1) entender de onde vinham as ideias e teorias (que circundavam a área da ecologia) e (2) me manter atualizado sobre as últimas tendências e discussões (ou seja, o que estava sendo pesquisado, quais resultados estavam sendo observados e métodos utilizados). Portanto, eu não precisava das leituras para implementar ou estruturar nada (ou seja, criar um conhecimento vertical), mas apenas expandir meu leque de conteúdo (ou seja, conhecimento horizontal). Com isso, uma simples passada pelo artigo já era suficiente para captar o que buscava, e o melhor: quanto mais eu lia, mais fácil e rápido era esse processo. Além disso, isso também me ajudou a melhorar a forma como estruturava minha linha de raciocínio para explicar algo, colaborando não só com a tarefa de ensinar um tema a outra pessoa, mas também na forma como eu escrevia um texto. Finalmente, o último benefício que tive foi começar a olhar algumas ideias por outros ângulos, enxergando maneiras de conectá-las de forma que (pareciam) não ter sido vistas antes. Como dá para ver, esse hábito pode trazer muitos benefícios para o dia a dia de quem o adota.</p>
+<p>Apesar dos benefícios, deixei esse hábito de lado nos últimos anos para focar em outras formas de aprendizado, deixando a leitura de artigos apenas quando precisava resolver algum tipo de problema específico no trabalho. Então, por que retornar com esse hábito agora? Ter focado tanto em MOOCs nesse período me deu uma boa visão sobre o mainstream das coisas em inteligência artificial, aprendizado de máquina e alguns problemas de negócio específicos. No entanto, passei a sentir falta de entender a jornada que essas coisas tomaram até chegar onde chegaram, bem como de conseguir enxergar para onde elas iriam e voltar a conectar aqueles pontos.</p>
 <p>Mas, e agora, como manter uma meta de leitura frequente com tantas demandas e falta de tempo?</p>
 <section id="como-fazer-a-leitura-diária-funcionar" class="level1"><h1>Como fazer a leitura diária funcionar?</h1>
 <p>Ainda que esse seja um momento diferente da vida, muitas das práticas para fazer a meta de leitura diária funcionar continuam valendo. Com algumas adaptações (à falta de tempo e correria), algumas coisas que você pode implementar para fazer a coisa funcionar são:</p>
 <ul>
 <li>
-<strong>Coloque tudo o que você quer ler em uma pasta:</strong> isso é importante para você ter um portfólio de possíveis leituras e não gastar tempo todo dia procurando o que ler;</li>
+<strong>Coloque tudo o que você quer ler em uma pasta:</strong> isso é importante para você ter um portfólio de possíveis leituras e não gastar tempo todo dia procurando o que ler;<br>
+</li>
 <li>
-<strong>Nomeie os arquivos pelo título dos artigos:</strong> isso fornece uma ideia rápida sobre o que se trata o artigo e/ou a sua mensagem principal. Além disso, isso ajuda a te fazer ler coisas diferentes a cada dia, uma vez que alguns títulos acabam sendo mais ou menos atrativos dependendo da nossa rotina;</li>
+<strong>Nomeie os arquivos pelo título dos artigos:</strong> isso fornece uma ideia rápida sobre o que se trata o artigo e/ou a sua mensagem principal. Além disso, isso ajuda a te fazer ler coisas diferentes a cada dia, uma vez que alguns títulos acabam sendo mais ou menos atrativos dependendo da nossa rotina;<br>
+</li>
 <li>
-<strong>Separe um tempo todo dia para ler:</strong> essa parte é a mais difícil, mas é a mais importante para que isso funcione. Minha sugestão é que você bloqueie todo dia o mesmo horário para fazer isso, e não precisa ser muito tempo… de 30 minutos a 1 hora por dia já são suficientes. Duas coisas aqui: não (se) permita interrupções nesse período (ou seja, assuma que é um compromisso, como uma reunião de trabalho que você não pode deixar de participar, por exemplo) e tenha em mente que se você não se der esse tempinho, ninguém vai te dar;</li>
+<strong>Separe um tempo todo dia para ler:</strong> essa parte é a mais difícil, mas é a mais importante para que isso funcione. Minha sugestão é que você bloqueie todo dia o mesmo horário para fazer isso, e não precisa ser muito tempo…de 30 minutos a 1 hora por dia já são suficientes. Duas coisas aqui: não (se) permita interrupções nesse período (ou seja, assuma que é um compromisso, como uma reunião de trabalho que você não pode deixar de participar, por exemplo) e tenha em mente que se você não se der esse tempinho, ninguém vai te dar;<br>
+</li>
 <li>
 <strong>Não vai dar para ler um artigo todo dia</strong>, por mais que você se organize e tente: imprevistos acontecem (por exemplo, computador quebrou) e demandas que nos sugam surgem o tempo todo (por exemplo, uma viagem de trabalho). Portanto, se não der para ler em um dia, tudo bem, porque…</li>
 <li>
@@ -243,7 +246,7 @@ text-align: justify}
 </ul>
 <p>Essas são algumas das práticas que eu adoto, muito embora imagine que hajam muitas outras que funcionam também. Portanto, te encorajo a buscar algumas outras formas que talvez façam mais sentido para você.</p>
 </section><section id="mas-e-aí-consegui-manter-a-meta-de-leitura-diária" class="level1 page-columns page-full"><h1>Mas e aí, consegui manter a meta de leitura diária?</h1>
-<p>Tendo em vista a minha realidade atual, defini que seria irreal achar que eu conseguiria ler alguma coisa fora dos dias de trabalho. Portanto, assumi que (inicialmente) teria 5 dias por semana para fazer minhas leituras. Se descontarmos os feriados, folga, férias, ausências médias e etc, isso daria cerca de 240 <em>papers</em>. Além disso, tinha convicção de que imprevistos aconteceriam[^ainda mais com uma criança de pequena entrando para a escola], de forma que haveriam dias que eu certamente não conseguiria ter tempo para ler. Portanto, defini como meta que eu deveria ler em pelo menos 75% dos meus dias de trabalho: isto equivale à uma meta de ler pelo menos <strong>180 papers</strong> ao longo do ano de 2024. Mas e aí, consegui?</p>
+<p>Tendo em vista a minha realidade atual, defini que seria irreal achar que eu conseguiria ler alguma coisa fora dos dias de trabalho. Portanto, assumi que (inicialmente) teria 5 dias por semana para fazer minhas leituras. Se descontarmos os feriados, folga, férias, ausências médias e etc, isso daria cerca de 240 artigos. Além disso, tinha convicção de que imprevistos aconteceriam[^ainda mais com uma criança pequena entrando para a escola], de forma que haveriam dias que eu certamente não conseguiria ter tempo para ler. Portanto, defini como meta que eu deveria ler em pelo menos 75% dos meus dias de trabalho: isto equivale a uma meta de ler pelo menos 180 artigos ao longo do ano de 2024. Mas e aí, consegui?</p>
 <div class="cell">
 <details><summary>Código</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carregando os pacotes que precisamos para extrair os resumos</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -401,25 +404,32 @@ text-align: justify}
 <p><img src="index_files/figure-html/calendario_leituras-1.png" class="img-fluid" alt="Mapa de calor descrevendo minha rotina de leitura de artigos em cada dia ao longo de 2024." width="1536"></p>
 </div>
 </div>
-<p>Alguns padrões interessantes que pude notar:<br>
-1. Consegui manter o hábito de leitura apenas durante os dias de semana, particularmente aqueles de trabalho;<br>
-2. Mantive a média de um paper por dia, lendo um adicional quando não consegui ler nos dias anteriores (ou quando sabia que não o faria no dia seguinte);<br>
-3. Houveram alguns dias durante a semana que eu não li nada e, tampouco, compensei lendo <em>papers</em> à mais - e tudo bem, isso acontece;<br>
-4. Em algum ponto no meio de fevereiro eu me toquei que meu objetivo não seria impactado se eu deixasse de ler um dia por semana. Portanto, eu decidi que não priorizaria a leitura de artigos às sextas-feiras, e focaria em outras demandas.</p>
-</section><section id="que-aprendizados-posso-compartilhar" class="level1"><h1>Que aprendizados posso compartilhar?</h1>
+<p>Alguns padrões interessantes que pude notar:</p>
+<ol type="1">
+<li>Consegui manter o hábito de leitura apenas durante os dias de semana, particularmente aqueles de trabalho;<br>
+</li>
+<li>Mantive a média de um artigo por dia, lendo um adicional quando não consegui ler nos dias anteriores (ou quando sabia que não o faria no dia seguinte);<br>
+</li>
+<li>Houveram alguns dias durante a semana que eu não li nada e, tampouco, compensei lendo artigos a mais - e tudo bem, isso acontece;<br>
+</li>
+<li>Em algum ponto no meio de fevereiro eu me toquei que meu objetivo não seria impactado se eu deixasse de ler um dia por semana. Portanto, eu decidi que não priorizaria a leitura de artigos às sextas-feiras, e focaria em outras demandas.</li>
+</ol></section><section id="que-aprendizados-posso-compartilhar" class="level1"><h1>Que aprendizados posso compartilhar?</h1>
 <ul>
-<li>Uma das chaves para o sucesso de manter o hábito da leitura é conseguir dedicar o tempo para tal em sua rotina. Para mim funcionou bem bloquear 30 minutos à 1 hora na minha agenda para ler algo; se tivesse que ir ao escritório todo dia, possivelmente leria enquanto estou comutando. Por outro lado, se minha meta fosse uma leitura semanal, possivelmente bloquearia um tempinho em um dia para isso (por exemplo, toda sexta-feira entre as 13 horas e as 14 horas). O importante aqui é consolidar um momento em que você você vai ter (alguma) previsibilidade de tempo para ler;<br>
+<li>Uma das chaves para o sucesso de manter o hábito da leitura é conseguir dedicar o tempo para tal em sua rotina. Para mim, funcionou bem bloquear 30 minutos a 1 hora na minha agenda para ler algo; se tivesse que ir ao escritório todo dia, possivelmente leria enquanto estou me deslocando. Por outro lado, se minha meta fosse uma leitura semanal, possivelmente bloquearia um tempinho em um dia para isso (por exemplo, toda sexta-feira entre as 13 horas e as 14 horas). O importante aqui é consolidar um momento em que você terá (alguma) previsibilidade de tempo para ler;<br>
 </li>
-<li>Ajuste o que você vai ler de acordo com o tempo que você vai ter disponível. Eu geralmente consigo ler um <em>paper</em> de até 10 páginas com coluna dupla em 1 hora (descontando as páginas de referências e apêndice), mas se o dia está apertado e não tenho esse tempo, eu possivelmente vou recorrer ao meu porfolio de leituras para buscar um <em>paper</em> menor (por exemplo, se eu tiver só 15 minutos, vou tentar achar um paper de até 5 páginas e coluna simples para ler);<br>
+<li>Ajuste o que você vai ler de acordo com o tempo que você tem disponível. Eu geralmente consigo ler um artigo de até 10 páginas com coluna dupla em 1 hora (descontando as páginas de referências e apêndice), mas se o dia está apertado e não tenho esse tempo, eu possivelmente vou recorrer ao meu portfólio de leituras para buscar um artigo menor (por exemplo, se eu tiver só 15 minutos, vou tentar achar um artigo de até 5 páginas e coluna simples para ler);<br>
 </li>
-<li>Já mencionei a questão da organização anteriormente, mas volto aqui a esse ponto pois ele é realmente importante e ajuda muito a tornar a fazer a coisa se manter no dia a dia;</li>
-<li>Imprevistos acontecem e vão haver períodos em que você não vai conseguir manter a meta de leitura. No entanto, é importante lembrar que essa meta deveria ser uma maratona e não uma corrida de 100 metros rasos. Portanto, você pode tentar compensar o déficit de leitura posteriormente, por exemplo, lendo uma quantidade maior de trabalhos pequenos nos próximos períodos (por exemplo, 2 trabalhos de até 5 páginas à cada dia);<br>
+<li>Já mencionei a questão da organização anteriormente, mas volto a esse ponto pois ele é realmente importante e ajuda muito a manter o hábito no dia a dia;<br>
 </li>
-<li>A maioria esmagadora dos <em>papers</em> disponíveis está escrito em inglês, e sei que isso pode ser uma barreira para muitas pessoas. Todavia, existem ferramentas hoje em dia que podem ajudar na tradução destes textos e, também, é possível ajustar a sua meta à essa realidade (isto é, assumindo que você vai levar mais tempo para ler um <em>paper</em>, tornando sua meta semanal, quinzenal ou mensal). De qualquer forma, um benefício deste hábito também será que com o tempo seu inglês vai melhorar e você vai ler cada vez mais rápido. Portanto, não deixe que o inglês seja uma barreira para você.</li>
+<li>Imprevistos acontecem e haverá períodos em que você não conseguirá manter a meta de leitura. No entanto, é importante lembrar que essa meta deve ser uma maratona e não uma corrida de 100 metros rasos. Portanto, você pode tentar compensar o déficit de leitura posteriormente, por exemplo, lendo uma quantidade maior de trabalhos pequenos nos próximos períodos (por exemplo, 2 trabalhos de até 5 páginas a cada dia);<br>
+</li>
+<li>A maioria esmagadora dos artigos disponíveis está escrita em inglês, e sei que isso pode ser uma barreira para muitas pessoas. Todavia, existem ferramentas hoje em dia que podem ajudar na tradução desses textos e, também, é possível ajustar a sua meta a essa realidade (isto é, assumindo que você vai levar mais tempo para ler um artigo, tornando sua meta semanal, quinzenal ou mensal). De qualquer forma, um benefício deste hábito também será que, com o tempo, seu inglês vai melhorar e você vai ler cada vez mais rápido. Portanto, não deixe que o inglês seja uma barreira para você;<br>
+</li>
+<li>Se o ritmo de leitura ou a meta não estiver sendo saudável, repense-a: o hábito não deve ser uma tortura ou uma competição, mas sim um momento prazeroso de aprendizado, de você para você.</li>
 </ul>
 <div class="cell">
 <details><summary>Código</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># deletando o ambiente que usei para criar especificamente esse post</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/conda-tools.html">conda_remove</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html">conda_remove</a></span><span class="op">(</span>envname <span class="op">=</span> <span class="st">'blog_post_env'</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <blockquote class="blockquote">
@@ -430,12 +440,12 @@ text-align: justify}
 </section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> De volta ao topo</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuso</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.pt">https://creativecommons.org/licenses/by/4.0/deed.pt</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citação</h2><div><div class="quarto-appendix-secondary-label">BibTeX</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{marino2025,
   author = {Marino, Nicholas},
   title = {Um paper por dia},
-  date = {2025-01-19},
+  date = {2025-01-11},
   url = {https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day},
   langid = {pt}
 }
 </code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">Por favor, cite este trabalho como:</div><div id="ref-marino2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Marino, Nicholas. 2025. <span>“Um paper por dia.”</span> January 19,
+Marino, Nicholas. 2025. <span>“Um paper por dia.”</span> January 11,
 2025. <a href="https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day">https://nacmarino.netlify.app//posts/2025-01-19_one_paper_a_day</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
