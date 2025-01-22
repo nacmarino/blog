@@ -453,7 +453,8 @@ tribble(
   'DeepLearning.AI'      , 'Red Teaming LLM Applications'                                                               , 2024,
   'DeepLearning.AI'      , 'Introduction to on-device AI'                                                               , 2024,
   'DeepLearning.AI'      , 'Intro to Federated Learning'                                                                , 2024,  
-  'DeepLearning.AI'      , 'AI Python for Beginners: Basics of AI Python Coding'                                        , 2024
+  'DeepLearning.AI'      , 'AI Python for Beginners: Basics of AI Python Coding'                                        , 2024,
+  'DeepLearning.AI'      , 'Multimodal RAG: Chat with Videos'                                                           , 2025
 ) %>% 
   arrange(ano, fornecedor, curso) %>% 
   gt(groupname_col = 'ano') %>%
